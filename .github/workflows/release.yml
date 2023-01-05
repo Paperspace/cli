@@ -46,7 +46,8 @@ jobs:
           zip -9 pspace-macos-arm.zip pspace
           cd ../windows
           zip -9 pspace-windows.zip pspace.exe
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+          
+      # - name: Release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: npx semantic-release
