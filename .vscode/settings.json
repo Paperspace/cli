@@ -1,6 +1,12 @@
 {
   "deno.enable": true,
   "deno.lint": true,
+  "deno.inlayHints.propertyDeclarationTypes.enabled": false,
+  "deno.inlayHints.parameterTypes.enabled": false,
+  "deno.inlayHints.variableTypes.enabled": false,
+  "deno.inlayHints.enumMemberValues.enabled": false,
+  "deno.inlayHints.functionLikeReturnTypes.enabled": false,
+  "deno.inlayHints.parameterNames.enabled": "none",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno"
 }

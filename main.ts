@@ -1,71 +1,14 @@
-import { colors } from "https://deno.land/x/cliffy@v0.25.6/ansi/mod.ts";
-import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
-import {
-  Command,
-  CompletionsCommand,
-} from "https://deno.land/x/cliffy@v0.25.6/command/mod.ts";
-import { GraphQLClient } from "https://esm.sh/graphql-request@5.1.0";
-import { TypedDocumentNode } from "https://esm.sh/v102/@graphql-typed-document-node/core@3.1.1";
-// import { ActivityLogDocument } from "./paperspace-graphql.ts";
+import * as Sentry from "https://deno.land/x/sentry_deno@v0.2.2/main.ts";
 
-const error = colors.bold.red;
-const warn = colors.bold.yellow;
-const info = colors.bold.cyan;
-const success = colors.bold.green;
-
-const __VERSION__ = "0.0.1";
-
-const endpoint = "https://api.paperspace.com/graphql";
-const gqlClient = new GraphQLClient(endpoint, {
-  headers: {
-    authorization: "Bearer MY_TOKEN",
-  },
-});
-
-function gqlFetch<TData = any, TVariables = Record<string, any>>(
-  operation: TypedDocumentNode<TData, TVariables>,
-  variables?: TVariables
-): Promise<TData> {
-  return gqlClient.request(operation, variables);
-}
+import { cli } from "./lib/cli.ts";
+import { __VERSION__ } from "./lib/version.ts";
 
 if (import.meta.main) {
-  // const response = await gqlFetch(ActivityLogDocument);
-  // response.projectActivities.nodes;
-
-  const url = z.string().url();
-  /**
-   * @see https://cliffy.io/docs@v0.25.0/command/commands
-   */
-  const cli = new Command()
-    .name("pspace")
-    .version(__VERSION__)
-    .description(
-      "The CLI for Paperspace. Check out the docs at https://docs.paperspace.com/cli"
-    );
-
-  // Custom parsers
-  cli.type("url", ({ value }) => {
-    return url.parse(value);
+  Sentry.init({
+    dsn: "https://fc31a63f01194bd2a70b0432557b4b88@o64342.ingest.sentry.io/4504454143475712",
+    release: __VERSION__,
+    tracesSampleRate: 0,
   });
 
-  // Make a request to a URL
-  cli
-    .command("get <url>", "Make a GET request to a URL")
-    .action(async (_opt, u) => {
-      const result = await get(u);
-      console.log("\n" + success(JSON.stringify(result, null, 2)));
-    });
-
-  // Adds a command to generate completions for various shells
-  cli.command("completions", new CompletionsCommand());
-
   await cli.parse(Deno.args);
-}
-
-export async function get(url: string) {
-  console.log(info("GET"), url);
-  const result = await fetch(url);
-  console.log(info("Status"), `${result.status} ${result.statusText}`);
-  return await result.json();
 }
