@@ -7,7 +7,7 @@
     "compile:macos-arm": "deno compile --allow-env --allow-sys --allow-net --lock=lock.json --target aarch64-apple-darwin --output bin/macos-arm/pspace main.ts",
     "compile:linux": "deno compile --allow-env --allow-sys --allow-net --lock=lock.json --target x86_64-unknown-linux-gnu --output bin/linux/pspace main.ts",
     "compile:windows": "deno compile --allow-env --allow-sys --allow-net --lock=lock.json --target x86_64-pc-windows-msvc --output bin/windows/pspace main.ts",
-    "generate": "cd .graphql && pnpm install && pnpm generate && cd .. && mv .graphql/paperspace-graphql.ts internal && npx replace-in-files-cli --string='@graphql-typed-document-node/core' --replacement='https://esm.sh/@graphql-typed-document-node/core@3.1.1' internal/paperspace-graphql.ts",
+    "generate": "cd .graphql && pnpm install && pnpm generate && cd .. && mv .graphql/paperspace-graphql.ts lib && npx replace-in-files-cli --string='@graphql-typed-document-node/core' --replacement='https://esm.sh/@graphql-typed-document-node/core@3.1.1' lib/paperspace-graphql.ts",
     "run": "deno run --allow-env --allow-sys --allow-net main.ts"
   }
 }
