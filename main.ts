@@ -64,8 +64,8 @@ if (import.meta.main) {
 }
 
 export async function get(url: string) {
-  console.log("GET", info(url));
+  console.log(info("GET"), url);
   const result = await fetch(url);
-  console.log("Status", info(`${result.status} ${result.statusText}`));
+  console.log(info("Status"), `${result.status} ${result.statusText}`);
   return await result.json();
 }

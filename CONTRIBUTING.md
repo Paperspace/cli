@@ -14,7 +14,6 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 
 ```sh
 git clone https://github.com/Paperspace/cli
-cd cli
 code cli
 ```
 
