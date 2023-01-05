@@ -47,6 +47,20 @@ pnpm install
 - `"run"`: Run the CLI in development mode e.g.
   `deno task run [command] [--options]`
 
+## Testing a binary
+
+1. Compile the binaries e.g.
+
+```sh
+deno task compile
+```
+
+2. Run a command
+
+```sh
+bin/macos-arm/pspace --help
+```
+
 ## Writing GraphQL documents
 
 GraphQL documents can be contributed in
