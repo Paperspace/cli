@@ -1,3 +1,4 @@
 /target
 /bin
 !.vscode
+node_modules

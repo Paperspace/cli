@@ -1,0 +1,174 @@
+query ActivityLog(
+  $projectId: String!
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
+) {
+  projectActivities(
+    projectId: $projectId
+    first: $first
+    last: $last
+    before: $before
+    after: $after
+  ) {
+    nodes {
+      __typename
+
+      ... on ProjectDeploymentCreatedActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentDeletedActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentDisabledActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentEnabledActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentUpdatedActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentAutoscalingEnabledActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentAutoscalingDisabledActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+
+      ... on ProjectDeploymentScaledActivity {
+        id
+        dtCreated
+        action
+
+        actor {
+          fullName
+          email
+          avatarUrl
+        }
+
+        data {
+          __typename
+          from
+          to
+        }
+
+        deployment {
+          id
+          name
+          dtDeleted
+        }
+      }
+    }
+
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
