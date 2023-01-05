@@ -1,6 +1,4 @@
-<div style="background-color: #0e1219; border-radius: 16px; padding: 16px 16px 0; text-align: center; margin-bottom: 64px;">
-  <img src="https://assets-global.website-files.com/5db99670374d1d829291af4f/62ba2b7be89d1cb179a19d1d_paperspace_combo-p-500.png" height='64' style='margin-bottom: 16px;'>
-</div>
+![Paperspace Logo](.assets/pSmallLogo.png)
 
 # Paperspace CLI
 
