@@ -9,7 +9,7 @@ const gqlClient = new GraphQLClient("https://api.paperspace.com/graphql", {
 
 export function gqlFetch<TData = unknown, TVariables = Record<string, unknown>>(
   operation: TypedDocumentNode<TData, TVariables>,
-  variables?: TVariables
+  variables?: TVariables,
 ): Promise<TData> {
   return gqlClient.request(operation, variables);
 }

@@ -5,7 +5,8 @@ import { __VERSION__ } from "./lib/version.ts";
 
 if (import.meta.main) {
   Sentry.init({
-    dsn: "https://fc31a63f01194bd2a70b0432557b4b88@o64342.ingest.sentry.io/4504454143475712",
+    dsn:
+      "https://fc31a63f01194bd2a70b0432557b4b88@o64342.ingest.sentry.io/4504454143475712",
     release: __VERSION__,
     tracesSampleRate: 0,
   });

@@ -14,7 +14,7 @@ export const cli = new Command()
   .name("pspace")
   .version(`${__VERSION__} (${__COMMIT__})`)
   .description(
-    "The CLI for Paperspace. Check out the docs at https://docs.paperspace.com/cli"
+    "The CLI for Paperspace. Check out the docs at https://docs.paperspace.com/cli",
   );
 
 /**
