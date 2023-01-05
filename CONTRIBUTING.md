@@ -25,6 +25,13 @@ code cli
 deno task cache
 ```
 
+5. Install the GraphQL package
+
+```sh
+cd .graphql
+pnpm install
+```
+
 ## Development scripts
 
 > `deno task [name]`
