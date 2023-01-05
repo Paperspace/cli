@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: 1.x.x
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Setup package.json
+        run: echo '{"name":"@paperspace/cli","version":"0.0.0","repository":{"type":"git","url":"https://github.com/paperspace/cli.git"},"author":"Jared Lunde <jared.lunde@gmail.com>","license":"MIT","bugs":{"url":"https://github.com/paperspace/cli/issues"},"homepage":"https://paperspace.com/","devDependencies":{}}' > package.json
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: deno task compile
+
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Zip build
+        run: |
+          cd bin/linux
+          zip -9 pspace-linux.zip pspace
+          cd ../macos
+          zip -9 pspace-macos.zip pspace
+          cd ../macos-arm
+          zip -9 pspace-macos-arm.zip pspace
+          cd ../windows
+          zip -9 pspace-windows.zip pspace.exe
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
