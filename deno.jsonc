@@ -1,7 +1,7 @@
 {
   "tasks": {
     "cache": "deno cache --reload --lock=deno.lock --lock-write main.ts",
-    "check": "deno check --lock=lock.json main.ts",
+    "check": "deno check --lock=deno.lock main.ts",
     "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows",
     "compile:macos": "deno compile --allow-env --allow-sys --allow-net --lock=lock.json --target x86_64-apple-darwin --output bin/macos/pspace main.ts",
     "compile:macos-arm": "deno compile --allow-env --allow-sys --allow-net --lock=lock.json --target aarch64-apple-darwin --output bin/macos-arm/pspace main.ts",
