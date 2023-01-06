@@ -71,7 +71,8 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        publishCmd: [
+        //publishCmd: [
+        analyzeCommitsCmd: [
           `deno task compile`,
           `cd bin/linux`,
           `zip -9 pspace-linux.zip pspace`,
