@@ -11,13 +11,15 @@ import { __COMMIT__, __VERSION__ } from "./version.ts";
 import { success } from "./ansi.ts";
 import { get } from "./deployments/get.ts";
 
+const DOCS_ENDPOINT = "https://docs.paperspace.com";
+
 export const cli = new Command()
   .name("pspace")
   .usage(`<command> [options] `)
   .version(`${__VERSION__} (${__COMMIT__})`)
   .description(
     `
-    A CLI for using the Paperspace API. Read the full documentation at "https://docs.paperspace.com/cli".
+    A CLI for using the Paperspace API. Read the full documentation at "${DOCS_ENDPOINT}/cli".
     `
   )
   .type("url", zodType(z.string().url()))
@@ -36,8 +38,6 @@ export const cli = new Command()
   )
   .globalOption("--no-color", `Disable colors in the output.".`)
   .globalOption("--debug", `Enable debug logging.`);
-
-const DOCS_ENDPOINT = "https://docs.paperspace.com/";
 
 /**
  * Custom types
