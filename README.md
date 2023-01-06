@@ -1,6 +1,4 @@
-<p align='center'>
-  <img src=".assets/Paperspace.svg" width=156>
-</p>
+<img src=".assets/Paperspace.svg" width=72>
 
 # Paperspace CLI
 
