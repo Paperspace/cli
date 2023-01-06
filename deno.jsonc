@@ -1,4 +1,5 @@
 {
+  "$schema": "https://deno.land/x/deno/cli/schemas/config-file.v1.json",
   "tasks": {
     "cache": "deno cache --reload --lock=deno.lock --lock-write main.ts",
     "check": "deno check --lock=deno.lock main.ts",
