@@ -16,14 +16,16 @@ try {
 } catch (error) {
   if (error instanceof z.ZodError) {
     console.error(
-      `Invalid environment variables:\n${Object.keys(
-        error.formErrors.fieldErrors
-      )
-        .map(
-          (key) =>
-            `  ${info(key)}: ${error.formErrors.fieldErrors[key].message}`
+      `Invalid environment variables:\n${
+        Object.keys(
+          error.formErrors.fieldErrors,
         )
-        .join("\n")}`
+          .map(
+            (key) =>
+              `  ${info(key)}: ${error.formErrors.fieldErrors[key].message}`,
+          )
+          .join("\n")
+      }`,
     );
   }
 

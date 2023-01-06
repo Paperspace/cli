@@ -9,7 +9,9 @@ type Provider = "scoop" | "choco" | "brew" | "curl";
 
 export interface UpgradeCommandOptions<
   TProvider extends Provider = Provider,
-  TProviders extends TProvider | Array<TProvider> = TProvider | Array<TProvider>
+  TProviders extends TProvider | Array<TProvider> =
+    | TProvider
+    | Array<TProvider>,
 > {
   provider: TProviders;
 }
@@ -27,7 +29,7 @@ export class UpgradeCommand extends Command {
 
     this.description(
       () =>
-        `Upgrade ${this.getMainCommand().getName()} executable to latest or given version.`
+        `Upgrade ${this.getMainCommand().getName()} executable to latest or given version.`,
     )
       .noGlobals()
       .type("provider", new EnumType(this.providers))
@@ -50,16 +52,16 @@ export class UpgradeCommand extends Command {
       //   "Replace current installation even if not out-of-date."
       // )
       // .complete("version", () => this.getAllVersions())
-      .action(async (/*{ registry, version: targetVersion, force }*/) => {
-        const name: string = this.getMainCommand().getName();
-        const currentVersion: string | undefined = this.getVersion();
+      .action((/*{ registry, version: targetVersion, force }*/) => {
+        // const name: string = this.getMainCommand().getName();
+        // const currentVersion: string | undefined = this.getVersion();
       });
   }
 
   async getLatestVersion(): Promise<string> {
     //if (__COMMIT__ !== "development") {
     const response = await fetch(
-      "https://api.github.com/repos/paperspace/cli/releases/latest"
+      "https://api.github.com/repos/paperspace/cli/releases/latest",
     );
 
     if (!response.ok) {

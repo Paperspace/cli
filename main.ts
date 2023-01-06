@@ -3,12 +3,13 @@ import { ValidationError } from "https://deno.land/x/cliffy@v0.25.6/command/mod.
 
 import { cli } from "./lib/cli.ts";
 import { __COMMIT__, __VERSION__ } from "./lib/version.ts";
-import { error, info, warn } from "./lib/ansi.ts";
+import { error, warn } from "./lib/ansi.ts";
 
 if (import.meta.main) {
   // Initialize Sentry
   Sentry.init({
-    dsn: "https://fc31a63f01194bd2a70b0432557b4b88@o64342.ingest.sentry.io/4504454143475712",
+    dsn:
+      "https://fc31a63f01194bd2a70b0432557b4b88@o64342.ingest.sentry.io/4504454143475712",
     release: __COMMIT__,
     tracesSampleRate: 0,
   });
@@ -25,9 +26,11 @@ if (import.meta.main) {
       Sentry.captureException(err);
       console.error(`${error("Runtime Error")}\n%s`, err);
       console.error(
-        `\n${warn(
-          "Please file a bug report including the above message:"
-        )}\n → https://github.com/Paperspace/cli/issues/new`
+        `\n${
+          warn(
+            "Please file a bug report including the above message:",
+          )
+        }\n → https://github.com/Paperspace/cli/issues/new`,
       );
       Deno.exit(1);
     }
