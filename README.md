@@ -1,4 +1,4 @@
-<img src=".assets/Paperspace.svg" width=72>
+<img src=".assets/Paperspace.svg" width=128>
 
 # Paperspace CLI
 
