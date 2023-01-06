@@ -1,3 +1,4 @@
+import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import {
   Command,
   EnumType,
@@ -55,7 +56,7 @@ export class UpgradeCommand extends Command {
       });
   }
 
-  async getLatestVersion(): string {
+  async getLatestVersion(): Promise<string> {
     //if (__COMMIT__ !== "development") {
     const response = await fetch(
       "https://api.github.com/repos/paperspace/cli/releases/latest"
