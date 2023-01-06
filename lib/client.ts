@@ -15,8 +15,13 @@ export function gqlFetch<TData = unknown, TVariables = Record<string, unknown>>(
   variables?: TVariables,
   options?: {
     apiKey?: string;
+    apiUrl?: string;
   }
 ): Promise<TData> {
+  if (options?.apiUrl) {
+    gqlClient.setEndpoint(options.apiUrl);
+  }
+
   if (options?.apiKey) {
     gqlClient.setHeader("authorization", `Bearer ${options.apiKey}`);
   }
