@@ -25,7 +25,7 @@ jobs:
           node-version: 18.x
 
       - name: Setup package.json
-        run: echo '{"name":"@paperspace/cli","version":"0.0.0","repository":{"type":"git","url":"https://github.com/paperspace/cli.git"},"author":"Jared Lunde <jared.lunde@gmail.com>","license":"MIT","bugs":{"url":"https://github.com/paperspace/cli/issues"},"homepage":"https://paperspace.com/","devDependencies":{"@google/semantic-release-replace-plugin":"^1.2.0"}}' > package.json
+        run: echo '{"name":"@paperspace/cli","version":"0.0.0","repository":{"type":"git","url":"https://github.com/paperspace/cli.git"},"author":"Jared Lunde <jared.lunde@gmail.com>","license":"MIT","bugs":{"url":"https://github.com/paperspace/cli/issues"},"homepage":"https://paperspace.com/","devDependencies":{"@google/semantic-release-replace-plugin":"^1.2.0","@semantic-release/exec":"^6.0.3"}}' > package.json
       
       - name: Install dependencies
         run: npm install
