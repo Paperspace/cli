@@ -25,29 +25,15 @@ jobs:
           node-version: 18.x
 
       - name: Setup package.json
-        run: echo '{"name":"@paperspace/cli","version":"0.0.0","repository":{"type":"git","url":"https://github.com/paperspace/cli.git"},"author":"Jared Lunde <jared.lunde@gmail.com>","license":"MIT","bugs":{"url":"https://github.com/paperspace/cli/issues"},"homepage":"https://paperspace.com/","devDependencies":{}}' > package.json
+        run: echo '{"name":"@paperspace/cli","version":"0.0.0","repository":{"type":"git","url":"https://github.com/paperspace/cli.git"},"author":"Jared Lunde <jared.lunde@gmail.com>","license":"MIT","bugs":{"url":"https://github.com/paperspace/cli/issues"},"homepage":"https://paperspace.com/","devDependencies":{"@google/semantic-release-replace-plugin":"^1.2.0"}}' > package.json
       
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: deno task compile
-
       - name: Install zip
         uses: montudor/action-zip@v1
-
-      - name: Zip build
-        run: |
-          cd bin/linux
-          zip -9 pspace-linux.zip pspace
-          cd ../macos
-          zip -9 pspace-macos.zip pspace
-          cd ../macos-arm
-          zip -9 pspace-macos-arm.zip pspace
-          cd ../windows
-          zip -9 pspace-windows.zip pspace.exe
           
-      # - name: Release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: npx semantic-release
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
