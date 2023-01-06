@@ -5,8 +5,8 @@ import { env } from "./env.ts";
 const gqlClient = new GraphQLClient(env.PAPERSPACE_API_URL, {
   headers: env.PAPERSPACE_API_KEY
     ? {
-        authorization: `Bearer ${env.PAPERSPACE_API_KEY}`,
-      }
+      authorization: `Bearer ${env.PAPERSPACE_API_KEY}`,
+    }
     : {},
 });
 
@@ -16,7 +16,7 @@ export function gqlFetch<TData = unknown, TVariables = Record<string, unknown>>(
   options?: {
     apiKey?: string;
     apiUrl?: string;
-  }
+  },
 ): Promise<TData> {
   if (options?.apiUrl) {
     gqlClient.setEndpoint(options.apiUrl);

@@ -1,10 +1,10 @@
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import {
-  Command,
-  EnumType,
-  CompletionsCommand,
-  ValidationError,
   ArgumentValue,
+  Command,
+  CompletionsCommand,
+  EnumType,
+  ValidationError,
 } from "https://deno.land/x/cliffy@v0.25.6/command/mod.ts";
 import { open } from "https://deno.land/x/open@v0.0.5/index.ts";
 import { __COMMIT__, __VERSION__ } from "./version.ts";
@@ -20,21 +20,21 @@ export const cli = new Command()
   .description(
     `
     A CLI for using the Paperspace API. Read the full documentation at "${DOCS_ENDPOINT}/cli".
-    `
+    `,
   )
   .type("url", zodType(z.string().url()))
   .type("format", new EnumType(["json", "human"] as const))
   .globalOption(
     "--api-key <apiKey:string>",
-    "The Paperspace API key to use for authenticating requests."
+    "The Paperspace API key to use for authenticating requests.",
   )
   .globalOption(
     "--api-url <apiUrl:url>",
-    `The URL for the Paperspace API. Defaults to "https://api.paperspace.com/graphql".`
+    `The URL for the Paperspace API. Defaults to "https://api.paperspace.com/graphql".`,
   )
   .globalOption(
     "-f, --format <format:format>",
-    `Display the output in a specific format. Defaults to "human".`
+    `Display the output in a specific format. Defaults to "human".`,
   )
   .globalOption("--no-color", `Disable colors in the output.".`)
   .globalOption("--debug", `Enable debug logging.`);
@@ -54,7 +54,7 @@ function zodType(schema: z.ZodSchema) {
           `Argument "${name}" is invalid: ${err.issues[0].message}`,
           {
             exitCode: 1,
-          }
+          },
         );
       }
 
@@ -73,7 +73,7 @@ cli
     "docs",
     `
       Open Paperspace documention in your default browser.
-    `
+    `,
   )
   .type("docsPage", new EnumType(["deploys", "nbs", "vms"] as const))
   .arguments("[page:docsPage]")
@@ -81,12 +81,11 @@ cli
     const url = new URL(DOCS_ENDPOINT);
 
     if (page) {
-      url.pathname =
-        {
-          deploys: "/gradient/deployments/",
-          nbs: "/gradient/notebooks/",
-          vms: "/core/compute/",
-        }[page] ?? "/";
+      url.pathname = {
+        deploys: "/gradient/deployments/",
+        nbs: "/gradient/notebooks/",
+        vms: "/core/compute/",
+      }[page] ?? "/";
     }
 
     open(url + "");
@@ -97,9 +96,8 @@ cli
     "deploys",
     `
       Effortlessly deploy and manage ML apps.
-    `
+    `,
   )
-
   .type("url", urlType)
   .arguments("<url:url>")
   .action(async (_opt, u) => {
