@@ -1,4 +1,6 @@
-![Paperspace Logo](.assets/pSmallLogo.png)
+<p align='center'>
+  <img src=".assets/Paperspace.svg" width=156>
+</p>
 
 # Paperspace CLI
 
