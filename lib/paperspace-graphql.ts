@@ -3629,6 +3629,301 @@ export type Address = {
   zipCode?: Maybe<Scalars["String"]>;
 };
 
+export type CreateDeploymentMutationVariables = Exact<{
+  createDeploymentInput: CreateDeploymentInput;
+}>;
+
+export type CreateDeploymentMutation = {
+  __typename?: "Mutation";
+  createDeployment: {
+    __typename?: "CreateDeploymentPayload";
+    deployment: { __typename?: "Deployment"; id: string };
+  };
+};
+
+export type UpdateDeploymentMutationVariables = Exact<{
+  updateDeploymentInput: UpdateDeploymentInput;
+}>;
+
+export type UpdateDeploymentMutation = {
+  __typename?: "Mutation";
+  updateDeployment: {
+    __typename?: "UpdateDeploymentPayload";
+    deployment: { __typename?: "Deployment"; id: string };
+  };
+};
+
+export type DeleteDeploymentMutationMutationVariables = Exact<{
+  deleteDeploymentInput: DeleteDeploymentInput;
+}>;
+
+export type DeleteDeploymentMutationMutation = {
+  __typename?: "Mutation";
+  deleteDeployment: {
+    __typename?: "DeleteDeploymentPayload";
+    deployment: { __typename?: "Deployment"; id: string; name: string };
+  };
+};
+
+export type DeploymentQueryVariables = Exact<{
+  deploymentId: Scalars["UUID"];
+  first?: InputMaybe<Scalars["Int"]>;
+  after?: InputMaybe<Scalars["String"]>;
+  runOrderBy?: InputMaybe<DeploymentRunOrder>;
+  instanceOrderBy?: InputMaybe<DeploymentRunInstanceOrder>;
+}>;
+
+export type DeploymentQuery = {
+  __typename?: "Query";
+  deployment?: {
+    __typename?: "Deployment";
+    id: string;
+    name: string;
+    dtCreated: Date;
+    dtModified?: Date | null;
+    deploymentSpecs: {
+      __typename?: "DeploymentSpecConnection";
+      nodes: Array<
+        {
+          __typename?: "DeploymentSpec";
+          id: string;
+          endpointUrl: string;
+          externalApplied?: Date | null;
+          dtCreated: Date;
+          dtInvalid?: Date | null;
+          error?: string | null;
+          actor: {
+            __typename?: "Actor";
+            avatarUrl?: string | null;
+            fullName?: string | null;
+            email?: string | null;
+          };
+          cluster?:
+            | { __typename?: "Cluster"; name: string; fqdn: string }
+            | null;
+          data: {
+            __typename?: "DeploymentSpecData";
+            image: string;
+            containerRegistry?: string | null;
+            port?: number | null;
+            command?: Array<string> | null;
+            env?:
+              | Array<
+                {
+                  __typename?: "DeploymentSpecEnvVariable";
+                  name: string;
+                  value: string;
+                }
+              >
+              | null;
+            models?:
+              | Array<
+                {
+                  __typename?: "DeploymentSpecModel";
+                  id: string;
+                  path?: string | null;
+                }
+              >
+              | null;
+            repositories?: {
+              __typename?: "DeploymentSpecRepositories";
+              dataset?: string | null;
+              mountPath?: string | null;
+              repositories?:
+                | Array<
+                  {
+                    __typename?: "DeploymentSpecRepository";
+                    url: string;
+                    name: string;
+                    ref?: string | null;
+                    username?: string | null;
+                    password?: string | null;
+                  }
+                >
+                | null;
+            } | null;
+            resources?: {
+              __typename?: "DeploymentSpecResources";
+              replicas: number;
+              instanceType?: string | null;
+              autoscaling?: {
+                __typename?: "DeploymentSpecAutoscaling";
+                enabled?: boolean | null;
+                maxReplicas: number;
+                metrics: Array<
+                  {
+                    __typename?: "DeploymentSpecAutoscalingMetricObject";
+                    metric: string;
+                    summary: string;
+                    value: number;
+                  }
+                >;
+              } | null;
+            } | null;
+          };
+          deploymentRuns?: {
+            __typename?: "DeploymentRunConnection";
+            nodes: Array<
+              {
+                __typename?: "DeploymentRun";
+                id: string;
+                availableReplicas?: number | null;
+                readyReplicas?: number | null;
+                replicas?: number | null;
+                dtDeleted?: Date | null;
+                dtModified?: Date | null;
+                dtCreated: Date;
+                deploymentRunInstances?: {
+                  __typename?: "DeploymentRunInstanceConnection";
+                  nodes: Array<
+                    {
+                      __typename?: "DeploymentRunInstance";
+                      id: string;
+                      externalApplied?: Date | null;
+                      dtStarted?: Date | null;
+                      dtFinished?: Date | null;
+                      dtDeleted?: Date | null;
+                      phase?: InstancePhase | null;
+                      state?: DeploymentRunInstanceState | null;
+                      stateMessage?: string | null;
+                    }
+                  >;
+                } | null;
+              }
+            >;
+          } | null;
+        }
+      >;
+      edges: Array<{ __typename?: "DeploymentSpecEdge"; cursor: string }>;
+      pageInfo: { __typename?: "PageInfo"; hasNextPage: boolean };
+    };
+  } | null;
+};
+
+export type DeploymentListQueryVariables = Exact<{
+  projectHandle: Scalars["String"];
+  first?: InputMaybe<Scalars["Int"]>;
+  after?: InputMaybe<Scalars["String"]>;
+}>;
+
+export type DeploymentListQuery = {
+  __typename?: "Query";
+  deployments: {
+    __typename?: "DeploymentConnection";
+    nodes: Array<
+      {
+        __typename?: "Deployment";
+        id: string;
+        name: string;
+        dtCreated: Date;
+        deploymentSpecs: {
+          __typename?: "DeploymentSpecConnection";
+          nodes: Array<
+            {
+              __typename?: "DeploymentSpec";
+              id: string;
+              externalApplied?: Date | null;
+              dtCreated: Date;
+              dtInvalid?: Date | null;
+              error?: string | null;
+              deploymentRuns?: {
+                __typename?: "DeploymentRunConnection";
+                nodes: Array<
+                  {
+                    __typename?: "DeploymentRun";
+                    id: string;
+                    dtDeleted?: Date | null;
+                    availableReplicas?: number | null;
+                    readyReplicas?: number | null;
+                    replicas?: number | null;
+                    deploymentRunInstances?: {
+                      __typename?: "DeploymentRunInstanceConnection";
+                      nodes: Array<
+                        {
+                          __typename?: "DeploymentRunInstance";
+                          id: string;
+                          externalApplied?: Date | null;
+                          dtStarted?: Date | null;
+                          dtFinished?: Date | null;
+                          phase?: InstancePhase | null;
+                          state?: DeploymentRunInstanceState | null;
+                          stateMessage?: string | null;
+                        }
+                      >;
+                    } | null;
+                  }
+                >;
+              } | null;
+              data: {
+                __typename?: "DeploymentSpecData";
+                image: string;
+                containerRegistry?: string | null;
+                port?: number | null;
+                command?: Array<string> | null;
+                env?:
+                  | Array<
+                    {
+                      __typename?: "DeploymentSpecEnvVariable";
+                      name: string;
+                      value: string;
+                    }
+                  >
+                  | null;
+                models?:
+                  | Array<
+                    {
+                      __typename?: "DeploymentSpecModel";
+                      id: string;
+                      path?: string | null;
+                    }
+                  >
+                  | null;
+                repositories?: {
+                  __typename?: "DeploymentSpecRepositories";
+                  dataset?: string | null;
+                  mountPath?: string | null;
+                  repositories?:
+                    | Array<
+                      {
+                        __typename?: "DeploymentSpecRepository";
+                        url: string;
+                        name: string;
+                        ref?: string | null;
+                        username?: string | null;
+                        password?: string | null;
+                      }
+                    >
+                    | null;
+                } | null;
+                resources?: {
+                  __typename?: "DeploymentSpecResources";
+                  replicas: number;
+                  instanceType?: string | null;
+                  autoscaling?: {
+                    __typename?: "DeploymentSpecAutoscaling";
+                    enabled?: boolean | null;
+                    maxReplicas: number;
+                    metrics: Array<
+                      {
+                        __typename?: "DeploymentSpecAutoscalingMetricObject";
+                        metric: string;
+                        summary: string;
+                        value: number;
+                      }
+                    >;
+                  } | null;
+                } | null;
+              };
+            }
+          >;
+        };
+      }
+    >;
+    edges: Array<{ __typename?: "DeploymentEdge"; cursor: string }>;
+    pageInfo: { __typename?: "PageInfo"; hasNextPage: boolean };
+  };
+};
+
 export type ActivityLogQueryVariables = Exact<{
   projectId: Scalars["String"];
   first?: InputMaybe<Scalars["Int"]>;
@@ -3793,6 +4088,1073 @@ export type ActivityLogQuery = {
   };
 };
 
+export const CreateDeploymentDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "mutation",
+    "name": { "kind": "Name", "value": "CreateDeployment" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "createDeploymentInput" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "CreateDeploymentInput" },
+        },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "createDeployment" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "input" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "createDeploymentInput" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "deployment" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<
+  CreateDeploymentMutation,
+  CreateDeploymentMutationVariables
+>;
+export const UpdateDeploymentDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "mutation",
+    "name": { "kind": "Name", "value": "UpdateDeployment" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "updateDeploymentInput" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "UpdateDeploymentInput" },
+        },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "updateDeployment" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "input" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "updateDeploymentInput" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "deployment" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<
+  UpdateDeploymentMutation,
+  UpdateDeploymentMutationVariables
+>;
+export const DeleteDeploymentMutationDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "mutation",
+    "name": { "kind": "Name", "value": "DeleteDeploymentMutation" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "deleteDeploymentInput" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "DeleteDeploymentInput" },
+        },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "deleteDeployment" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "input" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "deleteDeploymentInput" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "deployment" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "name" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<
+  DeleteDeploymentMutationMutation,
+  DeleteDeploymentMutationMutationVariables
+>;
+export const DeploymentDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "query",
+    "name": { "kind": "Name", "value": "Deployment" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "deploymentId" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "UUID" },
+        },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "first" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "Int" },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "after" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "String" },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "runOrderBy" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "DeploymentRunOrder" },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "instanceOrderBy" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "DeploymentRunInstanceOrder" },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "deployment" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "id" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "deploymentId" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [
+            { "kind": "Field", "name": { "kind": "Name", "value": "id" } },
+            { "kind": "Field", "name": { "kind": "Name", "value": "name" } },
+            {
+              "kind": "Field",
+              "name": { "kind": "Name", "value": "dtCreated" },
+            },
+            {
+              "kind": "Field",
+              "name": { "kind": "Name", "value": "dtModified" },
+            },
+            {
+              "kind": "Field",
+              "name": { "kind": "Name", "value": "deploymentSpecs" },
+              "arguments": [{
+                "kind": "Argument",
+                "name": { "kind": "Name", "value": "first" },
+                "value": {
+                  "kind": "Variable",
+                  "name": { "kind": "Name", "value": "first" },
+                },
+              }, {
+                "kind": "Argument",
+                "name": { "kind": "Name", "value": "after" },
+                "value": {
+                  "kind": "Variable",
+                  "name": { "kind": "Name", "value": "after" },
+                },
+              }],
+              "selectionSet": {
+                "kind": "SelectionSet",
+                "selections": [{
+                  "kind": "Field",
+                  "name": { "kind": "Name", "value": "nodes" },
+                  "selectionSet": {
+                    "kind": "SelectionSet",
+                    "selections": [{
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "id" },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "endpointUrl" },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "externalApplied" },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "dtCreated" },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "dtInvalid" },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "error" },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "actor" },
+                      "selectionSet": {
+                        "kind": "SelectionSet",
+                        "selections": [{
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "avatarUrl" },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "fullName" },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "email" },
+                        }],
+                      },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "cluster" },
+                      "selectionSet": {
+                        "kind": "SelectionSet",
+                        "selections": [{
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "name" },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "fqdn" },
+                        }],
+                      },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "data" },
+                      "selectionSet": {
+                        "kind": "SelectionSet",
+                        "selections": [{
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "image" },
+                        }, {
+                          "kind": "Field",
+                          "name": {
+                            "kind": "Name",
+                            "value": "containerRegistry",
+                          },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "port" },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "command" },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "env" },
+                          "selectionSet": {
+                            "kind": "SelectionSet",
+                            "selections": [{
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "name" },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "value" },
+                            }],
+                          },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "models" },
+                          "selectionSet": {
+                            "kind": "SelectionSet",
+                            "selections": [{
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "id" },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "path" },
+                            }],
+                          },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "repositories" },
+                          "selectionSet": {
+                            "kind": "SelectionSet",
+                            "selections": [{
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "dataset" },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "mountPath" },
+                            }, {
+                              "kind": "Field",
+                              "name": {
+                                "kind": "Name",
+                                "value": "repositories",
+                              },
+                              "selectionSet": {
+                                "kind": "SelectionSet",
+                                "selections": [{
+                                  "kind": "Field",
+                                  "name": { "kind": "Name", "value": "url" },
+                                }, {
+                                  "kind": "Field",
+                                  "name": { "kind": "Name", "value": "name" },
+                                }, {
+                                  "kind": "Field",
+                                  "name": { "kind": "Name", "value": "ref" },
+                                }, {
+                                  "kind": "Field",
+                                  "name": {
+                                    "kind": "Name",
+                                    "value": "username",
+                                  },
+                                }, {
+                                  "kind": "Field",
+                                  "name": {
+                                    "kind": "Name",
+                                    "value": "password",
+                                  },
+                                }],
+                              },
+                            }],
+                          },
+                        }, {
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "resources" },
+                          "selectionSet": {
+                            "kind": "SelectionSet",
+                            "selections": [{
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "replicas" },
+                            }, {
+                              "kind": "Field",
+                              "name": {
+                                "kind": "Name",
+                                "value": "autoscaling",
+                              },
+                              "selectionSet": {
+                                "kind": "SelectionSet",
+                                "selections": [{
+                                  "kind": "Field",
+                                  "name": {
+                                    "kind": "Name",
+                                    "value": "enabled",
+                                  },
+                                }, {
+                                  "kind": "Field",
+                                  "name": {
+                                    "kind": "Name",
+                                    "value": "maxReplicas",
+                                  },
+                                }, {
+                                  "kind": "Field",
+                                  "name": {
+                                    "kind": "Name",
+                                    "value": "metrics",
+                                  },
+                                  "selectionSet": {
+                                    "kind": "SelectionSet",
+                                    "selections": [{
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "metric",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "summary",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "value",
+                                      },
+                                    }],
+                                  },
+                                }],
+                              },
+                            }, {
+                              "kind": "Field",
+                              "name": {
+                                "kind": "Name",
+                                "value": "instanceType",
+                              },
+                            }],
+                          },
+                        }],
+                      },
+                    }, {
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "deploymentRuns" },
+                      "arguments": [{
+                        "kind": "Argument",
+                        "name": { "kind": "Name", "value": "first" },
+                        "value": {
+                          "kind": "Variable",
+                          "name": { "kind": "Name", "value": "first" },
+                        },
+                      }, {
+                        "kind": "Argument",
+                        "name": { "kind": "Name", "value": "orderBy" },
+                        "value": {
+                          "kind": "Variable",
+                          "name": { "kind": "Name", "value": "runOrderBy" },
+                        },
+                      }],
+                      "selectionSet": {
+                        "kind": "SelectionSet",
+                        "selections": [{
+                          "kind": "Field",
+                          "name": { "kind": "Name", "value": "nodes" },
+                          "selectionSet": {
+                            "kind": "SelectionSet",
+                            "selections": [{
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "id" },
+                            }, {
+                              "kind": "Field",
+                              "name": {
+                                "kind": "Name",
+                                "value": "availableReplicas",
+                              },
+                            }, {
+                              "kind": "Field",
+                              "name": {
+                                "kind": "Name",
+                                "value": "readyReplicas",
+                              },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "replicas" },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "dtDeleted" },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "dtModified" },
+                            }, {
+                              "kind": "Field",
+                              "name": { "kind": "Name", "value": "dtCreated" },
+                            }, {
+                              "kind": "Field",
+                              "name": {
+                                "kind": "Name",
+                                "value": "deploymentRunInstances",
+                              },
+                              "arguments": [{
+                                "kind": "Argument",
+                                "name": { "kind": "Name", "value": "first" },
+                                "value": {
+                                  "kind": "Variable",
+                                  "name": { "kind": "Name", "value": "first" },
+                                },
+                              }, {
+                                "kind": "Argument",
+                                "name": { "kind": "Name", "value": "orderBy" },
+                                "value": {
+                                  "kind": "Variable",
+                                  "name": {
+                                    "kind": "Name",
+                                    "value": "instanceOrderBy",
+                                  },
+                                },
+                              }],
+                              "selectionSet": {
+                                "kind": "SelectionSet",
+                                "selections": [{
+                                  "kind": "Field",
+                                  "name": { "kind": "Name", "value": "nodes" },
+                                  "selectionSet": {
+                                    "kind": "SelectionSet",
+                                    "selections": [{
+                                      "kind": "Field",
+                                      "name": { "kind": "Name", "value": "id" },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "externalApplied",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "dtStarted",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "dtFinished",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "dtDeleted",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "phase",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "state",
+                                      },
+                                    }, {
+                                      "kind": "Field",
+                                      "name": {
+                                        "kind": "Name",
+                                        "value": "stateMessage",
+                                      },
+                                    }],
+                                  },
+                                }],
+                              },
+                            }],
+                          },
+                        }],
+                      },
+                    }],
+                  },
+                }, {
+                  "kind": "Field",
+                  "name": { "kind": "Name", "value": "edges" },
+                  "selectionSet": {
+                    "kind": "SelectionSet",
+                    "selections": [{
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "cursor" },
+                    }],
+                  },
+                }, {
+                  "kind": "Field",
+                  "name": { "kind": "Name", "value": "pageInfo" },
+                  "selectionSet": {
+                    "kind": "SelectionSet",
+                    "selections": [{
+                      "kind": "Field",
+                      "name": { "kind": "Name", "value": "hasNextPage" },
+                    }],
+                  },
+                }],
+              },
+            },
+          ],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeploymentQuery, DeploymentQueryVariables>;
+export const DeploymentListDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "query",
+    "name": { "kind": "Name", "value": "DeploymentList" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "projectHandle" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "String" },
+        },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "first" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "Int" },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "after" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "String" },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "deployments" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "projectId" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "projectHandle" },
+          },
+        }, {
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "first" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "first" },
+          },
+        }, {
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "after" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "after" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "nodes" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "name" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "deploymentSpecs" },
+                "arguments": [{
+                  "kind": "Argument",
+                  "name": { "kind": "Name", "value": "first" },
+                  "value": { "kind": "IntValue", "value": "10" },
+                }],
+                "selectionSet": {
+                  "kind": "SelectionSet",
+                  "selections": [{
+                    "kind": "Field",
+                    "name": { "kind": "Name", "value": "nodes" },
+                    "selectionSet": {
+                      "kind": "SelectionSet",
+                      "selections": [{
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "deploymentRuns" },
+                        "arguments": [{
+                          "kind": "Argument",
+                          "name": { "kind": "Name", "value": "first" },
+                          "value": { "kind": "IntValue", "value": "10" },
+                        }],
+                        "selectionSet": {
+                          "kind": "SelectionSet",
+                          "selections": [{
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "nodes" },
+                            "selectionSet": {
+                              "kind": "SelectionSet",
+                              "selections": [{
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "id" },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "dtDeleted",
+                                },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "availableReplicas",
+                                },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "readyReplicas",
+                                },
+                              }, {
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "replicas" },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "deploymentRunInstances",
+                                },
+                                "arguments": [{
+                                  "kind": "Argument",
+                                  "name": { "kind": "Name", "value": "first" },
+                                  "value": {
+                                    "kind": "IntValue",
+                                    "value": "10",
+                                  },
+                                }],
+                                "selectionSet": {
+                                  "kind": "SelectionSet",
+                                  "selections": [{
+                                    "kind": "Field",
+                                    "name": {
+                                      "kind": "Name",
+                                      "value": "nodes",
+                                    },
+                                    "selectionSet": {
+                                      "kind": "SelectionSet",
+                                      "selections": [{
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "id",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "externalApplied",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "dtStarted",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "dtFinished",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "phase",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "state",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "stateMessage",
+                                        },
+                                      }],
+                                    },
+                                  }],
+                                },
+                              }],
+                            },
+                          }],
+                        },
+                      }, {
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "data" },
+                        "selectionSet": {
+                          "kind": "SelectionSet",
+                          "selections": [{
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "image" },
+                          }, {
+                            "kind": "Field",
+                            "name": {
+                              "kind": "Name",
+                              "value": "containerRegistry",
+                            },
+                          }, {
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "port" },
+                          }, {
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "command" },
+                          }, {
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "env" },
+                            "selectionSet": {
+                              "kind": "SelectionSet",
+                              "selections": [{
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "name" },
+                              }, {
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "value" },
+                              }],
+                            },
+                          }, {
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "models" },
+                            "selectionSet": {
+                              "kind": "SelectionSet",
+                              "selections": [{
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "id" },
+                              }, {
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "path" },
+                              }],
+                            },
+                          }, {
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "repositories" },
+                            "selectionSet": {
+                              "kind": "SelectionSet",
+                              "selections": [{
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "dataset" },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "mountPath",
+                                },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "repositories",
+                                },
+                                "selectionSet": {
+                                  "kind": "SelectionSet",
+                                  "selections": [{
+                                    "kind": "Field",
+                                    "name": { "kind": "Name", "value": "url" },
+                                  }, {
+                                    "kind": "Field",
+                                    "name": { "kind": "Name", "value": "name" },
+                                  }, {
+                                    "kind": "Field",
+                                    "name": { "kind": "Name", "value": "ref" },
+                                  }, {
+                                    "kind": "Field",
+                                    "name": {
+                                      "kind": "Name",
+                                      "value": "username",
+                                    },
+                                  }, {
+                                    "kind": "Field",
+                                    "name": {
+                                      "kind": "Name",
+                                      "value": "password",
+                                    },
+                                  }],
+                                },
+                              }],
+                            },
+                          }, {
+                            "kind": "Field",
+                            "name": { "kind": "Name", "value": "resources" },
+                            "selectionSet": {
+                              "kind": "SelectionSet",
+                              "selections": [{
+                                "kind": "Field",
+                                "name": { "kind": "Name", "value": "replicas" },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "instanceType",
+                                },
+                              }, {
+                                "kind": "Field",
+                                "name": {
+                                  "kind": "Name",
+                                  "value": "autoscaling",
+                                },
+                                "selectionSet": {
+                                  "kind": "SelectionSet",
+                                  "selections": [{
+                                    "kind": "Field",
+                                    "name": {
+                                      "kind": "Name",
+                                      "value": "enabled",
+                                    },
+                                  }, {
+                                    "kind": "Field",
+                                    "name": {
+                                      "kind": "Name",
+                                      "value": "maxReplicas",
+                                    },
+                                  }, {
+                                    "kind": "Field",
+                                    "name": {
+                                      "kind": "Name",
+                                      "value": "metrics",
+                                    },
+                                    "selectionSet": {
+                                      "kind": "SelectionSet",
+                                      "selections": [{
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "metric",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "summary",
+                                        },
+                                      }, {
+                                        "kind": "Field",
+                                        "name": {
+                                          "kind": "Name",
+                                          "value": "value",
+                                        },
+                                      }],
+                                    },
+                                  }],
+                                },
+                              }],
+                            },
+                          }],
+                        },
+                      }, {
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "id" },
+                      }, {
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "externalApplied" },
+                      }, {
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "dtCreated" },
+                      }, {
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "dtInvalid" },
+                      }, {
+                        "kind": "Field",
+                        "name": { "kind": "Name", "value": "error" },
+                      }],
+                    },
+                  }],
+                },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "dtCreated" },
+              }],
+            },
+          }, {
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "edges" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "cursor" },
+              }],
+            },
+          }, {
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "pageInfo" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "hasNextPage" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeploymentListQuery, DeploymentListQueryVariables>;
 export const ActivityLogDocument = {
   "kind": "Document",
   "definitions": [{

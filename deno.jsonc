@@ -4,11 +4,21 @@
     "cache": "deno cache --reload --lock=deno.lock --lock-write main.ts",
     "check": "deno check --lock=deno.lock main.ts",
     "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows",
-    "compile:macos": "deno compile --allow-env --allow-sys --allow-net --allow-run --lock=lock.json --target x86_64-apple-darwin --output bin/macos/pspace main.ts",
-    "compile:macos-arm": "deno compile --allow-env --allow-sys --allow-net --allow-run --lock=lock.json --target aarch64-apple-darwin --output bin/macos-arm/pspace main.ts",
-    "compile:linux": "deno compile --allow-env --allow-sys --allow-net --allow-run --lock=lock.json --target x86_64-unknown-linux-gnu --output bin/linux/pspace main.ts",
-    "compile:windows": "deno compile --allow-env --allow-sys --allow-net --allow-run --lock=lock.json --target x86_64-pc-windows-msvc --output bin/windows/pspace main.ts",
+    "compile:macos": "deno compile --allow-env --allow-read --allow-write --allow-sys --allow-net --allow-run --lock=lock.json --target x86_64-apple-darwin --output bin/macos/pspace main.ts",
+    "compile:macos-arm": "deno compile --allow-env --allow-read --allow-write --allow-sys --allow-net --allow-run --lock=lock.json --target aarch64-apple-darwin --output bin/macos-arm/pspace main.ts",
+    "compile:linux": "deno compile --allow-env --allow-read --allow-write --allow-sys --allow-net --allow-run --lock=lock.json --target x86_64-unknown-linux-gnu --output bin/linux/pspace main.ts",
+    "compile:windows": "deno compile --allow-env --allow-read --allow-write --allow-sys --allow-net --allow-run --lock=lock.json --target x86_64-pc-windows-msvc --output bin/windows/pspace main.ts",
     "generate": "cd .graphql && pnpm install && pnpm generate && cd .. && mv .graphql/paperspace-graphql.ts lib && npx replace-in-files-cli --string='@graphql-typed-document-node/core' --replacement='https://esm.sh/@graphql-typed-document-node/core@3.1.1' lib/paperspace-graphql.ts",
-    "run": "deno run --allow-env --allow-sys --allow-net --allow-run main.ts"
+    "run": "deno run --allow-env --allow-sys --allow-read --allow-write --allow-net --allow-run main.ts"
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["no-explicit-any"]
+    }
+  },
+  "fmt": {
+    "files": {
+      "include": ["main.ts", "lib"]
+    }
   }
 }

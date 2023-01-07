@@ -2,7 +2,7 @@ import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import {
   Command,
   EnumType,
-} from "https://deno.land/x/cliffy@v0.25.6/command/mod.ts";
+} from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
 import { __COMMIT__ } from "./version.ts";
 
 type Provider = "scoop" | "choco" | "brew" | "curl";

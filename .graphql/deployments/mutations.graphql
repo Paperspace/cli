@@ -1,0 +1,26 @@
+mutation CreateDeployment($createDeploymentInput: CreateDeploymentInput!) {
+  createDeployment(input: $createDeploymentInput) {
+    deployment {
+      id
+    }
+  }
+}
+
+mutation UpdateDeployment($updateDeploymentInput: UpdateDeploymentInput!) {
+  updateDeployment(input: $updateDeploymentInput) {
+    deployment {
+      id
+    }
+  }
+}
+
+mutation DeleteDeploymentMutation(
+  $deleteDeploymentInput: DeleteDeploymentInput!
+) {
+  deleteDeployment(input: $deleteDeploymentInput) {
+    deployment {
+      id
+      name
+    }
+  }
+}

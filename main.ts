@@ -1,5 +1,5 @@
 import * as Sentry from "https://deno.land/x/sentry_deno@v0.2.2/main.ts";
-import { ValidationError } from "https://deno.land/x/cliffy@v0.25.6/command/mod.ts";
+import { ValidationError } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
 
 import { cli } from "./lib/cli.ts";
 import { __COMMIT__, __VERSION__ } from "./lib/version.ts";
