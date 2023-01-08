@@ -17,6 +17,7 @@ import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
 import { bold, info } from "./ansi.ts";
 import { prints } from "./print.ts";
+import { select } from "./select.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
@@ -38,6 +39,7 @@ export const cli = new Command()
     "--api-url <api-url:url>",
     `The URL for the Paperspace API. Defaults to "https://api.paperspace.com/graphql".`,
   )
+  .globalOption("--debug", `Enable debug logging.`)
   .globalOption("--json", `Display the output as JSON.`)
   .globalOption("--no-color", `Disable colors in the output.".`)
   .globalEnv(
@@ -88,52 +90,83 @@ function zodType(schema: z.ZodSchema) {
  */
 
 /**
- * Docs
- */
-cli
-  .command(
-    "docs",
-    `
-    Open Paperspace documention in your default browser.
-    `,
-  )
-  .type(
-    "docsPage",
-    new EnumType(
-      [
-        "deploy",
-        "nb",
-        "vm",
-        "deployment",
-        "notebook",
-        "machine",
-      ] as const,
-    ),
-  )
-  .arguments("[page:docsPage]")
-  .action((_opt, page) => {
-    const url = new URL(DOCS_ENDPOINT);
-
-    if (page) {
-      url.pathname = {
-        deploy: "/gradient/deployments/",
-        deployment: "/gradient/deployments/",
-        nb: "/gradient/notebooks/",
-        notebook: "/gradient/notebooks/",
-        vm: "/core/compute/",
-        machine: "/core/compute/",
-      }[page] ?? "/";
-    }
-
-    open(url + "");
-  });
-
-/**
  * Deployments
  */
 cli
   .command(
     "deployment, deploy",
+    new Command()
+      .command("init")
+      .action(() => {
+        console.log("init");
+      })
+      .command("create")
+      .action(() => {
+        console.log("create");
+      })
+      .command("update")
+      .action(() => {
+        console.log("update");
+      })
+      .command("delete")
+      .action(() => {
+        console.log("delete");
+      })
+      .command("list")
+      .action(() => {
+        console.log("list");
+      })
+      .command("get")
+      .action(() => {
+        console.log("list");
+      }),
+  )
+  .action(function () {
+    this.showHelp();
+  });
+
+/**
+ * Notebooks
+ */
+cli
+  .command(
+    "notebook, nb",
+    new Command()
+      .command("init")
+      .action(() => {
+        console.log("init");
+      })
+      .command("create")
+      .action(() => {
+        console.log("create");
+      })
+      .command("update")
+      .action(() => {
+        console.log("update");
+      })
+      .command("delete")
+      .action(() => {
+        console.log("delete");
+      })
+      .command("list")
+      .action(() => {
+        console.log("list");
+      })
+      .command("get")
+      .action(() => {
+        console.log("get");
+      }),
+  )
+  .action(function () {
+    this.showHelp();
+  });
+
+/**
+ * Machines
+ */
+cli
+  .command(
+    "machine, vm",
     new Command()
       .command("init")
       .action(() => {
@@ -244,6 +277,7 @@ cli
         Set a configuration value at a given path.
         `,
       )
+      .example(`Set the team to "my-team"`, "pspace config set team my-team")
       .type("key", new EnumType(config.paths))
       .arguments("<key:key> <value:string>")
       .action(
@@ -259,10 +293,17 @@ cli
         Get a configuration value at a given path.
         `,
       )
+      .example(`Get the current team`, "pspace config get team")
       .type("key", new EnumType(config.paths))
-      .arguments("<key:key>")
+      .arguments("[key:key]")
       .action(
         prints(async (_opt, key) => {
+          if (!key) {
+            key = await select({
+              label: "Select a key to get the value for:",
+              options: config.paths,
+            });
+          }
           const value = await config.get(key);
           return { value };
         }),
@@ -273,6 +314,7 @@ cli
         Delete a configuration value at a given path.
         `,
       )
+      .example(`Delete the current team`, "pspace config delete team")
       .type("key", new EnumType(config.paths))
       .arguments("<key:key>")
       .action(async (_opt, key) => {
@@ -318,6 +360,11 @@ cli
   });
 
 /**
+ * Adds a command to generate completions for various shells
+ */
+cli.command("completions", new CompletionsCommand());
+
+/**
  * Console
  */
 cli
@@ -332,9 +379,45 @@ cli
   });
 
 /**
- * Adds a command to generate completions for various shells
+ * Docs
  */
-cli.command("completions", new CompletionsCommand());
+cli
+  .command(
+    "docs",
+    `
+    Open Paperspace documention in your default browser.
+    `,
+  )
+  .type(
+    "docsPage",
+    new EnumType(
+      [
+        "deploy",
+        "nb",
+        "vm",
+        "deployment",
+        "notebook",
+        "machine",
+      ] as const,
+    ),
+  )
+  .arguments("[page:docsPage]")
+  .action((_opt, page) => {
+    const url = new URL(DOCS_ENDPOINT);
+
+    if (page) {
+      url.pathname = {
+        deploy: "/gradient/deployments/",
+        deployment: "/gradient/deployments/",
+        nb: "/gradient/notebooks/",
+        notebook: "/gradient/notebooks/",
+        vm: "/core/compute/",
+        machine: "/core/compute/",
+      }[page] ?? "/";
+    }
+
+    open(url + "");
+  });
 
 /**
  * Adds a command to upgrade the CLI

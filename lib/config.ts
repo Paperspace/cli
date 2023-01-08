@@ -103,10 +103,15 @@ export const schema = z.object({
     .default(null),
 });
 
-export const paths = getKeys(schema) as ConfigPaths[];
+export const paths = getKeys(schema).filter((key) =>
+  key !== "version"
+) as ConfigPaths[];
 
 export type Config = z.infer<typeof schema>;
-export type ConfigPaths = Exclude<NestedPaths<Config>, undefined>;
+export type ConfigPaths = Exclude<
+  Exclude<NestedPaths<Config>, undefined>,
+  "version"
+>;
 
 const CONFIG_DIR = `${env.get("HOME")}/.paperspace`;
 export const CONFIG_PATH = `${CONFIG_DIR}/config.yml`;
