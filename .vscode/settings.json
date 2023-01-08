@@ -8,5 +8,8 @@
   "deno.inlayHints.functionLikeReturnTypes.enabled": false,
   "deno.inlayHints.parameterNames.enabled": "none",
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
 }
