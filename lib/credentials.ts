@@ -12,11 +12,11 @@ export async function read() {
   try {
     Deno.statSync(CREDENTIALS_PATH);
   } catch (_err) {
-    return credentialsSchema.parse({});
+    return schema.parse({});
   }
 
   const credentials = parse(await Deno.readTextFile(CREDENTIALS_PATH));
-  return credentialsSchema.parse(credentials);
+  return schema.parse(credentials);
 }
 
 /**
@@ -24,7 +24,7 @@ export async function read() {
  *
  * @param credentials - The credentials to write to the file
  */
-export async function write(credentials: z.infer<typeof credentialsSchema>) {
+export async function write(credentials: z.infer<typeof schema>) {
   try {
     Deno.statSync(CREDENTIALS_DIR);
   } catch (_err) {
@@ -43,7 +43,7 @@ export async function write(credentials: z.infer<typeof credentialsSchema>) {
  */
 export async function get(team: string) {
   const credentials = await read();
-  return credentials[team];
+  return credentials.keys[team];
 }
 
 /**
@@ -54,7 +54,7 @@ export async function get(team: string) {
  */
 export async function set(team: string, apiKey: string) {
   const credentials = await read();
-  credentials[team] = apiKey;
+  credentials.keys[team] = apiKey;
 
   return await write(credentials);
 }
@@ -66,7 +66,7 @@ export async function set(team: string, apiKey: string) {
  */
 export async function remove(team: string) {
   const credentials = await read();
-  delete credentials[team];
+  delete credentials.keys[team];
 
   return await write(credentials);
 }
@@ -75,9 +75,12 @@ export async function remove(team: string) {
  * Clear the credentials file
  */
 export async function clear() {
-  return await write({});
+  return await write({ version: 1, keys: {} });
 }
 
-const credentialsSchema = z.record(z.string());
+export const schema = z.object({
+  version: z.literal(1).default(1),
+  keys: z.record(z.string()),
+});
 const CREDENTIALS_DIR = `${env.get("HOME")}/.paperspace`;
-const CREDENTIALS_PATH = `${CREDENTIALS_DIR}/credentials.yml`;
+export const CREDENTIALS_PATH = `${CREDENTIALS_DIR}/credentials.yml`;

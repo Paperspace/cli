@@ -10,6 +10,7 @@ import { Input } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
 import { open } from "https://deno.land/x/open@v0.0.5/index.ts";
 import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
+import openEditor from "https://esm.sh/open-editor@4.0.0";
 
 import { formattedVersion } from "./version.ts";
 import * as credentials from "./credentials.ts";
@@ -26,22 +27,22 @@ export const cli = new Command()
   .description(
     `
     A CLI for using the Paperspace API. Read the full documentation at "${DOCS_ENDPOINT}/cli".
-    `
+    `,
   )
   .type("url", zodType(z.string().url()))
   .globalOption(
     "--api-key <api-key:string>",
-    `The Paperspace API key to use for authenticating requests.`
+    `The Paperspace API key to use for authenticating requests.`,
   )
   .globalOption(
     "--api-url <api-url:url>",
-    `The URL for the Paperspace API. Defaults to "https://api.paperspace.com/graphql".`
+    `The URL for the Paperspace API. Defaults to "https://api.paperspace.com/graphql".`,
   )
   .globalOption("--json", `Display the output as JSON.`)
   .globalOption("--no-color", `Disable colors in the output.".`)
   .globalEnv(
     "PAPERSPACE_API_KEY=<value:string>",
-    `The Paperspace API key to use for authenticating requests.`
+    `The Paperspace API key to use for authenticating requests.`,
   )
   .globalEnv(
     "PAPERSPACE_API_URL=<value:string>",
@@ -49,10 +50,13 @@ export const cli = new Command()
     {
       hidden: true,
       required: false,
-    }
+    },
   )
   .globalEnv("DEBUG=<value:boolean>", `Enable debug logging.`, {
     required: false,
+  })
+  .action(() => {
+    cli.showHelp();
   });
 
 /**
@@ -69,7 +73,7 @@ function zodType(schema: z.ZodSchema) {
           `Argument "${name}" is invalid: ${err.issues[0].message}`,
           {
             exitCode: 1,
-          }
+          },
         );
       }
 
@@ -91,33 +95,34 @@ cli
     "docs",
     `
     Open Paperspace documention in your default browser.
-    `
+    `,
   )
   .type(
     "docsPage",
-    new EnumType([
-      "deploy",
-      "nb",
-      "vm",
-      "deployment",
-      "notebook",
-      "machine",
-    ] as const)
+    new EnumType(
+      [
+        "deploy",
+        "nb",
+        "vm",
+        "deployment",
+        "notebook",
+        "machine",
+      ] as const,
+    ),
   )
   .arguments("[page:docsPage]")
   .action((_opt, page) => {
     const url = new URL(DOCS_ENDPOINT);
 
     if (page) {
-      url.pathname =
-        {
-          deploy: "/gradient/deployments/",
-          deployment: "/gradient/deployments/",
-          nb: "/gradient/notebooks/",
-          notebook: "/gradient/notebooks/",
-          vm: "/core/compute/",
-          machine: "/core/compute/",
-        }[page] ?? "/";
+      url.pathname = {
+        deploy: "/gradient/deployments/",
+        deployment: "/gradient/deployments/",
+        nb: "/gradient/notebooks/",
+        notebook: "/gradient/notebooks/",
+        vm: "/core/compute/",
+        machine: "/core/compute/",
+      }[page] ?? "/";
     }
 
     open(url + "");
@@ -153,7 +158,7 @@ cli
       .command("get")
       .action(() => {
         console.log("list");
-      })
+      }),
   )
   .action(function () {
     this.showHelp();
@@ -167,7 +172,7 @@ cli
     "login",
     `
     Log in to the CLI using your Paperspace API key or by opening the web console.
-    `
+    `,
   )
   .arguments("[api-key:string]")
   .action(async (_opt, apiKey) => {
@@ -192,7 +197,7 @@ cli
     "logout",
     `
     Log out of the CLI for the current team, a specific team, or all teams.
-    `
+    `,
   )
   .arguments("[team:string]")
   .option("--all", "Log out of all teams.")
@@ -220,7 +225,7 @@ cli
     "signup",
     `
   Sign up for a Paperspace account.
-  `
+  `,
   )
   .action(() => {
     open(`https://console.paperspace.com/signup`);
@@ -237,7 +242,7 @@ cli
       .description(
         `
         Set a configuration value at a given path.
-        `
+        `,
       )
       .type("key", new EnumType(config.paths))
       .arguments("<key:key> <value:string>")
@@ -246,13 +251,13 @@ cli
           await config.set(key, value);
           const parsedValue = await config.get(key);
           return { value: parsedValue };
-        })
+        }),
       )
       .command("get")
       .description(
         `
         Get a configuration value at a given path.
-        `
+        `,
       )
       .type("key", new EnumType(config.paths))
       .arguments("<key:key>")
@@ -260,13 +265,13 @@ cli
         prints(async (_opt, key) => {
           const value = await config.get(key);
           return { value };
-        })
+        }),
       )
       .command("delete")
       .description(
         `
         Delete a configuration value at a given path.
-        `
+        `,
       )
       .type("key", new EnumType(config.paths))
       .arguments("<key:key>")
@@ -277,7 +282,7 @@ cli
       .description(
         `
         List all configuration values with their paths.
-        `
+        `,
       )
       .action(
         prints(async () => {
@@ -287,17 +292,26 @@ cli
             config.paths.reduce((acc, key) => {
               acc.push([info(key), obj.get(cfg, key)]);
               return acc;
-            }, [] as [string, string][])
+            }, [] as [string, string][]),
           );
 
           return { human: table.padding(4).toString(), json: cfg };
-        })
+        }),
       )
+      .command("open")
+      .description(
+        `
+        Open the configuration file in a "nano" editor.
+        `,
+      )
+      .action(() => {
+        openEditor([config.CONFIG_PATH], { editor: "nano" });
+      }),
   )
   .description(
     `
-    Manage global configuration values.
-    `
+    Manage global configuration values stored in: "${config.CONFIG_PATH}".
+    `,
   )
   .action(function () {
     this.showHelp();
@@ -311,7 +325,7 @@ cli
     "console",
     `
     Open the Paperspace web console.
-    `
+    `,
   )
   .action(() => {
     open(`https://console.paperspace.com/`);

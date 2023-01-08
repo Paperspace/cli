@@ -5,6 +5,7 @@ import {
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
 import { env } from "./env.ts";
+import * as credentials from "./credentials.ts";
 
 /**
  * Load the config file
@@ -13,13 +14,13 @@ export async function read() {
   try {
     Deno.statSync(CONFIG_PATH);
   } catch (_err) {
-    return configSchema.parse({
+    return await schema.parseAsync({
       team: null,
     });
   }
 
   const config = parse(await Deno.readTextFile(CONFIG_PATH));
-  return configSchema.parse(config);
+  return await schema.parseAsync(config);
 }
 
 /**
@@ -27,7 +28,7 @@ export async function read() {
  *
  * @param config - The config to write to the file
  */
-export async function write(config: z.infer<typeof configSchema>) {
+export async function write(config: z.infer<typeof schema>) {
   try {
     Deno.statSync(CONFIG_DIR);
   } catch (_err) {
@@ -80,27 +81,35 @@ export async function remove<Path extends ConfigPaths>(path: Path) {
  */
 export async function clear() {
   return await write(
-    configSchema.parse({
+    await schema.parseAsync({
       team: null,
     }),
   );
 }
 
-const configSchema = z.object({
+export const schema = z.object({
+  version: z.literal(1).default(1),
   team: z
     .string()
+    .transform(async (value) => {
+      if (await credentials.get(value)) {
+        return value;
+      }
+
+      return null;
+    })
     .describe("The name of the current team.")
     .nullable()
     .default(null),
 });
 
-export const paths = getKeys(configSchema) as ConfigPaths[];
+export const paths = getKeys(schema) as ConfigPaths[];
 
-export type Config = z.infer<typeof configSchema>;
+export type Config = z.infer<typeof schema>;
 export type ConfigPaths = Exclude<NestedPaths<Config>, undefined>;
 
 const CONFIG_DIR = `${env.get("HOME")}/.paperspace`;
-const CONFIG_PATH = `${CONFIG_DIR}/config.yml`;
+export const CONFIG_PATH = `${CONFIG_DIR}/config.yml`;
 
 // deno-lint-ignore no-explicit-any
 function getKeys(obj: z.ZodObject<any>): string[] {
