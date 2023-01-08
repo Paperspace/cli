@@ -8,7 +8,7 @@ import { env } from "./env.ts";
  * @param opt - Configuration options
  */
 function print(
-  formats: PrintsFormats,
+  formats: Formats,
   opt: {
     json: boolean;
   },
@@ -41,7 +41,7 @@ function print(
  * ```
  */
 export function act<
-  Fn extends (...args: any[]) => PrintsFormats | Promise<PrintsFormats>,
+  Fn extends (...args: any[]) => Formats | Promise<Formats>,
 >(fn: Fn) {
   return async function action(...args: Parameters<Fn>): Promise<void> {
     const opt = args[0];
@@ -63,7 +63,7 @@ export function act<
   };
 }
 
-type PrintsFormats =
+type Formats =
   | {
     /**
      * A JSON-serializable value to print.

@@ -15,7 +15,7 @@ import openEditor from "https://esm.sh/open-editor@4.0.0";
 import { formattedVersion } from "./version.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
-import { bold, info } from "./ansi.ts";
+import { bold, colors } from "./ansi.ts";
 import { act } from "./act.ts";
 import { select } from "./select.ts";
 
@@ -328,16 +328,19 @@ cli
       )
       .action(
         act(async () => {
-          const cfg = await config.read();
+          const json = await config.read();
 
           const table = new Table().header([bold("Key"), bold("Value")]).body(
             config.paths.reduce((acc, key) => {
-              acc.push([info(key), obj.get(cfg, key)]);
+              acc.push([colors.cyan(key), JSON.stringify(obj.get(json, key))]);
               return acc;
             }, [] as [string, string][]),
           );
 
-          return { human: table.padding(4).toString(), json: cfg };
+          return {
+            human: table.padding(4).toString(),
+            json,
+          };
         }),
       )
       .command("open")

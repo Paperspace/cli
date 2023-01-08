@@ -5,3 +5,4 @@ export const warn = colors.bold.yellow;
 export const info = colors.bold.cyan;
 export const success = colors.bold.green;
 export const bold = colors.bold;
+export { colors };
