@@ -4,6 +4,7 @@ import {
 } from "https://deno.land/std@0.171.0/encoding/yaml.ts";
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import { env } from "./env.ts";
+import { logger } from "./logger.ts";
 
 /**
  * Load the credentials file
@@ -12,6 +13,7 @@ export async function read() {
   try {
     Deno.statSync(CREDENTIALS_PATH);
   } catch (_err) {
+    logger.warning(`No credentials file found at "${CREDENTIALS_PATH}".`);
     return schema.parse({});
   }
 
@@ -28,9 +30,14 @@ export async function write(credentials: z.infer<typeof schema>) {
   try {
     Deno.statSync(CREDENTIALS_DIR);
   } catch (_err) {
+    logger.warning(
+      `No credentials directory found. Creating one: "${CREDENTIALS_DIR}".`,
+    );
     await Deno.mkdir(CREDENTIALS_DIR, { recursive: true });
   }
 
+  credentials = schema.parse(credentials);
+  logger.info(`Writing credentials: "${CREDENTIALS_PATH}".`);
   await Deno.writeTextFile(CREDENTIALS_PATH, stringify(credentials), {
     mode: 0o600,
   });
@@ -80,7 +87,7 @@ export async function clear() {
 
 export const schema = z.object({
   version: z.literal(1).default(1),
-  keys: z.record(z.string()),
+  keys: z.record(z.string()).optional().default({}),
 });
 const CREDENTIALS_DIR = `${env.get("HOME")}/.paperspace`;
 export const CREDENTIALS_PATH = `${CREDENTIALS_DIR}/credentials.yml`;

@@ -16,7 +16,7 @@ import { formattedVersion } from "./version.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
 import { bold, info } from "./ansi.ts";
-import { prints } from "./print.ts";
+import { act } from "./act.ts";
 import { select } from "./select.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
@@ -41,7 +41,6 @@ export const cli = new Command()
   )
   .globalOption("--debug", `Enable debug logging.`)
   .globalOption("--json", `Display the output as JSON.`)
-  .globalOption("--no-color", `Disable colors in the output.".`)
   .globalEnv(
     "PAPERSPACE_API_KEY=<value:string>",
     `The Paperspace API key to use for authenticating requests.`,
@@ -51,12 +50,13 @@ export const cli = new Command()
     `The URL for the Paperspace API. Defaults to "https://api.paperspace.com/graphql"."`,
     {
       hidden: true,
-      required: false,
     },
   )
   .globalEnv("DEBUG=<value:boolean>", `Enable debug logging.`, {
     required: false,
+    hidden: true,
   })
+  .globalEnv("NO_COLOR=<value:boolean>", `Disable colors in the output.`)
   .action(() => {
     cli.showHelp();
   });
@@ -281,7 +281,7 @@ cli
       .type("key", new EnumType(config.paths))
       .arguments("<key:key> <value:string>")
       .action(
-        prints(async (_opt, key, value) => {
+        act(async (_opt, key, value) => {
           await config.set(key, value);
           const parsedValue = await config.get(key);
           return { value: parsedValue };
@@ -297,7 +297,7 @@ cli
       .type("key", new EnumType(config.paths))
       .arguments("[key:key]")
       .action(
-        prints(async (_opt, key) => {
+        act(async (_opt, key) => {
           if (!key) {
             key = await select({
               label: "Select a key to get the value for:",
@@ -327,7 +327,7 @@ cli
         `,
       )
       .action(
-        prints(async () => {
+        act(async () => {
           const cfg = await config.read();
 
           const table = new Table().header([bold("Key"), bold("Value")]).body(

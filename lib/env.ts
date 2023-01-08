@@ -1,6 +1,12 @@
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import { info } from "./ansi.ts";
 
+const bool = z
+  .string()
+  .transform((value) => {
+    return value === "true" || value === "1";
+  });
+
 export const envSchema = z.object({
   PAPERSPACE_API_KEY: z.string().optional(),
   PAPERSPACE_API_URL: z
@@ -8,12 +14,8 @@ export const envSchema = z.object({
     .url()
     .default("https://api.paperspace.com/graphql"),
   HOME: z.string(),
-  DEBUG: z
-    .string()
-    .transform((value) => {
-      return value === "true" || value === "1";
-    })
-    .optional(),
+  DEBUG: bool.optional(),
+  NO_COLOR: bool.optional(),
 });
 
 export const env = {

@@ -1,3 +1,5 @@
+import { env } from "./env.ts";
+
 /**
  * Logs a message to the console in the appropriate format based on the
  * CLI options.
@@ -25,16 +27,39 @@ function print(
 }
 
 /**
- * A higher order function that prints the return value of an action function.
+ * A higher order function that needs to be added to every action. This will also
+ * print the return value of an action function in the appropriate format based on
+ * the CLI options.
  *
  * @param fn - An action function that returns a `PrintsFormats` object.
+ *
+ * @example
+ * ```ts
+ * cli.action(act(async () => {
+ *  return { value: "Hello World" }
+ * }))
+ * ```
  */
-export function prints<
+export function act<
   Fn extends (...args: any[]) => PrintsFormats | Promise<PrintsFormats>,
 >(fn: Fn) {
   return async function action(...args: Parameters<Fn>): Promise<void> {
+    const opt = args[0];
+
+    if (opt.debug !== undefined) {
+      env.set("DEBUG", opt.debug);
+    }
+
+    if (opt.apiKey) {
+      env.set("PAPERSPACE_API_KEY", opt.apiKey);
+    }
+
+    if (opt.apiUrl) {
+      env.set("PAPERSPACE_API_URL", opt.apiUrl);
+    }
+
     const formats = await fn(...args);
-    print(formats, args[0]);
+    print(formats, opt);
   };
 }
 

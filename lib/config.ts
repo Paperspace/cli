@@ -6,6 +6,7 @@ import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
 import { env } from "./env.ts";
 import * as credentials from "./credentials.ts";
+import { logger } from "./logger.ts";
 
 /**
  * Load the config file
@@ -14,6 +15,7 @@ export async function read() {
   try {
     Deno.statSync(CONFIG_PATH);
   } catch (_err) {
+    logger.warning(`No config file found at "${CONFIG_PATH}".`);
     return await schema.parseAsync({
       team: null,
     });
@@ -32,12 +34,21 @@ export async function write(config: z.infer<typeof schema>) {
   try {
     Deno.statSync(CONFIG_DIR);
   } catch (_err) {
+    logger.warning(
+      `No config directory found. Creating one: "${CONFIG_DIR}".`,
+    );
     await Deno.mkdir(CONFIG_DIR, { recursive: true });
   }
 
-  await Deno.writeTextFile(CONFIG_PATH, stringify(config), {
-    mode: 0o600,
-  });
+  config = await schema.parseAsync(config);
+  logger.info(`Writing config: "${CONFIG_PATH}".`);
+  await Deno.writeTextFile(
+    CONFIG_PATH,
+    stringify(config),
+    {
+      mode: 0o600,
+    },
+  );
 }
 
 /**
