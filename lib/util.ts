@@ -1,3 +1,9 @@
+/**
+ * Returns the closest string in an array to the given string.
+ *
+ * @param arr - An array of strings to search
+ * @param str - The string to search for
+ */
 export function closest(arr: string[], str: string): string | undefined {
   let minDistance = Infinity;
   let minIndex = 0;
@@ -11,6 +17,13 @@ export function closest(arr: string[], str: string): string | undefined {
   return arr[minIndex];
 }
 
+/**
+ * Calculates the Levenshtein distance between two strings.
+ *  @see https://en.wikipedia.org/wiki/Levenshtein_distance
+ *
+ * @param a - The first string to compare
+ * @param b - The second string to compare
+ */
 export function distance(a: string, b: string): number {
   if (a.length == 0) {
     return b.length;

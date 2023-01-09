@@ -477,6 +477,7 @@
     "https://esm.sh/log-update@5.0.1": "61f9a31832f7120ab2b95d2c794f321afda413e65fc8a01eee43cecd1b72eb79",
     "https://esm.sh/object-path-immutable@4.1.2": "743d4d77d1339b783ff2f0dbf9445c33ab1e3d0be668344e0a91c07d2fbbebde",
     "https://esm.sh/open-editor@4.0.0": "6ac68c941d354da943453dbfdee1eaaac0e0ad3de7f1fb6711621186b692086e",
+    "https://esm.sh/strip-ansi@7.0.1": "7ad5b4cddfeb51dcbacc3f61ea9c6970ad5f645bb982f5287154beae097aac45",
     "https://esm.sh/v102/@types/line-column-path@2.0.0/line-column-path~.d.ts": "854cdc32752c20a63ea380b17a93c803d6d1e06fa939fdc231732a7b35e8a906",
     "https://esm.sh/v102/ansi-escapes@3.2.0/deno/ansi-escapes.js": "c421c4025c97b9a2fcb9a262b66891a04acd327820c11ca79b023bf35bfb6f0e",
     "https://esm.sh/v102/ansi-escapes@5.0.0/deno/ansi-escapes.js": "003f9b41e5b5e38cadcc59e3f0ef748ef7c76e84b1105a562118f4e964965459",
@@ -522,6 +523,7 @@
     "https://esm.sh/v102/slice-ansi@5.0.0/deno/slice-ansi.js": "df6280389b5664c0fec7c49fc55467ee14f2b25a7cf54a76c0c1b777c1a1eadf",
     "https://esm.sh/v102/string-width@5.1.2/deno/string-width.js": "079827585b8616ccc7fdf529ffd1e4b1467656b00f416ee0d520f848ad85bbbf",
     "https://esm.sh/v102/strip-ansi@7.0.1/deno/strip-ansi.js": "e47537cbda4d6eeaf825bba71491251167245954e580dcfd63c92b7a2ee8c04a",
+    "https://esm.sh/v102/strip-ansi@7.0.1/index.d.ts": "d690ec58f57c5fa69cfe088959335c9f12482db67eb1bc1bbba93e3062f69276",
     "https://esm.sh/v102/strip-final-newline@2.0.0/deno/strip-final-newline.js": "f39be28ef873f02fc625ed74ec9bd918851695549f7392181f213a38dff7843f",
     "https://esm.sh/v102/which@2.0.2/deno/which.js": "22a47228406f324168dad65f6896b1cc79ad78ead9fd2ff508f245fff5398978",
     "https://esm.sh/v102/wrap-ansi@8.0.1/deno/wrap-ansi.js": "4c7cc9dcff671d1b04dd70db7db6255d880f85df6fb353d3921236af3302599d"

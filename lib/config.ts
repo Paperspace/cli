@@ -23,8 +23,21 @@ export async function read() {
     });
   }
 
-  const config = parse(await Deno.readTextFile(CONFIG_PATH));
-  return await schema.parseAsync(config);
+  try {
+    const config = parse(await Deno.readTextFile(CONFIG_PATH));
+    return await schema.parseAsync(config);
+  } catch (_err) {
+    logger.warning(
+      `Config file at "${CONFIG_PATH}" is invalid. Using defaults.`,
+    );
+
+    const nextConfig = await schema.parseAsync({
+      team: null,
+    });
+
+    await write(nextConfig);
+    return nextConfig;
+  }
 }
 
 /**
@@ -124,7 +137,6 @@ export const schema = z.object({
         `A team named "${value}" was not found in your credentials file. ${didYouMean}
 Are you logged in? Try running "${bold("pspace login")}" first.`,
       );
-      // return await get("team");
     })
     .describe("The name of the current team.")
     .nullable()

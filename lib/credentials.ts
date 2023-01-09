@@ -17,8 +17,18 @@ export async function read() {
     return schema.parse({});
   }
 
-  const credentials = parse(await Deno.readTextFile(CREDENTIALS_PATH));
-  return schema.parse(credentials);
+  try {
+    const credentials = parse(await Deno.readTextFile(CREDENTIALS_PATH));
+    return schema.parse(credentials);
+  } catch (_err) {
+    logger.warning(
+      `Credentials file at "${CREDENTIALS_PATH}" is invalid. Using defaults.`,
+    );
+
+    const nextCredentials = schema.parse({});
+    await write(nextCredentials);
+    return nextCredentials;
+  }
 }
 
 /**

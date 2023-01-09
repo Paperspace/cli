@@ -2,10 +2,10 @@ import cliSelect from "https://esm.sh/cli-select@1.1.2";
 import { cursorPrevLine, eraseLines, info } from "./ansi.ts";
 
 export async function select<T>(
-  { label, options, renderValue, ...other }: SelectConfig<T>,
+  { label, prefix, options, renderValue, ...other }: SelectConfig<T>,
 ) {
   if (label) {
-    console.log(info("❯"), label);
+    console.log(...[prefix && info(prefix), label].filter(Boolean));
   }
 
   const value = await cliSelect({
@@ -36,6 +36,7 @@ export async function select<T>(
 
 export type SelectConfig<T> =
   & {
+    prefix?: string;
     label?: string;
     options: ValuesObject<T> | ValuesArray<T>;
     defaultValue?: Index;

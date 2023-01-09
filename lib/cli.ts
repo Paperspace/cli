@@ -208,14 +208,15 @@ cli
     `,
   )
   .arguments("[api-key:string]")
-  .action(async (_opt, apiKey) => {
+  .action(act(async (_opt, apiKey) => {
     const team = "google-saml-prod";
 
     if (!apiKey) {
       open(`https://console.paperspace.com/account/api`);
 
       const token = await Input.prompt({
-        message: "Enter the token:",
+        message: "Enter an API key:",
+        prefix: "",
       });
 
       await credentials.set(team, token);
@@ -224,7 +225,8 @@ cli
     }
 
     await config.set("team", team);
-  });
+    return { value: `Logged in to team "${bold(team)}"` };
+  }));
 
 /**
  * Logout
@@ -238,11 +240,11 @@ cli
   )
   .arguments("[team:string]")
   .option("--all", "Log out of all teams.")
-  .action(async (_opt, team) => {
+  .action(act(async (_opt, team) => {
     if (_opt.all) {
       await config.set("team", null);
-      console.log(`Logged out of all teams`);
-      return await credentials.clear();
+      await credentials.clear();
+      return { value: `Logged out of all teams` };
     }
 
     const currentTeam = await config.get("team");
@@ -252,16 +254,18 @@ cli
         await config.set("team", null);
       }
 
-      console.log(`Logged out of team "${bold(team)}"`);
-      return await credentials.remove(team);
+      await credentials.remove(team);
+      return { value: `Logged out of team "${bold(team)}"` };
     }
 
     if (currentTeam) {
       await config.set("team", null);
-      console.log(`Logged out of team "${bold(currentTeam)}"`);
-      return await credentials.remove(currentTeam);
+      await credentials.remove(currentTeam);
+      return { value: `Logged out of team "${bold(currentTeam)}"` };
     }
-  });
+
+    return { value: "" };
+  }));
 
 /**
  * Sign up
@@ -302,12 +306,13 @@ cli
                 options: config.paths,
               });
 
-              console.log(info(` Setting value for "${key}"`));
+              console.log(info(`Setting value for "${key}"`));
             }
           }
 
           if (!value) {
             value = await Input.prompt({
+              prefix: "",
               message: "Enter a new value:",
               suggestions: key === "team" ? await credentials.list() : [],
               validate(value) {
