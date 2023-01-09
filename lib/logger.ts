@@ -12,7 +12,9 @@ class PaperspaceLogger extends log.handlers.ConsoleHandler {
 log.setup({
   handlers: {
     console: new PaperspaceLogger("DEBUG", {
-      formatter: "{levelName} – {msg}",
+      formatter(logState) {
+        return `${logState.levelName.padEnd(8, " ")} ｜ ${logState.msg}`;
+      },
     }),
   },
 
