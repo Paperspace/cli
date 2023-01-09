@@ -1,5 +1,5 @@
 import cliSelect from "https://esm.sh/cli-select@1.1.2";
-import { info } from "./ansi.ts";
+import { cursorPrevLine, eraseLines, info } from "./ansi.ts";
 
 export async function select<T>(
   { label, options, renderValue, ...other }: SelectConfig<T>,
@@ -24,6 +24,12 @@ export async function select<T>(
     },
     ...other,
   });
+
+  if (label) {
+    const lines = 1 + label.split("\n").length;
+    console.log(eraseLines(lines));
+    console.log(cursorPrevLine(lines));
+  }
 
   return value.value;
 }

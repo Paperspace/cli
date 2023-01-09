@@ -15,7 +15,7 @@ import openEditor from "https://esm.sh/open-editor@4.0.0";
 import { formattedVersion } from "./version.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
-import { bold, colors } from "./ansi.ts";
+import { bold, colors, info } from "./ansi.ts";
 import { act } from "./act.ts";
 import { select } from "./select.ts";
 
@@ -209,6 +209,8 @@ cli
   )
   .arguments("[api-key:string]")
   .action(async (_opt, apiKey) => {
+    const team = "google-saml-prod";
+
     if (!apiKey) {
       open(`https://console.paperspace.com/account/api`);
 
@@ -216,10 +218,12 @@ cli
         message: "Enter the token:",
       });
 
-      console.log("token", token);
+      await credentials.set(team, token);
     } else {
-      credentials.set("google-saml-prod", apiKey);
+      await credentials.set(team, apiKey);
     }
+
+    await config.set("team", team);
   });
 
 /**
@@ -236,16 +240,25 @@ cli
   .option("--all", "Log out of all teams.")
   .action(async (_opt, team) => {
     if (_opt.all) {
+      await config.set("team", null);
+      console.log(`Logged out of all teams`);
       return await credentials.clear();
-    }
-
-    if (team) {
-      return await credentials.remove(team);
     }
 
     const currentTeam = await config.get("team");
 
+    if (team) {
+      if (team === currentTeam) {
+        await config.set("team", null);
+      }
+
+      console.log(`Logged out of team "${bold(team)}"`);
+      return await credentials.remove(team);
+    }
+
     if (currentTeam) {
+      await config.set("team", null);
+      console.log(`Logged out of team "${bold(currentTeam)}"`);
       return await credentials.remove(currentTeam);
     }
   });
@@ -279,9 +292,30 @@ cli
       )
       .example(`Set the team to "my-team"`, "pspace config set team my-team")
       .type("key", new EnumType(config.paths))
-      .arguments("<key:key> <value:string>")
+      .arguments("[key:key] [value:string]")
       .action(
         act(async (_opt, key, value) => {
+          if (!key) {
+            if (!key) {
+              key = await select({
+                label: "Select a key to set the value for:",
+                options: config.paths,
+              });
+
+              console.log(info(` Setting value for "${key}"`));
+            }
+          }
+
+          if (!value) {
+            value = await Input.prompt({
+              message: "Enter a new value:",
+              suggestions: key === "team" ? await credentials.list() : [],
+              validate(value) {
+                return !!value.trim() || "Required";
+              },
+            });
+          }
+
           await config.set(key, value);
           const parsedValue = await config.get(key);
           return { value: parsedValue };

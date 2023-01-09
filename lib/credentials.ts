@@ -85,6 +85,16 @@ export async function clear() {
   return await write({ version: 1, keys: {} });
 }
 
+/**
+ * List all of the teams in the credentials file
+ *
+ * @param path - The path to remove
+ */
+export async function list() {
+  const config = await read();
+  return Object.keys(config.keys);
+}
+
 export const schema = z.object({
   version: z.literal(1).default(1),
   keys: z.record(z.string()).optional().default({}),
