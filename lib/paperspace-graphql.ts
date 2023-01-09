@@ -4169,7 +4169,7 @@ export type ViewerQuery = {
   __typename?: "Query";
   viewer?: {
     __typename?: "Viewer";
-    team: { __typename?: "Team"; namespace: string; handle: string };
+    team: { __typename?: "Team"; namespace: string };
   } | null;
 };
 
@@ -5841,9 +5841,6 @@ export const ViewerDocument = {
               "selections": [{
                 "kind": "Field",
                 "name": { "kind": "Name", "value": "namespace" },
-              }, {
-                "kind": "Field",
-                "name": { "kind": "Name", "value": "handle" },
               }],
             },
           }],

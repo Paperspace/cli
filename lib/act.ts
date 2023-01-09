@@ -1,7 +1,7 @@
 import { env } from "./env.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
-import { strip } from "./ansi.ts";
+import { info, strip } from "./ansi.ts";
 
 /**
  * Logs a message to the console in the appropriate format based on the
@@ -73,6 +73,51 @@ export function act<
     print(formats, opt);
   };
 }
+
+/**
+ * A higher order function that needs to be added to every action that requires
+ * the user to be logged in. This will also print the return value of an action
+ * function in the appropriate format based on the CLI options.
+ *
+ * @param fn - An action function that returns a `PrintsFormats` object.
+ * @example
+ * ```ts
+ * cli.action(act.ifLoggedIn(async () => {
+ *  return { value: "Hello World" }
+ * }))
+ * ```
+ */
+act.ifLoggedIn = <
+  Fn extends (...args: any[]) => Formats | Promise<Formats>,
+>(fn: Fn) => {
+  return async function action(...args: Parameters<Fn>): Promise<void> {
+    const opt = args[0];
+    const isLoggedIn = !!(opt.apiKey || await config.get("team"));
+    const availableTeams = await credentials.list();
+    const hasTeams = availableTeams.length > 0;
+    const loginHelper = !hasTeams
+      ? `Run "${info("pspace login")}" to log in.`
+      : `Run "${
+        info(`pspace config set team`)
+      }" to choose a team. \n\nAvailable teams: \n › ${
+        availableTeams.join("\n › ")
+      }`;
+
+    const selectMessage = `You must ${
+      hasTeams ? "select a team" : "be logged in"
+    } to run this command.`;
+
+    if (!isLoggedIn) {
+      throw new config.ConfigError(
+        `${selectMessage}
+
+${loginHelper}`,
+      );
+    }
+
+    return act(fn)(...args);
+  };
+};
 
 type Formats =
   | {

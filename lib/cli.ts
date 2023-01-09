@@ -103,25 +103,30 @@ cli
         console.log("init");
       })
       .command("create")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("create");
-      })
+        return { value: "" };
+      }))
       .command("update")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("update");
-      })
+        return { value: "" };
+      }))
       .command("delete")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("delete");
-      })
+        return { value: "" };
+      }))
       .command("list")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("list");
-      })
+        return { value: "" };
+      }))
       .command("get")
-      .action(() => {
-        console.log("list");
-      }),
+      .action(act.ifLoggedIn(() => {
+        console.log("get");
+        return { value: "" };
+      })),
   )
   .action(function () {
     this.showHelp();
@@ -139,25 +144,30 @@ cli
         console.log("init");
       })
       .command("create")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("create");
-      })
+        return { value: "" };
+      }))
       .command("update")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("update");
-      })
+        return { value: "" };
+      }))
       .command("delete")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("delete");
-      })
+        return { value: "" };
+      }))
       .command("list")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("list");
-      })
+        return { value: "" };
+      }))
       .command("get")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("get");
-      }),
+        return { value: "" };
+      })),
   )
   .action(function () {
     this.showHelp();
@@ -175,25 +185,30 @@ cli
         console.log("init");
       })
       .command("create")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("create");
-      })
+        return { value: "" };
+      }))
       .command("update")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("update");
-      })
+        return { value: "" };
+      }))
       .command("delete")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("delete");
-      })
+        return { value: "" };
+      }))
       .command("list")
-      .action(() => {
+      .action(act.ifLoggedIn(() => {
         console.log("list");
-      })
+        return { value: "" };
+      }))
       .command("get")
-      .action(() => {
-        console.log("list");
-      }),
+      .action(act.ifLoggedIn(() => {
+        console.log("get");
+        return { value: "" };
+      })),
   )
   .action(function () {
     this.showHelp();
