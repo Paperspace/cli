@@ -1,7 +1,7 @@
 import { env } from "./env.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
-import { bold, info, strip, warn } from "./ansi.ts";
+import { info, strip } from "./ansi.ts";
 
 /**
  * Logs a message to the console in the appropriate format based on the
