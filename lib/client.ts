@@ -41,7 +41,7 @@ export function gqlFetch<TData = unknown, TVariables = Record<string, unknown>>(
     if (definition.kind === "OperationDefinition") {
       logger.debug(
         `${definition.operation} ${definition.name?.value}(${
-          JSON.stringify({ foo: "bar", baz: "boz" }, null, 2)
+          JSON.stringify(variables, null, 2)
         })`,
       );
     }
