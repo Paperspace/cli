@@ -17,8 +17,18 @@ export async function read() {
     return schema.parse({});
   }
 
-  const credentials = parse(await Deno.readTextFile(CREDENTIALS_PATH));
-  return schema.parse(credentials);
+  try {
+    const credentials = parse(await Deno.readTextFile(CREDENTIALS_PATH));
+    return schema.parse(credentials);
+  } catch (_err) {
+    logger.warning(
+      `Credentials file at "${CREDENTIALS_PATH}" is invalid. Using defaults.`,
+    );
+
+    const nextCredentials = schema.parse({});
+    await write(nextCredentials);
+    return nextCredentials;
+  }
 }
 
 /**
@@ -83,6 +93,16 @@ export async function remove(team: string) {
  */
 export async function clear() {
   return await write({ version: 1, keys: {} });
+}
+
+/**
+ * List all of the teams in the credentials file
+ *
+ * @param path - The path to remove
+ */
+export async function list() {
+  const config = await read();
+  return Object.keys(config.keys);
 }
 
 export const schema = z.object({

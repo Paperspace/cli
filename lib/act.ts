@@ -1,4 +1,7 @@
 import { env } from "./env.ts";
+import * as credentials from "./credentials.ts";
+import * as config from "./config.ts";
+import { strip } from "./ansi.ts";
 
 /**
  * Logs a message to the console in the appropriate format based on the
@@ -14,13 +17,13 @@ function print(
   },
 ): void {
   if (opt?.json) {
-    console.log(
-      JSON.stringify(
-        "value" in formats ? formats.value : formats.json,
-        null,
-        2,
-      ),
-    );
+    let json = "value" in formats ? formats.value : formats.json;
+
+    if (typeof json === "string") {
+      json = strip(json);
+    }
+
+    console.log(JSON.stringify(json, null, 2));
   } else {
     console.log("value" in formats ? formats.value : formats.human);
   }
@@ -56,6 +59,14 @@ export function act<
 
     if (opt.apiUrl) {
       env.set("PAPERSPACE_API_URL", opt.apiUrl);
+    }
+
+    if (!env.get("PAPERSPACE_API_KEY")) {
+      const team = await config.get("team");
+
+      if (team) {
+        env.set("PAPERSPACE_API_KEY", await credentials.get(team));
+      }
     }
 
     const formats = await fn(...args);

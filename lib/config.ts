@@ -7,6 +7,8 @@ import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
 import { env } from "./env.ts";
 import * as credentials from "./credentials.ts";
 import { logger } from "./logger.ts";
+import { bold } from "./ansi.ts";
+import { closest } from "./util.ts";
 
 /**
  * Load the config file
@@ -21,8 +23,21 @@ export async function read() {
     });
   }
 
-  const config = parse(await Deno.readTextFile(CONFIG_PATH));
-  return await schema.parseAsync(config);
+  try {
+    const config = parse(await Deno.readTextFile(CONFIG_PATH));
+    return await schema.parseAsync(config);
+  } catch (_err) {
+    logger.warning(
+      `Config file at "${CONFIG_PATH}" is invalid. Using defaults.`,
+    );
+
+    const nextConfig = await schema.parseAsync({
+      team: null,
+    });
+
+    await write(nextConfig);
+    return nextConfig;
+  }
 }
 
 /**
@@ -102,17 +117,37 @@ export const schema = z.object({
   version: z.literal(1).default(1),
   team: z
     .string()
-    .transform(async (value) => {
+    .transform(async (value): Promise<string | null> => {
       if (await credentials.get(value)) {
         return value;
       }
 
-      return null;
+      const teams = await credentials.list();
+
+      logger.critical(
+        `Team "${value}" was not found in your credentials file. Retaining current team.`,
+      );
+
+      const didYouMeanValue = closest(teams, value);
+      const didYouMean = didYouMeanValue
+        ? `\n\nDid you mean ${bold(didYouMeanValue)}?`
+        : "";
+
+      throw new ConfigError(
+        `A team named "${value}" was not found in your credentials file. ${didYouMean}
+Are you logged in? Try running "${bold("pspace login")}" first.`,
+      );
     })
     .describe("The name of the current team.")
     .nullable()
     .default(null),
 });
+
+export class ConfigError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
 
 export const paths = getKeys(schema).filter((key) =>
   key !== "version"
