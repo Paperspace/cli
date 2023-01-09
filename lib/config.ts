@@ -124,7 +124,7 @@ export const schema = z.object({
 
       const teams = await credentials.list();
 
-      logger.critical(
+      logger.error(
         `Team "${value}" was not found in your credentials file. Retaining current team.`,
       );
 
