@@ -18,6 +18,8 @@ import * as config from "./config.ts";
 import { bold, colors, info } from "./ansi.ts";
 import { act } from "./act.ts";
 import { select } from "./select.ts";
+import { gqlFetch } from "./client.ts";
+import { ViewerDocument } from "./paperspace-graphql.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
@@ -30,7 +32,7 @@ export const cli = new Command()
     A CLI for using the Paperspace API. Read the full documentation at "${DOCS_ENDPOINT}/cli".
     `,
   )
-  .type("url", zodType(z.string().url()))
+  .globalType("url", zodType(z.string().url()))
   .globalOption(
     "--api-key <api-key:string>",
     `The Paperspace API key to use for authenticating requests.`,
@@ -209,21 +211,23 @@ cli
   )
   .arguments("[api-key:string]")
   .action(act(async (_opt, apiKey) => {
-    const team = "google-saml-prod";
-
     if (!apiKey) {
       open(`https://console.paperspace.com/account/api`);
 
-      const token = await Input.prompt({
+      apiKey = await Input.prompt({
         message: "Enter an API key:",
         prefix: "",
       });
-
-      await credentials.set(team, token);
-    } else {
-      await credentials.set(team, apiKey);
     }
 
+    const { viewer } = await gqlFetch(ViewerDocument, {}, { apiKey });
+    const team = viewer?.team?.namespace;
+
+    if (!team) {
+      throw new ValidationError("Invalid API key.");
+    }
+
+    await credentials.set(team, apiKey);
     await config.set("team", team);
     return { value: `Logged in to team "${bold(team)}"` };
   }));

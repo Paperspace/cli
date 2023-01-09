@@ -115,6 +115,35 @@ export type AutoSnapshotInput = {
   autoSnapshotSaveCount?: InputMaybe<Scalars["Int"]>;
 };
 
+export type Billing = {
+  __typename?: "Billing";
+  addCardDeclineCount: Scalars["Int"];
+  billingAddress?: Maybe<BillingAddress>;
+  cards?: Maybe<Array<StripePaymentCard>>;
+  currentAndTargetGradientSubscription: CurrentTargetSubscriptions;
+  hasCreditCard: Scalars["Boolean"];
+  id: Scalars["String"];
+  vatId?: Maybe<Scalars["String"]>;
+};
+
+export type BillingCardsArgs = {
+  handle?: InputMaybe<Scalars["String"]>;
+};
+
+export type BillingVatIdArgs = {
+  handle?: InputMaybe<Scalars["String"]>;
+};
+
+export type BillingAddress = {
+  __typename?: "BillingAddress";
+  city?: Maybe<Scalars["String"]>;
+  country?: Maybe<Scalars["String"]>;
+  line1?: Maybe<Scalars["String"]>;
+  line2?: Maybe<Scalars["String"]>;
+  state?: Maybe<Scalars["String"]>;
+  zipCode?: Maybe<Scalars["String"]>;
+};
+
 export type Bucket = {
   __typename?: "Bucket";
   dtCreated: Scalars["DateTime"];
@@ -211,6 +240,7 @@ export enum ComputeLimitHistoryOrderField {
 export type ConfigInput = {
   accessKeyId?: InputMaybe<Scalars["String"]>;
   apiKey?: InputMaybe<Scalars["String"]>;
+  emails?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
   logGroupName?: InputMaybe<Scalars["String"]>;
   region?: InputMaybe<Scalars["String"]>;
   secretAccessKey?: InputMaybe<Scalars["String"]>;
@@ -1075,6 +1105,16 @@ export type DeploymentSpecResourcesInput = {
   replicas?: InputMaybe<Scalars["Int"]>;
 };
 
+export enum DirectionEnum {
+  Downgraded = "Downgraded",
+  Upgraded = "Upgraded",
+}
+
+export type GenericConfig = {
+  __typename?: "GenericConfig";
+  emails: Array<Scalars["String"]>;
+};
+
 export type GradientDataset = {
   __typename?: "GradientDataset";
   description?: Maybe<Scalars["String"]>;
@@ -1293,15 +1333,15 @@ export type GradientSubscription = {
   displayOrder: Scalars["Int"];
   dtCreated: Scalars["DateTime"];
   dtModified: Scalars["DateTime"];
-  enabledMachineTypes?: Maybe<Array<Scalars["String"]>>;
-  enabledMachineTypesWithCreditCard?: Maybe<Array<Scalars["String"]>>;
+  enabledMachineTypes: Array<Scalars["String"]>;
+  enabledMachineTypesWithCreditCard: Array<Scalars["String"]>;
   id: Scalars["Int"];
   isAvailable: Scalars["Boolean"];
   isDefault: Scalars["Boolean"];
   jobStorageQuotaBytes: Scalars["BigInt"];
   maxClusters: Scalars["Int"];
-  maxPrivateNotebooks?: Maybe<Scalars["Int"]>;
-  modelType?: Maybe<Scalars["String"]>;
+  maxPrivateNotebooks: Scalars["Int"];
+  modelType: Scalars["String"];
   name: Scalars["String"];
   notebookExpiration?: Maybe<Scalars["Int"]>;
   notebookExpirationSeconds?: Maybe<Scalars["Int"]>;
@@ -1357,7 +1397,7 @@ export enum InstancePhase {
 }
 
 /** Union type for project integration configs */
-export type IntegrationConfig = AwsConfig | DatadogConfig;
+export type IntegrationConfig = AwsConfig | DatadogConfig | GenericConfig;
 
 export type Invoice = {
   __typename?: "Invoice";
@@ -2237,6 +2277,7 @@ export type PublicTemplateAvailableVmTypesArgs = {
 export type Query = {
   __typename?: "Query";
   accountLedgerAdmin: AccountLedgerConnection;
+  billing?: Maybe<Billing>;
   computeLimit?: Maybe<ComputeLimit>;
   computeLimitAdminHistory: ComputeLimitAdminHistoryConnection;
   containerRegistries: ContainerRegistryConnection;
@@ -2289,6 +2330,7 @@ export type Query = {
   teamSecrets: TeamSecretConnection;
   templates: CustomTemplateConnection;
   userAdmin?: Maybe<User>;
+  viewer?: Maybe<Viewer>;
   vmType?: Maybe<VmType>;
   vmTypes: VmTypeConnection;
   vpn?: Maybe<Vpn>;
@@ -2302,6 +2344,10 @@ export type QueryAccountLedgerAdminArgs = {
   handle: Scalars["String"];
   last?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<AccountLedgerOrder>;
+};
+
+export type QueryBillingArgs = {
+  handle: Scalars["String"];
 };
 
 export type QueryComputeLimitArgs = {
@@ -2982,6 +3028,16 @@ export type StripeVatIdArgs = {
   handle?: InputMaybe<Scalars["String"]>;
 };
 
+export type StripeCardAddress = {
+  __typename?: "StripeCardAddress";
+  city?: Maybe<Scalars["String"]>;
+  country?: Maybe<Scalars["String"]>;
+  line1?: Maybe<Scalars["String"]>;
+  line2?: Maybe<Scalars["String"]>;
+  state?: Maybe<Scalars["String"]>;
+  zipCode?: Maybe<Scalars["String"]>;
+};
+
 export type StripeCharge = {
   __typename?: "StripeCharge";
   amount: Scalars["Float"];
@@ -3006,6 +3062,19 @@ export type StripeCustomer = {
   address: Address;
   defaultSource?: Maybe<StripePaymentSource>;
   sources?: Maybe<Array<StripePaymentSource>>;
+};
+
+export type StripePaymentCard = {
+  __typename?: "StripePaymentCard";
+  address: StripeCardAddress;
+  brand: Scalars["String"];
+  country?: Maybe<Scalars["String"]>;
+  expMonth: Scalars["Int"];
+  expYear: Scalars["Int"];
+  id: Scalars["String"];
+  isDefault: Scalars["Boolean"];
+  last4: Scalars["String"];
+  name?: Maybe<Scalars["String"]>;
 };
 
 export type StripePaymentSource = {
@@ -3323,9 +3392,9 @@ export type UpdateSubscriptionInput = {
 
 export type UpdateSubscriptionPayload = {
   __typename?: "UpdateSubscriptionPayload";
-  direction: Scalars["String"];
-  from: GradientSubscription;
-  to: GradientSubscription;
+  current: GradientSubscription;
+  direction: DirectionEnum;
+  target?: Maybe<GradientSubscription>;
 };
 
 export type UpdateTeamAdminInput = {
@@ -3499,6 +3568,12 @@ export type VpnOrder = {
 export enum VpnOrderField {
   DtCreated = "dtCreated",
 }
+
+export type Viewer = {
+  __typename?: "Viewer";
+  team: Team;
+  user: User;
+};
 
 export type VmType = {
   __typename?: "VmType";
@@ -4086,6 +4161,16 @@ export type ActivityLogQuery = {
       endCursor?: string | null;
     };
   };
+};
+
+export type ViewerQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ViewerQuery = {
+  __typename?: "Query";
+  viewer?: {
+    __typename?: "Viewer";
+    team: { __typename?: "Team"; namespace: string; handle: string };
+  } | null;
 };
 
 export const CreateDeploymentDocument = {
@@ -5735,3 +5820,35 @@ export const ActivityLogDocument = {
     },
   }],
 } as unknown as DocumentNode<ActivityLogQuery, ActivityLogQueryVariables>;
+export const ViewerDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "query",
+    "name": { "kind": "Name", "value": "Viewer" },
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "viewer" },
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "team" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "namespace" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "handle" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<ViewerQuery, ViewerQueryVariables>;
