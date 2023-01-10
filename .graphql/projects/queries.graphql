@@ -1,3 +1,14 @@
+query GetProject($id: String!) {
+  project(id: $id) {
+    id
+    name
+    repoNodeId
+    repoName
+    repoUrl
+    dtCreated
+  }
+}
+
 query ActivityLog(
   $projectId: String!
   $first: Int

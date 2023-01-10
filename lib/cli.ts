@@ -6,7 +6,10 @@ import {
   EnumType,
   ValidationError,
 } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
-import { Input } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
+import {
+  Input,
+  Secret,
+} from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
 import { open } from "https://deno.land/x/open@v0.0.5/index.ts";
 import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
@@ -20,6 +23,7 @@ import { act } from "./act.ts";
 import { select } from "./select.ts";
 import { gqlFetch } from "./client.ts";
 import { ViewerDocument } from "./paperspace-graphql.ts";
+import * as project from "./projects/crud.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
@@ -96,7 +100,7 @@ function zodType(schema: z.ZodSchema) {
  */
 cli
   .command(
-    "deployment, deploy",
+    "deployment, d",
     new Command()
       .command("init")
       .action(() => {
@@ -128,6 +132,7 @@ cli
         return { value: "" };
       })),
   )
+  .description(`Effortlessly deploy ML apps to Paperspace.`)
   .action(function () {
     this.showHelp();
   });
@@ -215,6 +220,67 @@ cli
   });
 
 /**
+ * Projects
+ */
+cli
+  .command(
+    "project, p",
+    new Command()
+      .command("create")
+      .arguments(`[name:string]`)
+      .action(act.ifLoggedIn(async (_opt, name) => {
+        if (!name) {
+          name = await Input.prompt({
+            prefix: "",
+            message: "Project name:",
+            validate(value) {
+              return z.string().min(1).max(128).safeParse(value).success
+                ? true
+                : "Must be between 1 and 128 characters.";
+            },
+          });
+        }
+
+        return await project.create({ name });
+      }))
+      .command("update")
+      .action(act.ifLoggedIn(() => {
+        console.log("update");
+        return { value: "" };
+      }))
+      .command("delete")
+      .action(act.ifLoggedIn(() => {
+        console.log("delete");
+        return { value: "" };
+      }))
+      .command("list")
+      .action(act.ifLoggedIn(() => {
+        console.log("list");
+        return { value: "" };
+      }))
+      .command("get")
+      .arguments("[id:string]")
+      .action(act.ifLoggedIn(async (_opt, id) => {
+        if (!id) {
+          // id = select({
+          //   label: "Select a project",
+          //   options: project.list().map((p) => ({
+          //     name: p.name,
+          //     value: p.id,
+          //   })),
+          // });
+          return { value: null };
+        }
+
+        return await project.get({ id });
+      })),
+  )
+  .description(`Manage your Paperspace Gradient projects.`)
+  .action(function () {
+    this.showHelp();
+  });
+
+/**
  * Login
  */
 cli
@@ -229,7 +295,7 @@ cli
     if (!apiKey) {
       open(`https://console.paperspace.com/account/api`);
 
-      apiKey = await Input.prompt({
+      apiKey = await Secret.prompt({
         message: "Enter an API key:",
         prefix: "",
       });
@@ -453,7 +519,7 @@ cli
     "docsPage",
     new EnumType(
       [
-        "deploy",
+        "d",
         "nb",
         "vm",
         "deployment",
@@ -468,7 +534,7 @@ cli
 
     if (page) {
       url.pathname = {
-        deploy: "/gradient/deployments/",
+        d: "/gradient/deployments/",
         deployment: "/gradient/deployments/",
         nb: "/gradient/notebooks/",
         notebook: "/gradient/notebooks/",
