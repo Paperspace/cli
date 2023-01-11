@@ -8,7 +8,9 @@ import {
 } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
 import {
   Input,
+  prompt,
   Secret,
+  Toggle,
 } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
 import { open } from "https://deno.land/x/open@v0.0.5/index.ts";
 import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
@@ -18,12 +20,17 @@ import openEditor from "https://esm.sh/open-editor@4.0.0";
 import { formattedVersion } from "./version.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
-import { bold, colors, info } from "./ansi.ts";
+import { bold, colors, warn } from "./ansi.ts";
 import { act } from "./act.ts";
 import { select } from "./select.ts";
 import { gqlFetch } from "./client.ts";
-import { ViewerDocument } from "./paperspace-graphql.ts";
-import * as project from "./projects/crud.ts";
+import {
+  ListProjectsDocument,
+  OrderDirection,
+  ProjectOrderField,
+  ViewerDocument,
+} from "./paperspace-graphql.ts";
+import * as project from "./projects/index.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
@@ -228,17 +235,35 @@ cli
     new Command()
       .command("create")
       .arguments(`[name:string]`)
+      .option(
+        "--link",
+        "Link the current directory to the project. (default: false)",
+      )
       .action(act.ifLoggedIn(async (_opt, name) => {
         if (!name) {
-          name = await Input.prompt({
-            prefix: "",
-            message: "Project name:",
-            validate(value) {
-              return z.string().min(1).max(128).safeParse(value).success
-                ? true
-                : "Must be between 1 and 128 characters.";
+          const values = await prompt([
+            {
+              name: "name",
+              type: Input,
+              prefix: "",
+              message: "Project name:",
+              validate(value) {
+                return z.string().min(1).max(128).safeParse(value).success
+                  ? true
+                  : "Must be between 1 and 128 characters.";
+              },
             },
-          });
+            {
+              name: "link",
+              type: Toggle,
+              prefix: "",
+              message:
+                "Do you want to link the current directory to the project?",
+              default: true,
+            },
+          ]);
+
+          name = values.name!;
         }
 
         return await project.create({ name });
@@ -254,25 +279,60 @@ cli
         return { value: "" };
       }))
       .command("list")
-      .action(act.ifLoggedIn(() => {
-        console.log("list");
-        return { value: "" };
+      .option(
+        "--next <count:number>",
+        "Return the next <count> results after the cursor.",
+      )
+      .option("--after <cursor:string>", "Return results after this cursor.")
+      .type("sort-by", new EnumType(ProjectOrderField))
+      .option("--sort <sort-by:sort-by>", "Sort the results by this field.", {
+        default: "dtCreated",
+      })
+      .option("--asc", "Order the results ascending.", { conflicts: ["desc"] })
+      .option("--desc", "Order the results descending.", { conflicts: ["asc"] })
+      .option("--fields <fields:string[]>", "Return only these fields.", {
+        collect: true,
+      })
+      .action(act.ifLoggedIn(async (opt) => {
+        const fields = opt.fields?.flat().map((field) => field.trim()) as any;
+
+        return await project.list({
+          fields,
+          after: opt.after,
+          first: opt.next,
+          orderBy: {
+            field: (opt.sort as ProjectOrderField) ?? "dtCreated",
+            direction: opt.asc ? OrderDirection.Asc : OrderDirection.Desc,
+          },
+        });
       }))
       .command("get")
       .arguments("[id:string]")
-      .action(act.ifLoggedIn(async (_opt, id) => {
+      .option("--fields <fields:string[]>", "Return only these fields.", {
+        collect: true,
+      })
+      .action(act.ifLoggedIn(async (opt, id) => {
+        const fields = opt.fields?.flat().map((field) => field.trim()) as any;
+
         if (!id) {
-          // id = select({
-          //   label: "Select a project",
-          //   options: project.list().map((p) => ({
-          //     name: p.name,
-          //     value: p.id,
-          //   })),
-          // });
-          return { value: null };
+          const suggestions = await gqlFetch(ListProjectsDocument, {
+            first: 100,
+          });
+
+          id = await select({
+            message: "Select a project",
+            options: suggestions.projects.nodes.map((p) => ({
+              name: `${p.name} (${p.id})`,
+              value: p.id,
+            })),
+            search: true,
+            searchLabel: "| 🔍",
+            searchIcon: "foo",
+            info: true,
+          });
         }
 
-        return await project.get({ id });
+        return await project.get({ id, fields });
       })),
   )
   .description(`Manage your Paperspace Gradient projects.`)
@@ -313,9 +373,7 @@ cli
     return { value: `Logged in to team "${bold(team)}"` };
   }));
 
-/**
- * Logout
- */
+/** */
 cli
   .command(
     "logout",
@@ -387,11 +445,9 @@ cli
           if (!key) {
             if (!key) {
               key = await select({
-                label: "Select a key to set the value for:",
+                message: "Select a key to set the value for:",
                 options: config.paths,
               });
-
-              console.log(info(`Setting value for "${key}"`));
             }
           }
 
@@ -400,13 +456,26 @@ cli
               prefix: "",
               message: "Enter a new value:",
               suggestions: key === "team" ? await credentials.list() : [],
+              list: true,
+              info: true,
               validate(value) {
                 return !!value.trim() || "Required";
               },
             });
           }
 
-          await config.set(key, value);
+          try {
+            await config.set(key, value);
+          } catch (err) {
+            if (err instanceof z.ZodError) {
+              throw new config.ConfigError(
+                `${warn(`Invalid value for "${key}"`)}\n${
+                  err.issues[0].message
+                }`,
+              );
+            }
+          }
+
           const parsedValue = await config.get(key);
           return { value: parsedValue };
         }),
@@ -424,7 +493,7 @@ cli
         act(async (_opt, key) => {
           if (!key) {
             key = await select({
-              label: "Select a key to get the value for:",
+              message: "Select a key to get the value for:",
               options: config.paths,
             });
           }
@@ -454,9 +523,12 @@ cli
         act(async () => {
           const json = await config.read();
 
-          const table = new Table().header([bold("Key"), bold("Value")]).body(
+          const table = new Table().header([
+            colors.blue("Key"),
+            colors.blue("Value"),
+          ]).body(
             config.paths.reduce((acc, key) => {
-              acc.push([colors.cyan(key), JSON.stringify(obj.get(json, key))]);
+              acc.push([colors.italic(key), obj.get(json, key)]);
               return acc;
             }, [] as [string, string][]),
           );

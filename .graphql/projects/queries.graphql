@@ -2,27 +2,27 @@ query GetProject($id: String!) {
   project(id: $id) {
     id
     name
-    repoNodeId
-    repoName
-    repoUrl
     dtCreated
   }
 }
 
-query ActivityLog(
-  $projectId: String!
-  $first: Int
-  $last: Int
-  $before: String
-  $after: String
-) {
-  projectActivities(
-    projectId: $projectId
-    first: $first
-    last: $last
-    before: $before
-    after: $after
-  ) {
+query ListProjects($first: Int, $after: String, $orderBy: ProjectOrder) {
+  projects(first: $first, after: $after, orderBy: $orderBy) {
+    nodes {
+      id
+      name
+      dtCreated
+    }
+
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+
+query ActivityLog($projectId: String!, $first: Int, $after: String) {
+  projectActivities(projectId: $projectId, first: $first, after: $after) {
     nodes {
       __typename
 

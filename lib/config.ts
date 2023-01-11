@@ -8,7 +8,7 @@ import { env } from "./env.ts";
 import * as credentials from "./credentials.ts";
 import { logger } from "./logger.ts";
 import { bold } from "./ansi.ts";
-import { closest } from "./util.ts";
+import { closest, NestedPaths, TypeFromPath } from "./util.ts";
 
 /**
  * Load the config file
@@ -141,6 +141,20 @@ Are you logged in? Try running "${bold("pspace login")}" first.`,
     .describe("The name of the current team.")
     .nullable()
     .default(null),
+  locale: z.string()
+    .transform((value) => {
+      try {
+        const locale = value.split(":")[0].split(".")[0].replace("_", "-");
+        new Intl.DateTimeFormat(locale);
+        return locale;
+      } catch (_err) {
+        return "en-US";
+      }
+    })
+    .default(
+      Deno.env.get("LANGUAGE") || Deno.env.get("LANG") ||
+        Deno.env.get("LC_ALL") || "en-US",
+    ),
 });
 
 export class ConfigError extends Error {
@@ -154,9 +168,12 @@ export const paths = getKeys(schema).filter((key) =>
 ) as ConfigPaths[];
 
 export type Config = z.infer<typeof schema>;
-export type ConfigPaths = Exclude<
-  Exclude<NestedPaths<Config>, undefined>,
-  "version"
+export type ConfigPaths = Extract<
+  Exclude<
+    NestedPaths<Config>,
+    "version"
+  >,
+  string
 >;
 
 const CONFIG_DIR = `${env.get("HOME")}/.paperspace`;
@@ -178,58 +195,3 @@ function getKeys(obj: z.ZodObject<any>): string[] {
     })
     .flat();
 }
-
-type Primitive = string | number | symbol;
-
-type GenericObject = Record<Primitive, unknown>;
-
-type Join<
-  L extends Primitive | undefined,
-  R extends Primitive | undefined,
-> = L extends string | number ? R extends string | number ? `${L}.${R}`
-  : L
-  : R extends string | number ? R
-  : undefined;
-
-type Union<
-  L extends unknown | undefined,
-  R extends unknown | undefined,
-> = L extends undefined ? R extends undefined ? undefined
-  : R
-  : R extends undefined ? L
-  : L | R;
-
-/**
- * NestedPaths
- * Get all the possible paths of an object
- * @example
- * type Keys = NestedPaths<{ a: { b: { c: string } }>
- * // 'a' | 'a.b' | 'a.b.c'
- */
-export type NestedPaths<
-  T extends GenericObject,
-  Prev extends Primitive | undefined = undefined,
-  Path extends Primitive | undefined = undefined,
-> = {
-  [K in keyof T]: T[K] extends GenericObject
-    ? NestedPaths<T[K], Union<Prev, Path>, Join<Path, K>>
-    : Union<Union<Prev, Path>, Join<Path, K>>;
-}[keyof T];
-
-/**
- * TypeFromPath
- * Get the type of the element specified by the path
- * @example
- * type TypeOfAB = TypeFromPath<{ a: { b: { c: string } }, 'a.b'>
- * // { c: string }
- */
-export type TypeFromPath<
-  T extends GenericObject,
-  Path extends string, // Or, if you prefer, NestedPaths<T>
-> = {
-  [K in Path]: K extends keyof T ? T[K]
-    : K extends `${infer P}.${infer S}`
-      ? T[P] extends GenericObject ? TypeFromPath<T[P], S>
-      : never
-    : never;
-}[Path];
