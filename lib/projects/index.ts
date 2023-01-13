@@ -1,5 +1,4 @@
 import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
-import { Formats } from "../act.ts";
 import { gqlFetch } from "../client.ts";
 import {
   CreateProjectDocument,
@@ -9,6 +8,8 @@ import {
   ListProjectsDocument,
   ListProjectsQueryVariables,
   Project,
+  UpdateProjectDocument,
+  UpdateProjectInput,
 } from "../paperspace-graphql.ts";
 import { colors } from "../ansi.ts";
 import * as config from "../config.ts";
@@ -51,6 +52,25 @@ export async function create(
   return {
     json: createProject.project,
     human: tableFromJson([createProject.project], {
+      locale: await config.get("locale"),
+    }),
+  };
+}
+
+export async function update(
+  input: UpdateProjectInput,
+) {
+  const { updateProject } = await gqlFetch(UpdateProjectDocument, {
+    input,
+  });
+
+  if (!updateProject.project) {
+    return { value: null };
+  }
+
+  return {
+    json: updateProject.project,
+    human: tableFromJson([updateProject.project], {
       locale: await config.get("locale"),
     }),
   };

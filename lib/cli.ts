@@ -269,9 +269,31 @@ cli
         return await project.create({ name });
       }))
       .command("update")
-      .action(act.ifLoggedIn(() => {
-        console.log("update");
-        return { value: "" };
+      .arguments("<id:string>")
+      .option("--name <name:string>", "The new name for the project.")
+      .action(act.ifLoggedIn(async (opt, argId) => {
+        let name = opt.name;
+        let id = argId;
+
+        if (!opt.name) {
+          const values = await prompt([
+            {
+              name: "name",
+              type: Input,
+              prefix: "",
+              message: "Project name:",
+              validate(value) {
+                return z.string().min(1).max(128).safeParse(value).success
+                  ? true
+                  : "Must be between 1 and 128 characters.";
+              },
+            },
+          ]);
+
+          name = values.name!;
+        }
+
+        return await project.update({ id, name });
       }))
       .command("delete")
       .action(act.ifLoggedIn(() => {
@@ -327,7 +349,6 @@ cli
             })),
             search: true,
             searchLabel: "| 🔍",
-            searchIcon: "foo",
             info: true,
           });
         }

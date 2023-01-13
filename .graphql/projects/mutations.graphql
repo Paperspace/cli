@@ -7,3 +7,13 @@ mutation CreateProject($input: CreateProjectInput!) {
     }
   }
 }
+
+mutation UpdateProject($input: UpdateProjectInput!) {
+  updateProject(input: $input) {
+    project {
+      id
+      name
+      dtCreated
+    }
+  }
+}
