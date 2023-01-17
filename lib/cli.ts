@@ -273,7 +273,7 @@ cli
       .option("--name <name:string>", "The new name for the project.")
       .action(act.ifLoggedIn(async (opt, argId) => {
         let name = opt.name;
-        let id = argId;
+        const id = argId;
 
         if (!opt.name) {
           const values = await prompt([
