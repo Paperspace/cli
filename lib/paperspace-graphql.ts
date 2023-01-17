@@ -1690,6 +1690,7 @@ export type Mutation = {
   updateMachine: UpdateMachinePayload;
   updateModel: UpdateModelPayload;
   updateModelVersion: UpdateModelVersionPayload;
+  updateProject: UpdateProjectPayload;
   updateStorageProvider: UpdateStorageProviderPayload;
   updateStripeAdmin: UpdateStripeAdminPayload;
   updateTeamAdmin: UpdateTeamAdminPayload;
@@ -1884,6 +1885,10 @@ export type MutationUpdateModelVersionArgs = {
   input: UpdateModelVersionInput;
 };
 
+export type MutationUpdateProjectArgs = {
+  input: UpdateProjectInput;
+};
+
 export type MutationUpdateStorageProviderArgs = {
   input: UpdateStorageProviderInput;
 };
@@ -2018,9 +2023,9 @@ export type Project = {
   dtCreated: Scalars["DateTime"];
   id: Scalars["String"];
   name: Scalars["String"];
-  repoName: Scalars["String"];
-  repoNodeId: Scalars["String"];
-  repoUrl: Scalars["String"];
+  repoName?: Maybe<Scalars["String"]>;
+  repoNodeId?: Maybe<Scalars["String"]>;
+  repoUrl?: Maybe<Scalars["String"]>;
 };
 
 export type ProjectActivities =
@@ -3356,6 +3361,16 @@ export type UpdateModelVersionPayload = {
   modelVersion: ModelVersion;
 };
 
+export type UpdateProjectInput = {
+  id: Scalars["String"];
+  name?: InputMaybe<Scalars["String"]>;
+};
+
+export type UpdateProjectPayload = {
+  __typename?: "UpdateProjectPayload";
+  project: Project;
+};
+
 export type UpdateStorageProviderInput = {
   id: Scalars["String"];
   isTeamDefault?: InputMaybe<Scalars["Boolean"]>;
@@ -3999,11 +4014,78 @@ export type DeploymentListQuery = {
   };
 };
 
+export type CreateProjectMutationVariables = Exact<{
+  input: CreateProjectInput;
+}>;
+
+export type CreateProjectMutation = {
+  __typename?: "Mutation";
+  createProject: {
+    __typename?: "CreateProjectPayload";
+    project: {
+      __typename?: "Project";
+      id: string;
+      name: string;
+      dtCreated: Date;
+    };
+  };
+};
+
+export type UpdateProjectMutationVariables = Exact<{
+  input: UpdateProjectInput;
+}>;
+
+export type UpdateProjectMutation = {
+  __typename?: "Mutation";
+  updateProject: {
+    __typename?: "UpdateProjectPayload";
+    project: {
+      __typename?: "Project";
+      id: string;
+      name: string;
+      dtCreated: Date;
+    };
+  };
+};
+
+export type GetProjectQueryVariables = Exact<{
+  id: Scalars["String"];
+}>;
+
+export type GetProjectQuery = {
+  __typename?: "Query";
+  project?: {
+    __typename?: "Project";
+    id: string;
+    name: string;
+    dtCreated: Date;
+  } | null;
+};
+
+export type ListProjectsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars["Int"]>;
+  after?: InputMaybe<Scalars["String"]>;
+  orderBy?: InputMaybe<ProjectOrder>;
+}>;
+
+export type ListProjectsQuery = {
+  __typename?: "Query";
+  projects: {
+    __typename?: "ProjectConnection";
+    nodes: Array<
+      { __typename?: "Project"; id: string; name: string; dtCreated: Date }
+    >;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      endCursor?: string | null;
+    };
+  };
+};
+
 export type ActivityLogQueryVariables = Exact<{
   projectId: Scalars["String"];
   first?: InputMaybe<Scalars["Int"]>;
-  last?: InputMaybe<Scalars["Int"]>;
-  before?: InputMaybe<Scalars["String"]>;
   after?: InputMaybe<Scalars["String"]>;
 }>;
 
@@ -5240,6 +5322,275 @@ export const DeploymentListDocument = {
     },
   }],
 } as unknown as DocumentNode<DeploymentListQuery, DeploymentListQueryVariables>;
+export const CreateProjectDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "mutation",
+    "name": { "kind": "Name", "value": "CreateProject" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "input" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "CreateProjectInput" },
+        },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "createProject" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "input" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "input" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "project" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "name" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "dtCreated" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<
+  CreateProjectMutation,
+  CreateProjectMutationVariables
+>;
+export const UpdateProjectDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "mutation",
+    "name": { "kind": "Name", "value": "UpdateProject" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "input" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "UpdateProjectInput" },
+        },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "updateProject" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "input" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "input" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "project" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "name" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "dtCreated" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<
+  UpdateProjectMutation,
+  UpdateProjectMutationVariables
+>;
+export const GetProjectDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "query",
+    "name": { "kind": "Name", "value": "GetProject" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "id" },
+      },
+      "type": {
+        "kind": "NonNullType",
+        "type": {
+          "kind": "NamedType",
+          "name": { "kind": "Name", "value": "String" },
+        },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "project" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "id" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "id" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [
+            { "kind": "Field", "name": { "kind": "Name", "value": "id" } },
+            { "kind": "Field", "name": { "kind": "Name", "value": "name" } },
+            {
+              "kind": "Field",
+              "name": { "kind": "Name", "value": "dtCreated" },
+            },
+          ],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<GetProjectQuery, GetProjectQueryVariables>;
+export const ListProjectsDocument = {
+  "kind": "Document",
+  "definitions": [{
+    "kind": "OperationDefinition",
+    "operation": "query",
+    "name": { "kind": "Name", "value": "ListProjects" },
+    "variableDefinitions": [{
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "first" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "Int" },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "after" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "String" },
+      },
+    }, {
+      "kind": "VariableDefinition",
+      "variable": {
+        "kind": "Variable",
+        "name": { "kind": "Name", "value": "orderBy" },
+      },
+      "type": {
+        "kind": "NamedType",
+        "name": { "kind": "Name", "value": "ProjectOrder" },
+      },
+    }],
+    "selectionSet": {
+      "kind": "SelectionSet",
+      "selections": [{
+        "kind": "Field",
+        "name": { "kind": "Name", "value": "projects" },
+        "arguments": [{
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "first" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "first" },
+          },
+        }, {
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "after" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "after" },
+          },
+        }, {
+          "kind": "Argument",
+          "name": { "kind": "Name", "value": "orderBy" },
+          "value": {
+            "kind": "Variable",
+            "name": { "kind": "Name", "value": "orderBy" },
+          },
+        }],
+        "selectionSet": {
+          "kind": "SelectionSet",
+          "selections": [{
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "nodes" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "id" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "name" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "dtCreated" },
+              }],
+            },
+          }, {
+            "kind": "Field",
+            "name": { "kind": "Name", "value": "pageInfo" },
+            "selectionSet": {
+              "kind": "SelectionSet",
+              "selections": [{
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "hasNextPage" },
+              }, {
+                "kind": "Field",
+                "name": { "kind": "Name", "value": "endCursor" },
+              }],
+            },
+          }],
+        },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<ListProjectsQuery, ListProjectsQueryVariables>;
 export const ActivityLogDocument = {
   "kind": "Document",
   "definitions": [{
@@ -5273,26 +5624,6 @@ export const ActivityLogDocument = {
       "kind": "VariableDefinition",
       "variable": {
         "kind": "Variable",
-        "name": { "kind": "Name", "value": "last" },
-      },
-      "type": {
-        "kind": "NamedType",
-        "name": { "kind": "Name", "value": "Int" },
-      },
-    }, {
-      "kind": "VariableDefinition",
-      "variable": {
-        "kind": "Variable",
-        "name": { "kind": "Name", "value": "before" },
-      },
-      "type": {
-        "kind": "NamedType",
-        "name": { "kind": "Name", "value": "String" },
-      },
-    }, {
-      "kind": "VariableDefinition",
-      "variable": {
-        "kind": "Variable",
         "name": { "kind": "Name", "value": "after" },
       },
       "type": {
@@ -5318,20 +5649,6 @@ export const ActivityLogDocument = {
           "value": {
             "kind": "Variable",
             "name": { "kind": "Name", "value": "first" },
-          },
-        }, {
-          "kind": "Argument",
-          "name": { "kind": "Name", "value": "last" },
-          "value": {
-            "kind": "Variable",
-            "name": { "kind": "Name", "value": "last" },
-          },
-        }, {
-          "kind": "Argument",
-          "name": { "kind": "Name", "value": "before" },
-          "value": {
-            "kind": "Variable",
-            "name": { "kind": "Name", "value": "before" },
           },
         }, {
           "kind": "Argument",

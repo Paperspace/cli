@@ -1,3 +1,5 @@
+import { DeepPick } from "https://esm.sh/ts-deep-pick@0.2.2";
+
 /**
  * Returns the closest string in an array to the given string.
  *
@@ -58,3 +60,70 @@ export function distance(a: string, b: string): number {
 
   return matrix[b.length][a.length];
 }
+
+/**
+ * Pick given properties from an object. Properties can be nested.
+ * @param obj - The object to pick properties from
+ * @param props - The properties to pick
+ * @returns An object containing the picked properties
+ */
+export function pick<
+  T extends Record<string, unknown>,
+  K extends Exclude<NestedPaths<T>, "">,
+>(
+  o: T,
+  props: K[],
+  // @ts-expect-error: works fine despite the complaint
+): DeepPick<T, K> {
+  const result = {};
+
+  for (const prop of props) {
+    const path = prop.split(".");
+    let current = result;
+
+    for (let i = 0; i < path.length; i++) {
+      const key = path[i];
+
+      if (i === path.length - 1) {
+        // @ts-expect-error: don't care about this util enough to fix
+        current[key] = o[key];
+      } else {
+        // @ts-expect-error: don't care about this util enough to fix
+        current[key] = current[key] || {};
+        // @ts-expect-error: don't care about this util enough to fix
+        current = current[key];
+      }
+    }
+  }
+
+  return result as any;
+}
+
+type Concat<Fst, Scd> = Fst extends string
+  ? Scd extends string ? Fst extends "" ? `${Scd}`
+    : `${Fst}.${Scd}`
+  : never
+  : never;
+
+export type NestedPaths<T, Cache extends string = ""> = T extends string ? Cache
+  : {
+    [P in keyof T]: Concat<Cache, P> | NestedPaths<T[P], Concat<Cache, P>>;
+  }[keyof T];
+
+/**
+ * TypeFromPath
+ * Get the type of the element specified by the path
+ * @example
+ * type TypeOfAB = TypeFromPath<{ a: { b: { c: string } }, 'a.b'>
+ * // { c: string }
+ */
+export type TypeFromPath<
+  T extends Record<string, unknown>,
+  Path extends string, // Or, if you prefer, NestedPaths<T>
+> = {
+  [K in Path]: K extends keyof T ? T[K]
+    : K extends `${infer P}.${infer S}`
+      ? T[P] extends Record<string, unknown> ? TypeFromPath<T[P], S>
+      : never
+    : never;
+}[Path];

@@ -4,32 +4,6 @@ import * as config from "./config.ts";
 import { info, strip } from "./ansi.ts";
 
 /**
- * Logs a message to the console in the appropriate format based on the
- * CLI options.
- *
- * @param formats - Formats to print.
- * @param opt - Configuration options
- */
-function print(
-  formats: Formats,
-  opt: {
-    json: boolean;
-  },
-): void {
-  if (opt?.json) {
-    let json = "value" in formats ? formats.value : formats.json;
-
-    if (typeof json === "string") {
-      json = strip(json);
-    }
-
-    console.log(JSON.stringify(json, null, 2));
-  } else {
-    console.log("value" in formats ? formats.value : formats.human);
-  }
-}
-
-/**
  * A higher order function that needs to be added to every action. This will also
  * print the return value of an action function in the appropriate format based on
  * the CLI options.
@@ -44,9 +18,10 @@ function print(
  * ```
  */
 export function act<
-  Fn extends (...args: any[]) => Formats | Promise<Formats>,
+  Args extends any[],
+  Fn extends (...args: Args) => Formats | Promise<Formats>,
 >(fn: Fn) {
-  return async function action(...args: Parameters<Fn>): Promise<void> {
+  return async function action(...args: Args): Promise<void> {
     const opt = args[0];
 
     if (opt.debug !== undefined) {
@@ -88,9 +63,10 @@ export function act<
  * ```
  */
 act.ifLoggedIn = <
-  Fn extends (...args: any[]) => Formats | Promise<Formats>,
+  Args extends any[],
+  Fn extends (...args: Args) => Formats | Promise<Formats>,
 >(fn: Fn) => {
-  return async function action(...args: Parameters<Fn>): Promise<void> {
+  return async function action(...args: Args): Promise<void> {
     const opt = args[0];
     const isLoggedIn = !!(opt.apiKey || await config.get("team"));
     const availableTeams = await credentials.list();
@@ -115,11 +91,37 @@ ${loginHelper}`,
       );
     }
 
-    return act(fn)(...args);
+    return act(fn as any)(...args);
   };
 };
 
-type Formats =
+/**
+ * Logs a message to the console in the appropriate format based on the
+ * CLI options.
+ *
+ * @param formats - Formats to print.
+ * @param opt - Configuration options
+ */
+function print(
+  formats: Formats,
+  opt: {
+    json: boolean;
+  },
+): void {
+  if (opt?.json) {
+    let json = "value" in formats ? formats.value : formats.json;
+
+    if (typeof json === "string") {
+      json = strip(json);
+    }
+
+    console.log(JSON.stringify(json, null, 2));
+  } else {
+    console.log("value" in formats ? formats.value : formats.human);
+  }
+}
+
+export type Formats =
   | {
     /**
      * A JSON-serializable value to print.
