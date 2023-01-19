@@ -31,7 +31,7 @@ import {
   ViewerDocument,
 } from "./paperspace-graphql.ts";
 import * as project from "./projects/index.ts";
-import { poll, pollCmd } from "./poll.ts";
+import { pollCmd } from "./poll.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
