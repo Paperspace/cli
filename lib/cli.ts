@@ -31,6 +31,7 @@ import {
   ViewerDocument,
 } from "./paperspace-graphql.ts";
 import * as project from "./projects/index.ts";
+import { poll, pollCmd } from "./poll.ts";
 
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
@@ -140,47 +141,6 @@ cli
       })),
   )
   .description(`Effortlessly deploy ML apps to Paperspace.`)
-  .action(function () {
-    this.showHelp();
-  });
-
-/**
- * Notebooks
- */
-cli
-  .command(
-    "notebook, nb",
-    new Command()
-      .command("init")
-      .action(() => {
-        console.log("init");
-      })
-      .command("create")
-      .action(act.ifLoggedIn(() => {
-        console.log("create");
-        return { value: "" };
-      }))
-      .command("update")
-      .action(act.ifLoggedIn(() => {
-        console.log("update");
-        return { value: "" };
-      }))
-      .command("delete")
-      .action(act.ifLoggedIn(() => {
-        console.log("delete");
-        return { value: "" };
-      }))
-      .command("list")
-      .action(act.ifLoggedIn(() => {
-        console.log("list");
-        return { value: "" };
-      }))
-      .command("get")
-      .action(act.ifLoggedIn(() => {
-        console.log("get");
-        return { value: "" };
-      })),
-  )
   .action(function () {
     this.showHelp();
   });
@@ -333,28 +293,43 @@ cli
       .option("--fields <fields:string[]>", "Return only these fields.", {
         collect: true,
       })
-      .action(act.ifLoggedIn(async (opt, id) => {
-        const fields = opt.fields?.flat().map((field) => field.trim()) as any;
+      .option(
+        "--poll [interval:string]",
+        `Poll the server for updates. Defaults to "3s".`,
+      )
+      .action(
+        act.ifLoggedIn(async (opt, id) => {
+          const fields = opt.fields?.flat().map((field) => field.trim()) as any;
 
-        if (!id) {
-          const suggestions = await gqlFetch(ListProjectsDocument, {
-            first: 100,
-          });
+          if (!id) {
+            const suggestions = await gqlFetch(ListProjectsDocument, {
+              first: 100,
+            });
 
-          id = await select({
-            message: "Select a project",
-            options: suggestions.projects.nodes.map((p) => ({
-              name: `${p.name} (${p.id})`,
-              value: p.id,
-            })),
-            search: true,
-            searchLabel: "| 🔍",
-            info: true,
-          });
-        }
+            id = await select({
+              message: "Select a project",
+              options: suggestions.projects.nodes.map((p) => ({
+                name: `${p.name} (${p.id})`,
+                value: p.id,
+              })),
+              search: true,
+              searchLabel: "| 🔍",
+              info: true,
+            });
+          }
 
-        return await project.get({ id, fields });
-      })),
+          if (opt.poll) {
+            return {
+              value: await pollCmd(
+                async () => await project.get({ id: id!, fields }),
+                opt,
+              ),
+            };
+          } else {
+            return await project.get({ id, fields });
+          }
+        }),
+      ),
   )
   .description(`Manage your Paperspace Gradient projects.`)
   .action(function () {
@@ -641,23 +616,23 @@ cli
 
 /**
  * Adds a command to upgrade the CLI
-
-cli.command(
-  "upgrade",
-  new UpgradeCommand({ provider: ["choco", "brew", "curl", "scoop"] })
-);
-
-async function checkVersion() {
-  const mainCommand = cli.getMainCommand();
-  const upgradeCommand = mainCommand.getCommand("upgrade");
-  const latestVersion = await upgradeCommand.getLatestVersion();
-  const currentVersion = mainCommand.getVersion();
-
-  if (currentVersion === latestVersion) {
-    return;
-  }
-
-  const versionHelpText = `(New version available: ${latestVersion}. Run '${mainCommand.getName()} upgrade' to upgrade to the latest version!)`;
-  console.log(warn(versionHelpText));
-}
  */
+// cli.command(
+//   "upgrade",
+//   new UpgradeCommand({ provider: ["choco", "brew", "curl", "scoop"] }),
+// );
+
+// async function checkVersion() {
+//   const mainCommand = cli.getMainCommand();
+//   const upgradeCommand = mainCommand.getCommand("upgrade");
+//   const latestVersion = await upgradeCommand.getLatestVersion();
+//   const currentVersion = mainCommand.getVersion();
+
+//   if (currentVersion === latestVersion) {
+//     return;
+//   }
+
+//   const versionHelpText =
+//     `(New version available: ${latestVersion}. Run '${mainCommand.getName()} upgrade' to upgrade to the latest version!)`;
+//   console.log(warn(versionHelpText));
+// }
