@@ -1,3 +1,4 @@
+import { UpgradeCommand } from "./upgrade.ts";
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import {
   ArgumentValue,
@@ -15,13 +16,12 @@ import {
 import { open } from "https://deno.land/x/open@v0.0.5/index.ts";
 import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
-import openEditor from "https://esm.sh/open-editor@4.0.0";
 
-import { formattedVersion } from "./version.ts";
+import { __NAME__, __VERSION__, formattedVersion } from "./version.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
 import { bold, colors, warn } from "./ansi.ts";
-import { act } from "./act.ts";
+import { act, checkVersion } from "./act.ts";
 import { select } from "./select.ts";
 import { gqlFetch } from "./client.ts";
 import {
@@ -36,9 +36,13 @@ import { pollCmd } from "./poll.ts";
 const DOCS_ENDPOINT = "https://docs.paperspace.com";
 
 export const cli = new Command()
-  .name("pspace")
+  .name(__NAME__)
   .usage(`<command> [options] `)
-  .version(formattedVersion)
+  .version(__VERSION__)
+  .versionOption("-V, --version", "Print the current version.", async () => {
+    console.log(`${__NAME__} ${colors.blue(formattedVersion)}`);
+    await checkVersion();
+  })
   .description(
     `
     A CLI for using the Paperspace API. Read the full documentation at "${DOCS_ENDPOINT}/cli".
@@ -195,6 +199,7 @@ cli
     new Command()
       .command("create")
       .arguments(`[name:string]`)
+      .description(`Create a new project.`)
       .option(
         "--link",
         "Link the current directory to the project. (default: false)",
@@ -230,6 +235,7 @@ cli
       }))
       .command("update")
       .arguments("<id:string>")
+      .description(`Update an existing project.`)
       .option("--name <name:string>", "The new name for the project.")
       .action(act.ifLoggedIn(async (opt, argId) => {
         let name = opt.name;
@@ -256,11 +262,13 @@ cli
         return await project.update({ id, name });
       }))
       .command("delete")
+      .description(`Delete a project.`)
       .action(act.ifLoggedIn(() => {
         console.log("delete");
         return { value: "" };
       }))
       .command("list")
+      .description(`List your projects.`)
       .option(
         "--next <count:number>",
         "Return the next <count> results after the cursor.",
@@ -290,6 +298,7 @@ cli
       }))
       .command("get")
       .arguments("[id:string]")
+      .description(`Get a project by its ID.`)
       .option("--fields <fields:string[]>", "Return only these fields.", {
         collect: true,
       })
@@ -534,16 +543,7 @@ cli
             json,
           };
         }),
-      )
-      .command("open")
-      .description(
-        `
-        Open the configuration file in a "nano" editor.
-        `,
-      )
-      .action(() => {
-        openEditor([config.CONFIG_PATH], { editor: "nano" });
-      }),
+      ),
   )
   .description(
     `
@@ -617,22 +617,4 @@ cli
 /**
  * Adds a command to upgrade the CLI
  */
-// cli.command(
-//   "upgrade",
-//   new UpgradeCommand({ provider: ["choco", "brew", "curl", "scoop"] }),
-// );
-
-// async function checkVersion() {
-//   const mainCommand = cli.getMainCommand();
-//   const upgradeCommand = mainCommand.getCommand("upgrade");
-//   const latestVersion = await upgradeCommand.getLatestVersion();
-//   const currentVersion = mainCommand.getVersion();
-
-//   if (currentVersion === latestVersion) {
-//     return;
-//   }
-
-//   const versionHelpText =
-//     `(New version available: ${latestVersion}. Run '${mainCommand.getName()} upgrade' to upgrade to the latest version!)`;
-//   console.log(warn(versionHelpText));
-// }
+cli.command("upgrade", new UpgradeCommand());

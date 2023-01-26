@@ -14,7 +14,6 @@ module.exports = {
       prerelease: true,
     },
   ],
-  dryRun: true,
   debug: true,
   plugins: [
     /**

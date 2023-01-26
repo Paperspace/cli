@@ -1,4 +1,5 @@
 import { DeepPick } from "https://esm.sh/ts-deep-pick@0.2.2";
+import { decompress } from "https://deno.land/x/zip@v1.2.5/mod.ts";
 
 /**
  * Returns the closest string in an array to the given string.
@@ -97,6 +98,45 @@ export function pick<
   }
 
   return result as any;
+}
+
+/**
+ * Download a source file and write it into the destination
+ */
+export async function download(
+  source: string,
+  destination: string,
+): Promise<void> {
+  // We use browser fetch API
+  const response = await fetch(source);
+
+  if (!response.ok) {
+    throw new Error(`Failed to download ${source}`);
+  }
+
+  const blob = await response.blob();
+
+  // We convert the blob into a typed array
+  // so we can use it to write the data into the file
+  const buf = await blob.arrayBuffer();
+  const data = new Uint8Array(buf);
+
+  // We then create a new file and write into it
+  await Deno.writeFile(destination, data);
+}
+
+/**
+ * Unzip a file at a given path
+ */
+export async function unzip(filePath: string): Promise<string> {
+  const dest = filePath.replace(/\.zip$/, "");
+  const response = await decompress(filePath, dest);
+
+  if (!response) {
+    throw new Error(`Failed to decompress ${filePath}`);
+  }
+
+  return dest;
 }
 
 type Concat<Fst, Scd> = Fst extends string

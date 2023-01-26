@@ -1,7 +1,7 @@
 import {
   parse,
   stringify,
-} from "https://deno.land/std@0.171.0/encoding/yaml.ts";
+} from "https://deno.land/std@0.173.0/encoding/yaml.ts";
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import { env } from "./env.ts";
 import { logger } from "./logger.ts";

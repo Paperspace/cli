@@ -1,5 +1,5 @@
 schema:
-  - http://localhost:4000/graphql
+  - https://staging-api.paperspace.com/graphql
 
 documents:
   - ./**/*.graphql
