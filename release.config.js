@@ -89,6 +89,8 @@ module.exports = {
     [
       "@semantic-release/github",
       {
+        // DO NOT CHANGE THIS unless you know what you're doing. Things like
+        // the `upgrade` command depend on these names and paths.
         assets: [
           {
             path: "bin/linux/pspace-linux.zip",

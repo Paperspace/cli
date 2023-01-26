@@ -12,7 +12,9 @@ export class UpgradeCommand extends Command {
     super();
     this.description(
       () =>
-        `Upgrade ${this.getMainCommand().getName()} executable to latest or given version.`,
+        `Upgrade ${
+          bold(this.getMainCommand().getName())
+        } executable to the latest version.`,
     )
       .noGlobals()
       .action(async () => {
