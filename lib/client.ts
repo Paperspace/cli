@@ -1,5 +1,5 @@
 import { GraphQLClient } from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
-import { TypedDocumentNode } from "https://esm.sh/v102/@graphql-typed-document-node/core@3.1.1";
+import { TypedDocumentNode } from "https://esm.sh/@graphql-typed-document-node/core@3.1.1";
 import { env } from "./env.ts";
 import { formattedVersion } from "./version.ts";
 import { logger } from "./logger.ts";

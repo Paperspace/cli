@@ -55,6 +55,7 @@ if (import.meta.main) {
       Deno.exit(1);
     } else {
       Sentry.captureException(err);
+      await Sentry.flush();
       console.error(`${error("Runtime Error")}\n%s`, err.message);
       console.error(
         `\n${

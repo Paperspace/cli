@@ -292,6 +292,16 @@ export enum ContainerRegistryOrderField {
   Name = "name",
 }
 
+export type CoreEvent = {
+  __typename?: "CoreEvent";
+  dtCreated: Scalars["String"];
+  dtFinished?: Maybe<Scalars["String"]>;
+  dtStarted?: Maybe<Scalars["String"]>;
+  errorMsg?: Maybe<Scalars["String"]>;
+  handle: Scalars["String"];
+  state: Scalars["String"];
+};
+
 export type CreateContainerRegistryInput = {
   name: Scalars["String"];
   namespace: Scalars["String"];
@@ -704,6 +714,7 @@ export type DeleteVpnPayload = {
 
 export type Deployment = {
   __typename?: "Deployment";
+  deploymentRollouts: DeploymentRolloutConnection;
   deploymentSpecs: DeploymentSpecConnection;
   dtCreated: Scalars["DateTime"];
   dtDeleted?: Maybe<Scalars["DateTime"]>;
@@ -712,6 +723,13 @@ export type Deployment = {
   log?: Maybe<DeploymentLog>;
   logs: DeploymentLogConnection;
   name: Scalars["String"];
+};
+
+export type DeploymentDeploymentRolloutsArgs = {
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
 };
 
 export type DeploymentDeploymentSpecsArgs = {
@@ -843,6 +861,48 @@ export enum DeploymentOrderField {
   DtCreated = "dtCreated",
 }
 
+export type DeploymentRollout = {
+  __typename?: "DeploymentRollout";
+  deployment?: Maybe<Deployment>;
+  deploymentRuns?: Maybe<DeploymentRunConnection>;
+  dtCreated: Scalars["DateTime"];
+  id: Scalars["UUID"];
+};
+
+export type DeploymentRolloutDeploymentRunsArgs = {
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+};
+
+export type DeploymentRolloutConnection = {
+  __typename?: "DeploymentRolloutConnection";
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types */
+  edges: Array<DeploymentRolloutEdge>;
+  /** Flattened list of DeploymentRollout type */
+  nodes: Array<DeploymentRollout>;
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo */
+  pageInfo: PageInfo;
+};
+
+export type DeploymentRolloutEdge = {
+  __typename?: "DeploymentRolloutEdge";
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor */
+  cursor: Scalars["String"];
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-Node */
+  node: DeploymentRollout;
+};
+
+export type DeploymentRolloutOrder = {
+  direction?: OrderDirection;
+  field?: DeploymentRolloutOrderField;
+};
+
+export enum DeploymentRolloutOrderField {
+  DtCreated = "dtCreated",
+}
+
 export type DeploymentRun = {
   __typename?: "DeploymentRun";
   availableReplicas?: Maybe<Scalars["Int"]>;
@@ -887,10 +947,19 @@ export type DeploymentRunInstance = {
   dtFinished?: Maybe<Scalars["DateTime"]>;
   dtStarted?: Maybe<Scalars["DateTime"]>;
   externalApplied?: Maybe<Scalars["DateTime"]>;
+  history?: Maybe<DeploymentRunInstanceStateHistoryConnection>;
   id: Scalars["UUID"];
+  instanceId?: Maybe<Scalars["String"]>;
   phase?: Maybe<InstancePhase>;
   state?: Maybe<DeploymentRunInstanceState>;
   stateMessage?: Maybe<Scalars["String"]>;
+};
+
+export type DeploymentRunInstanceHistoryArgs = {
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
 };
 
 export type DeploymentRunInstanceConnection = {
@@ -928,6 +997,33 @@ export enum DeploymentRunInstanceState {
   Retrying = "retrying",
 }
 
+export type DeploymentRunInstanceStateHistory = {
+  __typename?: "DeploymentRunInstanceStateHistory";
+  deploymentRunInstanceId: Scalars["UUID"];
+  id: Scalars["UUID"];
+  message?: Maybe<Scalars["String"]>;
+  state?: Maybe<Scalars["String"]>;
+  timestamp?: Maybe<Scalars["DateTime"]>;
+};
+
+export type DeploymentRunInstanceStateHistoryConnection = {
+  __typename?: "DeploymentRunInstanceStateHistoryConnection";
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types */
+  edges: Array<DeploymentRunInstanceStateHistoryEdge>;
+  /** Flattened list of DeploymentRunInstanceStateHistory type */
+  nodes: Array<DeploymentRunInstanceStateHistory>;
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo */
+  pageInfo: PageInfo;
+};
+
+export type DeploymentRunInstanceStateHistoryEdge = {
+  __typename?: "DeploymentRunInstanceStateHistoryEdge";
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor */
+  cursor: Scalars["String"];
+  /** https://facebook.github.io/relay/graphql/connections.htm#sec-Node */
+  node: DeploymentRunInstanceStateHistory;
+};
+
 export type DeploymentRunOrder = {
   direction?: OrderDirection;
   field?: DeploymentRunOrderField;
@@ -943,6 +1039,7 @@ export type DeploymentSpec = {
   cluster?: Maybe<Cluster>;
   data: DeploymentSpecData;
   deployment?: Maybe<Deployment>;
+  /** @deprecated Use deployment.deploymentRollouts instead */
   deploymentRuns?: Maybe<DeploymentRunConnection>;
   dtCreated: Scalars["DateTime"];
   dtInvalid?: Maybe<Scalars["DateTime"]>;
@@ -1699,6 +1796,7 @@ export type Mutation = {
   updateUserAdmin: UpdateUserAdminPayload;
   updateUserInfo: UpdateUserInfoPayload;
   updateVPN: UpdateVpnPayload;
+  upgradeMachine?: Maybe<CoreEvent>;
 };
 
 export type MutationAccountCreditMutationArgs = {
@@ -1919,6 +2017,10 @@ export type MutationUpdateUserInfoArgs = {
 
 export type MutationUpdateVpnArgs = {
   input: UpdateVpnInput;
+};
+
+export type MutationUpgradeMachineArgs = {
+  input: UpgradeMachineInput;
 };
 
 export type OperatingSystem = {
@@ -3482,6 +3584,13 @@ export type UpdateVpnInput = {
 export type UpdateVpnPayload = {
   __typename?: "UpdateVPNPayload";
   vpn: Vpn;
+};
+
+export type UpgradeMachineInput = {
+  billingType?: InputMaybe<Scalars["String"]>;
+  handle: Scalars["String"];
+  storage?: InputMaybe<Scalars["BigInt"]>;
+  vmType?: InputMaybe<Scalars["String"]>;
 };
 
 export type UsageRate = {

@@ -1,7 +1,10 @@
+import { UpgradeCommand } from "./upgrade.ts";
 import { env } from "./env.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
-import { info, strip } from "./ansi.ts";
+import { info, strip, warn } from "./ansi.ts";
+import { __NAME__, __VERSION__ } from "./version.ts";
+import * as cache from "./cache.ts";
 
 /**
  * A higher order function that needs to be added to every action. This will also
@@ -46,6 +49,12 @@ export function act<
 
     const formats = await fn(...args);
     print(formats, opt);
+
+    // Check for updates if the user is not running a command that
+    // requests a JSON response.
+    if (!opt.json) {
+      await checkVersion();
+    }
   };
 }
 
@@ -91,7 +100,7 @@ ${loginHelper}`,
       );
     }
 
-    return act(fn as any)(...args);
+    return await act(fn as any)(...args);
   };
 };
 
@@ -119,6 +128,25 @@ function print(
   } else {
     console.log("value" in formats ? formats.value : formats.human);
   }
+}
+
+export async function checkVersion() {
+  const updateAvailable = await cache.get("updateAvailable");
+  const needsRefresh = !updateAvailable?.expires ||
+    (Date.now() > updateAvailable.expires);
+  const upgradeCommand = new UpgradeCommand();
+  const latestVersion = needsRefresh
+    ? await upgradeCommand.getLatestVersion()
+    : updateAvailable.version;
+  const currentVersion = __VERSION__;
+
+  if (currentVersion === latestVersion) {
+    return;
+  }
+
+  const versionHelpText =
+    `New version available: ${latestVersion}. Run '${__NAME__} upgrade' to upgrade to the latest version!`;
+  console.log(warn(versionHelpText));
 }
 
 export type Formats =
