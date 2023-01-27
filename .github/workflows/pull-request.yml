@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
@@ -21,14 +21,14 @@ jobs:
       - name: Check types
         run: deno task check
 
-      # - name: Test
-      #   run: deno test --allow-env --allow-net --lock=lock.json
-
       - name: Lint
         run: deno lint
 
       - name: Format
         run: deno fmt --check
+
+      - name: Test
+        run: deno task test
 
       - name: Build
         run: deno task compile
