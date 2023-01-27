@@ -45,6 +45,11 @@ pnpm install
 - `"generate"`: Generate GraphQL types/documents
 - `"run"`: Run the CLI in development mode e.g.
   `deno task run [command] [--options]`
+- `"test"`: Run the test suite
+
+## Formatting code
+
+Run `deno fmt` to format the code
 
 ## Testing a binary
 
