@@ -1,7 +1,7 @@
 import {
   parse,
   stringify,
-} from "https://deno.land/std@0.173.0/encoding/yaml.ts";
+} from "https://deno.land/std@0.174.0/encoding/yaml.ts";
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
 import { env } from "./env.ts";

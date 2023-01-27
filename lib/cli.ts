@@ -17,7 +17,12 @@ import { open } from "https://deno.land/x/open@v0.0.5/index.ts";
 import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
 
-import { __NAME__, __VERSION__, formattedVersion } from "./version.ts";
+import {
+  __COMMIT__,
+  __NAME__,
+  __VERSION__,
+  formattedVersion,
+} from "./version.ts";
 import * as credentials from "./credentials.ts";
 import * as config from "./config.ts";
 import { bold, colors, warn } from "./ansi.ts";
@@ -43,6 +48,7 @@ export const cli = new Command()
     console.log(`${__NAME__} ${colors.blue(formattedVersion)}`);
     await checkVersion();
   })
+  .meta("Commit", __COMMIT__)
   .description(
     `
     A CLI for using the Paperspace API. Read the full documentation at "${DOCS_ENDPOINT}/cli".

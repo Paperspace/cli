@@ -1,5 +1,5 @@
 import { env } from "./env.ts";
-import * as log from "https://deno.land/std@0.173.0/log/mod.ts";
+import * as log from "https://deno.land/std@0.174.0/log/mod.ts";
 import * as Sentry from "https://deno.land/x/sentry_deno@v0.2.2/main.ts";
 
 class PaperspaceLogger extends log.handlers.ConsoleHandler {

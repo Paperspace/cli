@@ -1,11 +1,11 @@
 import { logger } from "./logger.ts";
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
-import { __COMMIT__, __VERSION__ } from "./version.ts";
 import * as cache from "./cache.ts";
-import * as path from "https://deno.land/std@0.173.0/path/mod.ts";
+import * as path from "https://deno.land/std@0.174.0/path/mod.ts";
 import { download, unzip } from "./util.ts";
 import { bold } from "./ansi.ts";
+import { __VERSION__ } from "./version.ts";
 
 export class UpgradeCommand extends Command {
   constructor() {
@@ -18,12 +18,12 @@ export class UpgradeCommand extends Command {
     )
       .noGlobals()
       .action(async () => {
-        const currentVersion: string | undefined = __VERSION__;
+        const currentVersion: string | undefined = this.getVersion();
         const latestVersion = await this.getLatestVersion();
 
         if (currentVersion === latestVersion) {
           console.log("Already up-to-date.");
-          Deno.exit(0);
+          return Deno.exit(0);
         }
 
         console.log(`Upgrading from ${currentVersion} to ${latestVersion}...`);
@@ -55,8 +55,8 @@ export class UpgradeCommand extends Command {
         logger.info(`Downloading asset: ${asset.name}`);
         const tmpDir = await Deno.makeTempDir({ prefix: ".pspace-" });
         const dest = path.join(tmpDir, asset.name);
-        await download(asset.url, dest);
-        const binPath = await unzip(dest);
+        await _internals.download(asset.url, dest);
+        const binPath = await _internals.unzip(dest);
 
         logger.info(`Moving ${binPath} to ${execPath}`);
         await Deno.rename(binPath, execPath);
@@ -74,13 +74,13 @@ export class UpgradeCommand extends Command {
   }
 
   async getLatestVersion(): Promise<string> {
-    if (__COMMIT__ !== "development") {
+    if (this.getCommit() !== "development") {
       const cached = await cache.get("updateAvailable");
       // If we've checked for an update in the last 24 hours, return the cached value
       // Otherwise, check for an update.
       if (
-        !cached?.lastChecked ||
-        Date.now() - cached.lastChecked > 1000 * 60 * 60 * 24
+        !cached?.expires ||
+        (Date.now() > cached.expires)
       ) {
         logger.info("Checking for the latest version...");
         const response = await fetch(
@@ -89,14 +89,14 @@ export class UpgradeCommand extends Command {
 
         if (!response.ok) {
           logger.error("Failed to fetch the latest version.");
-          return __VERSION__;
+          return this.getVersion() ?? __VERSION__;
         }
 
         const json = githubReleaseSchema.parse(await response.json());
 
         await cache.set("updateAvailable", {
           version: json.tag_name,
-          lastChecked: Date.now(),
+          expires: Date.now() + 1000 * 60 * 60 * 24,
           assets: json.assets.map((asset) => ({
             name: asset.name,
             url: asset.browser_download_url,
@@ -107,34 +107,29 @@ export class UpgradeCommand extends Command {
         return json.tag_name;
       }
 
-      if (cached?.version) {
-        logger.info(
-          `Returning the latest version from cache: ${cached.version}`,
-        );
+      logger.info(
+        `Returning the latest version from cache: ${cached.version}`,
+      );
 
-        return cached.version;
-      }
-
-      logger.info("Falling back to the current version of the CLI.");
-      return __VERSION__;
+      return cached.version;
     }
 
     logger.info(
       "In development mode. Falling back to the current version of the CLI.",
     );
-    return __VERSION__;
+    return this.getVersion() ?? __VERSION__;
   }
 
   async getLatestVersionAssets(): Promise<
     Array<{ name: string; url: string }>
   > {
-    if (__COMMIT__ !== "development") {
+    if (this.getCommit() !== "development") {
       const cached = await cache.get("updateAvailable");
       // If we've checked for an update in the last 24 hours, return the cached value
       // Otherwise, check for an update.
       if (
-        !cached?.lastChecked ||
-        Date.now() - cached.lastChecked > 1000 * 60 * 60 * 24
+        !cached?.expires ||
+        (Date.now() > cached.expires)
       ) {
         logger.info("Checking for the latest version...");
         const response = await fetch(
@@ -150,7 +145,7 @@ export class UpgradeCommand extends Command {
 
         await cache.set("updateAvailable", {
           version: json.tag_name,
-          lastChecked: Date.now(),
+          expires: Date.now() + 1000 * 60 * 60 * 24,
           assets: json.assets.map((asset) => ({
             name: asset.name,
             url: asset.browser_download_url,
@@ -164,16 +159,11 @@ export class UpgradeCommand extends Command {
         }));
       }
 
-      if (cached?.version) {
-        logger.info(
-          `Returning the latest version from cache: ${cached.version}`,
-        );
+      logger.info(
+        `Returning the latest version from cache: ${cached.version}`,
+      );
 
-        return cached.assets;
-      }
-
-      logger.info("Falling back to the current version of the CLI.");
-      return [];
+      return cached.assets;
     }
 
     logger.info(
@@ -181,7 +171,13 @@ export class UpgradeCommand extends Command {
     );
     return [];
   }
+
+  getCommit() {
+    return this.getMeta("Commit");
+  }
 }
+
+export const _internals = { download, unzip };
 
 const githubReleaseSchema = z
   .object({

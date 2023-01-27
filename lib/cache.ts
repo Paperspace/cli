@@ -1,7 +1,7 @@
 import {
   parse,
   stringify,
-} from "https://deno.land/std@0.173.0/encoding/yaml.ts";
+} from "https://deno.land/std@0.174.0/encoding/yaml.ts";
 import { z } from "https://deno.land/x/zod@v3.20.2/mod.ts";
 import * as obj from "https://esm.sh/object-path-immutable@4.1.2";
 import { env } from "./env.ts";
@@ -72,7 +72,7 @@ export async function write(cache: z.infer<typeof schema>) {
 export async function get<Path extends CachePaths>(
   path: Path,
 ): Promise<TypeFromPath<Cache, Path>> {
-  const cache = await read();
+  const cache = await _internals.read();
   return obj.get(cache, path);
 }
 
@@ -86,8 +86,8 @@ export async function set<Path extends CachePaths>(
   path: Path,
   value: TypeFromPath<Cache, Path>,
 ) {
-  const cache = await read();
-  return await write(obj.set(cache, path, value));
+  const cache = await _internals.read();
+  return await _internals.write(obj.set(cache, path, value));
 }
 
 /**
@@ -96,15 +96,15 @@ export async function set<Path extends CachePaths>(
  * @param path - The path to remove
  */
 export async function remove<Path extends CachePaths>(path: Path) {
-  const cache = await read();
-  return await write(obj.del(cache, path));
+  const cache = await _internals.read();
+  return await _internals.write(obj.del(cache, path));
 }
 
 /**
  * Clear the cache file
  */
 export async function clear() {
-  return await write(
+  return await _internals.write(
     await schema.parseAsync({
       team: null,
     }),
@@ -121,7 +121,7 @@ export const schema = z.object({
       name: z.string(),
       url: z.string(),
     })).describe(`The assets that are available to download for the update.`),
-    lastChecked: z.number().describe(`The last time the update was checked.`),
+    expires: z.number().describe(`The time this value expires.`),
   }).optional(),
 });
 
@@ -134,6 +134,9 @@ export class CacheError extends Error {
 export const paths = getKeys(schema).filter((key) =>
   key !== "version"
 ) as CachePaths[];
+
+// This is required for testing. Without it, we cannot stub the read/write.
+export const _internals = { write, read };
 
 export type Cache = z.infer<typeof schema>;
 export type CachePaths = Extract<

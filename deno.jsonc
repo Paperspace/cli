@@ -9,7 +9,8 @@
     "compile:linux": "deno compile --allow-env --allow-read --allow-write --allow-sys --allow-net --allow-run --lock=deno.lock --target x86_64-unknown-linux-gnu --output bin/linux/pspace main.ts",
     "compile:windows": "deno compile --allow-env --allow-read --allow-write --allow-sys --allow-net --allow-run --lock=deno.lock --target x86_64-pc-windows-msvc --output bin/windows/pspace main.ts",
     "generate": "cd .graphql && pnpm install && pnpm generate && cd .. && mv .graphql/paperspace-graphql.ts lib && npx replace-in-files-cli --string='@graphql-typed-document-node/core' --replacement='https://esm.sh/@graphql-typed-document-node/core@3.1.1' lib/paperspace-graphql.ts",
-    "run": "deno run --allow-env --allow-sys --allow-read --allow-write --allow-net --allow-run main.ts"
+    "run": "deno run --allow-env --allow-sys --allow-read --allow-write --allow-net --allow-run main.ts",
+    "test": "deno test --allow-env --allow-sys --allow-read --allow-write --allow-net --allow-run --lock=deno.lock"
   },
   "lint": {
     "rules": {

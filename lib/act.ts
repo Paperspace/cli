@@ -132,8 +132,8 @@ function print(
 
 export async function checkVersion() {
   const updateAvailable = await cache.get("updateAvailable");
-  const needsRefresh = !updateAvailable?.lastChecked ||
-    (Date.now() - updateAvailable.lastChecked > 1000 * 60 * 60 * 24);
+  const needsRefresh = !updateAvailable?.expires ||
+    (Date.now() > updateAvailable.expires);
   const upgradeCommand = new UpgradeCommand();
   const latestVersion = needsRefresh
     ? await upgradeCommand.getLatestVersion()
