@@ -15,6 +15,7 @@ module.exports = {
     },
   ],
   debug: true,
+  dryRun: true,
   plugins: [
     /**
      * Verify that the commit messages follow commit message conventions
