@@ -1,0 +1,29 @@
+name: Release published
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  published:
+    name: Published
+    runs-on: ubuntu-latest
+
+    steps:
+      # We'll need to check out the repository so that we can edit the README
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Sync to Homebrew tap
+        env:
+          GITHUB_TOKEN: ${ secrets.GITHUB_TOKEN }
+        run: sh .scripts/sync-release-to-tap.sh ${ github.event.release.tag_name }
+
+      - name: Sync to Scoop bucket
+        env:
+          GITHUB_TOKEN: ${ secrets.GITHUB_TOKEN }
+        run: sh .scripts/sync-release-to-scoop.sh ${ github.event.release.tag_name }

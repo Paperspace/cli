@@ -1,6 +1,6 @@
 ## CRUD (create, update, delete, list, get)
 
-- [ ] `pspace deploy create --spec path/to/spec.yml [--template]`
+- [ ] `pspace deploy create [--template]`
 - [ ] `pspace deploy delete`
 - [ ] `pspace deploy update [id] --spec path/to/**.yml`
 - [ ] `pspace deploy list [--first] [--after] [--order-by]`

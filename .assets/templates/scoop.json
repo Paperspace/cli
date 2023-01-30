@@ -1,0 +1,13 @@
+{
+  "version": "{{PSPACE_VERSION}}",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/Paperspace/cli/releases/download/v{{PSPACE_VERSION}}/pspace-windows.zip",
+      "bin": ["pspace.exe"],
+      "hash": "{{PSPACE_SHA256_WINDOWS}}"
+    }
+  },
+  "homepage": "https://github.com/Paperspace/cli",
+  "license": "Apache 2.0",
+  "description": "The Paperspace CLI"
+}
