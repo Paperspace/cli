@@ -1,7 +1,0 @@
-query Viewer {
-  viewer {
-    team {
-      namespace
-    }
-  }
-}

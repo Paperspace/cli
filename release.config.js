@@ -14,8 +14,6 @@ module.exports = {
       prerelease: true,
     },
   ],
-  debug: true,
-  dryRun: true,
   plugins: [
     /**
      * Verify that the commit messages follow commit message conventions
@@ -33,13 +31,12 @@ module.exports = {
       {
         replacements: [
           {
-            files: ["lib/version.ts"],
-            from: '__VERSION__ = ".*"',
-            to: '__VERSION__ = "${nextRelease.gitTag}"',
+            files: ["version.ts"],
+            from: 'const VERSION = ".*";',
+            to: 'const VERSION = "${nextRelease.version}";',
             results: [
-              // Verify that the replacement was successful
               {
-                file: "lib/version.ts",
+                file: "version.ts",
                 hasChanged: true,
                 numMatches: 1,
                 numReplacements: 1,
@@ -48,13 +45,12 @@ module.exports = {
             countMatches: true,
           },
           {
-            files: ["lib/version.ts"],
-            from: '__COMMIT__ = ".*"',
-            to: '__COMMIT__ = "${nextRelease.gitHead}"',
+            files: ["version.ts"],
+            from: 'const COMMIT = ".*";',
+            to: 'const COMMIT = "${nextRelease.gitHead}";',
             results: [
-              // Verify that the replacement was successful
               {
-                file: "lib/version.ts",
+                file: "version.ts",
                 hasChanged: true,
                 numMatches: 1,
                 numReplacements: 1,
@@ -71,7 +67,8 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        publishCmd: [
+        execCwd: ".",
+        prepareCmd: [
           `deno task compile`,
           `cd bin/linux`,
           `zip -9 pspace-linux.zip pspace`,
@@ -81,7 +78,7 @@ module.exports = {
           `zip -9 pspace-macos-arm.zip pspace`,
           `cd ../windows`,
           `zip -9 pspace-windows.zip pspace.exe`,
-        ].join(" \\ \n"),
+        ].join(" &&\\\n"),
       },
     ],
     /**

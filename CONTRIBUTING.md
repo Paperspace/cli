@@ -1,88 +1,115 @@
-# Iterating on the Paperspace CLI
+# Contribute
 
 > A guide for contributing to the Paperspace CLI
 
-## Getting started
+## Getting Started
 
-1. Install Deno
+1. [Install Deno](https://deno.land/#installation): A secure runtime for
+   JavaScript and TypeScript
 
 ```sh
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
 
-2. Clone the repo and open in VSCode
+2. [Install zCLI](https://github.com/jaredLunde/zcli-cli): A CLI for creating and
+   managing zCLI applications
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/jaredLunde/zcli-cli/main/install.sh | sh
+```
+
+3. Clone the repo and open in VSCode
 
 ```sh
 git clone https://github.com/Paperspace/cli
 code cli
 ```
 
-3. Install the VSCode Deno extension
-4. Load the Deno cache
+4. Install the VSCode Deno extension
+5. Load the Deno cache
 
 ```sh
 deno task cache
 ```
 
-5. Install the GraphQL package
+## Development
+
+Run the CLI in development mode:
 
 ```sh
-cd .graphql
-pnpm install
+deno task dev --help
 ```
 
-## Development scripts
+Run the CLI against production environment:
 
-> `deno task [name]`
+```sh
+deno task run --help
+```
 
-- `"cache"`: Load the Deno install cache
-- `"check"`: Type check without executing
-- `"compile"`: Compile the binaries for macOS, Linux, and Windows
-- `"compile:macos"`: Compile the binary for macOS x86
-- `"compile:macos-arm"`: Compile the binary for macOS M-series chips
-- `"compile:linux"`: Compile the binary for Linux
-- `"compile:windows"`: Compile the binary for Windows
-- `"generate"`: Generate GraphQL types/documents
-- `"run"`: Run the CLI in development mode e.g.
-  `deno task run [command] [--options]`
-- `"test"`: Run the test suite
+Add a command to the CLI:
 
-## Formatting code
+```sh
+zcli add [name]
+```
 
-Run `deno fmt` to format the code
+Generate the API client types for the CLI against the development environment:
 
-## Testing a binary
+```sh
+deno task generate-api
+```
 
-1. Compile the binaries e.g.
+Generate the API client types for the CLI against the production environment:
+
+```sh
+deno task generate-api:prod
+```
+
+Compile the CLI:
 
 ```sh
 deno task compile
 ```
 
-2. Run a command
+Test a binary:
 
 ```sh
+deno task compile
 bin/macos-arm/pspace --help
 ```
 
-## Writing GraphQL documents
+Test the CLI:
 
-GraphQL documents can be contributed in
-`.graphql/[feature]/[queries, mutations].graphql`. After adding a document, be
-sure to run `deno task generate` to generate the typings for it. You may then
-import the document within the Deno app via
+```sh
+deno task test
+```
 
-```ts
-import { MyDocument } from "./paperspace-graphql.ts";
+Generate documentation for the CLI:
+
+```sh
+deno task docs
+```
+
+Format the code:
+
+```sh
+deno fmt
+```
+
+Lint the code:
+
+```sh
+deno lint
+```
+
+Type-check the code:
+
+```sh
+deno check mod.ts
 ```
 
 ## Tools we use
 
-1. [Cliffy](https://cliffy.io) - The framework for building interactive command
-   line tools with Deno.
-2. [GraphQL Codegen](https://the-guild.dev/graphql/codegen) - Generate code from
-   your GraphQL schema and operations with a simple CLI.
-3. [Zod](https://github.com/colinhacks/zod) - TypeScript-first schema validation
-   with static type inference.
-4. [graphql-request](https://github.com/prisma-labs/graphql-request) - Minimal
-   GraphQL client supporting Node and browsers for scripts or simple apps.
+1. [zCLI](https://github.com/jaredLunde/zcli) - A framework for building type-safe command-line tools using Zod validators in Deno
+1. [zCLI CLI](https://github.com/jaredLunde/zcli-cli) - A command-line tool for easily creating zCLI applications and commands with Deno.
+1. [openapi-typescript](https://the-guild.dev/graphql/codegen) - Convert static OpenAPI schemas to TypeScript types quickly using pure Node.js. Fast, lightweight, (almost) dependency-free, and no Java/node-gyp/running OpenAPI servers necessary.
+1. [Zod](https://github.com/colinhacks/zod) - TypeScript-first schema validation with static type inference.
