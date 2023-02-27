@@ -12,7 +12,7 @@ curl -fsSL https://console.paperspace.com/install.sh | sh
 
 Using Scoop (Windows):
 
-> **Notice**: Coming soon
+> **Note** Coming soon
 >
 > ```sh
 > scoop bucket add pspace https://github.com/Paperspace/scoop-bucket.git
@@ -21,7 +21,7 @@ Using Scoop (Windows):
 
 Using Homebrew (macOS and Linux):
 
-> **Notice**: Coming soon
+> **Note** Coming soon
 >
 > ```sh
 > brew tap paperspace/tap
