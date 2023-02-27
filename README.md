@@ -66,7 +66,7 @@ pspace [command] [flags]
 | [**`pspace project list`**](#-pspace-project-list)       | List projects.                                            |
 | [**`pspace project update`**](#-pspace-project-update)   | Update an existing project.                               |
 | [**`pspace signup`**](#-pspace-signup)                   | Sign up for a Paperspace account.                         |
-| [**`pspace upgrade`**](#-pspace-upgrade)                 | Upgrade [1mpspace[22m to the latest version.                     |
+| [**`pspace upgrade`**](#-pspace-upgrade)                 | Upgrade [1mpspace[22m to the latest version.              |
 | [**`pspace version`**](#-pspace-version)                 | Show version information                                  |
 
 ---
@@ -100,8 +100,8 @@ These flags are available on all commands.
 
 ## `$ pspace completion`
 
-Generate an autocompletion script for pspace in the specified shell.
-See each sub-command's help for details on how to use the generated script.
+Generate an autocompletion script for pspace in the specified shell. See each
+sub-command's help for details on how to use the generated script.
 
 ### Global Flags
 
@@ -122,8 +122,8 @@ These flags are available on all commands.
 
 Generate the autocompletion script for the bash shell.
 
-This script depends on the `bash-completion` package.
-If it is not installed already, you can install it via your OS's package manager.
+This script depends on the `bash-completion` package. If it is not installed
+already, you can install it via your OS's package manager.
 
 To load completions in your current shell session:
 
@@ -205,8 +205,8 @@ These flags are available on all commands.
 
 Generate the autocompletion script for the zsh shell.
 
-If shell completion is not already enabled in your environment you will need
-to enable it. You can execute the following once:
+If shell completion is not already enabled in your environment you will need to
+enable it. You can execute the following once:
 
 ```
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
@@ -257,9 +257,9 @@ These flags are available on all commands.
 
 ## `$ pspace config`
 
-This command manages your Paperspace configuration. You can use it to set, get, and
-delete configuration values. Running this command without any subcommands will print
-your current configuration.
+This command manages your Paperspace configuration. You can use it to set, get,
+and delete configuration values. Running this command without any subcommands
+will print your current configuration.
 
 Your configuration is stored in a TOML file at `~/.paperspace/config.toml`.
 
@@ -481,9 +481,8 @@ These flags are available on all commands.
 
 ## `$ pspace docs`
 
-This command opens the Paperspace documentation in your browser.
-You can optionally pass an argument that will take you to a specific
-docs page.
+This command opens the Paperspace documentation in your browser. You can
+optionally pass an argument that will take you to a specific docs page.
 
 Valid pages are:
 
@@ -667,8 +666,8 @@ These flags are available on all commands.
 
 ## `$ pspace project get`
 
-Get a project by its ID. If you don't provide an ID, this command will
-prompt you for one based on the projects you have access to.
+Get a project by its ID. If you don't provide an ID, this command will prompt
+you for one based on the projects you have access to.
 
 ### Arguments
 
@@ -787,16 +786,15 @@ These flags are available on all commands.
 
 This command upgrades [1mpspace[22m to the latest version.
 
-If you used a package manager like `brew` to install `pspace`,
-you should use that to upgrade in order to avoid potential permissions
-issues. For example, for `brew` you can upgrade by running:
+If you used a package manager like `brew` to install `pspace`, you should use
+that to upgrade in order to avoid potential permissions issues. For example, for
+`brew` you can upgrade by running:
 
 ```
 brew upgrade pspace
 ```
 
-If you installed `pspace` using the install script, you can upgrade by
-running:
+If you installed `pspace` using the install script, you can upgrade by running:
 
 ```
 pspace upgrade
