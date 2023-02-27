@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { root } from "../mod.ts";
+import { root } from "../commands/mod.ts";
 import {
   asserts,
   assertSpyCall,
