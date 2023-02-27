@@ -22,7 +22,7 @@ jobs:
           deno-version: 1.x.x
 
       - name: Check types
-        run: deno task check
+        run: deno check mod.ts
 
       - name: Lint
         run: deno lint
