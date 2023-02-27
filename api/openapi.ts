@@ -3,50 +3,49 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
   "/auth/session": {
     /**
-     * Get the current session 
+     * Get the current session
      * @description Get the current session. If a user is not logged in, this will be null. Otherwise, it will contain the current team and user.
      */
     get: operations["query.auth.session"];
   };
   "/deployment-schemas/0.0.0": {
     /**
-     * Get the schema for the 0.0.0 version of the spec. 
+     * Get the schema for the 0.0.0 version of the spec.
      * @description Get the schema for the 0.0.0 version of the spec.
      */
     get: operations["query.deployments.schemas.v0alpha0"];
   };
   "/health": {
     /**
-     * Health check 
+     * Health check
      * @description Check if the API is healthy.
      */
     get: operations["query.health"];
   };
   "/projects": {
     /**
-     * List projects 
-     * @description 
+     * List projects
+     * @description
      *         List projects. This endpoint supports pagination and sorting.
      */
     get: operations["query.projects.list"];
     /**
-     * Create a project 
+     * Create a project
      * @description Create a project
      */
     post: operations["mutation.projects.create"];
   };
   "/projects/{handle}": {
     /**
-     * Get a project by its ID 
+     * Get a project by its ID
      * @description Get a project by its ID.
      */
     get: operations["query.projects.get"];
     /**
-     * Update a project 
+     * Update a project
      * @description Update a project
      */
     put: operations["mutation.projects.update"];
@@ -64,8 +63,8 @@ export interface components {
         readonly "application/json": {
           readonly code: string;
           readonly issues?: readonly ({
-              readonly message: string;
-            })[];
+            readonly message: string;
+          })[];
           readonly message: string;
         };
       };
@@ -80,10 +79,9 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   "query.auth.session": {
     /**
-     * Get the current session 
+     * Get the current session
      * @description Get the current session. If a user is not logged in, this will be null. Otherwise, it will contain the current team and user.
      */
     responses: {
@@ -117,7 +115,7 @@ export interface operations {
   };
   "query.deployments.schemas.v0alpha0": {
     /**
-     * Get the schema for the 0.0.0 version of the spec. 
+     * Get the schema for the 0.0.0 version of the spec.
      * @description Get the schema for the 0.0.0 version of the spec.
      */
     responses: {
@@ -136,7 +134,7 @@ export interface operations {
   };
   "query.health": {
     /**
-     * Health check 
+     * Health check
      * @description Check if the API is healthy.
      */
     responses: {
@@ -151,13 +149,13 @@ export interface operations {
   };
   "query.projects.list": {
     /**
-     * List projects 
-     * @description 
+     * List projects
+     * @description
      *         List projects. This endpoint supports pagination and sorting.
      */
     parameters: {
-        /** @description Order results by one of these fields. */
-        /** @description The order to sort the results by. */
+      /** @description Order results by one of these fields. */
+      /** @description The order to sort the results by. */
       readonly query: {
         after?: string;
         limit?: number;
@@ -174,42 +172,42 @@ export interface operations {
             readonly hasMore: boolean;
             /** @description The items on this page. */
             readonly items: readonly ({
-                /**
-                 * Format: date-time 
-                 * @description The date the project was created
-                 */
-                readonly dtCreated: Date;
-                /**
-                 * Format: date-time 
-                 * @description The date the project was deleted 
-                 * @default null
-                 */
-                readonly dtDeleted: Date;
-                /**
-                 * @description The ID of the GitHub App installation if this is is a GitHub-connected project. 
-                 * @default null
-                 */
-                readonly githubAppInstallationId: number | null;
-                /** @description The ID of the project */
-                readonly handle: string;
-                /** @description The name of the project */
-                readonly name: string;
-                /**
-                 * @description The name of the GitHub repository if this is is a GitHub-connected project. 
-                 * @default null
-                 */
-                readonly repoName: string | null;
-                /**
-                 * @description The node ID of the GitHub repository if this is is a GitHub-connected project. 
-                 * @default null
-                 */
-                readonly repoNodeId: string | null;
-                /**
-                 * @description The URL of the GitHub repository if this is is a GitHub-connected project. 
-                 * @default null
-                 */
-                readonly repoUrl: string | null;
-              })[];
+              /**
+               * Format: date-time
+               * @description The date the project was created
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the project was deleted
+               * @default null
+               */
+              readonly dtDeleted: Date;
+              /**
+               * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
+               * @default null
+               */
+              readonly githubAppInstallationId: number | null;
+              /** @description The ID of the project */
+              readonly handle: string;
+              /** @description The name of the project */
+              readonly name: string;
+              /**
+               * @description The name of the GitHub repository if this is is a GitHub-connected project.
+               * @default null
+               */
+              readonly repoName: string | null;
+              /**
+               * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
+               * @default null
+               */
+              readonly repoNodeId: string | null;
+              /**
+               * @description The URL of the GitHub repository if this is is a GitHub-connected project.
+               * @default null
+               */
+              readonly repoUrl: string | null;
+            })[];
             /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
             readonly nextPage: string | null;
           };
@@ -220,7 +218,7 @@ export interface operations {
   };
   "mutation.projects.create": {
     /**
-     * Create a project 
+     * Create a project
      * @description Create a project
      */
     readonly requestBody: {
@@ -237,18 +235,18 @@ export interface operations {
         content: {
           readonly "application/json": {
             /**
-             * Format: date-time 
+             * Format: date-time
              * @description The date the project was created
              */
             readonly dtCreated: Date;
             /**
-             * Format: date-time 
-             * @description The date the project was deleted 
+             * Format: date-time
+             * @description The date the project was deleted
              * @default null
              */
             readonly dtDeleted: Date;
             /**
-             * @description The ID of the GitHub App installation if this is is a GitHub-connected project. 
+             * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
              * @default null
              */
             readonly githubAppInstallationId: number | null;
@@ -257,17 +255,17 @@ export interface operations {
             /** @description The name of the project */
             readonly name: string;
             /**
-             * @description The name of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The name of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoName: string | null;
             /**
-             * @description The node ID of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoNodeId: string | null;
             /**
-             * @description The URL of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The URL of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoUrl: string | null;
@@ -279,11 +277,11 @@ export interface operations {
   };
   "query.projects.get": {
     /**
-     * Get a project by its ID 
+     * Get a project by its ID
      * @description Get a project by its ID.
      */
     parameters: {
-        /** @description The ID of the project to get */
+      /** @description The ID of the project to get */
       readonly path: {
         handle: string;
       };
@@ -294,18 +292,18 @@ export interface operations {
         content: {
           readonly "application/json": {
             /**
-             * Format: date-time 
+             * Format: date-time
              * @description The date the project was created
              */
             readonly dtCreated: Date;
             /**
-             * Format: date-time 
-             * @description The date the project was deleted 
+             * Format: date-time
+             * @description The date the project was deleted
              * @default null
              */
             readonly dtDeleted: Date;
             /**
-             * @description The ID of the GitHub App installation if this is is a GitHub-connected project. 
+             * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
              * @default null
              */
             readonly githubAppInstallationId: number | null;
@@ -314,17 +312,17 @@ export interface operations {
             /** @description The name of the project */
             readonly name: string;
             /**
-             * @description The name of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The name of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoName: string | null;
             /**
-             * @description The node ID of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoNodeId: string | null;
             /**
-             * @description The URL of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The URL of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoUrl: string | null;
@@ -336,11 +334,11 @@ export interface operations {
   };
   "mutation.projects.update": {
     /**
-     * Update a project 
+     * Update a project
      * @description Update a project
      */
     parameters: {
-        /** @description The ID of the project to update */
+      /** @description The ID of the project to update */
       readonly path: {
         handle: string;
       };
@@ -359,18 +357,18 @@ export interface operations {
         content: {
           readonly "application/json": {
             /**
-             * Format: date-time 
+             * Format: date-time
              * @description The date the project was created
              */
             readonly dtCreated: Date;
             /**
-             * Format: date-time 
-             * @description The date the project was deleted 
+             * Format: date-time
+             * @description The date the project was deleted
              * @default null
              */
             readonly dtDeleted: Date;
             /**
-             * @description The ID of the GitHub App installation if this is is a GitHub-connected project. 
+             * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
              * @default null
              */
             readonly githubAppInstallationId: number | null;
@@ -379,17 +377,17 @@ export interface operations {
             /** @description The name of the project */
             readonly name: string;
             /**
-             * @description The name of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The name of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoName: string | null;
             /**
-             * @description The node ID of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoNodeId: string | null;
             /**
-             * @description The URL of the GitHub repository if this is is a GitHub-connected project. 
+             * @description The URL of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
             readonly repoUrl: string | null;
