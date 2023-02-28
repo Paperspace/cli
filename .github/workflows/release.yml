@@ -9,8 +9,6 @@ on:
       - canary
 
 concurrency: release-${{ github.head_ref }}
-permissions:
-  contents: write
 
 jobs:
   release:
