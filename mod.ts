@@ -18,7 +18,6 @@ if (import.meta.main) {
   try {
     await root.execute();
   } catch (err) {
-    console.log(err);
     // Clean up the cursor before exiting in case we removed it somewhere.
     print(cursorShow());
 

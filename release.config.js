@@ -14,6 +14,7 @@ module.exports = {
       prerelease: true,
     },
   ],
+  tagFormat: "${version}",
   plugins: [
     /**
      * Verify that the commit messages follow commit message conventions
