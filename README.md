@@ -711,7 +711,7 @@ Examples:
 Pick a subset of fields to display:
 
 ```
-zcli.json -F handle -F name -F dtCreated
+pspace project list -F handle -F name -F dtCreated
 ```
 
 ### Flags
