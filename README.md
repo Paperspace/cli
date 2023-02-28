@@ -66,7 +66,7 @@ pspace [command] [flags]
 | [**`pspace project list`**](#-pspace-project-list)       | List projects.                                            |
 | [**`pspace project update`**](#-pspace-project-update)   | Update an existing project.                               |
 | [**`pspace signup`**](#-pspace-signup)                   | Sign up for a Paperspace account.                         |
-| [**`pspace upgrade`**](#-pspace-upgrade)                 | Upgrade [1mpspace[22m to the latest version.              |
+| [**`pspace upgrade`**](#-pspace-upgrade)                 | Upgrade pspace to the latest version.                     |
 | [**`pspace version`**](#-pspace-version)                 | Show version information                                  |
 
 ---
@@ -799,7 +799,7 @@ These flags are available on all commands.
 
 ## `$ pspace upgrade`
 
-This command upgrades [1mpspace[22m to the latest version.
+This command upgrades pspace to the latest version.
 
 If you used a package manager like `brew` to install `pspace`, you should use
 that to upgrade in order to avoid potential permissions issues. For example, for
