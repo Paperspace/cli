@@ -52,8 +52,6 @@ export const login = command("login", {
   );
 
   const team = sess.data?.team?.namespace;
-  await credentials.set(`keys.${team}`, apiKey);
-  await config.set("team", team ?? null);
 
   invariant(
     team,
@@ -63,5 +61,7 @@ export const login = command("login", {
     }),
   );
 
+  await credentials.set(`keys.${team}`, apiKey);
+  await config.set("team", team ?? null);
   yield `Logged in to team "${fmt.colors.bold(team)}"`;
 });

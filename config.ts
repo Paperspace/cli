@@ -21,13 +21,14 @@ const configShape = {
         `Team "${value}" was not found in your credentials file. Retaining current team.`,
       );
 
-      const correction = didYouMean(value, teams);
+      const correction = teams.length
+        ? didYouMean(value, teams)
+        : `→ Are you logged in? Try running "${
+          fmt.colors.bold("pspace login")
+        }" first.`;
 
       throw new ConfigError(
-        `A team named "${value}" was not found in your credentials file. ${correction}
-   → Are you logged in? Try running "${
-          fmt.colors.bold("pspace login")
-        }" first.`,
+        `A team named "${value}" was not found in your credentials file.\n ${correction}`,
       );
     })
     .describe("The name of the current team.")
@@ -62,7 +63,9 @@ export const config = zcliConfig(configShape, {
   path: CONFIG_PATH,
 });
 
-export const configPaths = deepKeys(configShape) as [string, ...string[]];
+export const configPaths = deepKeys(configShape).filter((p) =>
+  p !== "version"
+) as [string, ...string[]];
 
 function deepKeys(obj: Record<string | number | symbol, unknown>): string[] {
   // Use tail call optimization
