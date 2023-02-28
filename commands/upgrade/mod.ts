@@ -73,10 +73,16 @@ export const upgrade = command("upgrade", {
   const tmpDir = await Deno.makeTempDir({ prefix: `.${ctx.root.name}-` });
   const dest = path.join(tmpDir, asset.name);
   await _internals.download(asset.url, dest);
-  const binPath = await _internals.unzip(dest);
+  const binDir = await _internals.unzip(dest, tmpDir);
 
-  logger.info(`Moving ${binPath} to ${execPath}`);
-  await Deno.rename(binPath, execPath);
+  for await (const bin of Deno.readDir(binDir)) {
+    if (bin.isFile) {
+      const binPath = path.join(binDir, bin.name);
+      logger.info(`Moving ${binPath} to ${execPath}`);
+      await Deno.rename(binPath, execPath);
+      break;
+    }
+  }
 
   logger.info(`Removing ${tmpDir}`);
   await Deno.remove(tmpDir, { recursive: true });
