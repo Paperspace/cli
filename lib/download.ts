@@ -1,5 +1,5 @@
 import { AppError } from "../errors.ts";
-import { invariant } from "./invariant.ts";
+import { asserts } from "./asserts.ts";
 
 /**
  * Download a source file and write it into the destination
@@ -11,7 +11,7 @@ export async function download(
   // We use browser fetch API
   const response = await fetch(source);
 
-  invariant(
+  asserts(
     response.ok,
     new AppError({ message: `Failed to download: ${source}` }),
   );

@@ -3,7 +3,7 @@ import { args, command, z } from "../../../zcli.ts";
 import { config, configPaths } from "../../../config.ts";
 import { ConfigError } from "../../../errors.ts";
 import { select } from "../../../prompts/select.ts";
-import { invariant } from "../../../lib/invariant.ts";
+import { asserts } from "../../../lib/asserts.ts";
 import { input } from "../../../prompts/input.ts";
 import { credentials } from "../../../credentials.ts";
 
@@ -28,7 +28,7 @@ export const set = command("set", {
 
   if (!key) {
     key = await select("Select a key:", configPaths);
-    invariant(key, "No key selected.");
+    asserts(key, "No key selected.");
   }
 
   if (!value) {
@@ -42,7 +42,7 @@ export const set = command("set", {
       value = await input(`Enter a value for "${key}":`);
     }
 
-    invariant(value, "No value entered.");
+    asserts(value, "No value entered.");
   }
 
   try {

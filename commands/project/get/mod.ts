@@ -1,5 +1,5 @@
 import { projects } from "../../../api/projects.ts";
-import { invariant } from "../../../lib/invariant.ts";
+import { asserts } from "../../../lib/asserts.ts";
 import { args, command, flag, flags, z } from "../../../zcli.ts";
 import { select } from "../../../prompts/select.ts";
 import { dataTable } from "../../../lib/data-table.ts";
@@ -38,7 +38,7 @@ export const get = command("get", {
 
   if (!handle) {
     const existingProjects = await loading(projects.list({ limit: 50 }));
-    invariant(existingProjects.ok, existingProjects);
+    asserts(existingProjects.ok, existingProjects);
 
     const selected = await select(
       "Select a project:",
@@ -50,7 +50,7 @@ export const get = command("get", {
       },
     );
 
-    invariant(selected, "No project selected.");
+    asserts(selected, "No project selected.");
     handle = selected.handle;
   }
 
@@ -58,7 +58,7 @@ export const get = command("get", {
     enabled: !flags.json,
   });
 
-  invariant(result.ok, result);
+  asserts(result.ok, result);
 
   if (!flags.json) {
     for await (const line of dataTable([result.data], flags.fields)) {

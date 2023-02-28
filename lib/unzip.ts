@@ -1,6 +1,6 @@
 import { path } from "../deps.ts";
 import { AppError } from "../errors.ts";
-import { invariant } from "./invariant.ts";
+import { asserts } from "./asserts.ts";
 
 /**
  * Decompress a zip file at a given path.
@@ -22,7 +22,7 @@ export async function unzip(
   const filename = path.basename(filepath, path.extname(filepath));
   const destination = path.join(destinationPath, filename);
 
-  invariant(
+  asserts(
     await decompressProcess(filepath, destination),
     new AppError({ message: `A file "${filepath}" does not exist` }),
   );

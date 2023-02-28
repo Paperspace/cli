@@ -1,6 +1,6 @@
 import { projects } from "../../../api/projects.ts";
 import { dataTable } from "../../../lib/data-table.ts";
-import { invariant } from "../../../lib/invariant.ts";
+import { asserts } from "../../../lib/asserts.ts";
 import { input } from "../../../prompts/input.ts";
 import { args, command, flag, flags, z } from "../../../zcli.ts";
 import * as psFlags from "../../../flags.ts";
@@ -39,14 +39,14 @@ export const update = command("update", {
 
     if (!name) {
       name = await input("New name:");
-      invariant(name, "You must provide a new name for the project.");
+      asserts(name, "You must provide a new name for the project.");
     }
 
     const result = await loading(projects.update({ name, handle }), {
       enabled: !flags.json,
     });
 
-    invariant(result.ok, result);
+    asserts(result.ok, result);
 
     if (!flags.json) {
       for await (const line of dataTable([result.data], flags.fields)) {
