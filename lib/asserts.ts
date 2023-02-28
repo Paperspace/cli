@@ -6,9 +6,9 @@ import { AppError } from "../errors.ts";
  * Asserts state we assume to be true.
  *
  * @param condition - Condition to test
- * @param format - Message to display on invariant failure.
+ * @param format - Message to display on failure.
  */
-export function invariant<T>(
+export function asserts<T>(
   condition: T,
   format: string | Error | (SuccessData<any, any> | ErrorData<any, any>),
 ): asserts condition {
@@ -21,7 +21,7 @@ export function invariant<T>(
       ? format
       : new AppError({ message: typeof format === "string" ? format : "" });
     // @ts-expect-error: It's fine
-    error.framesToPop = 1; // We don't care about invariant's own frame
+    error.framesToPop = 1; // We don't care about asserts's own frame
     throw error;
   }
 }

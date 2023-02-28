@@ -2,7 +2,7 @@ import { command } from "../../../zcli.ts";
 import { projects } from "../../../api/projects.ts";
 import { args, flags, z } from "../../../zcli.ts";
 import { input } from "../../../prompts/input.ts";
-import { invariant } from "../../../lib/invariant.ts";
+import { asserts } from "../../../lib/asserts.ts";
 import { loading } from "../../../lib/loading.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
@@ -41,13 +41,13 @@ export const create = command("create", {
 
   if (!name) {
     name = await input("Project name:");
-    invariant(name, "You must provide a name for the project.");
+    asserts(name, "You must provide a name for the project.");
   }
 
   const result = await loading(projects.create({ name }), {
     enabled: !flags.json,
   });
-  invariant(result.ok, result);
+  asserts(result.ok, result);
 
   if (!flags.json) {
     for await (const line of dataTable([result.data], flags.fields)) {

@@ -1,6 +1,6 @@
 import { projects } from "../../../api/projects.ts";
 import { command } from "../../../zcli.ts";
-import { invariant } from "../../../lib/invariant.ts";
+import { asserts } from "../../../lib/asserts.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { loading } from "../../../lib/loading.ts";
 import * as psFlags from "../../../flags.ts";
@@ -41,7 +41,7 @@ export const list = command("list", {
     { enabled: !flags.json },
   );
 
-  invariant(result.ok, result);
+  asserts(result.ok, result);
 
   if (!flags.json) {
     for await (const line of dataTable(result.data.items, flags.fields)) {

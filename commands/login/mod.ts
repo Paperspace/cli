@@ -3,7 +3,7 @@ import { cursorUp, eraseLine, open } from "../../deps.ts";
 import { config } from "../../config.ts";
 import { credentials } from "../../credentials.ts";
 import { session } from "../../api/auth.ts";
-import { invariant } from "../../lib/invariant.ts";
+import { asserts } from "../../lib/asserts.ts";
 import { DocumentedError } from "../../errors.ts";
 import { env } from "../../env.ts";
 import { secret } from "../../prompts/secret.ts";
@@ -41,9 +41,9 @@ export const login = command("login", {
   }
 
   const sess = await session.get(null, { apiKey });
-  invariant(sess.ok, sess);
+  asserts(sess.ok, sess);
 
-  invariant(
+  asserts(
     sess.ok,
     new DocumentedError({
       message: "Invalid API key",
@@ -52,10 +52,8 @@ export const login = command("login", {
   );
 
   const team = sess.data?.team?.namespace;
-  await credentials.set(`keys.${team}`, apiKey);
-  await config.set("team", team ?? null);
 
-  invariant(
+  asserts(
     team,
     new DocumentedError({
       message: "Invalid API key",
@@ -63,5 +61,7 @@ export const login = command("login", {
     }),
   );
 
+  await credentials.set(`keys.${team}`, apiKey);
+  await config.set("team", team ?? null);
   yield `Logged in to team "${fmt.colors.bold(team)}"`;
 });
