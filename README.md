@@ -649,6 +649,12 @@ Create a project with these properties.
 | -------- | --------- | ----------- |
 | `string` | No        |             |
 
+### Flags
+
+| Name         | Type     | Required? | Default | Description                            |
+| ------------ | -------- | --------- | ------- | -------------------------------------- |
+| --fields, -F | `string` | No        |         | The fields to include in the response. |
+
 ### Global Flags
 
 These flags are available on all commands.
@@ -700,6 +706,14 @@ These flags are available on all commands.
 
 List projects in your team.
 
+Examples:
+
+Pick a subset of fields to display:
+
+```
+zcli.json -F handle -F name -F dtCreated
+```
+
 ### Flags
 
 | Name         | Type          | Required? | Default | Description                                        |
@@ -744,9 +758,10 @@ pspace project update psukfyemho7 --name my-cool-project
 
 ### Flags
 
-| Name   | Type     | Required? | Default | Description                   |
-| ------ | -------- | --------- | ------- | ----------------------------- |
-| --name | `string` | No        |         | The new name for the project. |
+| Name         | Type     | Required? | Default | Description                            |
+| ------------ | -------- | --------- | ------- | -------------------------------------- |
+| --name       | `string` | No        |         | The new name for the project.          |
+| --fields, -F | `string` | No        |         | The fields to include in the response. |
 
 ### Global Flags
 

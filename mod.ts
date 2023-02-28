@@ -3,6 +3,8 @@ import { COMMIT } from "./version.ts";
 import { ApiClientError, AppError } from "./errors.ts";
 import { root } from "./commands/mod.ts";
 import { fmt } from "./zcli.ts";
+import { cursorShow } from "./deps.ts";
+import { print } from "./lib/print.ts";
 
 if (import.meta.main) {
   // Initialize Sentry
@@ -16,6 +18,10 @@ if (import.meta.main) {
   try {
     await root.execute();
   } catch (err) {
+    console.log(err);
+    // Clean up the cursor before exiting in case we removed it somewhere.
+    print(cursorShow());
+
     // Catch known errors and exit with the appropriate code.
     if (err instanceof ApiClientError) {
       console.error(`${fmt.colors.bold("Network Error")}\n%s`, err.message);
@@ -27,7 +33,7 @@ if (import.meta.main) {
 
     Sentry.captureException(err);
     await Sentry.flush();
-
+    console.error(err);
     console.error(`${fmt.colors.bold("Runtime Error")}\n%s`, err.message);
     console.error(
       `\n${

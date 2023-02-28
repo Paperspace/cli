@@ -60,3 +60,4 @@ export type {
   NestedValue,
 } from "https://deno.land/x/zcli@1.3.1/lib/types.ts";
 export { textEncoder } from "https://deno.land/x/zcli@1.3.1/lib/text-encoder.ts";
+export { table } from "https://deno.land/x/zcli@1.3.1/lib/simple-table.ts";
