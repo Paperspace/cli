@@ -1,6 +1,5 @@
-import { Formats } from "./act.ts";
-import { ms } from "https://deno.land/x/ms@v0.1.0/ms.ts";
-import { bold, cursorUp, eraseLines } from "./ansi.ts";
+// import { Formats } from "./act.ts";
+import { ms } from "../deps.ts";
 
 /**
  * Poll a function infinitely or until a condition is met.
@@ -22,6 +21,7 @@ export async function poll(
   });
 }
 
+/**
 export async function pollCmd(fn: () => Promise<Formats>, opt: any) {
   let n = 0;
   let output = "";
@@ -44,14 +44,15 @@ export async function pollCmd(fn: () => Promise<Formats>, opt: any) {
     output += `\n\nPress ${bold("Ctrl+C")} to exit.`;
 
     if (n > 0) {
-      console.log(
+      printLn(
         eraseLines(output.split("\n").length + 1),
         cursorUp(1),
       );
     }
 
     n++;
-    console.log(output);
+    printLn(output);
     return false;
   }, opt.poll === true ? "3s" : opt.poll);
 }
+*/

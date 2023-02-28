@@ -4,4 +4,5 @@
 node_modules
 lock.json
 .paperspace
+.pspace
 .coverage

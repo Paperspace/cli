@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+      - next
+      - alpha
+      - canary
+
+concurrency: release-${{ github.head_ref }}
+permissions:
+  contents: write
 
 jobs:
   release:
@@ -13,27 +20,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x.x
+      
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
           deno-version: 1.x.x
 
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Setup package.json
-        run: echo '{"name":"@paperspace/cli","version":"0.0.0","repository":{"type":"git","url":"https://github.com/paperspace/cli.git"},"author":"Jared Lunde <jared.lunde@gmail.com>","license":"MIT","bugs":{"url":"https://github.com/paperspace/cli/issues"},"homepage":"https://paperspace.com/","devDependencies":{"@google/semantic-release-replace-plugin":"^1.2.0","@semantic-release/exec":"^6.0.3"}}' > package.json
+      - name: Install semantic release
+        run: |
+          npm init -y 
+          npm i semantic-release @google/semantic-release-replace-plugin @semantic-release/exec
       
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install zip
-        uses: montudor/action-zip@v1
-          
       - name: Release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
