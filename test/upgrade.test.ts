@@ -369,6 +369,18 @@ describe("pspace upgrade", () => {
         "unzip",
         returnsNext([Promise.resolve("/tmp/pspace")]),
       );
+      const readDirStub = stub(
+        Deno,
+        "readDir",
+        returnsNext([(async function* () {
+          yield {
+            isFile: true,
+            isDirectory: false,
+            isSymlink: false,
+            name: "pspace",
+          };
+        })()]),
+      );
       // @ts-expect-error: we do what we want in tests
       const renameStub = stub(Deno, "rename", returnsNext([undefined]));
       // @ts-expect-error: we do what we want in tests
@@ -389,10 +401,10 @@ describe("pspace upgrade", () => {
         ],
       });
       assertSpyCall(unzipStub, 0, {
-        args: [`/tmp/pspace-${build.file}.zip`],
+        args: [`/tmp/pspace-${build.file}.zip`, "/tmp"],
       });
       assertSpyCall(renameStub, 0, {
-        args: ["/tmp/pspace", "/.paperspace/bin/pspace"],
+        args: ["/tmp/pspace/pspace", "/.paperspace/bin/pspace"],
       });
       assertSpyCall(removeStub, 0, {
         args: ["/tmp", { recursive: true }],
@@ -417,6 +429,7 @@ describe("pspace upgrade", () => {
       makeTempDirStub.restore();
       downloadStub.restore();
       unzipStub.restore();
+      readDirStub.restore();
       renameStub.restore();
       removeStub.restore();
       exitStub.restore();
