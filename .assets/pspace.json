@@ -1,0 +1,3421 @@
+{
+  "zcli": "1.0.0",
+  "info": {
+    "name": "pspace",
+    "version": "0.1.0-dev",
+    "commit": "development",
+    "buildDate": "2023-03-01T21:08:03.716Z",
+    "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
+    "summary": "A CLI for using the Paperspace API."
+  },
+  "commands": [
+    {
+      "name": "pspace",
+      "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
+      "summary": "A CLI for using the Paperspace API.",
+      "flags": [
+        {
+          "name": "log-level",
+          "aliases": [
+            "l"
+          ],
+          "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+          "summary": "Enable debug logging",
+          "required": false,
+          "collects": false,
+          "negatable": false,
+          "global": true,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "debug",
+              "info",
+              "warning",
+              "error",
+              "critical"
+            ],
+            "$schema": "http://json-schema.org/draft-07/schema#"
+          }
+        },
+        {
+          "name": "json",
+          "aliases": [
+            "j"
+          ],
+          "description": "Output JSON",
+          "summary": "Output JSON",
+          "required": false,
+          "collects": false,
+          "negatable": false,
+          "global": true,
+          "schema": {
+            "type": "boolean",
+            "$schema": "http://json-schema.org/draft-07/schema#"
+          }
+        },
+        {
+          "name": "api-key",
+          "aliases": [],
+          "description": "A Paperspace public API Key used for authenticating requests",
+          "summary": "A Paperspace public API Key used for authenticating requests",
+          "required": false,
+          "collects": false,
+          "negatable": false,
+          "global": true,
+          "schema": {
+            "type": "string",
+            "$schema": "http://json-schema.org/draft-07/schema#"
+          }
+        },
+        {
+          "name": "help",
+          "aliases": [
+            "h"
+          ],
+          "description": "Show help for a command",
+          "summary": "Show help for a command",
+          "required": false,
+          "collects": false,
+          "negatable": false,
+          "global": true,
+          "schema": {
+            "type": "boolean",
+            "default": false,
+            "$schema": "http://json-schema.org/draft-07/schema#"
+          }
+        }
+      ],
+      "commands": [
+        {
+          "name": "completion",
+          "description": "Generate an autocompletion script for pspace in the specified shell.\nSee each sub-command's help for details on how to use the generated script.",
+          "summary": "Generate an autocompletion script for the specified shell",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": [
+            {
+              "name": "bash",
+              "description": "Generate the autocompletion script for the bash shell.\n\nThis script depends on the `bash-completion` package.\nIf it is not installed already, you can install it via your OS's package manager.\n\nTo load completions in your current shell session:\n```\n$ source <(pspace completion bash)\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion bash > /etc/bash_completion.d/pspace\n```\n\nMacOS:\n```\n$ pspace completion bash > /usr/local/etc/bash_completion.d/pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "summary": "Generate an autocompletion script for the bash shell",
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "fish",
+              "description": "Generate the autocompletion script for the fish shell.\n\nTo load completions in your current shell session:\n```\n$ pspace completion fish | source\n```\n\nTo load completions for every new session, execute once:\n```\n$ pspace completion fish > ~/.config/fish/completions/pspace.fish\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "summary": "Generate an autocompletion script for the fish shell",
+              "flags": [
+                {
+                  "name": "no-descriptions",
+                  "aliases": [],
+                  "description": "Disable completion descriptions",
+                  "summary": "Disable completion descriptions",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "default": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "help",
+              "description": "Show help for a completion command",
+              "summary": "Show help for a completion command",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The command to show help for.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "bash",
+                        "zsh",
+                        "fish",
+                        "help"
+                      ],
+                      "description": "The command to show help for.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": [
+                {
+                  "name": "commands",
+                  "description": "List completion commands",
+                  "summary": "List completion commands",
+                  "flags": [
+                    {
+                      "name": "log-level",
+                      "aliases": [
+                        "l"
+                      ],
+                      "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                      "summary": "Enable debug logging",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "enum": [
+                          "debug",
+                          "info",
+                          "warning",
+                          "error",
+                          "critical"
+                        ],
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "json",
+                      "aliases": [
+                        "j"
+                      ],
+                      "description": "Output JSON",
+                      "summary": "Output JSON",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "api-key",
+                      "aliases": [],
+                      "description": "A Paperspace public API Key used for authenticating requests",
+                      "summary": "A Paperspace public API Key used for authenticating requests",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "help",
+                      "aliases": [
+                        "h"
+                      ],
+                      "description": "Show help for a command",
+                      "summary": "Show help for a command",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "default": false,
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "all",
+                      "aliases": [
+                        "a"
+                      ],
+                      "description": "Show all commands, including hidden ones",
+                      "summary": "Show all commands, including hidden ones",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "default": false,
+                      "global": false,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    }
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "name": "zsh",
+              "description": "Generate the autocompletion script for the zsh shell.\n\nIf shell completion is not already enabled in your environment you will need\nto enable it.  You can execute the following once:\n\n```\n$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion zsh > \"${fpath[1]}/_pspace\"\n```\n\nmacOS:\n```\n$ pspace completion zsh > /usr/local/share/zsh/site-functions/_pspace\n```\n\nOh My Zsh:\n```\n$ pspace completion zsh > ~/.oh-my-zsh/completions/_pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "summary": "Generate an autocompletion script for the zsh shell",
+              "flags": [
+                {
+                  "name": "no-descriptions",
+                  "aliases": [],
+                  "description": "Disable completion descriptions",
+                  "summary": "Disable completion descriptions",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "default": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "name": "config",
+          "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n```\npspace config set team \"my-team\"\n```",
+          "summary": "Manage your local Paperspace configuration.",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": [
+            {
+              "name": "delete",
+              "description": "Delete a configuration value.",
+              "summary": "Delete a configuration value.",
+              "arguments": {
+                "description": "",
+                "summary": "The key to delete.",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The configuration key.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "team",
+                        "locale"
+                      ],
+                      "description": "The configuration key.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "get",
+              "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n```\npspace config get team\n```",
+              "summary": "Get a configuration value.",
+              "arguments": {
+                "description": "",
+                "summary": "The key to get.",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The configuration key.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "team",
+                        "locale"
+                      ],
+                      "description": "The configuration key.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "help",
+              "description": "Show help for a config command",
+              "summary": "Show help for a config command",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The command to show help for.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "set",
+                        "get",
+                        "delete",
+                        "help"
+                      ],
+                      "description": "The command to show help for.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": [
+                {
+                  "name": "commands",
+                  "description": "List config commands",
+                  "summary": "List config commands",
+                  "flags": [
+                    {
+                      "name": "log-level",
+                      "aliases": [
+                        "l"
+                      ],
+                      "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                      "summary": "Enable debug logging",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "enum": [
+                          "debug",
+                          "info",
+                          "warning",
+                          "error",
+                          "critical"
+                        ],
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "json",
+                      "aliases": [
+                        "j"
+                      ],
+                      "description": "Output JSON",
+                      "summary": "Output JSON",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "api-key",
+                      "aliases": [],
+                      "description": "A Paperspace public API Key used for authenticating requests",
+                      "summary": "A Paperspace public API Key used for authenticating requests",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "help",
+                      "aliases": [
+                        "h"
+                      ],
+                      "description": "Show help for a command",
+                      "summary": "Show help for a command",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "default": false,
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "all",
+                      "aliases": [
+                        "a"
+                      ],
+                      "description": "Show all commands, including hidden ones",
+                      "summary": "Show all commands, including hidden ones",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "default": false,
+                      "global": false,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    }
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "name": "set",
+              "description": "Set a configuration value.",
+              "summary": "Set a configuration value.",
+              "arguments": {
+                "description": "",
+                "summary": "The key/value pair to set.",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The configuration key.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "team",
+                        "locale"
+                      ],
+                      "description": "The configuration key.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  },
+                  {
+                    "position": 1,
+                    "summary": "The new configuration value.",
+                    "required": true,
+                    "variadic": true,
+                    "schema": {
+                      "type": "string",
+                      "description": "The new configuration value.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "name": "console",
+          "description": "This command opens the Paperspace web console in your browser.",
+          "summary": "Open the Paperspace web console.",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "deployment",
+          "description": "Effortlessly deploy ML apps to Paperspace.",
+          "summary": "Effortlessly deploy ML apps to Paperspace.",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": [
+            {
+              "name": "get",
+              "description": "",
+              "summary": "",
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "help",
+              "description": "Show help for a deployment command",
+              "summary": "Show help for a deployment command",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The command to show help for.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "init",
+                        "get",
+                        "up",
+                        "list",
+                        "help"
+                      ],
+                      "description": "The command to show help for.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": [
+                {
+                  "name": "commands",
+                  "description": "List deployment commands",
+                  "summary": "List deployment commands",
+                  "flags": [
+                    {
+                      "name": "log-level",
+                      "aliases": [
+                        "l"
+                      ],
+                      "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                      "summary": "Enable debug logging",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "enum": [
+                          "debug",
+                          "info",
+                          "warning",
+                          "error",
+                          "critical"
+                        ],
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "json",
+                      "aliases": [
+                        "j"
+                      ],
+                      "description": "Output JSON",
+                      "summary": "Output JSON",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "api-key",
+                      "aliases": [],
+                      "description": "A Paperspace public API Key used for authenticating requests",
+                      "summary": "A Paperspace public API Key used for authenticating requests",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "help",
+                      "aliases": [
+                        "h"
+                      ],
+                      "description": "Show help for a command",
+                      "summary": "Show help for a command",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "default": false,
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "all",
+                      "aliases": [
+                        "a"
+                      ],
+                      "description": "Show all commands, including hidden ones",
+                      "summary": "Show all commands, including hidden ones",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "default": false,
+                      "global": false,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    }
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "name": "init",
+              "description": "",
+              "summary": "",
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "list",
+              "description": "",
+              "summary": "",
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "up",
+              "description": "",
+              "summary": "",
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "name": "docs",
+          "description": "This command opens the Paperspace documentation in your browser.\nYou can optionally pass an argument that will take you to a specific \ndocs page.\n\nValid pages are:\n  - `d`, `deployment`",
+          "summary": "Open Paperspace documention in your default browser.",
+          "arguments": {
+            "description": "",
+            "summary": "",
+            "items": [
+              {
+                "position": 0,
+                "summary": "The page to open",
+                "required": true,
+                "variadic": false,
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "d",
+                    "deployment"
+                  ],
+                  "description": "The page to open",
+                  "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+              }
+            ]
+          },
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "help",
+          "description": "Show help for a pspace command",
+          "summary": "Show help for a pspace command",
+          "arguments": {
+            "description": "",
+            "summary": "",
+            "items": [
+              {
+                "position": 0,
+                "summary": "The command to show help for.",
+                "required": true,
+                "variadic": false,
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "project",
+                    "deployment",
+                    "upgrade",
+                    "config",
+                    "signup",
+                    "console",
+                    "docs",
+                    "logout",
+                    "login",
+                    "version",
+                    "completion",
+                    "help"
+                  ],
+                  "description": "The command to show help for.",
+                  "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+              }
+            ]
+          },
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": [
+            {
+              "name": "commands",
+              "description": "List pspace commands",
+              "summary": "List pspace commands",
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "all",
+                  "aliases": [
+                    "a"
+                  ],
+                  "description": "Show all commands, including hidden ones",
+                  "summary": "Show all commands, including hidden ones",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "default": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "name": "login",
+          "description": "Log in to the CLI using your Paperspace API key or by opening the web console.",
+          "summary": "Log in to the CLI.",
+          "arguments": {
+            "description": "",
+            "summary": "",
+            "items": [
+              {
+                "position": 0,
+                "summary": "An API key to log in with.",
+                "required": true,
+                "variadic": false,
+                "schema": {
+                  "type": "string",
+                  "description": "An API key to log in with.",
+                  "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+              }
+            ]
+          },
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "logout",
+          "description": "Log out of the CLI for the current team, a specific team, or all teams.",
+          "summary": "Log out of the CLI.",
+          "arguments": {
+            "description": "",
+            "summary": "The teams to logout of.",
+            "items": [
+              {
+                "position": 0,
+                "summary": "The team to logout of.",
+                "required": true,
+                "variadic": true,
+                "schema": {
+                  "type": "string",
+                  "description": "The team to logout of.",
+                  "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+              }
+            ]
+          },
+          "flags": [
+            {
+              "name": "all",
+              "aliases": [
+                "a"
+              ],
+              "description": "Log out of all teams.",
+              "summary": "Log out of all teams.",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": false,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "project",
+          "description": "Manage your Paperspace projects.",
+          "summary": "Manage your Paperspace projects.",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": [
+            {
+              "name": "create",
+              "description": "Create a new project. This command will prompt you for a name if you don't\nprovide one.",
+              "summary": "Create a new project",
+              "arguments": {
+                "description": "",
+                "summary": "Create a project with these properties.",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120,
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "get",
+              "description": "Get a project by its ID. If you don't provide an ID, this command will\nprompt you for one based on the projects you have access to.",
+              "summary": "Get a project.",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The project ID to get.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "description": "The project ID to get.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "help",
+              "description": "Show help for a project command",
+              "summary": "Show help for a project command",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The command to show help for.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "get",
+                        "list",
+                        "create",
+                        "update",
+                        "help"
+                      ],
+                      "description": "The command to show help for.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": [
+                {
+                  "name": "commands",
+                  "description": "List project commands",
+                  "summary": "List project commands",
+                  "flags": [
+                    {
+                      "name": "log-level",
+                      "aliases": [
+                        "l"
+                      ],
+                      "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                      "summary": "Enable debug logging",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "enum": [
+                          "debug",
+                          "info",
+                          "warning",
+                          "error",
+                          "critical"
+                        ],
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "json",
+                      "aliases": [
+                        "j"
+                      ],
+                      "description": "Output JSON",
+                      "summary": "Output JSON",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "api-key",
+                      "aliases": [],
+                      "description": "A Paperspace public API Key used for authenticating requests",
+                      "summary": "A Paperspace public API Key used for authenticating requests",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "help",
+                      "aliases": [
+                        "h"
+                      ],
+                      "description": "Show help for a command",
+                      "summary": "Show help for a command",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "default": false,
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "all",
+                      "aliases": [
+                        "a"
+                      ],
+                      "description": "Show all commands, including hidden ones",
+                      "summary": "Show all commands, including hidden ones",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "default": false,
+                      "global": false,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    }
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "name": "list",
+              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
+              "summary": "List projects.",
+              "flags": [
+                {
+                  "name": "limit",
+                  "aliases": [],
+                  "description": "The number of projects to return in the next page.",
+                  "summary": "The number of projects to return in the next page.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "number",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "after",
+                  "aliases": [],
+                  "description": "The cursor to fetch the next results from.",
+                  "summary": "The cursor to fetch the next results from.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "orderBy",
+                  "aliases": [],
+                  "description": "The field to order projects by.",
+                  "summary": "The field to order projects by.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "dtCreated"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "asc",
+                  "aliases": [],
+                  "description": "Whether to order projects ascending.",
+                  "summary": "Whether to order projects ascending.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "desc",
+                  "aliases": [],
+                  "description": "Whether to order projects descending.",
+                  "summary": "Whether to order projects descending.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "update",
+              "description": "Update an existing project.\n\nExample:\n```\npspace project update psukfyemho7 --name my-cool-project\n```",
+              "summary": "Update an existing project.",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The project ID to update.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "description": "The project ID to update.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "name",
+                  "aliases": [],
+                  "description": "The new name for the project.",
+                  "summary": "The new name for the project.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
+          "name": "signup",
+          "description": "This command opens the Paperspace signup page in your browser.",
+          "summary": "Sign up for a Paperspace account.",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "upgrade",
+          "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n```\npspace upgrade\n```",
+          "summary": "Upgrade \u001b[1mpspace\u001b[22m to the latest version.",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "version",
+          "description": "Shows version information command, including version number and build date.",
+          "summary": "Show version information",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging. Options are: debug, info, warning, error, and critical",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        }
+      ]
+    }
+  ]
+}
