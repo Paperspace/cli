@@ -87,12 +87,12 @@ Read the full documentation at: https://docs.paperspace.com/
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -100,19 +100,19 @@ These flags are available on all commands.
 
 ## `$ pspace completion`
 
-Generate an autocompletion script for pspace in the specified shell. See each
-sub-command's help for details on how to use the generated script.
+Generate an autocompletion script for pspace in the specified shell.
+See each sub-command's help for details on how to use the generated script.
 
 ### Global Flags
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -122,8 +122,8 @@ These flags are available on all commands.
 
 Generate the autocompletion script for the bash shell.
 
-This script depends on the `bash-completion` package. If it is not installed
-already, you can install it via your OS's package manager.
+This script depends on the `bash-completion` package.
+If it is not installed already, you can install it via your OS's package manager.
 
 To load completions in your current shell session:
 
@@ -151,12 +151,12 @@ You will need to start a new shell for this setup to take effect.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -190,12 +190,12 @@ You will need to start a new shell for this setup to take effect.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -205,8 +205,8 @@ These flags are available on all commands.
 
 Generate the autocompletion script for the zsh shell.
 
-If shell completion is not already enabled in your environment you will need to
-enable it. You can execute the following once:
+If shell completion is not already enabled in your environment you will need
+to enable it. You can execute the following once:
 
 ```
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
@@ -244,12 +244,12 @@ You will need to start a new shell for this setup to take effect.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -257,9 +257,9 @@ These flags are available on all commands.
 
 ## `$ pspace config`
 
-This command manages your Paperspace configuration. You can use it to set, get,
-and delete configuration values. Running this command without any subcommands
-will print your current configuration.
+This command manages your Paperspace configuration. You can use it to set, get, and
+delete configuration values. Running this command without any subcommands will print
+your current configuration.
 
 Your configuration is stored in a TOML file at `~/.paperspace/config.toml`.
 
@@ -273,12 +273,12 @@ pspace config set team "my-team"
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -300,12 +300,12 @@ The key to delete.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -334,12 +334,12 @@ The key to get.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -362,12 +362,12 @@ The key/value pair to set.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -381,12 +381,12 @@ This command opens the Paperspace web console in your browser.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -400,12 +400,12 @@ Effortlessly deploy ML apps to Paperspace.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -417,12 +417,12 @@ These flags are available on all commands.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -434,12 +434,12 @@ These flags are available on all commands.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -451,12 +451,12 @@ These flags are available on all commands.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -468,12 +468,12 @@ These flags are available on all commands.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -481,8 +481,9 @@ These flags are available on all commands.
 
 ## `$ pspace docs`
 
-This command opens the Paperspace documentation in your browser. You can
-optionally pass an argument that will take you to a specific docs page.
+This command opens the Paperspace documentation in your browser.
+You can optionally pass an argument that will take you to a specific
+docs page.
 
 Valid pages are:
 
@@ -498,12 +499,12 @@ Valid pages are:
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -523,12 +524,12 @@ Show help for a pspace command
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -548,12 +549,12 @@ List pspace commands
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -573,12 +574,12 @@ Log in to the CLI using your Paperspace API key or by opening the web console.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -606,12 +607,12 @@ The teams to logout of.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -625,12 +626,12 @@ Manage your Paperspace projects.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -659,12 +660,12 @@ Create a project with these properties.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -672,8 +673,8 @@ These flags are available on all commands.
 
 ## `$ pspace project get`
 
-Get a project by its ID. If you don't provide an ID, this command will prompt
-you for one based on the projects you have access to.
+Get a project by its ID. If you don't provide an ID, this command will
+prompt you for one based on the projects you have access to.
 
 ### Arguments
 
@@ -691,12 +692,12 @@ you for one based on the projects you have access to.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -729,12 +730,12 @@ pspace project list -F handle -F name -F dtCreated
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -744,7 +745,7 @@ These flags are available on all commands.
 
 Update an existing project.
 
-Example:
+#### Example
 
 ```
 pspace project update psukfyemho7 --name my-cool-project
@@ -767,12 +768,12 @@ pspace project update psukfyemho7 --name my-cool-project
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -786,12 +787,12 @@ This command opens the Paperspace signup page in your browser.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -801,15 +802,16 @@ These flags are available on all commands.
 
 This command upgrades pspace to the latest version.
 
-If you used a package manager like `brew` to install `pspace`, you should use
-that to upgrade in order to avoid potential permissions issues. For example, for
-`brew` you can upgrade by running:
+If you used a package manager like `brew` to install `pspace`,
+you should use that to upgrade in order to avoid potential permissions
+issues. For example, for `brew` you can upgrade by running:
 
 ```
 brew upgrade pspace
 ```
 
-If you installed `pspace` using the install script, you can upgrade by running:
+If you installed `pspace` using the install script, you can upgrade by
+running:
 
 ```
 pspace upgrade
@@ -819,12 +821,12 @@ pspace upgrade
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)
 
@@ -838,11 +840,11 @@ Shows version information command, including version number and build date.
 
 These flags are available on all commands.
 
-| Name            | Type                                                      | Required? | Default | Description                                                                  |
-| --------------- | --------------------------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
-| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging. Options are: debug, info, warning, error, and critical |
-| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                                  |
-| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests                 |
-| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                                      |
+| Name            | Type                                                      | Required? | Default | Description                                                  |
+| --------------- | --------------------------------------------------------- | --------- | ------- | ------------------------------------------------------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No        |         | Enable debug logging.                                        |
+| --json, -j      | `boolean`                                                 | No        |         | Output JSON                                                  |
+| --api-key       | `string`                                                  | No        |         | A Paperspace public API Key used for authenticating requests |
+| --help, -h      | `boolean`                                                 | No        |         | Show help for a command                                      |
 
 [**⇗ Back to top**](#available-commands)

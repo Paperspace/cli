@@ -30,7 +30,7 @@ export const app = init({
   globalFlags: flags({
     "log-level": flag({
       short: "Enable debug logging",
-      long: `Enable debug logging. Options are: ${intl.list([...logLevels])}`,
+      long: `Enable debug logging.`,
       aliases: ["l"],
     })
       .enum(logLevels).optional(),
