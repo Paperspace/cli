@@ -58,14 +58,17 @@ pspace [command] [flags]
 | [**`pspace docs`**](#-pspace-docs) | Open Paperspace documention in your default browser. |
 | [**`pspace help`**](#-pspace-help) | Show help for a pspace command |
 | [**`pspace help commands`**](#-pspace-help-commands) | List pspace commands |
+| [**`pspace init`**](#-pspace-init) | Create a new Paperspace app |
 | [**`pspace login`**](#-pspace-login) | Log in to the CLI. |
 | [**`pspace logout`**](#-pspace-logout) | Log out of the CLI. |
 | [**`pspace project`**](#-pspace-project) | Manage your Paperspace projects. |
 | [**`pspace project create`**](#-pspace-project-create) | Create a new project |
 | [**`pspace project get`**](#-pspace-project-get) | Get a project. |
+| [**`pspace project link`**](#-pspace-project-link) | Link a remote project to  |
 | [**`pspace project list`**](#-pspace-project-list) | List projects. |
 | [**`pspace project update`**](#-pspace-project-update) | Update an existing project. |
 | [**`pspace signup`**](#-pspace-signup) | Sign up for a Paperspace account. |
+| [**`pspace up`**](#-pspace-up) | Deploy your app to Paperspace |
 | [**`pspace upgrade`**](#-pspace-upgrade) | Upgrade pspace to the latest version. |
 | [**`pspace version`**](#-pspace-version) | Show version information | 
 
@@ -318,7 +321,7 @@ The key to delete.
 
 | Type | Variadic? |  Description |
 | ---- | --------- | ------------ |
-| `"team" \| "locale"` | No | The configuration key. |
+| `"team" \| "projects" \| "locale"` | No | The configuration key. |
 
 
   
@@ -357,7 +360,7 @@ The key to get.
 
 | Type | Variadic? |  Description |
 | ---- | --------- | ------------ |
-| `"team" \| "locale"` | No | The configuration key. |
+| `"team" \| "projects" \| "locale"` | No | The configuration key. |
 
 
   
@@ -390,7 +393,7 @@ The key/value pair to set.
 
 | Type | Variadic? |  Description |
 | ---- | --------- | ------------ |
-| `"team" \| "locale"` | No | The configuration key. |
+| `"team" \| "projects" \| "locale"` | No | The configuration key. |
 | `string` | Yes | The new configuration value. |
 
 
@@ -614,7 +617,7 @@ Show help for a pspace command
 
 | Type | Variadic? |  Description |
 | ---- | --------- | ------------ |
-| `"project" \| "deployment" \| "upgrade" \| "config" \| "signup" \| "console" \| "docs" \| "logout" \| "login" \| "version" \| "completion" \| "help"` | No | The command to show help for. |
+| `"project" \| "deployment" \| "upgrade" \| "config" \| "signup" \| "console" \| "docs" \| "logout" \| "login" \| "init" \| "up" \| "version" \| "completion" \| "help"` | No | The command to show help for. |
 
 
   
@@ -661,6 +664,98 @@ These flags are available on all commands.
 [**⇗ Back to top**](#available-commands)
 
 
+
+
+
+
+---
+
+## `$ pspace init`
+
+Create a new Paperspace app. This will create a new directory with a
+default app structure. You can optionally specify a name for the app
+and a template to use. If no template is specified, the default
+template will be used.
+
+Create a new app in the current directory.
+```
+$ pspace init
+```
+
+Create a new app named "my-app" relative to the current directory.
+```
+$ pspace init my-app
+```
+
+Create a new app named "my-app" relative to the current directory using
+a template from the Paperspace GitHub organization.
+```
+$ pspace init my-app -t Paperspace/gradio-demo
+```
+
+
+### Arguments
+
+The directory to create the app in. Defaults to the current directory.
+
+| Type | Variadic? |  Description |
+| ---- | --------- | ------------ |
+| `string` | No |  |
+
+
+### Flags
+
+| Name | Type | Required? | Default |  Description |
+| -------- | ---- | --------- | --- | --- | ------------ |
+| --template, -t | `undefined` | Yes |  | A template to use when creating the app. This can be a URL  to a git repository or a shorthand template name.
+
+These templates are equivalent:
+```
+user/repo
+github:user/repo
+git@github.com:user/repo
+https://github.com/user/repo
+```
+
+Download from GitLab:
+```
+gitlab:user/repo
+git@gitlab.com:user/repo
+https://gitlab.com/user/repo
+```
+
+Download from BitBucket
+```
+bitbucket:user/repo
+git@bitbucket.org:user/repo
+https://bitbucket.org/user/repo
+```
+
+Specify a tag or branch:
+```
+user/repo#dev       # branch
+user/repo#v1.2.3    # release tag
+user/repo#1234abcd  # commit hash
+``` |
+| --mode, -m | `"git" \| "tar"` | No | `"tar"` | The mode to use when creating the app. This can be either "git" or "tar". If "git" is specified, the template will be downloaded as a
+tarball. Note that "git" clones over SSH, so you must have a valid
+SSH key configured with GitHub, Bitbucket, or GitLab. |
+| --name, -n | `string` | No |  | The name of the app. Defaults to the first argument current directory name. |
+| --clean, -c | `boolean` | No |  | Clean the Paperspace cache. This negates other args/flags. |
+
+  
+### Global Flags
+
+These flags are available on all commands.
+
+| Name | Type | Required? | Default |  Description |
+| -------- | ---- | --------- | --- | --- | ------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No |  | Enable debug logging. |
+| --json, -j | `boolean` | No |  | Output JSON |
+| --api-key | `string` | No |  | A Paperspace public API Key used for authenticating requests |
+| --help, -h | `boolean` | No |  | Show help for a command |
+
+[**⇗ Back to top**](#available-commands)
 
 
 
@@ -842,6 +937,62 @@ These flags are available on all commands.
 
 ---
 
+## `$ pspace project link`
+
+This will link a remote project to a local directory. Commands that
+depend on a project ID will use the project ID of the linked project
+when communicating with the Paperspace API.
+
+Link a project to the current directory.
+```
+$ pspace link
+```
+
+Link a project to a different directory.
+```
+$ pspace link --cwd ../my-app
+```
+
+Link a project and specify a project ID.
+```
+$ pspace link pzwf2g05ubegj
+```
+
+
+### Arguments
+
+A project ID. If not provided, you will be prompted to select one.
+
+| Type | Variadic? |  Description |
+| ---- | --------- | ------------ |
+| `string` | No | A project ID. |
+
+
+### Flags
+
+| Name | Type | Required? | Default |  Description |
+| -------- | ---- | --------- | --- | --- | ------------ |
+| --cwd | `string` | No |  | The directory to link the project to. Defaults to the current directory. |
+
+  
+### Global Flags
+
+These flags are available on all commands.
+
+| Name | Type | Required? | Default |  Description |
+| -------- | ---- | --------- | --- | --- | ------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No |  | Enable debug logging. |
+| --json, -j | `boolean` | No |  | Output JSON |
+| --api-key | `string` | No |  | A Paperspace public API Key used for authenticating requests |
+| --help, -h | `boolean` | No |  | Show help for a command |
+
+[**⇗ Back to top**](#available-commands)
+
+
+
+
+---
+
 ## `$ pspace project list`
 
 List projects in your team.
@@ -937,6 +1088,65 @@ These flags are available on all commands.
 This command opens the Paperspace signup page in your browser.
 
 
+
+  
+### Global Flags
+
+These flags are available on all commands.
+
+| Name | Type | Required? | Default |  Description |
+| -------- | ---- | --------- | --- | --- | ------------ |
+| --log-level, -l | `"debug" \| "info" \| "warning" \| "error" \| "critical"` | No |  | Enable debug logging. |
+| --json, -j | `boolean` | No |  | Output JSON |
+| --api-key | `string` | No |  | A Paperspace public API Key used for authenticating requests |
+| --help, -h | `boolean` | No |  | Show help for a command |
+
+[**⇗ Back to top**](#available-commands)
+
+
+
+
+---
+
+## `$ pspace up`
+
+This will upsert an app config and deploy your app to Paperspace. You can optionally 
+specify a path to a config file. If no config file is specified, the default
+config file paths will be tried.
+
+Deploy the app in the current directory.
+```
+$ pspace up
+```
+
+Deploy the app using a config file.
+```
+$ pspace up -c paperspace.json
+```
+
+Deploy an app in a different directory.
+```
+$ pspace up --cwd ../my-app
+```
+
+
+
+### Flags
+
+| Name | Type | Required? | Default |  Description |
+| -------- | ---- | --------- | --- | --- | ------------ |
+| --config, -c | `string` | No |  | The path to the config file. Defaults to our default config file paths. 
+The default config file paths are in order of precedence:
+
+- `paperspace.yaml`
+- `paperspace.yml`
+- `paperspace.json`
+- `paperspace.toml`
+- `.paperspace/app.yaml`
+- `.paperspace/app.yml`
+- `.paperspace/app.json`
+- `.paperspace/app.toml` |
+| --cwd | `string` | No |  | The directory to deploy the app from. Defaults to the current directory. |
 
   
 ### Global Flags
