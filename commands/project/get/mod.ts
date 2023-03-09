@@ -44,6 +44,9 @@ export const get = command("get", {
       "Select a project:",
       existingProjects.data.items,
       {
+        filter(input, option) {
+          return option.name.toLowerCase().startsWith(input);
+        },
         renderOption(option, isSelected) {
           return `${isSelected ? ">" : " "} ${option.name}`;
         },

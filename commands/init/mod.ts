@@ -109,18 +109,16 @@ export const init = command("init", {
 
     if (!flags.json) {
       yield `✨ Created app "${app.data.name}"`;
-      yield `  Console URL: ${
-        fmt.colors.bold(
-          new URL(
-            `/${team}/projects/${app.data.handle}/gradient-deployments`,
-            env.get("PAPERSPACE_CONSOLE_URL"),
-          ) + "",
-        )
-      }`;
       yield "";
-      yield `To deploy your app:`;
-      yield `  ${fmt.colors.bold(`cd ${path.relative(Deno.cwd(), dest)}`)}`;
-      yield `  ${fmt.colors.bold(`${ctx.root.name} up`)}`;
+      yield fmt.colors.bold("Console URL");
+      yield new URL(
+        `/${team}/projects/${app.data.handle}/gradient-deployments`,
+        env.get("PAPERSPACE_CONSOLE_URL"),
+      ) + "";
+      yield "";
+      yield `To deploy your app`;
+      yield `   ${fmt.colors.bold(`cd ${path.relative(Deno.cwd(), dest)}`)}`;
+      yield `   ${fmt.colors.bold(`${ctx.root.name} up`)}`;
     } else {
       yield JSON.stringify(app.data, null, 2);
     }

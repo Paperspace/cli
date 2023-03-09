@@ -15,7 +15,7 @@ export async function poll<Value>(
     const id = setInterval(async () => {
       const value = await fn();
 
-      if (value !== undefined) {
+      if (value) {
         clearInterval(id);
         // @ts-expect-error: it's actually ok
         resolve(value);
