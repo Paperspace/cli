@@ -42,7 +42,11 @@ export function client<
       }
     }
     logger.info(`${init.method} ${url}`);
-    logger.info(`Request body\n${body}`);
+
+    if (body) {
+      logger.info(`Request body\n${body}`);
+    }
+
     const response = await fetch(
       new Request(
         url,
