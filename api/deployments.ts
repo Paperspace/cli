@@ -7,3 +7,7 @@ export const deployments = {
   upsert: client("/deployments").post,
   delete: client("/deployments/{id}").delete,
 };
+
+export const deploymentRuns = {
+  get: client("/deployments/{id}/runs").get,
+};

@@ -99,12 +99,20 @@ export const init = command("init", {
     const team = await config.get("team");
     asserts(app.ok, app);
 
+    await config.set("projects", {
+      ...await config.get("projects"),
+      [dest]: {
+        path: dest,
+        handle: app.data.handle,
+      },
+    });
+
     if (!flags.json) {
       yield `✨ Created app "${app.data.name}"`;
       yield `  Console URL: ${
         fmt.colors.bold(
           new URL(
-            `/${team}/projects/${app.data.handle}/deployments`,
+            `/${team}/projects/${app.data.handle}/gradient-deployments`,
             env.get("PAPERSPACE_CONSOLE_URL"),
           ) + "",
         )

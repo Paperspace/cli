@@ -170,6 +170,8 @@ export interface operations {
                  * @description The date the deployment was created
                  */
                 readonly dtCreated: Date;
+                /** @description The unique endpoint for the deployment */
+                readonly endpoint: string;
                 /** @description The ID of the deployment */
                 readonly id: string;
                 /** @description The latest deployment configuration. If invalid, null is returned. */
@@ -634,7 +636,7 @@ export interface operations {
         content: {
           readonly "application/json": {
             /** @description The ID of the deployment */
-            readonly deploymentId?: string;
+            readonly deploymentId: string;
           };
         };
       };
@@ -661,6 +663,8 @@ export interface operations {
              * @description The date the deployment was created
              */
             readonly dtCreated: Date;
+            /** @description The unique endpoint for the deployment */
+            readonly endpoint: string;
             /** @description The ID of the deployment */
             readonly id: string;
             /** @description The latest deployment configuration. If invalid, null is returned. */

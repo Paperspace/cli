@@ -14,6 +14,8 @@ export {
 } from "https://deno.land/std@0.178.0/streams/mod.ts";
 export { TarEntry, Untar } from "https://deno.land/std@0.178.0/archive/mod.ts";
 export { format as formatBytes } from "https://deno.land/std@0.178.0/fmt/bytes.ts";
+export * as YAML from "https://deno.land/std@0.178.0/encoding/yaml.ts";
+export * as TOML from "https://deno.land/std@0.178.0/encoding/toml.ts";
 
 export * as Sentry from "https://deno.land/x/sentry_deno@v0.2.2/main.ts";
 export { open } from "https://deno.land/x/open@v0.0.5/index.ts";

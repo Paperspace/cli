@@ -10,6 +10,7 @@ import {
 } from "../errors.ts";
 import { z } from "../zcli.ts";
 import { isValidDate } from "../lib/is-valid-date.ts";
+import { logger } from "../logger.ts";
 
 /**
  * Create a client for a given API endpoint.
@@ -40,7 +41,8 @@ export function client<
         body = JSON.stringify(additionalParams);
       }
     }
-
+    logger.info(`${init.method} ${url}`);
+    logger.info(`Request body\n${body}`);
     const response = await fetch(
       new Request(
         url,
@@ -230,11 +232,12 @@ function makePath(
   const params = { ...payload };
   const pathname = path
     .replace(/\{([^}]+)\}/g, (_, key) => {
+      delete params[key];
+
       if (payload[key]) {
         return encodeURIComponent(payload[key] + "");
       }
 
-      delete params[key];
       return "";
     })
     .replace(/^\//, "");
@@ -247,11 +250,11 @@ function makePath(
     hasAdditionalParams
       ? keys.reduce((acc, key) => {
         if (params[key] && !["asc", "desc"].includes(key)) {
-          acc[key] = params[key] + "";
+          acc[key] = params[key];
         }
 
         return acc;
-      }, {} as Record<string, string>)
+      }, {} as Record<string, any>)
       : null,
   ];
 }
