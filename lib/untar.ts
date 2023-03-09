@@ -28,11 +28,16 @@ export async function untar(
   // Untar the file
   const reader = readerFromStreamReader(streamReader);
   const untar = new Untar(reader);
-  let entry: TarEntry | null;
+  const writes: Promise<void>[] = [];
   logger.info(`Untar ${filePath}`);
 
-  // deno-lint-ignore no-cond-assign
-  while (entry = await untar.extract()) {
+  while (true) {
+    const entry = await untar.extract();
+
+    if (entry === null) {
+      break;
+    }
+
     if (entry.type === "file" && entry.fileName !== "pax_global_header") {
       if (!filter(entry)) {
         continue;
@@ -44,20 +49,24 @@ export async function untar(
 
       const dir = path.dirname(filePath);
 
-      try {
-        Deno.statSync(dir);
-      } catch (err) {
-        if (err instanceof Deno.errors.NotFound) {
-          await Deno.mkdir(dir, { recursive: true });
-        } else {
-          throw err;
+      writes.push((async () => {
+        try {
+          Deno.statSync(dir);
+        } catch (err) {
+          if (err instanceof Deno.errors.NotFound) {
+            await Deno.mkdir(dir, { recursive: true });
+          } else {
+            throw err;
+          }
         }
-      }
 
-      const file = await Deno.open(filePath, { create: true, write: true });
-      // Write the file in entry to file
-      await copy(entry, file);
-      logger.info(`  > ${filePath}`);
+        const file = await Deno.open(filePath, { create: true, write: true });
+        await copy(entry, file, { bufSize: 1024 * 1024 });
+        file.close();
+        logger.info(`  > ${filePath}`);
+      })());
     }
+
+    await Promise.all(writes);
   }
 }

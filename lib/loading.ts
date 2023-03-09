@@ -2,6 +2,7 @@
 import { cursorHide, cursorShow, cursorUp, eraseDown } from "../deps.ts";
 import { env } from "../env.ts";
 import { print, printLn } from "./print.ts";
+import { isCI } from "./is-ci.ts";
 
 /**
  * A function that will spin a spinner until a promise resolves. This will
@@ -19,8 +20,9 @@ export async function loading<Promised extends Promise<any>>(
   let i = 0;
   let spinning = true;
   const hasLogLevel = !!env.get("LOG_LEVEL");
-  const write = hasLogLevel ? () => {} : print;
-  const writeLn = hasLogLevel ? () => {} : printLn;
+  const quiet = hasLogLevel || isCI;
+  const write = quiet ? () => {} : print;
+  const writeLn = quiet ? () => {} : printLn;
 
   if (!enabled) {
     return await until;
@@ -45,7 +47,7 @@ export async function loading<Promised extends Promise<any>>(
       spinning = false;
       return value;
     }).catch(async (error) => {
-      await write(cursorUp(1) + eraseDown());
+      await write(cursorUp(1) + eraseDown() + cursorShow());
       throw error;
     }),
     spin(),

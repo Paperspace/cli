@@ -15,6 +15,11 @@ if (import.meta.main) {
     tracesSampleRate: 0,
   });
 
+  Deno.addSignalListener("SIGINT", async () => {
+    await print(cursorShow());
+    Deno.exit();
+  });
+
   try {
     await root.execute();
   } catch (err) {

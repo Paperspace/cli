@@ -5,6 +5,7 @@ import { untar } from "./untar.ts";
 import { path } from "../deps.ts";
 import { logger } from "../logger.ts";
 import { loading } from "./loading.ts";
+import { env } from "../env.ts";
 
 /**
  * Adapted to Deno from Rich Harris' degit library.
@@ -161,42 +162,57 @@ export async function downloadTarball(
   destination: string,
 ) {
   // First make a temporary directory
-  const tmp = await Deno.makeTempDir({ prefix: "pspace-template-" });
+  const cachePath = path.join(env.get("HOME"), ".paperspace/.cache");
 
   try {
-    const ownerRepo = `${template.owner}/${template.repo}`;
-    const ref = selectRef(await fetchRefs(template), template.ref);
-    const tarballUrl = {
-      "github.com":
-        `https://${template.host}/${ownerRepo}/archive/${ref}.tar.gz`,
-      "gitlab.com":
-        `https://${template.host}/${ownerRepo}/repository/archive.tar.gz?ref=${ref}`,
-      "bitbucket.com":
-        `https://${template.host}/${ownerRepo}/get/${ref}.tar.gz`,
-    }[template.host]!;
-
-    const tmpFile = path.join(tmp, path.basename(tarballUrl));
-    await download(tarballUrl, tmpFile);
-    await untar(tmpFile, ({ fileName }) => {
-      return path.join(
-        destination,
-        path.relative(
-          path.join(`${template.repo}-${ref}`, template.subdir || ""),
-          fileName,
-        ),
-      );
-    }, {
-      filter(entry) {
-        return !template.subdir ||
-          entry.fileName.startsWith(
-            `${template.repo}-${ref}/${template.subdir}`,
-          );
-      },
-    });
-  } finally {
-    logger.info(`Removing temporary directory: ${tmp}`);
-    await Deno.remove(tmp, { recursive: true });
+    Deno.statSync(cachePath);
+  } catch (err) {
+    if (err instanceof Deno.errors.NotFound) {
+      await Deno.mkdir(cachePath);
+    } else {
+      throw err;
+    }
   }
+
+  const ownerRepo = `${template.owner}/${template.repo}`;
+  const ref = selectRef(await fetchRefs(template), template.ref);
+  const tarballUrl = {
+    "github.com": `https://${template.host}/${ownerRepo}/archive/${ref}.tar.gz`,
+    "gitlab.com":
+      `https://${template.host}/${ownerRepo}/repository/archive.tar.gz?ref=${ref}`,
+    "bitbucket.com": `https://${template.host}/${ownerRepo}/get/${ref}.tar.gz`,
+  }[template.host]!;
+
+  const tmpFile = path.join(cachePath, path.basename(tarballUrl));
+
+  try {
+    Deno.statSync(tmpFile);
+    logger.info(`Using cached template from ${tmpFile}`);
+  } catch (err) {
+    if (err instanceof Deno.errors.NotFound) {
+      logger.info(`Downloading template from ${tarballUrl}...`);
+      await download(tarballUrl, tmpFile);
+    } else {
+      throw err;
+    }
+  }
+
+  await untar(tmpFile, ({ fileName }) => {
+    return path.join(
+      destination,
+      path.relative(
+        path.join(`${template.repo}-${ref}`, template.subdir || ""),
+        fileName,
+      ),
+    );
+  }, {
+    filter(entry) {
+      return !template.subdir ||
+        entry.fileName.startsWith(
+          `${template.repo}-${ref}/${template.subdir}`,
+        );
+    },
+  });
 }
 
 /**
