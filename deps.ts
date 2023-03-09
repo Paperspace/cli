@@ -3,6 +3,16 @@ export * as log from "https://deno.land/std@0.178.0/log/mod.ts";
 export { getLevelByName } from "https://deno.land/std@0.178.0/log/levels.ts";
 export { deepMerge } from "https://deno.land/std@0.178.0/collections/deep_merge.ts";
 export { stripColor } from "https://deno.land/std@0.178.0/fmt/colors.ts";
+export {
+  concat,
+  indexOfNeedle,
+} from "https://deno.land/std@0.178.0/bytes/mod.ts";
+export {
+  copy,
+  iterateReader,
+  readerFromStreamReader,
+} from "https://deno.land/std@0.178.0/streams/mod.ts";
+export { TarEntry, Untar } from "https://deno.land/std@0.178.0/archive/mod.ts";
 
 export * as Sentry from "https://deno.land/x/sentry_deno@v0.2.2/main.ts";
 export { open } from "https://deno.land/x/open@v0.0.5/index.ts";

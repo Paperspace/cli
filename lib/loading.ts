@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { cursorHide, cursorShow, cursorUp, eraseDown } from "../deps.ts";
+import { env } from "../env.ts";
 import { print, printLn } from "./print.ts";
 
 /**
@@ -17,19 +18,22 @@ export async function loading<Promised extends Promise<any>>(
   const frames = ["㊂", "㊀", "㊁"];
   let i = 0;
   let spinning = true;
+  const hasLogLevel = !!env.get("LOG_LEVEL");
+  const write = hasLogLevel ? () => {} : print;
+  const writeLn = hasLogLevel ? () => {} : printLn;
 
   if (!enabled) {
     return await until;
   }
 
   async function spin() {
-    await print(cursorHide());
+    await write(cursorHide());
 
     while (spinning) {
-      await printLn(frames[i++ % frames.length] + " " + text);
+      await writeLn(frames[i++ % frames.length] + " " + text);
       await new Promise<void>((resolve) =>
         setTimeout(async () => {
-          await print(cursorUp(1) + eraseDown());
+          await write(cursorUp(1) + eraseDown());
           resolve();
         }, 100)
       );
@@ -40,11 +44,14 @@ export async function loading<Promised extends Promise<any>>(
     until.then((value) => {
       spinning = false;
       return value;
+    }).catch(async (error) => {
+      await write(cursorUp(1) + eraseDown());
+      throw error;
     }),
     spin(),
   ]);
 
-  await print(cursorShow());
+  await write(cursorShow());
   return value;
 }
 

@@ -3,7 +3,6 @@ import {
   flags,
   inferContext,
   init,
-  intl,
 } from "https://deno.land/x/zcli@1.3.2/mod.ts";
 
 import { COMMIT, VERSION } from "./version.ts";

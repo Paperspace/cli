@@ -15,13 +15,13 @@ export async function input<ReturnValue = string>(
     filter,
     transform = (value) => value,
     print: write = print,
-    onBreak = () => {
-      print("\n");
+    onBreak = async () => {
+      await print("\n");
       Deno.exit(0);
     },
   } = config;
 
-  await print(message + " ");
+  await write(message + " ");
   let input = "";
 
   for await (const keypress of readKeypress(Deno.stdin)) {
@@ -46,10 +46,10 @@ export async function input<ReturnValue = string>(
 
       case "backspace":
         if (input.length) {
-          await write(cursorBack(1) + eraseEndLine());
+          if (await write(cursorBack(input.at(-1)!.length) + eraseEndLine())) {
+            input = input.slice(0, -1);
+          }
         }
-
-        input = input.slice(0, -1);
         break;
 
       case "return":
@@ -59,8 +59,9 @@ export async function input<ReturnValue = string>(
 
       default:
         if (filter === undefined || filter(keypress)) {
-          input += keypress.sequence;
-          await write(keypress.sequence);
+          if (await write(keypress.sequence)) {
+            input += keypress.sequence;
+          }
         }
     }
   }

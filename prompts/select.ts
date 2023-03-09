@@ -24,8 +24,8 @@ export async function select<Option>(
   config: SelectConfig<Option> = {},
 ): Promise<Option | undefined> {
   const {
-    onBreak = () => {
-      print("\n");
+    onBreak = async () => {
+      await print("\n");
       Deno.exit(0);
     },
     maxOptions = 8,

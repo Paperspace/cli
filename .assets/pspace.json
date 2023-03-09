@@ -4,7 +4,7 @@
     "name": "pspace",
     "version": "0.1.0-dev",
     "commit": "development",
-    "buildDate": "2023-03-02T01:19:03.825Z",
+    "buildDate": "2023-03-09T00:20:43.357Z",
     "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
     "summary": "A CLI for using the Paperspace API."
   },
@@ -628,7 +628,7 @@
         },
         {
           "name": "config",
-          "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n\n```\npspace config set team \"my-team\"\n```",
+          "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n```\npspace config set team \"my-team\"\n```",
           "summary": "Manage your local Paperspace configuration.",
           "flags": [
             {
@@ -804,7 +804,7 @@
             },
             {
               "name": "get",
-              "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n\n```\npspace config get team\n```",
+              "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n```\npspace config get team\n```",
               "summary": "Get a configuration value.",
               "arguments": {
                 "description": "",
@@ -2887,7 +2887,7 @@
             },
             {
               "name": "list",
-              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n\n```\npspace project list -F handle -F name -F dtCreated\n```",
+              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
               "summary": "List projects.",
               "flags": [
                 {
@@ -3054,7 +3054,7 @@
             },
             {
               "name": "update",
-              "description": "Update an existing project.\n\n#### Example\n\n```\npspace project update psukfyemho7 --name my-cool-project\n```",
+              "description": "Update an existing project.\n\nExample:\n```\npspace project update psukfyemho7 --name my-cool-project\n```",
               "summary": "Update an existing project.",
               "arguments": {
                 "description": "",
@@ -3261,7 +3261,7 @@
         },
         {
           "name": "upgrade",
-          "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n\n```\npspace upgrade\n```",
+          "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n```\npspace upgrade\n```",
           "summary": "Upgrade \u001b[1mpspace\u001b[22m to the latest version.",
           "flags": [
             {

@@ -10,8 +10,8 @@ export async function confirm(
 ): Promise<boolean | undefined> {
   const {
     defaultValue = false,
-    onBreak = () => {
-      print("\n");
+    onBreak = async () => {
+      await print("\n");
       Deno.exit(0);
     },
   } = options;
