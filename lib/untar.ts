@@ -21,52 +21,45 @@ export async function untar(
   } = {},
 ) {
   const { filter = () => true } = options;
-  const streamReader = (await Deno.open(filePath))
+  const file = await Deno.open(filePath, { read: true });
+  const streamReader = file
     .readable
     .pipeThrough(new DecompressionStream("gzip"))
     .getReader();
-  // Untar the file
   const reader = readerFromStreamReader(streamReader);
   const untar = new Untar(reader);
-  const writes: Promise<void>[] = [];
   logger.info(`Untar ${filePath}`);
 
-  while (true) {
-    const entry = await untar.extract();
-
+  for await (const entry of untar) {
     if (entry === null) {
       break;
     }
 
     if (entry.type === "file" && entry.fileName !== "pax_global_header") {
       if (!filter(entry)) {
+        await entry.discard();
         continue;
       }
 
       const filePath = typeof destinationPath === "function"
         ? destinationPath(entry)
         : path.join(destinationPath, entry.fileName);
-
       const dir = path.dirname(filePath);
-
-      writes.push((async () => {
-        try {
-          Deno.statSync(dir);
-        } catch (err) {
-          if (err instanceof Deno.errors.NotFound) {
-            await Deno.mkdir(dir, { recursive: true });
-          } else {
-            throw err;
-          }
-        }
-
-        const file = await Deno.open(filePath, { create: true, write: true });
-        await copy(entry, file, { bufSize: 1024 * 1024 });
-        file.close();
-        logger.info(`  > ${filePath}`);
-      })());
+      // Create the directory if it doesn't exist
+      await Deno.mkdir(dir, { recursive: true });
+      const file = await Deno.open(filePath, {
+        create: true,
+        truncate: true,
+        write: true,
+      });
+      // Overwrite/write the file
+      await copy(entry, file, { bufSize: 1024 * 1024 });
+      file.close();
+      await entry.discard();
+      logger.info(`  > ${filePath}`);
+    } else {
+      // Skip directories
+      await entry.discard();
     }
-
-    await Promise.all(writes);
   }
 }

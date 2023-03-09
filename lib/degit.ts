@@ -6,6 +6,7 @@ import { path } from "../deps.ts";
 import { logger } from "../logger.ts";
 import { loading } from "./loading.ts";
 import { env } from "../env.ts";
+import { intl } from "../zcli.ts";
 
 /**
  * Adapted to Deno from Rich Harris' degit library.
@@ -90,6 +91,17 @@ export function parse(template: string): DegitSource {
     const host = uri.host;
     const [owner, repo] = uri.pathname.split("/").slice(1);
     const ref = uri.hash.slice(1) || undefined;
+
+    asserts(
+      isValidHost(host),
+      new DegitError({
+        message: `Invalid host: ${host}. Must be one of ${
+          intl.list(Object.values(SOURCE_TO_HOST), { type: "disjunction" })
+        }.`,
+        exitCode: 1,
+      }),
+    );
+
     return { host, owner, repo, ref, subdir: undefined, mode: "tar" };
   } else if (template.startsWith("git@")) {
     template = template.replace(/^git@/, "");
@@ -106,7 +118,24 @@ export function parse(template: string): DegitSource {
       [repo, ref] = repoBranch.split("#");
     }
 
-    return { host, owner, repo, ref, subdir, mode: "git" };
+    asserts(
+      isValidHost(host),
+      new DegitError({
+        message: `Invalid host: ${host}. Must be one of ${
+          intl.list(Object.values(SOURCE_TO_HOST), { type: "disjunction" })
+        }.`,
+        exitCode: 1,
+      }),
+    );
+
+    return {
+      host,
+      owner,
+      repo,
+      ref,
+      subdir,
+      mode: "git",
+    };
   }
 
   let source: keyof typeof SOURCE_TO_HOST = "github";
@@ -144,11 +173,16 @@ export function parse(template: string): DegitSource {
   };
 }
 
+function isValidHost(host: string): host is DegitSource["host"] {
+  return Object.values(SOURCE_TO_HOST).includes(host as DegitSource["host"]);
+}
+
 const SOURCE_TO_HOST = {
   github: "github.com",
   bitbucket: "bitbucket.org",
   gitlab: "gitlab.com",
-};
+  "git.sr.ht": "git.sr.ht",
+} as const;
 
 /**
  * Download a template from a tarball.
@@ -180,8 +214,9 @@ export async function downloadTarball(
     "github.com": `https://${template.host}/${ownerRepo}/archive/${ref}.tar.gz`,
     "gitlab.com":
       `https://${template.host}/${ownerRepo}/repository/archive.tar.gz?ref=${ref}`,
-    "bitbucket.com": `https://${template.host}/${ownerRepo}/get/${ref}.tar.gz`,
-  }[template.host]!;
+    "bitbucket.org": `https://${template.host}/${ownerRepo}/get/${ref}.tar.gz`,
+    "git.sr.ht": `https://${template.host}/${ownerRepo}/archive/${ref}.tar.gz`,
+  }[template.host];
 
   const tmpFile = path.join(cachePath, path.basename(tarballUrl));
 
@@ -197,22 +232,26 @@ export async function downloadTarball(
     }
   }
 
-  await untar(tmpFile, ({ fileName }) => {
-    return path.join(
-      destination,
-      path.relative(
-        path.join(`${template.repo}-${ref}`, template.subdir || ""),
-        fileName,
-      ),
-    );
-  }, {
-    filter(entry) {
-      return !template.subdir ||
-        entry.fileName.startsWith(
-          `${template.repo}-${ref}/${template.subdir}`,
-        );
+  await untar(
+    tmpFile,
+    ({ fileName }) => {
+      return path.join(
+        destination,
+        path.relative(
+          path.join(`${template.repo}-${ref}`, template.subdir || ""),
+          fileName,
+        ),
+      );
     },
-  });
+    {
+      filter(entry) {
+        return !template.subdir ||
+          entry.fileName.startsWith(
+            `${template.repo}-${ref}/${template.subdir}`,
+          );
+      },
+    },
+  );
 }
 
 /**
