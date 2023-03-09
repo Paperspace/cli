@@ -21,7 +21,7 @@ export async function input<ReturnValue = string>(
     },
   } = config;
 
-  await write(message + " ");
+  await print(message + " ");
   let input = "";
 
   for await (const keypress of readKeypress(Deno.stdin)) {
@@ -46,9 +46,8 @@ export async function input<ReturnValue = string>(
 
       case "backspace":
         if (input.length) {
-          if (await write(cursorBack(input.at(-1)!.length) + eraseEndLine())) {
-            input = input.slice(0, -1);
-          }
+          await write(cursorBack(input.at(-1)!.length) + eraseEndLine());
+          input = input.slice(0, -1);
         }
         break;
 
@@ -59,9 +58,8 @@ export async function input<ReturnValue = string>(
 
       default:
         if (filter === undefined || filter(keypress)) {
-          if (await write(keypress.sequence)) {
-            input += keypress.sequence;
-          }
+          await write(keypress.sequence);
+          input += keypress.sequence;
         }
     }
   }

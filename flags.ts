@@ -65,7 +65,7 @@ export const degit = flags({
     `,
   }).ostring().transform((value) => {
     if (!value) {
-      return undefined;
+      return parse("Paperspace/app-template");
     }
 
     return parse(value);

@@ -4,12 +4,11 @@ import { download } from "./download.ts";
 import { untar } from "./untar.ts";
 import { path } from "../deps.ts";
 import { logger } from "../logger.ts";
-import { loading } from "./loading.ts";
 import { env } from "../env.ts";
 import { intl } from "../zcli.ts";
 
 /**
- * Adapted to Deno from Rich Harris' degit library.
+ * Adapted to Deno from Rich Harris's `degit` library.
  *
  * Make a copy of a git repository. When you run degit some-user/some-repo,
  * it will find the latest commit on https://github.com/some-user/some-repo
@@ -49,7 +48,7 @@ export async function degit(
       stdout: "null",
       stderr: "piped",
     });
-    const status = await loading(proc.status(), { text: "Downloading" });
+    const status = await proc.status();
 
     asserts(
       status.success,
@@ -72,10 +71,8 @@ export async function degit(
     logger.info(`  ref: ${source.ref}`);
     logger.info(`  host: ${source.host}`);
     logger.info(`  subdir: ${source.subdir}`);
-
-    await loading(downloadTarball(source, dest), {
-      text: "Downloading",
-    });
+    // Download the tarball
+    await downloadTarball(source, dest, config);
   }
 }
 
@@ -194,15 +191,19 @@ const SOURCE_TO_HOST = {
 export async function downloadTarball(
   template: DegitSource,
   destination: string,
+  options: { cache?: string },
 ) {
   // First make a temporary directory
-  const cachePath = path.join(env.get("HOME"), ".paperspace/.cache");
+  const { cache = ".degit/.cache" } = options;
+  const cachePath = path.isAbsolute(cache)
+    ? cache
+    : path.join(env.get("HOME"), cache);
 
   try {
     Deno.statSync(cachePath);
   } catch (err) {
     if (err instanceof Deno.errors.NotFound) {
-      await Deno.mkdir(cachePath);
+      await Deno.mkdir(cachePath, { recursive: true });
     } else {
       throw err;
     }
@@ -402,6 +403,10 @@ export type DegitConfig = {
    * @default Deno.cwd()
    */
   dest?: string;
+  /**
+   * The cache directory to use.
+   */
+  cache?: string;
 };
 
 export type DegitMode = "tar" | "git";

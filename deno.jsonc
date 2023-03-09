@@ -4,7 +4,7 @@
      * Run the CLI in development mode. This will use the local Paperspace API and
      * Console URLs.
      */
-    "dev": "PAPERSPACE_API_URL=https://api.local.paperspacegradient.com:8443/v1 PAPERSPACE_CONSOLE_URL=https://console.local.paperspacegradient.com:8443/ deno run --allow-env --allow-run --allow-read --allow-write --allow-net mod.ts",
+    "dev": "PAPERSPACE_API_URL=https://api.psdev.sh:8443/v1 PAPERSPACE_CONSOLE_URL=https://console.psdev.sh:8443/ deno run --allow-env --allow-run --allow-read --allow-write --allow-net mod.ts",
     /**
      * Run the CLI in production mode. This will use the production Paperspace API and
      * Console URLs.
