@@ -1,3 +1,4 @@
+import { copy, readerFromStreamReader } from "../deps.ts";
 import { AppError } from "../errors.ts";
 import { asserts } from "./asserts.ts";
 
@@ -8,21 +9,16 @@ export async function download(
   source: string,
   destination: string,
 ): Promise<void> {
-  // We use browser fetch API
   const response = await fetch(source);
 
   asserts(
-    response.ok,
+    response.ok && response.body,
     new AppError({ message: `Failed to download: ${source}` }),
   );
 
-  const blob = await response.blob();
-
-  // We convert the blob into a typed array
-  // so we can use it to write the data into the file
-  const buf = await blob.arrayBuffer();
-  const data = new Uint8Array(buf);
-
-  // We then create a new file and write into it
-  await Deno.writeFile(destination, data);
+  const stream = response.body.getReader();
+  const reader = readerFromStreamReader(stream);
+  const file = await Deno.open(destination, { create: true, write: true });
+  await copy(reader, file);
+  file.close();
 }

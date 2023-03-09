@@ -35,6 +35,11 @@ const configShape = {
     .nullable()
     .default(null),
 
+  projects: z.record(z.object({ handle: z.string(), path: z.string() }))
+    .default(
+      {},
+    ),
+
   locale: z
     .string()
     .transform((value) => {
@@ -58,6 +63,7 @@ export const config = zcliConfig(configShape, {
   defaultConfig: {
     version: 1,
     team: null,
+    projects: {},
     locale,
   },
   path: CONFIG_PATH,

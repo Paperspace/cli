@@ -4,7 +4,7 @@
     "name": "pspace",
     "version": "0.1.0-dev",
     "commit": "development",
-    "buildDate": "2023-03-02T01:19:03.825Z",
+    "buildDate": "2023-03-09T20:59:13.499Z",
     "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
     "summary": "A CLI for using the Paperspace API."
   },
@@ -628,7 +628,7 @@
         },
         {
           "name": "config",
-          "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n\n```\npspace config set team \"my-team\"\n```",
+          "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n```\npspace config set team \"my-team\"\n```",
           "summary": "Manage your local Paperspace configuration.",
           "flags": [
             {
@@ -720,6 +720,7 @@
                       "type": "string",
                       "enum": [
                         "team",
+                        "projects",
                         "locale"
                       ],
                       "description": "The configuration key.",
@@ -804,7 +805,7 @@
             },
             {
               "name": "get",
-              "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n\n```\npspace config get team\n```",
+              "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n```\npspace config get team\n```",
               "summary": "Get a configuration value.",
               "arguments": {
                 "description": "",
@@ -819,6 +820,7 @@
                       "type": "string",
                       "enum": [
                         "team",
+                        "projects",
                         "locale"
                       ],
                       "description": "The configuration key.",
@@ -1115,6 +1117,7 @@
                       "type": "string",
                       "enum": [
                         "team",
+                        "projects",
                         "locale"
                       ],
                       "description": "The configuration key.",
@@ -1459,9 +1462,7 @@
                     "schema": {
                       "type": "string",
                       "enum": [
-                        "init",
                         "get",
-                        "up",
                         "list",
                         "help"
                       ],
@@ -1642,163 +1643,7 @@
               ]
             },
             {
-              "name": "init",
-              "description": "",
-              "summary": "",
-              "flags": [
-                {
-                  "name": "log-level",
-                  "aliases": [
-                    "l"
-                  ],
-                  "description": "Enable debug logging.",
-                  "summary": "Enable debug logging",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "string",
-                    "enum": [
-                      "debug",
-                      "info",
-                      "warning",
-                      "error",
-                      "critical"
-                    ],
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "json",
-                  "aliases": [
-                    "j"
-                  ],
-                  "description": "Output JSON",
-                  "summary": "Output JSON",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "boolean",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "api-key",
-                  "aliases": [],
-                  "description": "A Paperspace public API Key used for authenticating requests",
-                  "summary": "A Paperspace public API Key used for authenticating requests",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "string",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "help",
-                  "aliases": [
-                    "h"
-                  ],
-                  "description": "Show help for a command",
-                  "summary": "Show help for a command",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "boolean",
-                    "default": false,
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                }
-              ],
-              "commands": []
-            },
-            {
               "name": "list",
-              "description": "",
-              "summary": "",
-              "flags": [
-                {
-                  "name": "log-level",
-                  "aliases": [
-                    "l"
-                  ],
-                  "description": "Enable debug logging.",
-                  "summary": "Enable debug logging",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "string",
-                    "enum": [
-                      "debug",
-                      "info",
-                      "warning",
-                      "error",
-                      "critical"
-                    ],
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "json",
-                  "aliases": [
-                    "j"
-                  ],
-                  "description": "Output JSON",
-                  "summary": "Output JSON",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "boolean",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "api-key",
-                  "aliases": [],
-                  "description": "A Paperspace public API Key used for authenticating requests",
-                  "summary": "A Paperspace public API Key used for authenticating requests",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "string",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "help",
-                  "aliases": [
-                    "h"
-                  ],
-                  "description": "Show help for a command",
-                  "summary": "Show help for a command",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "boolean",
-                    "default": false,
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                }
-              ],
-              "commands": []
-            },
-            {
-              "name": "up",
               "description": "",
               "summary": "",
               "flags": [
@@ -2001,6 +1846,8 @@
                     "docs",
                     "logout",
                     "login",
+                    "init",
+                    "up",
                     "version",
                     "completion",
                     "help"
@@ -2180,6 +2027,176 @@
               "commands": []
             }
           ]
+        },
+        {
+          "name": "init",
+          "description": "Create a new Paperspace app. This will create a new directory with a\ndefault app structure. You can optionally specify a name for the app\nand a template to use. If no template is specified, the default\ntemplate will be used.\n\nCreate a new app in the current directory.\n```\n$ pspace init\n```\n\nCreate a new app named \"my-app\" relative to the current directory.\n```\n$ pspace init my-app\n```\n\nCreate a new app named \"my-app\" relative to the current directory using\na template from the Paperspace GitHub organization.\n```\n$ pspace init my-app -t Paperspace/gradio-demo\n```",
+          "summary": "Create a new Paperspace app",
+          "arguments": {
+            "description": "",
+            "summary": "The directory to create the app in. Defaults to the current directory.",
+            "items": [
+              {
+                "position": 0,
+                "summary": "",
+                "required": true,
+                "variadic": false,
+                "schema": {
+                  "type": "string",
+                  "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+              }
+            ]
+          },
+          "flags": [
+            {
+              "name": "template",
+              "aliases": [
+                "t"
+              ],
+              "description": "A template to use when creating the app. This can be a URL \nto a git repository or a shorthand template name.\n\nThese templates are equivalent:\n```\nuser/repo\ngithub:user/repo\ngit@github.com:user/repo\nhttps://github.com/user/repo\n```\n\nDownload from GitLab:\n```\ngitlab:user/repo\ngit@gitlab.com:user/repo\nhttps://gitlab.com/user/repo\n```\n\nDownload from BitBucket\n```\nbitbucket:user/repo\ngit@bitbucket.org:user/repo\nhttps://bitbucket.org/user/repo\n```\n\nSpecify a tag or branch:\n```\nuser/repo#dev       # branch\nuser/repo#v1.2.3    # release tag\nuser/repo#1234abcd  # commit hash\n```",
+              "summary": "A template to use when creating the app",
+              "required": true,
+              "collects": false,
+              "negatable": false,
+              "global": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "mode",
+              "aliases": [
+                "m"
+              ],
+              "description": "The mode to use when creating the app. This can be either \"git\" or\n\"tar\". If \"git\" is specified, the template will be downloaded as a\ntarball. Note that \"git\" clones over SSH, so you must have a valid\nSSH key configured with GitHub, Bitbucket, or GitLab.",
+              "summary": "The mode to use when creating the app: 'git' or 'tar'.",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "default": "tar",
+              "global": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "git",
+                  "tar"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "name",
+              "aliases": [
+                "n"
+              ],
+              "description": "The name of the app. Defaults to the first argument current directory name.",
+              "summary": "The name of the app. Defaults to the first argument current directory name.",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": false,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "clean",
+              "aliases": [
+                "c"
+              ],
+              "description": "Clean the Paperspace cache. This negates other args/flags.",
+              "summary": "Clean the Paperspace cache. This negates other args/flags.",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": false,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging.",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
         },
         {
           "name": "login",
@@ -2707,6 +2724,7 @@
                         "list",
                         "create",
                         "update",
+                        "link",
                         "help"
                       ],
                       "description": "The command to show help for.",
@@ -2886,8 +2904,117 @@
               ]
             },
             {
+              "name": "link",
+              "description": "This will link a remote project to a local directory. Commands that\ndepend on a project ID will use the project ID of the linked project\nwhen communicating with the Paperspace API.\n\nLink a project to the current directory.\n```\n$ pspace link\n```\n\nLink a project to a different directory.\n```\n$ pspace link --cwd ../my-app\n```\n\nLink a project and specify a project ID.\n```\n$ pspace link pzwf2g05ubegj\n```",
+              "summary": "Link a remote project to ",
+              "arguments": {
+                "description": "",
+                "summary": "A project ID. If not provided, you will be prompted to select one.",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "A project ID.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "description": "A project ID.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to link the project to. Defaults to the current directory.",
+                  "summary": "The directory to link the project to. Defaults to the current directory.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
               "name": "list",
-              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n\n```\npspace project list -F handle -F name -F dtCreated\n```",
+              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
               "summary": "List projects.",
               "flags": [
                 {
@@ -3054,7 +3181,7 @@
             },
             {
               "name": "update",
-              "description": "Update an existing project.\n\n#### Example\n\n```\npspace project update psukfyemho7 --name my-cool-project\n```",
+              "description": "Update an existing project.\n\nExample:\n```\npspace project update psukfyemho7 --name my-cool-project\n```",
               "summary": "Update an existing project.",
               "arguments": {
                 "description": "",
@@ -3260,8 +3387,116 @@
           "commands": []
         },
         {
+          "name": "up",
+          "description": "This will upsert an app config and deploy your app to Paperspace. You can optionally \nspecify a path to a config file. If no config file is specified, the default\nconfig file paths will be tried.\n\nDeploy the app in the current directory.\n```\n$ pspace up\n```\n\nDeploy the app using a config file.\n```\n$ pspace up -c paperspace.json\n```\n\nDeploy an app in a different directory.\n```\n$ pspace up --cwd ../my-app\n```",
+          "summary": "Deploy your app to Paperspace",
+          "flags": [
+            {
+              "name": "config",
+              "aliases": [
+                "c"
+              ],
+              "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
+              "summary": "The path to the config file. Defaults to our default config file paths.",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": false,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "cwd",
+              "aliases": [],
+              "description": "The directory to deploy the app from. Defaults to the current directory.",
+              "summary": "The directory to deploy the app from. Defaults to the current directory.",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": false,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging.",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": []
+        },
+        {
           "name": "upgrade",
-          "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n\n```\npspace upgrade\n```",
+          "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n```\npspace upgrade\n```",
           "summary": "Upgrade \u001b[1mpspace\u001b[22m to the latest version.",
           "flags": [
             {

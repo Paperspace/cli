@@ -5,26 +5,26 @@ import { asserts } from "./asserts.ts";
 /**
  * Decompress a zip file at a given path.
  *
- * @param filepath - Path to the zip file
+ * @param filePath - Path to the zip file
  * @param destinationPath - Path to the destination folder
  * @param options - Configuration options
  */
 export async function unzip(
-  filepath: string,
+  filePath: string,
   destinationPath = Deno.cwd(),
 ): Promise<string> {
   try {
-    Deno.statSync(filepath);
+    Deno.statSync(filePath);
   } catch (_err) {
-    throw new AppError({ message: `A file "${filepath}" does not exist` });
+    throw new AppError({ message: `A file "${filePath}" does not exist` });
   }
 
-  const filename = path.basename(filepath, path.extname(filepath));
+  const filename = path.basename(filePath, path.extname(filePath));
   const destination = path.join(destinationPath, filename);
 
   asserts(
-    await decompressProcess(filepath, destination),
-    new AppError({ message: `A file "${filepath}" does not exist` }),
+    await decompressProcess(filePath, destination),
+    new AppError({ message: `A file "${filePath}" does not exist` }),
   );
 
   return destination;

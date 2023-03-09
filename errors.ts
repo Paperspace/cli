@@ -1,3 +1,4 @@
+import { fmt } from "./zcli.ts";
 import { components } from "./api/openapi.ts";
 import { env } from "./env.ts";
 
@@ -47,6 +48,20 @@ export class ValidationError extends AppError {
 
   constructor(message: string) {
     super({ message: `⛔ ${message}` });
+  }
+}
+
+/**
+ * An error that is caused by git.
+ */
+export class DegitError extends AppError {
+  readonly name = "DegitError";
+
+  constructor({ message, exitCode }: { message: string; exitCode?: number }) {
+    super({
+      message: `⛔ ${fmt.colors.bold("Error cloning project")}\n${message}`,
+      exitCode,
+    });
   }
 }
 
