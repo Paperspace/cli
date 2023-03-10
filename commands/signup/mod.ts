@@ -1,5 +1,5 @@
 import { command } from "../../zcli.ts";
-import { open } from "../../deps.ts";
+import { open } from "../../lib/open.ts";
 import { env } from "../../env.ts";
 
 /**
