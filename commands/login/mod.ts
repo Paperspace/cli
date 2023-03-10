@@ -1,5 +1,6 @@
 import { args, command, fmt, z } from "../../zcli.ts";
-import { cursorUp, eraseLine, open } from "../../deps.ts";
+import { cursorUp, eraseLine } from "../../deps.ts";
+import { open } from "../../lib/open.ts";
 import { config } from "../../config.ts";
 import { credentials } from "../../credentials.ts";
 import { session } from "../../api/auth.ts";

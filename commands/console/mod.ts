@@ -1,4 +1,4 @@
-import { open } from "../../deps.ts";
+import { open } from "../../lib/open.ts";
 import { env } from "../../env.ts";
 import { command } from "../../zcli.ts";
 
