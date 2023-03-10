@@ -29,7 +29,12 @@ export const login = command("login", {
   let apiKey: string | undefined = args[0];
 
   if (!apiKey) {
-    open(new URL("settings/apikeys", env.get("PAPERSPACE_CONSOLE_URL")) + "");
+    try {
+      open(new URL("settings/apikeys", env.get("PAPERSPACE_CONSOLE_URL")) + "");
+    } catch (_err) {
+      // do nothing it's all good
+    }
+
     apiKey = await secret("Enter an API key:");
 
     if (!apiKey) {

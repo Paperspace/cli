@@ -1,6 +1,6 @@
 import { deploymentRuns, deployments } from "./../../api/deployments.ts";
 import { projects } from "./../../api/projects.ts";
-import { command, flag, flags, fmt } from "../../zcli.ts";
+import { command, Context, flag, flags, fmt } from "../../zcli.ts";
 import { config } from "../../config.ts";
 import { asserts } from "../../lib/asserts.ts";
 import { loading } from "../../lib/loading.ts";
@@ -17,6 +17,36 @@ import * as appConfig from "../../lib/app-config.ts";
  * or change its name unless you're no longer using `zcli add`.
  */
 const subCommands: ReturnType<typeof command>[] = [];
+
+export const upFlags = flags({
+  config: flag({
+    aliases: ["c"],
+    short:
+      "The path to the config file. Defaults to our default config file paths.",
+    long: `
+      The path to the config file. Defaults to our default config file paths.
+
+      The default config file paths are in order of precedence:
+
+      - \`paperspace.yaml\`
+      - \`paperspace.yml\`
+      - \`paperspace.json\`
+      - \`paperspace.toml\`
+      - \`.paperspace/app.yaml\`
+      - \`.paperspace/app.yml\`
+      - \`.paperspace/app.json\`
+      - \`.paperspace/app.toml\`
+    `,
+  }).ostring(),
+  "project-id": flag({
+    aliases: ["p"],
+    short: "The ID of the project to deploy to.",
+  }).ostring(),
+  cwd: flag({
+    short:
+      "The directory to deploy the app from. Defaults to the current directory.",
+  }).ostring(),
+});
 
 export const up = command("up", {
   short: "Deploy your app to Paperspace",
@@ -41,31 +71,7 @@ export const up = command("up", {
     \`\`\`
   `,
   commands: subCommands,
-  flags: flags({
-    config: flag({
-      aliases: ["c"],
-      short:
-        "The path to the config file. Defaults to our default config file paths.",
-      long: `
-        The path to the config file. Defaults to our default config file paths.
-
-        The default config file paths are in order of precedence:
-
-        - \`paperspace.yaml\`
-        - \`paperspace.yml\`
-        - \`paperspace.json\`
-        - \`paperspace.toml\`
-        - \`.paperspace/app.yaml\`
-        - \`.paperspace/app.yml\`
-        - \`.paperspace/app.json\`
-        - \`.paperspace/app.toml\`
-      `,
-    }).ostring(),
-    cwd: flag({
-      short:
-        "The directory to deploy the app from. Defaults to the current directory.",
-    }).ostring(),
-  }),
+  flags: upFlags,
   // We use command metadata in the `persistentPreRun` function to check if a
   // command requires an API key. If it does, we'll check to see if one is
   // set. If not, we'll throw an error.
@@ -74,137 +80,151 @@ export const up = command("up", {
   },
 }).run(
   async function* ({ flags, ctx }) {
-    const projectPath = flags.cwd
-      ? path.isAbsolute(flags.cwd)
-        ? flags.cwd
-        : path.join(Deno.cwd(), flags.cwd)
-      : Deno.cwd();
-    const localProjects = await config.get("projects");
-    let handle = localProjects[projectPath]?.handle;
-    const configFile = await appConfig.find(projectPath, flags.config);
-    const team = await config.get("team");
-
-    if (!handle) {
-      const existingProjects = await loading(projects.list({ limit: 50 }), {
-        enabled: !flags.json,
-      });
-      asserts(existingProjects.ok, existingProjects);
-      yield fmt.colors.yellow(
-        `Couldn't find a linked project for ${projectPath}.`,
-      );
-
-      yield `Run "${
-        fmt.colors.bold(`${ctx.root.name} project link`)
-      }" in this directory to skip this step in the future.`;
-
-      const selected = await select(
-        "Select a project:",
-        existingProjects.data.items,
-        {
-          filter(input, option) {
-            return option.name.toLowerCase().startsWith(input);
-          },
-          renderOption(option, isSelected) {
-            return `${isSelected ? ">" : " "} ${option.name}`;
-          },
-        },
-      );
-
-      asserts(selected, "No project selected.");
-      handle = selected.handle;
-    }
-
-    logger.info({ projectId: handle, config: configFile });
-    const upsert = await loading(
-      // @ts-expect-error: it'll be ok
-      deployments.upsert({ projectId: handle, config: configFile }),
-      { text: "Deploying", enabled: !flags.json },
-    );
-
-    asserts(upsert.ok, upsert);
-    const { deploymentId } = upsert.data;
-    const start = Date.now();
-
-    asserts(upsert.ok, upsert);
-
-    const { latestRun, deployment } = await loading(
-      poll(async () => {
-        const deployment = await deployments.get({ id: deploymentId! });
-
-        if (
-          deployment.ok && deployment.data.latestSpec?.externalApplied
-        ) {
-          if (
-            !configFile.enabled ||
-            ("resources" in configFile && configFile.resources.replicas === 0)
-          ) {
-            return {
-              deployment: deployment.data,
-              latestRun: { replicas: 0 },
-            };
-          }
-
-          const runs = await deploymentRuns.get({ id: deploymentId! });
-
-          if (runs.ok && runs.data) {
-            const latestRun = runs.data[0];
-
-            if (!latestRun) {
-              return;
-            }
-
-            const erroredInstance = latestRun.instances.find(
-              (instance) => ["failed", "errored"].includes(instance.state),
-            );
-
-            const timedOut = (Date.now() - start) > (5 * 60 * 1000);
-
-            if (
-              timedOut && latestRun.readyReplicas !== latestRun.replicas &&
-              erroredInstance
-            ) {
-              throw new AppError({
-                message:
-                  `⛔ ${
-                    fmt.colors.bold("Deployment error")
-                  }:\n${erroredInstance.stateMessage}` ?? "Deployment error",
-                exitCode: 1,
-              });
-            }
-
-            if (latestRun.readyReplicas === latestRun.replicas) {
-              return {
-                deployment: deployment.data,
-                latestRun: { replicas: latestRun.replicas },
-              };
-            }
-          }
-        }
-      }, "5s"),
-      { text: "Waiting for ready status", enabled: !flags.json },
-    );
-
-    if (!flags.json) {
-      if (latestRun.replicas) {
-        yield `✨ ${fmt.colors.bold("Your app is ready")}\n`;
-        yield "   " + fmt.colors.bold("Console URL");
-        yield "   " + new URL(
-          `/${team}/projects/${handle}/gradient-deployments/${deployment.id}`,
-          env.get("PAPERSPACE_CONSOLE_URL"),
-        ).toString();
-        yield "";
-        yield "   " + fmt.colors.bold("Deployment URL");
-        yield `   https://${deployment.endpoint}`;
-      } else {
-        yield `🌙 ${fmt.colors.bold("Your app was disabled")}\n`;
-        yield "   " + fmt.colors.bold("Console URL");
-        yield "   " + new URL(
-          `/${team}/projects/${handle}/gradient-deployments/${deployment.id}`,
-          env.get("PAPERSPACE_CONSOLE_URL"),
-        );
-      }
-    } else {
-      yield JSON.stringify(deployment, null, 2);
+    for await (const line of runUp({ flags, ctx })) {
+      yield line;
     }
   },
 );
+
+export async function* runUp(
+  { flags, ctx }: {
+    flags: {
+      cwd?: string;
+      config?: string;
+      "project-id"?: string;
+      json?: boolean;
+    };
+    ctx: Context;
+  },
+) {
+  const projectPath = flags.cwd
+    ? path.isAbsolute(flags.cwd) ? flags.cwd : path.join(Deno.cwd(), flags.cwd)
+    : Deno.cwd();
+  const localProjects = await config.get("projects");
+  let handle = flags["project-id"] ?? localProjects[projectPath]?.handle;
+  const configFile = await appConfig.find(projectPath, flags.config);
+  const team = await config.get("team");
+
+  if (!handle) {
+    const existingProjects = await loading(projects.list({ limit: 50 }), {
+      enabled: !flags.json,
+    });
+    asserts(existingProjects.ok, existingProjects);
+    yield fmt.colors.yellow(
+      `Couldn't find a linked project for ${projectPath}.`,
+    );
+
+    yield `Run "${
+      fmt.colors.bold(`${ctx.root.name} project link`)
+    }" in this directory to skip this step in the future.`;
+
+    const selected = await select(
+      "Select a project:",
+      existingProjects.data.items,
+      {
+        filter(input, option) {
+          return option.name.toLowerCase().startsWith(input);
+        },
+        renderOption(option, isSelected) {
+          return `${isSelected ? ">" : " "} ${option.name}`;
+        },
+      },
+    );
+
+    asserts(selected, "No project selected.");
+    handle = selected.handle;
+  }
+
+  logger.info({ projectId: handle, config: configFile });
+  const upsert = await loading(
+    // @ts-expect-error: it'll be ok
+    deployments.upsert({ projectId: handle, config: configFile }),
+    { text: "Deploying", enabled: !flags.json },
+  );
+
+  asserts(upsert.ok, upsert);
+  const { deploymentId } = upsert.data;
+  const start = Date.now();
+
+  asserts(upsert.ok, upsert);
+
+  const { latestRun, deployment } = await loading(
+    poll(async () => {
+      const deployment = await deployments.get({ id: deploymentId! });
+
+      if (
+        deployment.ok && deployment.data.latestSpec?.externalApplied
+      ) {
+        if (
+          !configFile.enabled ||
+          ("resources" in configFile && configFile.resources.replicas === 0)
+        ) {
+          return {
+            deployment: deployment.data,
+            latestRun: { replicas: 0 },
+          };
+        }
+
+        const runs = await deploymentRuns.get({ id: deploymentId! });
+
+        if (runs.ok && runs.data) {
+          const latestRun = runs.data[0];
+
+          if (!latestRun) {
+            return;
+          }
+
+          const erroredInstance = latestRun.instances.find(
+            (instance) => ["failed", "errored"].includes(instance.state),
+          );
+
+          const timedOut = (Date.now() - start) > (5 * 60 * 1000);
+
+          if (
+            timedOut && latestRun.readyReplicas !== latestRun.replicas &&
+            erroredInstance
+          ) {
+            throw new AppError({
+              message:
+                `⛔ ${
+                  fmt.colors.bold("Deployment error")
+                }:\n${erroredInstance.stateMessage}` ?? "Deployment error",
+              exitCode: 1,
+            });
+          }
+
+          if (latestRun.readyReplicas === latestRun.replicas) {
+            return {
+              deployment: deployment.data,
+              latestRun: { replicas: latestRun.replicas },
+            };
+          }
+        }
+      }
+    }, "5s"),
+    { text: "Waiting for ready status", enabled: !flags.json },
+  );
+
+  if (!flags.json) {
+    if (latestRun.replicas) {
+      yield `✨ ${fmt.colors.bold("Your app is ready")}\n`;
+      yield "   " + fmt.colors.bold("Console URL");
+      yield "   " + new URL(
+        `/${team}/projects/${handle}/gradient-deployments/${deployment.id}`,
+        env.get("PAPERSPACE_CONSOLE_URL"),
+      ).toString();
+      yield "";
+      yield "   " + fmt.colors.bold("Deployment URL");
+      yield `   https://${deployment.endpoint}`;
+    } else {
+      yield `🌙 ${fmt.colors.bold("Your app was disabled")}\n`;
+      yield "   " + fmt.colors.bold("Console URL");
+      yield "   " + new URL(
+        `/${team}/projects/${handle}/gradient-deployments/${deployment.id}`,
+        env.get("PAPERSPACE_CONSOLE_URL"),
+      );
+    }
+  } else {
+    yield JSON.stringify(deployment, null, 2);
+  }
+}

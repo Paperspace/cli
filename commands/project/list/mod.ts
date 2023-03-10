@@ -14,14 +14,14 @@ const subCommands: ReturnType<typeof command>[] = [];
 
 export const list = command("list", {
   short: "List projects.",
-  long: () => `
+  long: ({ root }) => `
     List projects in your team.
 
     Examples:
 
     Pick a subset of fields to display:
     \`\`\`
-    pspace project list -F handle -F name -F dtCreated
+    ${root.name} project list -F handle -F name -F dtCreated
     \`\`\`
   `,
   commands: subCommands,
