@@ -4,7 +4,7 @@
     "name": "pspace",
     "version": "0.1.0-dev",
     "commit": "development",
-    "buildDate": "2023-03-10T16:54:28.249Z",
+    "buildDate": "2023-03-10T17:05:17.620Z",
     "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
     "summary": "A CLI for using the Paperspace API."
   },
@@ -1369,130 +1369,6 @@
           ],
           "commands": [
             {
-              "name": "create",
-              "description": "This will create a new deployment for your app. You can optionally specify a \npath to a config file. If no config file is specified, the default\nconfig file paths will be tried.\n\nCreate a new deployment for the app in the current directory.\n```\n$ pspace deployment create\n```\n\nCreate a new deployment using a config file.\n```\n$ pspace deployment create -c paperspace.json\n```\n\nCreate a new deployment for an app in a different directory.\n```\n$ pspace deployment create --cwd ../my-app\n```\n\nCreate a new deployment for an app in a specific project.\n```\n$ pspace deployment create --project-id 1234\n```",
-              "summary": "Create a new deployment",
-              "flags": [
-                {
-                  "name": "config",
-                  "aliases": [
-                    "c"
-                  ],
-                  "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
-                  "summary": "The path to the config file. Defaults to our default config file paths.",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": false,
-                  "schema": {
-                    "type": "string",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "project-id",
-                  "aliases": [
-                    "p"
-                  ],
-                  "description": "The ID of the project to deploy to.",
-                  "summary": "The ID of the project to deploy to.",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": false,
-                  "schema": {
-                    "type": "string",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "cwd",
-                  "aliases": [],
-                  "description": "The directory to deploy the app from. Defaults to the current directory.",
-                  "summary": "The directory to deploy the app from. Defaults to the current directory.",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": false,
-                  "schema": {
-                    "type": "string",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "log-level",
-                  "aliases": [
-                    "l"
-                  ],
-                  "description": "Enable debug logging.",
-                  "summary": "Enable debug logging",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "string",
-                    "enum": [
-                      "debug",
-                      "info",
-                      "warning",
-                      "error",
-                      "critical"
-                    ],
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "json",
-                  "aliases": [
-                    "j"
-                  ],
-                  "description": "Output JSON",
-                  "summary": "Output JSON",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "boolean",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "api-key",
-                  "aliases": [],
-                  "description": "A Paperspace public API Key used for authenticating requests",
-                  "summary": "A Paperspace public API Key used for authenticating requests",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "string",
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                },
-                {
-                  "name": "help",
-                  "aliases": [
-                    "h"
-                  ],
-                  "description": "Show help for a command",
-                  "summary": "Show help for a command",
-                  "required": false,
-                  "collects": false,
-                  "negatable": false,
-                  "global": true,
-                  "schema": {
-                    "type": "boolean",
-                    "default": false,
-                    "$schema": "http://json-schema.org/draft-07/schema#"
-                  }
-                }
-              ],
-              "commands": []
-            },
-            {
               "name": "delete",
               "description": "Delete a deployment by its ID. If you don't provide an ID, this command will\nprompt you for one based on the deployments you have access to.\n\n```\npspace deployment delete 123e4567-e89b-12d3-a456-426614174000\n```",
               "summary": "Delete a deployment.",
@@ -1717,7 +1593,7 @@
                         "get",
                         "list",
                         "delete",
-                        "create",
+                        "up",
                         "help"
                       ],
                       "description": "The command to show help for.",
@@ -1983,6 +1859,130 @@
                   "summary": "The fields to include in the response.",
                   "required": false,
                   "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "up",
+              "description": "This will create a new deployment for your app or update it if it already exists. \nYou can optionally specify a path to a config file. If no config file is specified, \nthe default config file paths will be tried.\n\nCreate a new deployment for the app in the current directory.\n```\n$ pspace deployment create\n```\n\nCreate a new deployment using a config file.\n```\n$ pspace deployment create -c paperspace.json\n```\n\nCreate a new deployment for an app in a different directory.\n```\n$ pspace deployment create --cwd ../my-app\n```\n\nCreate a new deployment for an app in a specific project.\n```\n$ pspace deployment create --project-id 1234\n```",
+              "summary": "Create or update a deployment",
+              "flags": [
+                {
+                  "name": "config",
+                  "aliases": [
+                    "c"
+                  ],
+                  "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
+                  "summary": "The path to the config file. Defaults to our default config file paths.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project to deploy to.",
+                  "summary": "The ID of the project to deploy to.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to deploy the app from. Defaults to the current directory.",
+                  "summary": "The directory to deploy the app from. Defaults to the current directory.",
+                  "required": false,
+                  "collects": false,
                   "negatable": false,
                   "global": false,
                   "schema": {
