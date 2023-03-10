@@ -10,11 +10,13 @@ export async function* dataTable(
 ): AsyncGenerator<string> {
   const locale = await config.get("locale");
 
-  const rows: string[][] = [
-    Object.keys(pickFields ? pick(json[0], pickFields) : json[0]).map((key) =>
-      key
-    ),
-  ];
+  const rows: string[][] = json.length
+    ? [
+      Object.keys(pickFields ? pick(json[0], pickFields) : json[0]).map((key) =>
+        key.toUpperCase()
+      ),
+    ]
+    : [];
 
   for (const obj of json) {
     rows.push(
@@ -29,15 +31,17 @@ export async function* dataTable(
     );
   }
 
-  let first = true;
+  if (rows.length) {
+    let first = true;
 
-  for (const line of table(rows, { indent: 0, cellPadding: 2 })) {
-    if (first) {
-      yield `${fmt.colors.bold(line)}`;
-    } else {
-      yield line;
+    for (const line of table(rows, { indent: 0, cellPadding: 2 })) {
+      if (first) {
+        yield `${fmt.colors.bold(line)}`;
+      } else {
+        yield line;
+      }
+
+      first = false;
     }
-
-    first = false;
   }
 }
