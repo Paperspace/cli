@@ -49,7 +49,7 @@ export const degit = flags({
       https://gitlab.com/user/repo
       \`\`\`
 
-      Download from BitBucket
+      Download from Bitbucket
       \`\`\`
       bitbucket:user/repo
       git@bitbucket.org:user/repo
