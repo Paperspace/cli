@@ -26,7 +26,7 @@ export async function* dataTable(
             timeStyle: "short",
             dateStyle: "short",
           }).format(Date.parse(value as any))
-          : value + "";
+          : (typeof value === "object" ? JSON.stringify(value) : (value + ""));
       }) as any[],
     );
   }

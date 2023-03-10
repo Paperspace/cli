@@ -13,8 +13,8 @@ const subCommands: ReturnType<typeof command>[] = [get, list, delete_, create];
 export const deployment = command("deployment", {
   short: "Effortlessly deploy ML apps to Paperspace.",
   commands: subCommands,
-}).run(({ args, flags, ctx }) => {
-  console.log("Arguments:", args);
-  console.log("Flags:", flags);
-  console.log("Context:", ctx);
+}).run(function* ({ ctx }) {
+  for (const line of deployment.help(ctx)) {
+    yield line;
+  }
 });
