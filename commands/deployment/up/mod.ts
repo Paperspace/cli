@@ -7,12 +7,12 @@ import { runUp, upFlags } from "../../up/mod.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const create = command("create", {
-  short: "Create a new deployment",
+export const up = command("up", {
+  short: "Create or update a deployment",
   long: ({ root }) => `
-    This will create a new deployment for your app. You can optionally specify a 
-    path to a config file. If no config file is specified, the default
-    config file paths will be tried.
+    This will create a new deployment for your app or update it if it already exists. 
+    You can optionally specify a path to a config file. If no config file is specified, 
+    the default config file paths will be tried.
 
     Create a new deployment for the app in the current directory.
     \`\`\`
