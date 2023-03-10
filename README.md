@@ -7,7 +7,7 @@
 Using Shell (macOS, Linux, and Windows using WSL):
 
 ```sh
-curl -fsSL https://console.paperspace.com/install.sh | sh
+curl -fsSL https://paperspace.com/install.sh | sh
 ```
 
 Using Scoop (Windows):
