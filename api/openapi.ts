@@ -74,6 +74,71 @@ export interface paths {
      */
     put: operations["mutation.projects.update"];
   };
+  "/projects/{handle}/deployments": {
+    /**
+     * List a project's deployments
+     * @description Fetches a list of deployments for a project.
+     */
+    get: operations["query.projectsDeployments.list"];
+  };
+  "/projects/{handle}/secrets": {
+    /**
+     * List a project's secrets
+     * @description Fetches a list of secrets for a project.
+     */
+    get: operations["query.projectSecrets.list"];
+    /**
+     * Create a project secret
+     * @description Creates a new secret for a project.
+     */
+    post: operations["mutation.projectSecrets.create"];
+  };
+  "/projects/{handle}/secrets/{name}": {
+    /**
+     * Get a project secret
+     * @description Fetches a secret for a project.
+     */
+    get: operations["query.projectSecrets.getProjectSecret"];
+    /**
+     * Delete a project secret
+     * @description Deletes a secret for a project.
+     */
+    delete: operations["mutation.projectSecrets.delete"];
+    /**
+     * Update a project secret
+     * @description Update the value of a secret for a project.
+     */
+    patch: operations["mutation.projectSecrets.update"];
+  };
+  "/teams/{handle}/secrets": {
+    /**
+     * List a team's secrets
+     * @description Fetches a list of secrets for a team.
+     */
+    get: operations["query.teamSecrets.list"];
+    /**
+     * Create a team secret
+     * @description Creates a new secret for a team.
+     */
+    post: operations["mutation.teamSecrets.create"];
+  };
+  "/teams/{handle}/secrets/{name}": {
+    /**
+     * Get a team secret
+     * @description Fetches a secret for a team.
+     */
+    get: operations["query.teamSecrets.get"];
+    /**
+     * Delete a team secret
+     * @description Deletes a secret for a team.
+     */
+    delete: operations["mutation.teamSecrets.delete"];
+    /**
+     * Update a team secret
+     * @description Update the value of a secret for a team.
+     */
+    patch: operations["mutation.teamSecrets.update"];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -384,11 +449,11 @@ export interface operations {
                     });
                   /** @description The ID of the deployment the spec belongs to */
                   readonly deploymentId: string;
-                  /** @description The error message for the deployment */
+                  /** @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error. */
                   readonly error: string | null;
                   /**
                    * Format: date-time
-                   * @description The date the deployment was applied to the cluster
+                   * @description The date the deployment configuration was applied to the cluster
                    */
                   readonly externalApplied: Date;
                   /** @description The ID of the deployment spec */
@@ -404,8 +469,10 @@ export interface operations {
               readonly latestSpecHash: string | null;
               /** @description The name of the deployment */
               readonly name: string;
+              /** @description The ID of the project the deployment belongs to */
+              readonly projectId: string;
               /** @description The ID of the team the deployment belongs to */
-              readonly teamId: number;
+              readonly teamId: string;
             })[];
             /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
             readonly nextPage: string | null;
@@ -659,6 +726,7 @@ export interface operations {
      * @description Fetches a single deployment by deployment ID.
      */
     parameters: {
+      /** @description The ID of the deployment to fetch */
       readonly path: {
         id: string;
       };
@@ -889,11 +957,11 @@ export interface operations {
                   });
                 /** @description The ID of the deployment the spec belongs to */
                 readonly deploymentId: string;
-                /** @description The error message for the deployment */
+                /** @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error. */
                 readonly error: string | null;
                 /**
                  * Format: date-time
-                 * @description The date the deployment was applied to the cluster
+                 * @description The date the deployment configuration was applied to the cluster
                  */
                 readonly externalApplied: Date;
                 /** @description The ID of the deployment spec */
@@ -909,8 +977,10 @@ export interface operations {
             readonly latestSpecHash: string | null;
             /** @description The name of the deployment */
             readonly name: string;
+            /** @description The ID of the project the deployment belongs to */
+            readonly projectId: string;
             /** @description The ID of the team the deployment belongs to */
-            readonly teamId: number;
+            readonly teamId: string;
           };
         };
       };
@@ -923,6 +993,7 @@ export interface operations {
      * @description Deletes a deployment by deployment ID.
      */
     parameters: {
+      /** @description The ID of the deployment to delete */
       readonly path: {
         id: string;
       };
@@ -932,6 +1003,7 @@ export interface operations {
       200: {
         content: {
           readonly "application/json": {
+            /** @description The ID of the deleted deployment */
             readonly id: string;
           };
         };
@@ -949,6 +1021,7 @@ export interface operations {
       readonly query: {
         limit?: number;
       };
+      /** @description The ID of the deployment to fetch */
       readonly path: {
         id: string;
       };
@@ -1281,6 +1354,678 @@ export interface operations {
              * @default null
              */
             readonly repoUrl: string | null;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "query.projectsDeployments.list": {
+    /**
+     * List a project's deployments
+     * @description Fetches a list of deployments for a project.
+     */
+    parameters: {
+      readonly query: {
+        name?: string;
+      };
+      /** @description The ID of the project to fetch deployments for */
+      readonly path: {
+        handle: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": readonly ({
+            /**
+             * Format: date-time
+             * @description The date the deployment was created
+             */
+            readonly dtCreated: Date;
+            /** @description The unique endpoint for the deployment */
+            readonly endpoint: string;
+            /** @description The ID of the deployment */
+            readonly id: string;
+            /** @description The latest deployment configuration. If invalid, null is returned. */
+            readonly latestSpec?:
+              | ({
+                /** @description The data for the deployment spec */
+                readonly data:
+                  | ({
+                    readonly apiVersion: "v0alpha0" | "latest";
+                    readonly command?: readonly [string, ...(string)[]];
+                    /** Format: uuid */
+                    readonly containerRegistry?: string;
+                    /** @default true */
+                    readonly enabled: boolean;
+                    readonly env?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly healthchecks?: {
+                      readonly liveness?: {
+                        readonly failureThreshold?: number;
+                        readonly headers?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly host?: string;
+                        readonly initialDelaySeconds?: number;
+                        readonly path: string;
+                        readonly periodSeconds?: number;
+                        readonly port?: number;
+                        readonly timeoutSeconds?: number;
+                      } | {
+                        readonly exec: {
+                          readonly command: readonly (string)[];
+                        };
+                        readonly failureThreshold?: number;
+                        readonly initialDelaySeconds?: number;
+                        readonly periodSeconds?: number;
+                        readonly timeoutSeconds?: number;
+                      };
+                      readonly readiness?: {
+                        readonly failureThreshold?: number;
+                        readonly headers?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly host?: string;
+                        readonly initialDelaySeconds?: number;
+                        readonly path: string;
+                        readonly periodSeconds?: number;
+                        readonly port?: number;
+                        readonly timeoutSeconds?: number;
+                      } | {
+                        readonly exec: {
+                          readonly command: readonly (string)[];
+                        };
+                        readonly failureThreshold?: number;
+                        readonly initialDelaySeconds?: number;
+                        readonly periodSeconds?: number;
+                        readonly timeoutSeconds?: number;
+                      };
+                      readonly startup?: {
+                        readonly failureThreshold?: number;
+                        readonly headers?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly host?: string;
+                        readonly initialDelaySeconds?: number;
+                        readonly path: string;
+                        readonly periodSeconds?: number;
+                        readonly port?: number;
+                        readonly timeoutSeconds?: number;
+                      } | {
+                        readonly exec: {
+                          readonly command: readonly (string)[];
+                        };
+                        readonly failureThreshold?: number;
+                        readonly initialDelaySeconds?: number;
+                        readonly periodSeconds?: number;
+                        readonly timeoutSeconds?: number;
+                      };
+                    };
+                    readonly image: string;
+                    readonly models?: readonly ({
+                      readonly id: string;
+                      readonly path?: string;
+                    })[];
+                    readonly name: string;
+                    /** @default 80 */
+                    readonly port: number;
+                    /** @default null */
+                    readonly region: string | null;
+                    readonly repositories?: {
+                      readonly dataset: string;
+                      readonly mountPath?: string;
+                      readonly repositories: readonly ({
+                        readonly name: string;
+                        readonly password?: string;
+                        readonly ref?: string;
+                        readonly url: string;
+                        readonly username?: string;
+                      })[];
+                    };
+                    readonly resources: {
+                      readonly autoscaling?: {
+                        readonly enabled?: boolean;
+                        readonly maxReplicas: number;
+                        readonly metrics: readonly (
+                          | {
+                            /** @enum {string} */
+                            readonly metric: "requestDuration";
+                            /** @enum {string} */
+                            readonly summary: "average";
+                            readonly value: number;
+                          }
+                          | ({
+                            /** @enum {string} */
+                            readonly metric: "cpu" | "memory";
+                            /** @enum {string} */
+                            readonly summary: "average";
+                            readonly value: number;
+                          })
+                        )[];
+                      };
+                      readonly instanceType: string;
+                      /** @default 1 */
+                      readonly replicas: number;
+                    };
+                  })
+                  | ({
+                    /** @enum {string} */
+                    readonly apiVersion: "v0alpha1";
+                    readonly command: readonly [string, ...(string)[]];
+                    /** Format: uuid */
+                    readonly containerRegistry?: string;
+                    /** @default true */
+                    readonly enabled: boolean;
+                    readonly env?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly healthchecks?: {
+                      readonly liveness?: {
+                        readonly failureThreshold?: number;
+                        readonly headers?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly host?: string;
+                        readonly initialDelaySeconds?: number;
+                        readonly path: string;
+                        readonly periodSeconds?: number;
+                        readonly port?: number;
+                        readonly timeoutSeconds?: number;
+                      } | {
+                        readonly exec: {
+                          readonly command: readonly (string)[];
+                        };
+                        readonly failureThreshold?: number;
+                        readonly initialDelaySeconds?: number;
+                        readonly periodSeconds?: number;
+                        readonly timeoutSeconds?: number;
+                      };
+                      readonly readiness?: {
+                        readonly failureThreshold?: number;
+                        readonly headers?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly host?: string;
+                        readonly initialDelaySeconds?: number;
+                        readonly path: string;
+                        readonly periodSeconds?: number;
+                        readonly port?: number;
+                        readonly timeoutSeconds?: number;
+                      } | {
+                        readonly exec: {
+                          readonly command: readonly (string)[];
+                        };
+                        readonly failureThreshold?: number;
+                        readonly initialDelaySeconds?: number;
+                        readonly periodSeconds?: number;
+                        readonly timeoutSeconds?: number;
+                      };
+                      readonly startup?: {
+                        readonly failureThreshold?: number;
+                        readonly headers?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly host?: string;
+                        readonly initialDelaySeconds?: number;
+                        readonly path: string;
+                        readonly periodSeconds?: number;
+                        readonly port?: number;
+                        readonly timeoutSeconds?: number;
+                      } | {
+                        readonly exec: {
+                          readonly command: readonly (string)[];
+                        };
+                        readonly failureThreshold?: number;
+                        readonly initialDelaySeconds?: number;
+                        readonly periodSeconds?: number;
+                        readonly timeoutSeconds?: number;
+                      };
+                    };
+                    readonly image: string;
+                    readonly name: string;
+                    /** @default null */
+                    readonly region: string | null;
+                  });
+                /** @description The ID of the deployment the spec belongs to */
+                readonly deploymentId: string;
+                /** @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error. */
+                readonly error: string | null;
+                /**
+                 * Format: date-time
+                 * @description The date the deployment configuration was applied to the cluster
+                 */
+                readonly externalApplied: Date;
+                /** @description The ID of the deployment spec */
+                readonly id: string;
+                /** @description The ID of the user the deployment belongs to */
+                readonly userId: number;
+              })
+              | null;
+            /**
+             * @description The last version hash for the deployment
+             * @default null
+             */
+            readonly latestSpecHash: string | null;
+            /** @description The name of the deployment */
+            readonly name: string;
+            /** @description The ID of the project the deployment belongs to */
+            readonly projectId: string;
+            /** @description The ID of the team the deployment belongs to */
+            readonly teamId: string;
+          })[];
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "query.projectSecrets.list": {
+    /**
+     * List a project's secrets
+     * @description Fetches a list of secrets for a project.
+     */
+    parameters: {
+      /** @description Fetch the next page of results after this cursor. */
+      /** @description The number of items to fetch after this page. */
+      /** @description Order results by one of these fields. */
+      /** @description The order to sort the results by. */
+      readonly query: {
+        after?: string;
+        limit?: number;
+        orderBy?: "dtCreated";
+        order?: "asc" | "desc";
+      };
+      /** @description The ID of the project where the secret is stored. */
+      readonly path: {
+        handle: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the secret was created.
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the secret was last modified.
+               */
+              readonly dtModified: Date;
+              /** @description The name of the secret, e.g. "DB_PASSWORD". */
+              readonly name: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage: string | null;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "mutation.projectSecrets.create": {
+    /**
+     * Create a project secret
+     * @description Creates a new secret for a project.
+     */
+    parameters: {
+      /** @description The ID of the project where the secret is stored. */
+      readonly path: {
+        handle: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the secret, e.g. "DB_PASSWORD". */
+          readonly name: string;
+          /** @description The value of the secret, e.g. "password". */
+          readonly value: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the secret was created.
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the secret was last modified.
+             */
+            readonly dtModified: Date;
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "query.projectSecrets.getProjectSecret": {
+    /**
+     * Get a project secret
+     * @description Fetches a secret for a project.
+     */
+    parameters: {
+      /** @description The ID of the project where the secret is stored. */
+      /** @description The name of the secret, e.g. "DB_PASSWORD". */
+      readonly path: {
+        handle: string;
+        name: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the secret was created.
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the secret was last modified.
+             */
+            readonly dtModified: Date;
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "mutation.projectSecrets.delete": {
+    /**
+     * Delete a project secret
+     * @description Deletes a secret for a project.
+     */
+    parameters: {
+      /** @description The ID of the project where the secret is stored. */
+      /** @description The name of the secret, e.g. "DB_PASSWORD". */
+      readonly path: {
+        handle: string;
+        name: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "mutation.projectSecrets.update": {
+    /**
+     * Update a project secret
+     * @description Update the value of a secret for a project.
+     */
+    parameters: {
+      /** @description The ID of the project where the secret is stored. */
+      /** @description The name of the secret, e.g. "DB_PASSWORD". */
+      readonly path: {
+        handle: string;
+        name: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The value of the secret, e.g. "password". */
+          readonly value: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the secret was created.
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the secret was last modified.
+             */
+            readonly dtModified: Date;
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "query.teamSecrets.list": {
+    /**
+     * List a team's secrets
+     * @description Fetches a list of secrets for a team.
+     */
+    parameters: {
+      /** @description Fetch the next page of results after this cursor. */
+      /** @description The number of items to fetch after this page. */
+      /** @description Order results by one of these fields. */
+      /** @description The order to sort the results by. */
+      readonly query: {
+        after?: string;
+        limit?: number;
+        orderBy?: "dtCreated";
+        order?: "asc" | "desc";
+      };
+      /** @description The ID of the team where the secret is stored. */
+      readonly path: {
+        handle: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the secret was created.
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the secret was last modified.
+               */
+              readonly dtModified: Date;
+              /** @description The name of the secret, e.g. "DB_PASSWORD". */
+              readonly name: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage: string | null;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "mutation.teamSecrets.create": {
+    /**
+     * Create a team secret
+     * @description Creates a new secret for a team.
+     */
+    parameters: {
+      /** @description The ID of the team where the secret is stored. */
+      readonly path: {
+        handle: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the secret, e.g. "DB_PASSWORD". */
+          readonly name: string;
+          /** @description The value of the secret, e.g. "password". */
+          readonly value: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the secret was created.
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the secret was last modified.
+             */
+            readonly dtModified: Date;
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "query.teamSecrets.get": {
+    /**
+     * Get a team secret
+     * @description Fetches a secret for a team.
+     */
+    parameters: {
+      /** @description The ID of the team where the secret is stored. */
+      /** @description The name of the secret, e.g. "DB_PASSWORD". */
+      readonly path: {
+        handle: string;
+        name: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the secret was created.
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the secret was last modified.
+             */
+            readonly dtModified: Date;
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "mutation.teamSecrets.delete": {
+    /**
+     * Delete a team secret
+     * @description Deletes a secret for a team.
+     */
+    parameters: {
+      /** @description The ID of the team where the secret is stored. */
+      /** @description The name of the secret, e.g. "DB_PASSWORD". */
+      readonly path: {
+        handle: string;
+        name: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  "mutation.teamSecrets.update": {
+    /**
+     * Update a team secret
+     * @description Update the value of a secret for a team.
+     */
+    parameters: {
+      /** @description The ID of the team where the secret is stored. */
+      /** @description The name of the secret, e.g. "DB_PASSWORD". */
+      readonly path: {
+        handle: string;
+        name: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The value of the secret, e.g. "password". */
+          readonly value: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the secret was created.
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the secret was last modified.
+             */
+            readonly dtModified: Date;
+            /** @description The name of the secret, e.g. "DB_PASSWORD". */
+            readonly name: string;
           };
         };
       };

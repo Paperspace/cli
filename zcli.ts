@@ -3,7 +3,7 @@ import {
   flags,
   inferContext,
   init,
-} from "https://deno.land/x/zcli@1.3.2/mod.ts";
+} from "https://deno.land/x/zcli@1.3.3/mod.ts";
 
 import { COMMIT, VERSION } from "./version.ts";
 
@@ -52,11 +52,11 @@ export const app = init({
 
 export type Context = inferContext<typeof app>;
 export const { command } = app;
-export * from "https://deno.land/x/zcli@1.3.2/mod.ts";
+export * from "https://deno.land/x/zcli@1.3.3/mod.ts";
 export type {
   Join,
   NestedKeys,
   NestedValue,
-} from "https://deno.land/x/zcli@1.3.2/lib/types.ts";
-export { textEncoder } from "https://deno.land/x/zcli@1.3.2/lib/text-encoder.ts";
-export { table } from "https://deno.land/x/zcli@1.3.2/lib/simple-table.ts";
+} from "https://deno.land/x/zcli@1.3.3/lib/types.ts";
+export { textEncoder } from "https://deno.land/x/zcli@1.3.3/lib/text-encoder.ts";
+export { table } from "https://deno.land/x/zcli@1.3.3/lib/simple-table.ts";
