@@ -8,7 +8,7 @@ import { loading } from "../../../lib/loading.ts";
 import { input } from "../../../prompts/input.ts";
 import { confirm } from "../../../prompts/confirm.ts";
 import { secret } from "../../../prompts/secret.ts";
-import { args, command, fmt } from "../../../zcli.ts";
+import { args, command } from "../../../zcli.ts";
 import { secretFlags } from "../flags.ts";
 
 /**
@@ -17,7 +17,7 @@ import { secretFlags } from "../flags.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const create = command("create", {
+export const update = command("update", {
   short: "",
   commands: subCommands,
   args: args().tuple([
@@ -63,23 +63,20 @@ export const create = command("create", {
       const team = await config.get("team");
       asserts(
         team,
-        "You must be logged into a team to create a secret.",
+        "You must be logged into a team to update a secret.",
       );
 
       if (!flags.json) {
-        yield fmt.colors.yellow(
-          `This secret will be available to all resources in the team.`,
-        );
         asserts(
           await confirm(
-            `Are you sure you want to create a global secret in team "${team}"?`,
+            `Are you sure you want to update your global secret "${name}" in team "${team}"?`,
           ),
           "Aborted",
         );
       }
 
       const response = await loading(
-        teamSecrets.create({ handle: team, name, value }),
+        teamSecrets.update({ handle: team, name, value }),
       );
 
       asserts(response.ok, response);
@@ -88,7 +85,7 @@ export const create = command("create", {
       if (flags.json) {
         yield JSON.stringify(result, null, 2);
       } else {
-        yield `Created secret "${name}" in team "${team}"`;
+        yield `Updated secret "${name}" in team "${team}"`;
       }
     } else {
       const project = await findProject({
@@ -97,7 +94,7 @@ export const create = command("create", {
         quiet: flags.json,
       });
       const response = await loading(
-        projectSecrets.create({ handle: project.handle, name, value }),
+        projectSecrets.update({ handle: project.handle, name, value }),
       );
 
       asserts(response.ok, response);
@@ -106,7 +103,7 @@ export const create = command("create", {
       if (flags.json) {
         yield JSON.stringify(result, null, 2);
       } else {
-        yield `Created secret "${name}" in project "${project.name}"`;
+        yield `Updated secret "${name}" in project "${project.name}"`;
       }
     }
   },

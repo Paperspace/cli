@@ -4,7 +4,7 @@
     "name": "pspace",
     "version": "0.1.0-dev",
     "commit": "development",
-    "buildDate": "2023-03-11T14:20:59.025Z",
+    "buildDate": "2023-03-11T15:52:54.499Z",
     "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
     "summary": "A CLI for using the Paperspace API."
   },
@@ -1793,7 +1793,7 @@
             },
             {
               "name": "list",
-              "description": "List deployments in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace deployment list -F id -F name\n```",
+              "description": "List deployments in your team.\n\nPick a subset of fields to display:\n```\npspace deployment list -F id -F name\n```",
               "summary": "List deployments.",
               "usage": "  pspace deployment [flags]",
               "flags": [
@@ -1970,7 +1970,7 @@
                   "aliases": [
                     "c"
                   ],
-                  "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
+                  "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.jsonc`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.jsonc`\n- `.paperspace/app.toml`",
                   "summary": "The path to the config file. Defaults to our default config file paths.",
                   "required": false,
                   "collects": false,
@@ -3391,7 +3391,7 @@
             },
             {
               "name": "list",
-              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
+              "description": "List projects in your team.\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
               "summary": "List projects.",
               "usage": "  pspace project [flags]",
               "flags": [
@@ -3769,13 +3769,87 @@
               "name": "create",
               "description": "",
               "summary": "",
-              "usage": "  pspace secret [flags]",
+              "usage": "  pspace secret [arguments] [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
-                "items": []
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  },
+                  {
+                    "position": 1,
+                    "summary": "The value of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 8192,
+                      "description": "The value of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
               },
               "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
                 {
                   "name": "log-level",
                   "aliases": [
@@ -3851,10 +3925,76 @@
             },
             {
               "name": "delete",
-              "description": "",
-              "summary": "",
-              "usage": "  pspace secret [flags]",
+              "description": "Delete a secret from a project or team.",
+              "summary": "Delete a secret",
+              "usage": "  pspace secret [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret to delete",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret to delete",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
               "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
                 {
                   "name": "log-level",
                   "aliases": [
@@ -3930,10 +4070,92 @@
             },
             {
               "name": "get",
-              "description": "",
-              "summary": "",
-              "usage": "  pspace secret [flags]",
+              "description": "Get a secret from a project or team.",
+              "summary": "Get a secret",
+              "usage": "  pspace secret [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret to get",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret to get",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
               "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
                 {
                   "name": "log-level",
                   "aliases": [
@@ -4028,6 +4250,7 @@
                         "get",
                         "list",
                         "delete",
+                        "update",
                         "help"
                       ],
                       "description": "The command to show help for.",
@@ -4209,10 +4432,303 @@
             },
             {
               "name": "list",
-              "description": "",
-              "summary": "",
+              "description": "List secrets in your team or project.\n\nPick a subset of fields to display:\n```\npspace secret list -F name -F dtModified\n```",
+              "summary": "List secrets.",
               "usage": "  pspace secret [flags]",
               "flags": [
+                {
+                  "name": "limit",
+                  "aliases": [],
+                  "description": "The number of projects to return in the next page.",
+                  "summary": "The number of projects to return in the next page.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "number",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "after",
+                  "aliases": [],
+                  "description": "The cursor to fetch the next results from.",
+                  "summary": "The cursor to fetch the next results from.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "orderBy",
+                  "aliases": [],
+                  "description": "The field to order projects by.",
+                  "summary": "The field to order projects by.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "dtCreated"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "asc",
+                  "aliases": [],
+                  "description": "Whether to order projects ascending.",
+                  "summary": "Whether to order projects ascending.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "desc",
+                  "aliases": [],
+                  "description": "Whether to order projects descending.",
+                  "summary": "Whether to order projects descending.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "update",
+              "description": "",
+              "summary": "",
+              "usage": "  pspace secret [arguments] [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  },
+                  {
+                    "position": 1,
+                    "summary": "The value of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 8192,
+                      "description": "The value of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
                 {
                   "name": "log-level",
                   "aliases": [
@@ -4378,7 +4894,7 @@
               "aliases": [
                 "c"
               ],
-              "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
+              "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.jsonc`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.jsonc`\n- `.paperspace/app.toml`",
               "summary": "The path to the config file. Defaults to our default config file paths.",
               "required": false,
               "collects": false,
