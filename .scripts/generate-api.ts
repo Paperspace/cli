@@ -10,7 +10,6 @@ const output = await openapiTS(url, {
   supportArrayLength: true,
   alphabetize: true,
   immutableTypes: true,
-  defaultNonNullable: true,
   transform(schemaObject) {
     if ("format" in schemaObject && schemaObject.format === "date-time") {
       return "Date";

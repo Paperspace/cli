@@ -107,8 +107,10 @@ export async function* runUp(
 
   logger.info({ projectId: project.handle, config: configFile });
   const upsert = await loading(
-    // @ts-expect-error: it'll be ok
-    deployments.upsert({ projectId: handle, config: configFile }),
+    deployments.upsert({
+      projectId: project.handle,
+      config: configFile,
+    }),
     { text: "Deploying", enabled: !flags.json },
   );
 
