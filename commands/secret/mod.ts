@@ -25,6 +25,11 @@ export const secret = command("secret", {
     can be safely injected into workloads as environment variables. An environment 
     variable that uses a Secret will not reveal the contents of the secret itself.
 
+    Secrets can be created at the following levels:
+    
+    - Project (default): these secrets are applied to all resources in a project
+    - Global: these secrets can be applied to all resources on your current team
+
     For more information, see https://docs.paperspace.com/secrets.
   `,
   commands: subCommands,
