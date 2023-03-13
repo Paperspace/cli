@@ -248,7 +248,7 @@ export interface operations {
                       /** Format: uuid */
                       readonly containerRegistry?: string;
                       /** @default true */
-                      readonly enabled: boolean;
+                      readonly enabled?: boolean;
                       readonly env?: readonly ({
                         readonly name: string;
                         readonly value: string;
@@ -325,7 +325,7 @@ export interface operations {
                       })[];
                       readonly name: string;
                       /** @default 80 */
-                      readonly port: number;
+                      readonly port?: number;
                       readonly region?: string;
                       readonly repositories?: {
                         readonly dataset: string;
@@ -361,7 +361,7 @@ export interface operations {
                         };
                         readonly instanceType: string;
                         /** @default 1 */
-                        readonly replicas: number;
+                        readonly replicas?: number;
                       };
                     })
                     | ({
@@ -371,7 +371,7 @@ export interface operations {
                       /** Format: uuid */
                       readonly containerRegistry?: string;
                       /** @default true */
-                      readonly enabled: boolean;
+                      readonly enabled?: boolean;
                       readonly env?: readonly ({
                         readonly name: string;
                         readonly value: string;
@@ -464,7 +464,7 @@ export interface operations {
                * @description The last version hash for the deployment
                * @default null
                */
-              readonly latestSpecHash: string | null;
+              readonly latestSpecHash?: string | null;
               /** @description The name of the deployment */
               readonly name: string;
               /** @description The ID of the project the deployment belongs to */
@@ -496,7 +496,7 @@ export interface operations {
               /** Format: uuid */
               readonly containerRegistry?: string;
               /** @default true */
-              readonly enabled: boolean;
+              readonly enabled?: boolean;
               readonly env?: readonly ({
                 readonly name: string;
                 readonly value: string;
@@ -573,7 +573,7 @@ export interface operations {
               })[];
               readonly name: string;
               /** @default 80 */
-              readonly port: number;
+              readonly port?: number;
               readonly region?: string;
               readonly repositories?: {
                 readonly dataset: string;
@@ -609,7 +609,7 @@ export interface operations {
                 };
                 readonly instanceType: string;
                 /** @default 1 */
-                readonly replicas: number;
+                readonly replicas?: number;
               };
             })
             | ({
@@ -619,7 +619,7 @@ export interface operations {
               /** Format: uuid */
               readonly containerRegistry?: string;
               /** @default true */
-              readonly enabled: boolean;
+              readonly enabled?: boolean;
               readonly env?: readonly ({
                 readonly name: string;
                 readonly value: string;
@@ -697,7 +697,7 @@ export interface operations {
            * @description The ID of the deployment to update.
            * @default null
            */
-          readonly deploymentId: string | null;
+          readonly deploymentId?: string | null;
           /** @description The project ID to deploy resources under. */
           readonly projectId: string;
         };
@@ -752,7 +752,7 @@ export interface operations {
                     /** Format: uuid */
                     readonly containerRegistry?: string;
                     /** @default true */
-                    readonly enabled: boolean;
+                    readonly enabled?: boolean;
                     readonly env?: readonly ({
                       readonly name: string;
                       readonly value: string;
@@ -829,7 +829,7 @@ export interface operations {
                     })[];
                     readonly name: string;
                     /** @default 80 */
-                    readonly port: number;
+                    readonly port?: number;
                     readonly region?: string;
                     readonly repositories?: {
                       readonly dataset: string;
@@ -865,7 +865,7 @@ export interface operations {
                       };
                       readonly instanceType: string;
                       /** @default 1 */
-                      readonly replicas: number;
+                      readonly replicas?: number;
                     };
                   })
                   | ({
@@ -875,7 +875,7 @@ export interface operations {
                     /** Format: uuid */
                     readonly containerRegistry?: string;
                     /** @default true */
-                    readonly enabled: boolean;
+                    readonly enabled?: boolean;
                     readonly env?: readonly ({
                       readonly name: string;
                       readonly value: string;
@@ -968,7 +968,7 @@ export interface operations {
              * @description The last version hash for the deployment
              * @default null
              */
-            readonly latestSpecHash: string | null;
+            readonly latestSpecHash?: string | null;
             /** @description The name of the deployment */
             readonly name: string;
             /** @description The ID of the project the deployment belongs to */
@@ -1029,7 +1029,7 @@ export interface operations {
              * @description The amount of replicas that are available but not ready
              * @default 0
              */
-            readonly availableReplicas: number;
+            readonly availableReplicas?: number;
             readonly id: string;
             /** @description The deployment run instances */
             readonly instances: readonly ({
@@ -1043,14 +1043,14 @@ export interface operations {
                * @description The date the instance was finished
                * @default null
                */
-              readonly dtFinished: Date;
+              readonly dtFinished?: Date;
               /** @description The time series state history of the deployment instance */
               readonly history: readonly ({
                 /**
                  * @description The state message from the instance at the point in time
                  * @default null
                  */
-                readonly message: string | null;
+                readonly message?: string | null;
                 /** @description The state of the instance at the point in time */
                 readonly state: string;
                 /**
@@ -1069,18 +1069,18 @@ export interface operations {
                * @description The latest state message for the instance
                * @default null
                */
-              readonly stateMessage: string | null;
+              readonly stateMessage?: string | null;
             })[];
             /**
              * @description The amount of replicas that are ready
              * @default 0
              */
-            readonly readyReplicas: number;
+            readonly readyReplicas?: number;
             /**
              * @description The desired amount of replicas for the deployment run
              * @default 0
              */
-            readonly replicas: number;
+            readonly replicas?: number;
           })[];
         };
       };
@@ -1139,12 +1139,12 @@ export interface operations {
                * @description The date the project was deleted
                * @default null
                */
-              readonly dtDeleted: Date;
+              readonly dtDeleted?: Date;
               /**
                * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
                * @default null
                */
-              readonly githubAppInstallationId: number | null;
+              readonly githubAppInstallationId?: number | null;
               /** @description The ID of the project */
               readonly handle: string;
               /** @description The name of the project */
@@ -1153,17 +1153,17 @@ export interface operations {
                * @description The name of the GitHub repository if this is is a GitHub-connected project.
                * @default null
                */
-              readonly repoName: string | null;
+              readonly repoName?: string | null;
               /**
                * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
                * @default null
                */
-              readonly repoNodeId: string | null;
+              readonly repoNodeId?: string | null;
               /**
                * @description The URL of the GitHub repository if this is is a GitHub-connected project.
                * @default null
                */
-              readonly repoUrl: string | null;
+              readonly repoUrl?: string | null;
             })[];
             /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
             readonly nextPage: string | null;
@@ -1201,12 +1201,12 @@ export interface operations {
              * @description The date the project was deleted
              * @default null
              */
-            readonly dtDeleted: Date;
+            readonly dtDeleted?: Date;
             /**
              * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
              * @default null
              */
-            readonly githubAppInstallationId: number | null;
+            readonly githubAppInstallationId?: number | null;
             /** @description The ID of the project */
             readonly handle: string;
             /** @description The name of the project */
@@ -1215,17 +1215,17 @@ export interface operations {
              * @description The name of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoName: string | null;
+            readonly repoName?: string | null;
             /**
              * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoNodeId: string | null;
+            readonly repoNodeId?: string | null;
             /**
              * @description The URL of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoUrl: string | null;
+            readonly repoUrl?: string | null;
           };
         };
       };
@@ -1258,12 +1258,12 @@ export interface operations {
              * @description The date the project was deleted
              * @default null
              */
-            readonly dtDeleted: Date;
+            readonly dtDeleted?: Date;
             /**
              * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
              * @default null
              */
-            readonly githubAppInstallationId: number | null;
+            readonly githubAppInstallationId?: number | null;
             /** @description The ID of the project */
             readonly handle: string;
             /** @description The name of the project */
@@ -1272,17 +1272,17 @@ export interface operations {
              * @description The name of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoName: string | null;
+            readonly repoName?: string | null;
             /**
              * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoNodeId: string | null;
+            readonly repoNodeId?: string | null;
             /**
              * @description The URL of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoUrl: string | null;
+            readonly repoUrl?: string | null;
           };
         };
       };
@@ -1323,12 +1323,12 @@ export interface operations {
              * @description The date the project was deleted
              * @default null
              */
-            readonly dtDeleted: Date;
+            readonly dtDeleted?: Date;
             /**
              * @description The ID of the GitHub App installation if this is is a GitHub-connected project.
              * @default null
              */
-            readonly githubAppInstallationId: number | null;
+            readonly githubAppInstallationId?: number | null;
             /** @description The ID of the project */
             readonly handle: string;
             /** @description The name of the project */
@@ -1337,17 +1337,17 @@ export interface operations {
              * @description The name of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoName: string | null;
+            readonly repoName?: string | null;
             /**
              * @description The node ID of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoNodeId: string | null;
+            readonly repoNodeId?: string | null;
             /**
              * @description The URL of the GitHub repository if this is is a GitHub-connected project.
              * @default null
              */
-            readonly repoUrl: string | null;
+            readonly repoUrl?: string | null;
           };
         };
       };
@@ -1393,7 +1393,7 @@ export interface operations {
                     /** Format: uuid */
                     readonly containerRegistry?: string;
                     /** @default true */
-                    readonly enabled: boolean;
+                    readonly enabled?: boolean;
                     readonly env?: readonly ({
                       readonly name: string;
                       readonly value: string;
@@ -1470,7 +1470,7 @@ export interface operations {
                     })[];
                     readonly name: string;
                     /** @default 80 */
-                    readonly port: number;
+                    readonly port?: number;
                     readonly region?: string;
                     readonly repositories?: {
                       readonly dataset: string;
@@ -1506,7 +1506,7 @@ export interface operations {
                       };
                       readonly instanceType: string;
                       /** @default 1 */
-                      readonly replicas: number;
+                      readonly replicas?: number;
                     };
                   })
                   | ({
@@ -1516,7 +1516,7 @@ export interface operations {
                     /** Format: uuid */
                     readonly containerRegistry?: string;
                     /** @default true */
-                    readonly enabled: boolean;
+                    readonly enabled?: boolean;
                     readonly env?: readonly ({
                       readonly name: string;
                       readonly value: string;
@@ -1609,7 +1609,7 @@ export interface operations {
              * @description The last version hash for the deployment
              * @default null
              */
-            readonly latestSpecHash: string | null;
+            readonly latestSpecHash?: string | null;
             /** @description The name of the deployment */
             readonly name: string;
             /** @description The ID of the project the deployment belongs to */

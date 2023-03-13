@@ -109,7 +109,6 @@ export async function* runUp(
   const upsert = await loading(
     deployments.upsert({
       projectId: project.handle,
-      deploymentId: null,
       config: configFile,
     }),
     { text: "Deploying", enabled: !flags.json },
