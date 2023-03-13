@@ -119,7 +119,7 @@ export async function getLatestVersion(ctx: Context) {
             url: asset.browser_download_url,
           })),
         },
-        1000 * 60 * 60 * 24, // 24 hours
+        60 * 60 * 4, // 4 hours
       );
 
       logger.info(`Found the latest version: ${json.tag_name}`);
@@ -167,7 +167,7 @@ export async function getLatestVersionAssets(
             url: asset.browser_download_url,
           })),
         },
-        1000 * 60 * 60 * 24, // 24 hours
+        60 * 60 * 4, // 4 hours
       );
 
       logger.info(`Found the latest version: ${json.tag_name}`);
