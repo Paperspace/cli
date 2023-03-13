@@ -18,7 +18,10 @@ import { secretFlags } from "../flags.ts";
 const subCommands: ReturnType<typeof command>[] = [];
 
 export const update = command("update", {
-  short: "",
+  short: "Update a secret",
+  long: `
+    Update a secret in a project or team.
+  `,
   commands: subCommands,
   args: args().tuple([
     secretSchema.shape.name.describe("The name of the secret"),
