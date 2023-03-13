@@ -36,7 +36,7 @@ export const upgrade = command("upgrade", {
   commands: subCommands,
 }).run(async function* ({ ctx }) {
   const currentVersion = ctx.meta.version;
-  const latestVersion = await _internals.getLatestVersion(ctx);
+  const latestVersion = await _internals.getLatestVersion(ctx, { force: true });
 
   if (currentVersion === latestVersion) {
     yield "Already up-to-date.";
@@ -91,12 +91,17 @@ export const upgrade = command("upgrade", {
   yield ` → Run ${fmt.colors.bold(`${ctx.root.name} version`)} to verify.`;
 });
 
-export async function getLatestVersion(ctx: Context) {
+export async function getLatestVersion(ctx: Context, options: {
+  /**
+   * Force a check for an update.
+   */
+  force?: boolean;
+} = {}) {
   if (ctx.meta.commit !== "development") {
     const cached = await cache.get("updateAvailable");
     // If we've checked for an update in the last 24 hours, return the cached value
     // Otherwise, check for an update.
-    if (!cached) {
+    if (!cached || options.force) {
       logger.info("Checking for the latest version...");
 
       const response = await fetch(
@@ -119,7 +124,7 @@ export async function getLatestVersion(ctx: Context) {
             url: asset.browser_download_url,
           })),
         },
-        1000 * 60 * 60 * 24, // 24 hours
+        60 * 60 * 8, // 8 hours
       );
 
       logger.info(`Found the latest version: ${json.tag_name}`);
@@ -167,7 +172,7 @@ export async function getLatestVersionAssets(
             url: asset.browser_download_url,
           })),
         },
-        1000 * 60 * 60 * 24, // 24 hours
+        60 * 60 * 8, // 8 hours
       );
 
       logger.info(`Found the latest version: ${json.tag_name}`);
