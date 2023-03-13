@@ -4,7 +4,7 @@
     "name": "pspace",
     "version": "0.1.0-dev",
     "commit": "development",
-    "buildDate": "2023-03-10T17:05:17.620Z",
+    "buildDate": "2023-03-13T13:38:57.799Z",
     "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
     "summary": "A CLI for using the Paperspace API."
   },
@@ -13,6 +13,7 @@
       "name": "pspace",
       "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
       "summary": "A CLI for using the Paperspace API.",
+      "usage": "  pspace [command]\n  pspace [flags]",
       "flags": [
         {
           "name": "log-level",
@@ -90,6 +91,7 @@
           "name": "completion",
           "description": "Generate an autocompletion script for pspace in the specified shell.\nSee each sub-command's help for details on how to use the generated script.",
           "summary": "Generate an autocompletion script for the specified shell",
+          "usage": "  pspace [command]\n  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -165,8 +167,9 @@
           "commands": [
             {
               "name": "bash",
-              "description": "Generate the autocompletion script for the bash shell.\n\nThis script depends on the `bash-completion` package.\nIf it is not installed already, you can install it via your OS's package manager.\n\nTo load completions in your current shell session:\n```\n$ source <(pspace completion bash)\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion bash > /etc/bash_completion.d/pspace\n```\n\nMacOS:\n```\n$ pspace completion bash > /usr/local/etc/bash_completion.d/pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "description": "Generate the autocompletion script for the bash shell.\n\nThis script depends on the `bash-completion` package.\nIf it is not installed already, you can install it via your OS's package manager.\n\nTo load completions in your current shell session:\n```\n$ source <(pspace completion bash)\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion bash > /etc/bash_completion.d/pspace\n```\n\nmacOS:\n```\n$ pspace completion bash > /usr/local/etc/bash_completion.d/pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
               "summary": "Generate an autocompletion script for the bash shell",
+              "usage": "  pspace completion [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -245,6 +248,7 @@
               "name": "fish",
               "description": "Generate the autocompletion script for the fish shell.\n\nTo load completions in your current shell session:\n```\n$ pspace completion fish | source\n```\n\nTo load completions for every new session, execute once:\n```\n$ pspace completion fish > ~/.config/fish/completions/pspace.fish\n```\n\nYou will need to start a new shell for this setup to take effect.",
               "summary": "Generate an autocompletion script for the fish shell",
+              "usage": "  pspace completion [flags]",
               "flags": [
                 {
                   "name": "no-descriptions",
@@ -338,6 +342,7 @@
               "name": "help",
               "description": "Show help for a completion command",
               "summary": "Show help for a completion command",
+              "usage": "  pspace completion [command]\n  pspace completion [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -436,8 +441,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List completion commands",
+                  "description": "List completion commands\n\nExample:\n```\n$ pspace completion help commands\n```",
                   "summary": "List completion commands",
+                  "usage": "  pspace completion help [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -535,6 +541,7 @@
               "name": "zsh",
               "description": "Generate the autocompletion script for the zsh shell.\n\nIf shell completion is not already enabled in your environment you will need\nto enable it.  You can execute the following once:\n\n```\n$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion zsh > \"${fpath[1]}/_pspace\"\n```\n\nmacOS:\n```\n$ pspace completion zsh > /usr/local/share/zsh/site-functions/_pspace\n```\n\nOh My Zsh:\n```\n$ pspace completion zsh > ~/.oh-my-zsh/completions/_pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
               "summary": "Generate an autocompletion script for the zsh shell",
+              "usage": "  pspace completion [flags]",
               "flags": [
                 {
                   "name": "no-descriptions",
@@ -630,6 +637,7 @@
           "name": "config",
           "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n```\npspace config set team \"my-team\"\n```",
           "summary": "Manage your local Paperspace configuration.",
+          "usage": "  pspace [command]\n  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -707,6 +715,7 @@
               "name": "delete",
               "description": "Delete a configuration value.",
               "summary": "Delete a configuration value.",
+              "usage": "  pspace config <arguments> [flags]",
               "arguments": {
                 "description": "",
                 "summary": "The key to delete.",
@@ -807,6 +816,7 @@
               "name": "get",
               "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n```\npspace config get team\n```",
               "summary": "Get a configuration value.",
+              "usage": "  pspace config [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "The key to get.",
@@ -907,6 +917,7 @@
               "name": "help",
               "description": "Show help for a config command",
               "summary": "Show help for a config command",
+              "usage": "  pspace config [command]\n  pspace config [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -1005,8 +1016,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List config commands",
+                  "description": "List config commands\n\nExample:\n```\n$ pspace config help commands\n```",
                   "summary": "List config commands",
+                  "usage": "  pspace config help [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -1104,6 +1116,7 @@
               "name": "set",
               "description": "Set a configuration value.",
               "summary": "Set a configuration value.",
+              "usage": "  pspace config [arguments] [arguments...] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "The key/value pair to set.",
@@ -1217,6 +1230,7 @@
           "name": "console",
           "description": "This command opens the Paperspace web console in your browser.",
           "summary": "Open the Paperspace web console.",
+          "usage": "  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -1295,6 +1309,7 @@
           "name": "deployment",
           "description": "Effortlessly deploy ML apps to Paperspace.",
           "summary": "Effortlessly deploy ML apps to Paperspace.",
+          "usage": "  pspace [command]\n  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -1372,6 +1387,7 @@
               "name": "delete",
               "description": "Delete a deployment by its ID. If you don't provide an ID, this command will\nprompt you for one based on the deployments you have access to.\n\n```\npspace deployment delete 123e4567-e89b-12d3-a456-426614174000\n```",
               "summary": "Delete a deployment.",
+              "usage": "  pspace deployment [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -1467,6 +1483,7 @@
               "name": "get",
               "description": "Get a deployment by its ID. If you don't provide an ID, this command will\nprompt you for one based on the deployments you have access to.\n\n```\npspace deployment get 123e4567-e89b-12d3-a456-426614174000\n```\n\nPick a subset of fields to display:\n```\npspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name\n```",
               "summary": "Get a deployment.",
+              "usage": "  pspace deployment [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -1578,6 +1595,7 @@
               "name": "help",
               "description": "Show help for a deployment command",
               "summary": "Show help for a deployment command",
+              "usage": "  pspace deployment [command]\n  pspace deployment [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -1677,8 +1695,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List deployment commands",
+                  "description": "List deployment commands\n\nExample:\n```\n$ pspace deployment help commands\n```",
                   "summary": "List deployment commands",
+                  "usage": "  pspace deployment help [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -1774,8 +1793,9 @@
             },
             {
               "name": "list",
-              "description": "List deployments in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace deployment list -F id -F name\n```",
+              "description": "List deployments in your team.\n\nPick a subset of fields to display:\n```\npspace deployment list -F id -F name\n```",
               "summary": "List deployments.",
+              "usage": "  pspace deployment [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -1943,13 +1963,14 @@
               "name": "up",
               "description": "This will create a new deployment for your app or update it if it already exists. \nYou can optionally specify a path to a config file. If no config file is specified, \nthe default config file paths will be tried.\n\nCreate a new deployment for the app in the current directory.\n```\n$ pspace deployment create\n```\n\nCreate a new deployment using a config file.\n```\n$ pspace deployment create -c paperspace.json\n```\n\nCreate a new deployment for an app in a different directory.\n```\n$ pspace deployment create --cwd ../my-app\n```\n\nCreate a new deployment for an app in a specific project.\n```\n$ pspace deployment create --project-id 1234\n```",
               "summary": "Create or update a deployment",
+              "usage": "  pspace deployment [flags]",
               "flags": [
                 {
                   "name": "config",
                   "aliases": [
                     "c"
                   ],
-                  "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
+                  "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.jsonc`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.jsonc`\n- `.paperspace/app.toml`",
                   "summary": "The path to the config file. Defaults to our default config file paths.",
                   "required": false,
                   "collects": false,
@@ -2069,6 +2090,7 @@
           "name": "docs",
           "description": "This command opens the Paperspace documentation in your browser.\nYou can optionally pass an argument that will take you to a specific \ndocs page.\n\nValid pages are:\n  - `d`, `deployment`",
           "summary": "Open Paperspace documention in your default browser.",
+          "usage": "  pspace [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "",
@@ -2168,6 +2190,7 @@
           "name": "help",
           "description": "Show help for a pspace command",
           "summary": "Show help for a pspace command",
+          "usage": "  pspace [command]\n  pspace [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "",
@@ -2191,6 +2214,7 @@
                     "login",
                     "init",
                     "up",
+                    "secret",
                     "version",
                     "completion",
                     "help"
@@ -2276,8 +2300,9 @@
           "commands": [
             {
               "name": "commands",
-              "description": "List pspace commands",
+              "description": "List pspace commands\n\nExample:\n```\n$ pspace help commands\n```",
               "summary": "List pspace commands",
+              "usage": "  pspace help [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -2375,6 +2400,7 @@
           "name": "init",
           "description": "Create a new Paperspace app. This will create a new directory with a\ndefault app structure. You can optionally specify a name for the app\nand a template to use. If no template is specified, the default\ntemplate will be used.\n\nCreate a new app in the current directory.\n```\n$ pspace init\n```\n\nCreate a new app named \"my-app\" relative to the current directory.\n```\n$ pspace init my-app\n```\n\nCreate a new app named \"my-app\" relative to the current directory using\na template from the Paperspace GitHub organization.\n```\n$ pspace init my-app -t Paperspace/gradio-demo\n```",
           "summary": "Create a new Paperspace app",
+          "usage": "  pspace [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "The directory to create the app in. Defaults to the current directory.",
@@ -2545,6 +2571,7 @@
           "name": "login",
           "description": "Log in to the CLI using your Paperspace API key or by opening the web console.",
           "summary": "Log in to the CLI.",
+          "usage": "  pspace [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "",
@@ -2640,6 +2667,7 @@
           "name": "logout",
           "description": "Log out of the CLI for the current team, a specific team, or all teams.",
           "summary": "Log out of the CLI.",
+          "usage": "  pspace [arguments...] [flags]",
           "arguments": {
             "description": "",
             "summary": "The teams to logout of.",
@@ -2751,6 +2779,7 @@
           "name": "project",
           "description": "Manage your Paperspace projects.",
           "summary": "Manage your Paperspace projects.",
+          "usage": "  pspace [command]\n  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -2828,6 +2857,7 @@
               "name": "create",
               "description": "Create a new project. This command will prompt you for a name if you don't\nprovide one.",
               "summary": "Create a new project",
+              "usage": "  pspace project [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "Create a project with these properties.",
@@ -2940,6 +2970,7 @@
               "name": "get",
               "description": "Get a project by its ID. If you don't provide an ID, this command will\nprompt you for one based on the projects you have access to.",
               "summary": "Get a project.",
+              "usage": "  pspace project [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3051,6 +3082,7 @@
               "name": "help",
               "description": "Show help for a project command",
               "summary": "Show help for a project command",
+              "usage": "  pspace project [command]\n  pspace project [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3151,8 +3183,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List project commands",
+                  "description": "List project commands\n\nExample:\n```\n$ pspace project help commands\n```",
                   "summary": "List project commands",
+                  "usage": "  pspace project help [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -3250,6 +3283,7 @@
               "name": "link",
               "description": "This will link a remote project to a local directory. Commands that\ndepend on a project ID will use the project ID of the linked project\nwhen communicating with the Paperspace API.\n\nLink a project to the current directory.\n```\n$ pspace link\n```\n\nLink a project to a different directory.\n```\n$ pspace link --cwd ../my-app\n```\n\nLink a project and specify a project ID.\n```\n$ pspace link pzwf2g05ubegj\n```",
               "summary": "Link a remote project to ",
+              "usage": "  pspace project [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "A project ID. If not provided, you will be prompted to select one.",
@@ -3357,8 +3391,9 @@
             },
             {
               "name": "list",
-              "description": "List projects in your team.\n\nExamples:\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
+              "description": "List projects in your team.\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
               "summary": "List projects.",
+              "usage": "  pspace project [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -3526,6 +3561,7 @@
               "name": "update",
               "description": "Update an existing project.\n\nExample:\n```\npspace project update psukfyemho7 --name my-cool-project\n```",
               "summary": "Update an existing project.",
+              "usage": "  pspace project update <project-id> [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3652,9 +3688,1127 @@
           ]
         },
         {
+          "name": "secret",
+          "description": "Manage your Paperspace secrets. Secrets are used to store sensitive\ninformation such as API keys, passwords, and other credentials. Secrets \ncan be safely injected into workloads as environment variables. An environment \nvariable that uses a Secret will not reveal the contents of the secret itself.\n\nSecrets can be created at the following levels:\n\n- Project (default): these secrets are applied to all resources in a project\n- Global: these secrets can be applied to all resources on your current team\n\nFor more information, see https://docs.paperspace.com/secrets.",
+          "summary": "Manage your Paperspace secrets",
+          "usage": "  pspace [command]\n  pspace [flags]",
+          "flags": [
+            {
+              "name": "log-level",
+              "aliases": [
+                "l"
+              ],
+              "description": "Enable debug logging.",
+              "summary": "Enable debug logging",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warning",
+                  "error",
+                  "critical"
+                ],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "json",
+              "aliases": [
+                "j"
+              ],
+              "description": "Output JSON",
+              "summary": "Output JSON",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "api-key",
+              "aliases": [],
+              "description": "A Paperspace public API Key used for authenticating requests",
+              "summary": "A Paperspace public API Key used for authenticating requests",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "string",
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            },
+            {
+              "name": "help",
+              "aliases": [
+                "h"
+              ],
+              "description": "Show help for a command",
+              "summary": "Show help for a command",
+              "required": false,
+              "collects": false,
+              "negatable": false,
+              "global": true,
+              "schema": {
+                "type": "boolean",
+                "default": false,
+                "$schema": "http://json-schema.org/draft-07/schema#"
+              }
+            }
+          ],
+          "commands": [
+            {
+              "name": "create",
+              "description": "",
+              "summary": "",
+              "usage": "  pspace secret [arguments] [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  },
+                  {
+                    "position": 1,
+                    "summary": "The value of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 8192,
+                      "description": "The value of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "delete",
+              "description": "Delete a secret from a project or team.",
+              "summary": "Delete a secret",
+              "usage": "  pspace secret [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret to delete",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret to delete",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "get",
+              "description": "Get a secret from a project or team.",
+              "summary": "Get a secret",
+              "usage": "  pspace secret [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret to get",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret to get",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "help",
+              "description": "Show help for a secret command",
+              "summary": "Show help for a secret command",
+              "usage": "  pspace secret [command]\n  pspace secret [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The command to show help for.",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "enum": [
+                        "create",
+                        "get",
+                        "list",
+                        "delete",
+                        "update",
+                        "help"
+                      ],
+                      "description": "The command to show help for.",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": [
+                {
+                  "name": "commands",
+                  "description": "List secret commands\n\nExample:\n```\n$ pspace secret help commands\n```",
+                  "summary": "List secret commands",
+                  "usage": "  pspace secret help [flags]",
+                  "flags": [
+                    {
+                      "name": "log-level",
+                      "aliases": [
+                        "l"
+                      ],
+                      "description": "Enable debug logging.",
+                      "summary": "Enable debug logging",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "enum": [
+                          "debug",
+                          "info",
+                          "warning",
+                          "error",
+                          "critical"
+                        ],
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "json",
+                      "aliases": [
+                        "j"
+                      ],
+                      "description": "Output JSON",
+                      "summary": "Output JSON",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "api-key",
+                      "aliases": [],
+                      "description": "A Paperspace public API Key used for authenticating requests",
+                      "summary": "A Paperspace public API Key used for authenticating requests",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "string",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "help",
+                      "aliases": [
+                        "h"
+                      ],
+                      "description": "Show help for a command",
+                      "summary": "Show help for a command",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "global": true,
+                      "schema": {
+                        "type": "boolean",
+                        "default": false,
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    },
+                    {
+                      "name": "all",
+                      "aliases": [
+                        "a"
+                      ],
+                      "description": "Show all commands, including hidden ones",
+                      "summary": "Show all commands, including hidden ones",
+                      "required": false,
+                      "collects": false,
+                      "negatable": false,
+                      "default": false,
+                      "global": false,
+                      "schema": {
+                        "type": "boolean",
+                        "$schema": "http://json-schema.org/draft-07/schema#"
+                      }
+                    }
+                  ],
+                  "commands": []
+                }
+              ]
+            },
+            {
+              "name": "list",
+              "description": "List secrets in your team or project.\n\nPick a subset of fields to display:\n```\npspace secret list -F name -F dtModified\n```",
+              "summary": "List secrets.",
+              "usage": "  pspace secret [flags]",
+              "flags": [
+                {
+                  "name": "limit",
+                  "aliases": [],
+                  "description": "The number of projects to return in the next page.",
+                  "summary": "The number of projects to return in the next page.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "number",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "after",
+                  "aliases": [],
+                  "description": "The cursor to fetch the next results from.",
+                  "summary": "The cursor to fetch the next results from.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "orderBy",
+                  "aliases": [],
+                  "description": "The field to order projects by.",
+                  "summary": "The field to order projects by.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "dtCreated"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "asc",
+                  "aliases": [],
+                  "description": "Whether to order projects ascending.",
+                  "summary": "Whether to order projects ascending.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "desc",
+                  "aliases": [],
+                  "description": "Whether to order projects descending.",
+                  "summary": "Whether to order projects descending.",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "fields",
+                  "aliases": [
+                    "F"
+                  ],
+                  "description": "The fields to include in the response.",
+                  "summary": "The fields to include in the response.",
+                  "required": false,
+                  "collects": true,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            },
+            {
+              "name": "update",
+              "description": "",
+              "summary": "",
+              "usage": "  pspace secret [arguments] [arguments] [flags]",
+              "arguments": {
+                "description": "",
+                "summary": "",
+                "items": [
+                  {
+                    "position": 0,
+                    "summary": "The name of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+                      "description": "The name of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  },
+                  {
+                    "position": 1,
+                    "summary": "The value of the secret",
+                    "required": true,
+                    "variadic": false,
+                    "schema": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 8192,
+                      "description": "The value of the secret",
+                      "$schema": "http://json-schema.org/draft-07/schema#"
+                    }
+                  }
+                ]
+              },
+              "flags": [
+                {
+                  "name": "project-id",
+                  "aliases": [
+                    "p"
+                  ],
+                  "description": "The ID of the project the secret is in. If not specified, the\nsecret will be created in the project linked to your current working\ndirectory. If you are not in a project directory, you will be prompted\nto select a project.",
+                  "summary": "The ID of the project the secret is in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "global",
+                  "aliases": [
+                    "g"
+                  ],
+                  "description": "Manage a secret that is available to the entire team you are\ncurrently logged into. By default, secrets are only available to\na project.",
+                  "summary": "Manage a secret that is available to the entire team",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "cwd",
+                  "aliases": [],
+                  "description": "The directory to create the secret in",
+                  "summary": "The directory to create the secret in",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": false,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "log-level",
+                  "aliases": [
+                    "l"
+                  ],
+                  "description": "Enable debug logging.",
+                  "summary": "Enable debug logging",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warning",
+                      "error",
+                      "critical"
+                    ],
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "json",
+                  "aliases": [
+                    "j"
+                  ],
+                  "description": "Output JSON",
+                  "summary": "Output JSON",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "api-key",
+                  "aliases": [],
+                  "description": "A Paperspace public API Key used for authenticating requests",
+                  "summary": "A Paperspace public API Key used for authenticating requests",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "string",
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                },
+                {
+                  "name": "help",
+                  "aliases": [
+                    "h"
+                  ],
+                  "description": "Show help for a command",
+                  "summary": "Show help for a command",
+                  "required": false,
+                  "collects": false,
+                  "negatable": false,
+                  "global": true,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                  }
+                }
+              ],
+              "commands": []
+            }
+          ]
+        },
+        {
           "name": "signup",
           "description": "This command opens the Paperspace signup page in your browser.",
           "summary": "Sign up for a Paperspace account.",
+          "usage": "  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -3733,13 +4887,14 @@
           "name": "up",
           "description": "This will upsert an app config and deploy your app to Paperspace. You can optionally \nspecify a path to a config file. If no config file is specified, the default\nconfig file paths will be tried.\n\nDeploy the app in the current directory.\n```\n$ pspace up\n```\n\nDeploy the app using a config file.\n```\n$ pspace up -c paperspace.json\n```\n\nDeploy an app in a different directory.\n```\n$ pspace up --cwd ../my-app\n```",
           "summary": "Deploy your app to Paperspace",
+          "usage": "  pspace [flags]",
           "flags": [
             {
               "name": "config",
               "aliases": [
                 "c"
               ],
-              "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.toml`",
+              "description": "The path to the config file. Defaults to our default config file paths.\n\nThe default config file paths are in order of precedence:\n\n- `paperspace.yaml`\n- `paperspace.yml`\n- `paperspace.json`\n- `paperspace.jsonc`\n- `paperspace.toml`\n- `.paperspace/app.yaml`\n- `.paperspace/app.yml`\n- `.paperspace/app.json`\n- `.paperspace/app.jsonc`\n- `.paperspace/app.toml`",
               "summary": "The path to the config file. Defaults to our default config file paths.",
               "required": false,
               "collects": false,
@@ -3857,6 +5012,7 @@
           "name": "upgrade",
           "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n```\npspace upgrade\n```",
           "summary": "Upgrade \u001b[1mpspace\u001b[22m to the latest version.",
+          "usage": "  pspace [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -3935,6 +5091,7 @@
           "name": "version",
           "description": "Shows version information command, including version number and build date.",
           "summary": "Show version information",
+          "usage": "  pspace [flags]",
           "flags": [
             {
               "name": "log-level",

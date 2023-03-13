@@ -1,6 +1,6 @@
 import { app } from "../zcli.ts";
 import { root } from "../commands/mod.ts";
-import { zcliJson } from "https://deno.land/x/zcli@1.3.2/zcli-json.ts";
+import { zcliJson } from "https://deno.land/x/zcli@1.3.3/zcli-json.ts";
 
 // Read the markdown file adjacent to this script
 const json = await zcliJson(app, root);

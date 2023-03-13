@@ -191,7 +191,7 @@ export type ClientMethod<
       requestInit?: ApiClientRequestInit,
     ) => Promise<SuccessData<Path, Method> | ErrorData<Path, Method>>
     : (
-      params: PathParams<Path, Method> & PathBody<Path, Method>,
+      params: Prettify<PathParams<Path, Method> & PathBody<Path, Method>>,
       requestInit?: ApiClientRequestInit,
     ) => Promise<SuccessData<Path, Method> | ErrorData<Path, Method>>);
 

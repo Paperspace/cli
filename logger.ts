@@ -1,6 +1,6 @@
 import { env } from "./env.ts";
-import { LogRecord } from "https://deno.land/std@0.178.0/log/logger.ts";
-import { HandlerOptions } from "https://deno.land/std@0.178.0/log/handlers.ts";
+import type { LogRecord } from "https://deno.land/std@0.179.0/log/logger.ts";
+import type { HandlerOptions } from "https://deno.land/std@0.179.0/log/handlers.ts";
 import { getLevelByName, log, Sentry } from "./deps.ts";
 
 class PaperspaceLogger extends log.handlers.ConsoleHandler {

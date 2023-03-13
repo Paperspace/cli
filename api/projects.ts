@@ -7,3 +7,11 @@ export const projects = {
   update: client("/projects/{handle}").put,
   // delete: client("/projects/{handle}").delete,
 };
+
+export const projectSecrets = {
+  list: client("/projects/{handle}/secrets").get,
+  create: client("/projects/{handle}/secrets").post,
+  get: client("/projects/{handle}/secrets/{name}").get,
+  update: client("/projects/{handle}/secrets/{name}").patch,
+  delete: client("/projects/{handle}/secrets/{name}").delete,
+};

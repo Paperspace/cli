@@ -17,8 +17,6 @@ export const list = command("list", {
   long: ({ root }) => `
     List deployments in your team.
 
-    Examples:
-
     Pick a subset of fields to display:
     \`\`\`
     ${root.name} deployment list -F id -F name

@@ -1,9 +1,12 @@
 import { paths } from "../api/openapi.ts";
-import { path, TOML, YAML } from "../deps.ts";
+import { JSONc, path, TOML, YAML } from "../deps.ts";
 import { AppError, DocumentedError } from "../errors.ts";
 import { logger } from "../logger.ts";
 
-export async function find(cwd: string, file?: string) {
+export async function find(options: { cwd?: string; config?: string }) {
+  let { config: file, cwd = Deno.cwd() } = options;
+  cwd = path.isAbsolute(cwd) ? cwd : path.join(Deno.cwd(), cwd);
+
   if (file) {
     logger.info(`Using config file: ${file}`);
     const filePath = path.isAbsolute(file) ? file : path.join(cwd, file);
@@ -28,10 +31,12 @@ export async function find(cwd: string, file?: string) {
     "paperspace.yaml",
     "paperspace.yml",
     "paperspace.json",
+    "paperspace.jsonc",
     "paperspace.toml",
     ".paperspace/app.yaml",
     ".paperspace/app.yml",
     ".paperspace/app.json",
+    ".paperspace/app.jsonc",
     ".paperspace/app.toml",
   ];
 
@@ -72,7 +77,8 @@ export function parse(
 }
 
 const parsers = {
-  ".json": JSON.parse,
+  ".json": JSONc.parse,
+  ".jsonc": JSONc.parse,
   ".yaml": YAML.parse,
   ".yml": YAML.parse,
   ".toml": TOML.parse,

@@ -17,8 +17,6 @@ export const list = command("list", {
   long: ({ root }) => `
     List projects in your team.
 
-    Examples:
-
     Pick a subset of fields to display:
     \`\`\`
     ${root.name} project list -F handle -F name -F dtCreated
