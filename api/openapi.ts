@@ -253,7 +253,7 @@ export interface operations {
                         readonly name: string;
                         readonly value: string;
                       })[];
-                      readonly healthchecks?: {
+                      readonly healthChecks?: {
                         readonly liveness?: {
                           readonly failureThreshold?: number;
                           readonly headers?: readonly ({
@@ -326,8 +326,7 @@ export interface operations {
                       readonly name: string;
                       /** @default 80 */
                       readonly port: number;
-                      /** @default null */
-                      readonly region: string | null;
+                      readonly region?: string;
                       readonly repositories?: {
                         readonly dataset: string;
                         readonly mountPath?: string;
@@ -444,8 +443,7 @@ export interface operations {
                       };
                       readonly image: string;
                       readonly name: string;
-                      /** @default null */
-                      readonly region: string | null;
+                      readonly region?: string;
                     });
                   /** @description The ID of the deployment the spec belongs to */
                   readonly deploymentId: string;
@@ -503,7 +501,7 @@ export interface operations {
                 readonly name: string;
                 readonly value: string;
               })[];
-              readonly healthchecks?: {
+              readonly healthChecks?: {
                 readonly liveness?: {
                   readonly failureThreshold?: number;
                   readonly headers?: readonly ({
@@ -576,8 +574,7 @@ export interface operations {
               readonly name: string;
               /** @default 80 */
               readonly port: number;
-              /** @default null */
-              readonly region: string | null;
+              readonly region?: string;
               readonly repositories?: {
                 readonly dataset: string;
                 readonly mountPath?: string;
@@ -694,8 +691,7 @@ export interface operations {
               };
               readonly image: string;
               readonly name: string;
-              /** @default null */
-              readonly region: string | null;
+              readonly region?: string;
             });
           /**
            * @description The ID of the deployment to update.
@@ -761,7 +757,7 @@ export interface operations {
                       readonly name: string;
                       readonly value: string;
                     })[];
-                    readonly healthchecks?: {
+                    readonly healthChecks?: {
                       readonly liveness?: {
                         readonly failureThreshold?: number;
                         readonly headers?: readonly ({
@@ -834,8 +830,7 @@ export interface operations {
                     readonly name: string;
                     /** @default 80 */
                     readonly port: number;
-                    /** @default null */
-                    readonly region: string | null;
+                    readonly region?: string;
                     readonly repositories?: {
                       readonly dataset: string;
                       readonly mountPath?: string;
@@ -952,8 +947,7 @@ export interface operations {
                     };
                     readonly image: string;
                     readonly name: string;
-                    /** @default null */
-                    readonly region: string | null;
+                    readonly region?: string;
                   });
                 /** @description The ID of the deployment the spec belongs to */
                 readonly deploymentId: string;
@@ -1404,7 +1398,7 @@ export interface operations {
                       readonly name: string;
                       readonly value: string;
                     })[];
-                    readonly healthchecks?: {
+                    readonly healthChecks?: {
                       readonly liveness?: {
                         readonly failureThreshold?: number;
                         readonly headers?: readonly ({
@@ -1477,8 +1471,7 @@ export interface operations {
                     readonly name: string;
                     /** @default 80 */
                     readonly port: number;
-                    /** @default null */
-                    readonly region: string | null;
+                    readonly region?: string;
                     readonly repositories?: {
                       readonly dataset: string;
                       readonly mountPath?: string;
@@ -1595,8 +1588,7 @@ export interface operations {
                     };
                     readonly image: string;
                     readonly name: string;
-                    /** @default null */
-                    readonly region: string | null;
+                    readonly region?: string;
                   });
                 /** @description The ID of the deployment the spec belongs to */
                 readonly deploymentId: string;
