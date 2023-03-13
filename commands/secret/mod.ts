@@ -18,12 +18,18 @@ const subCommands: ReturnType<typeof command>[] = [
 ];
 
 export const secret = command("secret", {
-  short: "",
+  short: "Manage your Paperspace secrets",
+  long: `
+    Manage your Paperspace secrets. Secrets are used to store sensitive
+    information such as API keys, passwords, and other credentials. Secrets 
+    can be safely injected into workloads as environment variables. An environment 
+    variable that uses a Secret will not reveal the contents of the secret itself.
+
+    For more information, see https://docs.paperspace.com/secrets.
+  `,
   commands: subCommands,
-}).run(
-  ({ args, flags, ctx }) => {
-    console.log("Arguments:", args);
-    console.log("Flags:", flags);
-    console.log("Context:", ctx);
-  },
-);
+}).run(function* ({ ctx }) {
+  for (const line of secret.help(ctx)) {
+    yield line;
+  }
+});
