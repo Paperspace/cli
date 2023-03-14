@@ -161,13 +161,13 @@ export async function* runUp(
                 exitCode: 1,
               });
             }
-          }
 
-          if (deployment.data.latestSpec?.dtHealthy && latestRun) {
-            return {
-              deployment: deployment.data,
-              latestRun: { replicas: latestRun.replicas },
-            };
+            if (deployment.data.latestSpec?.dtHealthy) {
+              return {
+                deployment: deployment.data,
+                latestRun: { replicas: latestRun.replicas },
+              };
+            }
           }
         }
       }
