@@ -142,10 +142,6 @@ export async function* runUp(
         if (runs.ok && runs.data) {
           const latestRun = runs.data[0];
 
-          if (!latestRun) {
-            return;
-          }
-
           const erroredInstance = latestRun.instances.find(
             (instance) => ["failed", "errored"].includes(instance.state),
           );
@@ -165,7 +161,7 @@ export async function* runUp(
             });
           }
 
-          if (latestRun.readyReplicas === latestRun.replicas) {
+          if (deployment.data.latestSpec?.dtHealthy) {
             return {
               deployment: deployment.data,
               latestRun: { replicas: latestRun.replicas },
