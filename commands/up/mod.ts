@@ -142,23 +142,25 @@ export async function* runUp(
         if (runs.ok && runs.data) {
           const latestRun = runs.data[0];
 
-          const erroredInstance = latestRun.instances.find(
-            (instance) => ["failed", "errored"].includes(instance.state),
-          );
+          if (latestRun) {
+            const erroredInstance = latestRun.instances.find(
+              (instance) => ["failed", "errored"].includes(instance.state),
+            );
 
-          const timedOut = (Date.now() - start) > (5 * 60 * 1000);
+            const timedOut = (Date.now() - start) > (5 * 60 * 1000);
 
-          if (
-            timedOut && latestRun.readyReplicas !== latestRun.replicas &&
-            erroredInstance
-          ) {
-            throw new AppError({
-              message:
-                `⛔ ${
-                  fmt.colors.bold("Deployment error")
-                }:\n${erroredInstance.stateMessage}` ?? "Deployment error",
-              exitCode: 1,
-            });
+            if (
+              timedOut && latestRun.readyReplicas !== latestRun.replicas &&
+              erroredInstance
+            ) {
+              throw new AppError({
+                message:
+                  `⛔ ${
+                    fmt.colors.bold("Deployment error")
+                  }:\n${erroredInstance.stateMessage}` ?? "Deployment error",
+                exitCode: 1,
+              });
+            }
           }
 
           if (deployment.data.latestSpec?.dtHealthy) {
