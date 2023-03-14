@@ -163,7 +163,7 @@ export async function* runUp(
             }
           }
 
-          if (deployment.data.latestSpec?.dtHealthy) {
+          if (deployment.data.latestSpec?.dtHealthy && latestRun) {
             return {
               deployment: deployment.data,
               latestRun: { replicas: latestRun.replicas },
