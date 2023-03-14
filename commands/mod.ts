@@ -1,4 +1,5 @@
 import { app, completion, fmt, version } from "../zcli.ts";
+import { semver } from "../deps.ts";
 import { VERSION } from "../version.ts";
 import { AppError } from "../errors.ts";
 import { logger } from "../logger.ts";
@@ -126,7 +127,7 @@ export const root = app
     const latestVersion = await getLatestVersion(ctx);
     const currentVersion = VERSION;
 
-    if (currentVersion === latestVersion) {
+    if (semver.gte(currentVersion, latestVersion)) {
       return;
     }
 

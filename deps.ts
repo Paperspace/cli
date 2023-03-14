@@ -17,6 +17,7 @@ export { format as formatBytes } from "https://deno.land/std@0.179.0/fmt/bytes.t
 export * as YAML from "https://deno.land/std@0.179.0/encoding/yaml.ts";
 export * as TOML from "https://deno.land/std@0.179.0/encoding/toml.ts";
 export * as JSONc from "https://deno.land/std@0.179.0/encoding/jsonc.ts";
+export * as semver from "https://deno.land/std@0.179.0/semver/mod.ts";
 
 export * as Sentry from "https://deno.land/x/sentry_deno@v0.2.2/main.ts";
 export { ms } from "https://deno.land/x/ms@v0.1.0/ms.ts";
