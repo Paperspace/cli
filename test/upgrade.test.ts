@@ -443,7 +443,32 @@ describe("pspace upgrade", () => {
 function mockReleaseApi(config: { version?: string } = {}) {
   const { version = "v1.0.0" } = config;
 
-  return jsonOk({
+  return jsonOk([{
+    tag_name: version,
+    assets: [
+      {
+        name: "pspace-linux.zip",
+        browser_download_url:
+          `https://raw.github.com/paperspace/cli/${version}-beta/pspace-linux.zip`,
+      },
+      {
+        name: "pspace-macos.zip",
+        browser_download_url:
+          `https://raw.github.com/paperspace/cli/${version}-beta/pspace-macos.zip`,
+      },
+      {
+        name: "pspace-macos-arm.zip",
+        browser_download_url:
+          `https://raw.github.com/paperspace/cli/${version}-beta/pspace-macos-arm.zip`,
+      },
+      {
+        name: "pspace-windows.zip",
+        browser_download_url:
+          `https://raw.github.com/paperspace/cli/${version}-beta/pspace-windows.zip`,
+      },
+    ],
+    prerelease: true,
+  }, {
     tag_name: version,
     assets: [
       {
@@ -467,7 +492,8 @@ function mockReleaseApi(config: { version?: string } = {}) {
           `https://raw.github.com/paperspace/cli/${version}/pspace-windows.zip`,
       },
     ],
-  });
+    prerelease: false,
+  }]);
 }
 
 function mergeContext(
