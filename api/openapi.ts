@@ -237,223 +237,239 @@ export interface operations {
               readonly endpoint: string;
               /** @description The ID of the deployment */
               readonly id: string;
-              /** @description The latest deployment configuration. If invalid, null is returned. */
+              /**
+               * @description The latest deployment configuration. If invalid, null is returned.
+               * @default null
+               */
               readonly latestSpec?:
                 | ({
                   /** @description The data for the deployment spec */
-                  readonly data:
-                    | ({
-                      readonly apiVersion: "v0alpha0" | "latest";
-                      readonly command?: readonly [string, ...(string)[]];
-                      /** Format: uuid */
-                      readonly containerRegistry?: string;
-                      /** @default true */
-                      readonly enabled?: boolean;
-                      readonly env?: readonly ({
-                        readonly name: string;
-                        readonly value: string;
-                      })[];
-                      readonly healthChecks?: {
-                        readonly liveness?: {
-                          readonly failureThreshold?: number;
-                          readonly headers?: readonly ({
-                            readonly name: string;
-                            readonly value: string;
-                          })[];
-                          readonly host?: string;
-                          readonly initialDelaySeconds?: number;
-                          readonly path: string;
-                          readonly periodSeconds?: number;
-                          readonly port?: number;
-                          readonly timeoutSeconds?: number;
-                        } | {
-                          readonly exec: {
-                            readonly command: readonly (string)[];
-                          };
-                          readonly failureThreshold?: number;
-                          readonly initialDelaySeconds?: number;
-                          readonly periodSeconds?: number;
-                          readonly timeoutSeconds?: number;
-                        };
-                        readonly readiness?: {
-                          readonly failureThreshold?: number;
-                          readonly headers?: readonly ({
-                            readonly name: string;
-                            readonly value: string;
-                          })[];
-                          readonly host?: string;
-                          readonly initialDelaySeconds?: number;
-                          readonly path: string;
-                          readonly periodSeconds?: number;
-                          readonly port?: number;
-                          readonly timeoutSeconds?: number;
-                        } | {
-                          readonly exec: {
-                            readonly command: readonly (string)[];
-                          };
-                          readonly failureThreshold?: number;
-                          readonly initialDelaySeconds?: number;
-                          readonly periodSeconds?: number;
-                          readonly timeoutSeconds?: number;
-                        };
-                        readonly startup?: {
-                          readonly failureThreshold?: number;
-                          readonly headers?: readonly ({
-                            readonly name: string;
-                            readonly value: string;
-                          })[];
-                          readonly host?: string;
-                          readonly initialDelaySeconds?: number;
-                          readonly path: string;
-                          readonly periodSeconds?: number;
-                          readonly port?: number;
-                          readonly timeoutSeconds?: number;
-                        } | {
-                          readonly exec: {
-                            readonly command: readonly (string)[];
-                          };
-                          readonly failureThreshold?: number;
-                          readonly initialDelaySeconds?: number;
-                          readonly periodSeconds?: number;
-                          readonly timeoutSeconds?: number;
-                        };
-                      };
-                      readonly image: string;
-                      readonly models?: readonly ({
-                        readonly id: string;
-                        readonly path?: string;
-                      })[];
-                      readonly name: string;
-                      /** @default 80 */
-                      readonly port?: number;
-                      readonly region?: string;
-                      readonly repositories?: {
-                        readonly dataset: string;
-                        readonly mountPath?: string;
-                        readonly repositories: readonly ({
+                  readonly data?:
+                    | (
+                      | ({
+                        readonly apiVersion: "v0alpha0" | "latest";
+                        readonly command?: readonly [string, ...(string)[]];
+                        /** Format: uuid */
+                        readonly containerRegistry?: string;
+                        /** @default true */
+                        readonly enabled?: boolean;
+                        readonly env?: readonly ({
                           readonly name: string;
-                          readonly password?: string;
-                          readonly ref?: string;
-                          readonly url: string;
-                          readonly username?: string;
+                          readonly value: string;
                         })[];
-                      };
-                      readonly resources: {
-                        readonly autoscaling?: {
-                          readonly enabled?: boolean;
-                          readonly maxReplicas: number;
-                          readonly metrics: readonly (
-                            | {
-                              /** @enum {string} */
-                              readonly metric: "requestDuration";
-                              /** @enum {string} */
-                              readonly summary: "average";
-                              readonly value: number;
-                            }
-                            | ({
-                              /** @enum {string} */
-                              readonly metric: "cpu" | "memory";
-                              /** @enum {string} */
-                              readonly summary: "average";
-                              readonly value: number;
-                            })
-                          )[];
+                        readonly healthChecks?: {
+                          readonly liveness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly readiness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly startup?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
                         };
-                        readonly instanceType: string;
-                        /** @default 1 */
-                        readonly replicas?: number;
-                      };
-                    })
-                    | ({
-                      /** @enum {string} */
-                      readonly apiVersion: "v0alpha1";
-                      readonly command: readonly [string, ...(string)[]];
-                      /** Format: uuid */
-                      readonly containerRegistry?: string;
-                      /** @default true */
-                      readonly enabled?: boolean;
-                      readonly env?: readonly ({
+                        readonly image: string;
+                        readonly models?: readonly ({
+                          readonly id: string;
+                          readonly path?: string;
+                        })[];
                         readonly name: string;
-                        readonly value: string;
-                      })[];
-                      readonly healthchecks?: {
-                        readonly liveness?: {
-                          readonly failureThreshold?: number;
-                          readonly headers?: readonly ({
+                        /** @default 80 */
+                        readonly port?: number;
+                        readonly region?: string;
+                        readonly repositories?: {
+                          readonly dataset: string;
+                          readonly mountPath?: string;
+                          readonly repositories: readonly ({
                             readonly name: string;
-                            readonly value: string;
+                            readonly password?: string;
+                            readonly ref?: string;
+                            readonly url: string;
+                            readonly username?: string;
                           })[];
-                          readonly host?: string;
-                          readonly initialDelaySeconds?: number;
-                          readonly path: string;
-                          readonly periodSeconds?: number;
-                          readonly port?: number;
-                          readonly timeoutSeconds?: number;
-                        } | {
-                          readonly exec: {
-                            readonly command: readonly (string)[];
-                          };
-                          readonly failureThreshold?: number;
-                          readonly initialDelaySeconds?: number;
-                          readonly periodSeconds?: number;
-                          readonly timeoutSeconds?: number;
                         };
-                        readonly readiness?: {
-                          readonly failureThreshold?: number;
-                          readonly headers?: readonly ({
-                            readonly name: string;
-                            readonly value: string;
-                          })[];
-                          readonly host?: string;
-                          readonly initialDelaySeconds?: number;
-                          readonly path: string;
-                          readonly periodSeconds?: number;
-                          readonly port?: number;
-                          readonly timeoutSeconds?: number;
-                        } | {
-                          readonly exec: {
-                            readonly command: readonly (string)[];
+                        readonly resources: {
+                          readonly autoscaling?: {
+                            readonly enabled?: boolean;
+                            readonly maxReplicas: number;
+                            readonly metrics: readonly (
+                              | {
+                                /** @enum {string} */
+                                readonly metric: "requestDuration";
+                                /** @enum {string} */
+                                readonly summary: "average";
+                                readonly value: number;
+                              }
+                              | ({
+                                /** @enum {string} */
+                                readonly metric: "cpu" | "memory";
+                                /** @enum {string} */
+                                readonly summary: "average";
+                                readonly value: number;
+                              })
+                            )[];
                           };
-                          readonly failureThreshold?: number;
-                          readonly initialDelaySeconds?: number;
-                          readonly periodSeconds?: number;
-                          readonly timeoutSeconds?: number;
+                          readonly instanceType: string;
+                          /** @default 1 */
+                          readonly replicas?: number;
                         };
-                        readonly startup?: {
-                          readonly failureThreshold?: number;
-                          readonly headers?: readonly ({
-                            readonly name: string;
-                            readonly value: string;
-                          })[];
-                          readonly host?: string;
-                          readonly initialDelaySeconds?: number;
-                          readonly path: string;
-                          readonly periodSeconds?: number;
-                          readonly port?: number;
-                          readonly timeoutSeconds?: number;
-                        } | {
-                          readonly exec: {
-                            readonly command: readonly (string)[];
+                      })
+                      | ({
+                        /** @enum {string} */
+                        readonly apiVersion: "v0alpha1";
+                        readonly command: readonly [string, ...(string)[]];
+                        /** Format: uuid */
+                        readonly containerRegistry?: string;
+                        /** @default true */
+                        readonly enabled?: boolean;
+                        readonly env?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly healthchecks?: {
+                          readonly liveness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
                           };
-                          readonly failureThreshold?: number;
-                          readonly initialDelaySeconds?: number;
-                          readonly periodSeconds?: number;
-                          readonly timeoutSeconds?: number;
+                          readonly readiness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly startup?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
                         };
-                      };
-                      readonly image: string;
-                      readonly name: string;
-                      readonly region?: string;
-                    });
+                        readonly image: string;
+                        readonly name: string;
+                        readonly region?: string;
+                      })
+                    )
+                    | null;
                   /** @description The ID of the deployment the spec belongs to */
                   readonly deploymentId: string;
-                  /** @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error. */
-                  readonly error: string | null;
+                  /**
+                   * Format: date-time
+                   * @description The date the deployment was marked "healthy"
+                   * @default null
+                   */
+                  readonly dtHealthy?: Date;
+                  /**
+                   * @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error.
+                   * @default null
+                   */
+                  readonly error?: string | null;
                   /**
                    * Format: date-time
                    * @description The date the deployment configuration was applied to the cluster
+                   * @default null
                    */
-                  readonly externalApplied: Date;
+                  readonly externalApplied?: Date;
                   /** @description The ID of the deployment spec */
                   readonly id: string;
                   /** @description The ID of the user the deployment belongs to */
@@ -741,223 +757,239 @@ export interface operations {
             readonly endpoint: string;
             /** @description The ID of the deployment */
             readonly id: string;
-            /** @description The latest deployment configuration. If invalid, null is returned. */
+            /**
+             * @description The latest deployment configuration. If invalid, null is returned.
+             * @default null
+             */
             readonly latestSpec?:
               | ({
                 /** @description The data for the deployment spec */
-                readonly data:
-                  | ({
-                    readonly apiVersion: "v0alpha0" | "latest";
-                    readonly command?: readonly [string, ...(string)[]];
-                    /** Format: uuid */
-                    readonly containerRegistry?: string;
-                    /** @default true */
-                    readonly enabled?: boolean;
-                    readonly env?: readonly ({
-                      readonly name: string;
-                      readonly value: string;
-                    })[];
-                    readonly healthChecks?: {
-                      readonly liveness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
-                      };
-                      readonly readiness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
-                      };
-                      readonly startup?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
-                      };
-                    };
-                    readonly image: string;
-                    readonly models?: readonly ({
-                      readonly id: string;
-                      readonly path?: string;
-                    })[];
-                    readonly name: string;
-                    /** @default 80 */
-                    readonly port?: number;
-                    readonly region?: string;
-                    readonly repositories?: {
-                      readonly dataset: string;
-                      readonly mountPath?: string;
-                      readonly repositories: readonly ({
+                readonly data?:
+                  | (
+                    | ({
+                      readonly apiVersion: "v0alpha0" | "latest";
+                      readonly command?: readonly [string, ...(string)[]];
+                      /** Format: uuid */
+                      readonly containerRegistry?: string;
+                      /** @default true */
+                      readonly enabled?: boolean;
+                      readonly env?: readonly ({
                         readonly name: string;
-                        readonly password?: string;
-                        readonly ref?: string;
-                        readonly url: string;
-                        readonly username?: string;
+                        readonly value: string;
                       })[];
-                    };
-                    readonly resources: {
-                      readonly autoscaling?: {
-                        readonly enabled?: boolean;
-                        readonly maxReplicas: number;
-                        readonly metrics: readonly (
-                          | {
-                            /** @enum {string} */
-                            readonly metric: "requestDuration";
-                            /** @enum {string} */
-                            readonly summary: "average";
-                            readonly value: number;
-                          }
-                          | ({
-                            /** @enum {string} */
-                            readonly metric: "cpu" | "memory";
-                            /** @enum {string} */
-                            readonly summary: "average";
-                            readonly value: number;
-                          })
-                        )[];
+                      readonly healthChecks?: {
+                        readonly liveness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
+                        readonly readiness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
+                        readonly startup?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
                       };
-                      readonly instanceType: string;
-                      /** @default 1 */
-                      readonly replicas?: number;
-                    };
-                  })
-                  | ({
-                    /** @enum {string} */
-                    readonly apiVersion: "v0alpha1";
-                    readonly command: readonly [string, ...(string)[]];
-                    /** Format: uuid */
-                    readonly containerRegistry?: string;
-                    /** @default true */
-                    readonly enabled?: boolean;
-                    readonly env?: readonly ({
+                      readonly image: string;
+                      readonly models?: readonly ({
+                        readonly id: string;
+                        readonly path?: string;
+                      })[];
                       readonly name: string;
-                      readonly value: string;
-                    })[];
-                    readonly healthchecks?: {
-                      readonly liveness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
+                      /** @default 80 */
+                      readonly port?: number;
+                      readonly region?: string;
+                      readonly repositories?: {
+                        readonly dataset: string;
+                        readonly mountPath?: string;
+                        readonly repositories: readonly ({
                           readonly name: string;
-                          readonly value: string;
+                          readonly password?: string;
+                          readonly ref?: string;
+                          readonly url: string;
+                          readonly username?: string;
                         })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
                       };
-                      readonly readiness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
+                      readonly resources: {
+                        readonly autoscaling?: {
+                          readonly enabled?: boolean;
+                          readonly maxReplicas: number;
+                          readonly metrics: readonly (
+                            | {
+                              /** @enum {string} */
+                              readonly metric: "requestDuration";
+                              /** @enum {string} */
+                              readonly summary: "average";
+                              readonly value: number;
+                            }
+                            | ({
+                              /** @enum {string} */
+                              readonly metric: "cpu" | "memory";
+                              /** @enum {string} */
+                              readonly summary: "average";
+                              readonly value: number;
+                            })
+                          )[];
                         };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
+                        readonly instanceType: string;
+                        /** @default 1 */
+                        readonly replicas?: number;
                       };
-                      readonly startup?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
+                    })
+                    | ({
+                      /** @enum {string} */
+                      readonly apiVersion: "v0alpha1";
+                      readonly command: readonly [string, ...(string)[]];
+                      /** Format: uuid */
+                      readonly containerRegistry?: string;
+                      /** @default true */
+                      readonly enabled?: boolean;
+                      readonly env?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly healthchecks?: {
+                        readonly liveness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
                         };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
+                        readonly readiness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
+                        readonly startup?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
                       };
-                    };
-                    readonly image: string;
-                    readonly name: string;
-                    readonly region?: string;
-                  });
+                      readonly image: string;
+                      readonly name: string;
+                      readonly region?: string;
+                    })
+                  )
+                  | null;
                 /** @description The ID of the deployment the spec belongs to */
                 readonly deploymentId: string;
-                /** @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error. */
-                readonly error: string | null;
+                /**
+                 * Format: date-time
+                 * @description The date the deployment was marked "healthy"
+                 * @default null
+                 */
+                readonly dtHealthy?: Date;
+                /**
+                 * @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error.
+                 * @default null
+                 */
+                readonly error?: string | null;
                 /**
                  * Format: date-time
                  * @description The date the deployment configuration was applied to the cluster
+                 * @default null
                  */
-                readonly externalApplied: Date;
+                readonly externalApplied?: Date;
                 /** @description The ID of the deployment spec */
                 readonly id: string;
                 /** @description The ID of the user the deployment belongs to */
@@ -1382,223 +1414,239 @@ export interface operations {
             readonly endpoint: string;
             /** @description The ID of the deployment */
             readonly id: string;
-            /** @description The latest deployment configuration. If invalid, null is returned. */
+            /**
+             * @description The latest deployment configuration. If invalid, null is returned.
+             * @default null
+             */
             readonly latestSpec?:
               | ({
                 /** @description The data for the deployment spec */
-                readonly data:
-                  | ({
-                    readonly apiVersion: "v0alpha0" | "latest";
-                    readonly command?: readonly [string, ...(string)[]];
-                    /** Format: uuid */
-                    readonly containerRegistry?: string;
-                    /** @default true */
-                    readonly enabled?: boolean;
-                    readonly env?: readonly ({
-                      readonly name: string;
-                      readonly value: string;
-                    })[];
-                    readonly healthChecks?: {
-                      readonly liveness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
-                      };
-                      readonly readiness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
-                      };
-                      readonly startup?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
-                      };
-                    };
-                    readonly image: string;
-                    readonly models?: readonly ({
-                      readonly id: string;
-                      readonly path?: string;
-                    })[];
-                    readonly name: string;
-                    /** @default 80 */
-                    readonly port?: number;
-                    readonly region?: string;
-                    readonly repositories?: {
-                      readonly dataset: string;
-                      readonly mountPath?: string;
-                      readonly repositories: readonly ({
+                readonly data?:
+                  | (
+                    | ({
+                      readonly apiVersion: "v0alpha0" | "latest";
+                      readonly command?: readonly [string, ...(string)[]];
+                      /** Format: uuid */
+                      readonly containerRegistry?: string;
+                      /** @default true */
+                      readonly enabled?: boolean;
+                      readonly env?: readonly ({
                         readonly name: string;
-                        readonly password?: string;
-                        readonly ref?: string;
-                        readonly url: string;
-                        readonly username?: string;
+                        readonly value: string;
                       })[];
-                    };
-                    readonly resources: {
-                      readonly autoscaling?: {
-                        readonly enabled?: boolean;
-                        readonly maxReplicas: number;
-                        readonly metrics: readonly (
-                          | {
-                            /** @enum {string} */
-                            readonly metric: "requestDuration";
-                            /** @enum {string} */
-                            readonly summary: "average";
-                            readonly value: number;
-                          }
-                          | ({
-                            /** @enum {string} */
-                            readonly metric: "cpu" | "memory";
-                            /** @enum {string} */
-                            readonly summary: "average";
-                            readonly value: number;
-                          })
-                        )[];
+                      readonly healthChecks?: {
+                        readonly liveness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
+                        readonly readiness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
+                        readonly startup?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
                       };
-                      readonly instanceType: string;
-                      /** @default 1 */
-                      readonly replicas?: number;
-                    };
-                  })
-                  | ({
-                    /** @enum {string} */
-                    readonly apiVersion: "v0alpha1";
-                    readonly command: readonly [string, ...(string)[]];
-                    /** Format: uuid */
-                    readonly containerRegistry?: string;
-                    /** @default true */
-                    readonly enabled?: boolean;
-                    readonly env?: readonly ({
+                      readonly image: string;
+                      readonly models?: readonly ({
+                        readonly id: string;
+                        readonly path?: string;
+                      })[];
                       readonly name: string;
-                      readonly value: string;
-                    })[];
-                    readonly healthchecks?: {
-                      readonly liveness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
+                      /** @default 80 */
+                      readonly port?: number;
+                      readonly region?: string;
+                      readonly repositories?: {
+                        readonly dataset: string;
+                        readonly mountPath?: string;
+                        readonly repositories: readonly ({
                           readonly name: string;
-                          readonly value: string;
+                          readonly password?: string;
+                          readonly ref?: string;
+                          readonly url: string;
+                          readonly username?: string;
                         })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
-                        };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
                       };
-                      readonly readiness?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
+                      readonly resources: {
+                        readonly autoscaling?: {
+                          readonly enabled?: boolean;
+                          readonly maxReplicas: number;
+                          readonly metrics: readonly (
+                            | {
+                              /** @enum {string} */
+                              readonly metric: "requestDuration";
+                              /** @enum {string} */
+                              readonly summary: "average";
+                              readonly value: number;
+                            }
+                            | ({
+                              /** @enum {string} */
+                              readonly metric: "cpu" | "memory";
+                              /** @enum {string} */
+                              readonly summary: "average";
+                              readonly value: number;
+                            })
+                          )[];
                         };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
+                        readonly instanceType: string;
+                        /** @default 1 */
+                        readonly replicas?: number;
                       };
-                      readonly startup?: {
-                        readonly failureThreshold?: number;
-                        readonly headers?: readonly ({
-                          readonly name: string;
-                          readonly value: string;
-                        })[];
-                        readonly host?: string;
-                        readonly initialDelaySeconds?: number;
-                        readonly path: string;
-                        readonly periodSeconds?: number;
-                        readonly port?: number;
-                        readonly timeoutSeconds?: number;
-                      } | {
-                        readonly exec: {
-                          readonly command: readonly (string)[];
+                    })
+                    | ({
+                      /** @enum {string} */
+                      readonly apiVersion: "v0alpha1";
+                      readonly command: readonly [string, ...(string)[]];
+                      /** Format: uuid */
+                      readonly containerRegistry?: string;
+                      /** @default true */
+                      readonly enabled?: boolean;
+                      readonly env?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly healthchecks?: {
+                        readonly liveness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
                         };
-                        readonly failureThreshold?: number;
-                        readonly initialDelaySeconds?: number;
-                        readonly periodSeconds?: number;
-                        readonly timeoutSeconds?: number;
+                        readonly readiness?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
+                        readonly startup?: {
+                          readonly failureThreshold?: number;
+                          readonly headers?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly host?: string;
+                          readonly initialDelaySeconds?: number;
+                          readonly path: string;
+                          readonly periodSeconds?: number;
+                          readonly port?: number;
+                          readonly timeoutSeconds?: number;
+                        } | {
+                          readonly exec: {
+                            readonly command: readonly (string)[];
+                          };
+                          readonly failureThreshold?: number;
+                          readonly initialDelaySeconds?: number;
+                          readonly periodSeconds?: number;
+                          readonly timeoutSeconds?: number;
+                        };
                       };
-                    };
-                    readonly image: string;
-                    readonly name: string;
-                    readonly region?: string;
-                  });
+                      readonly image: string;
+                      readonly name: string;
+                      readonly region?: string;
+                    })
+                  )
+                  | null;
                 /** @description The ID of the deployment the spec belongs to */
                 readonly deploymentId: string;
-                /** @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error. */
-                readonly error: string | null;
+                /**
+                 * Format: date-time
+                 * @description The date the deployment was marked "healthy"
+                 * @default null
+                 */
+                readonly dtHealthy?: Date;
+                /**
+                 * @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error.
+                 * @default null
+                 */
+                readonly error?: string | null;
                 /**
                  * Format: date-time
                  * @description The date the deployment configuration was applied to the cluster
+                 * @default null
                  */
-                readonly externalApplied: Date;
+                readonly externalApplied?: Date;
                 /** @description The ID of the deployment spec */
                 readonly id: string;
                 /** @description The ID of the user the deployment belongs to */
