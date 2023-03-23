@@ -8,6 +8,9 @@ export async function* dataTable(
   json: Record<string, unknown>[] | ReadonlyArray<Record<string, unknown>>,
   pickFields?: string[],
 ): AsyncGenerator<string> {
+  if (!json.length) {
+    return;
+  }
   const locale = await config.get("locale");
 
   const rows: string[][] = json.length
