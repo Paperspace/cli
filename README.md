@@ -21,4 +21,4 @@ pspace [command] [flags]
 ## Documentation
 
 For more information, see the
-[Paperspace CLI documentation](https://docs.paperspace.com/).
+[Paperspace CLI documentation](https://docs-next.paperspace.com/cli/overview).
