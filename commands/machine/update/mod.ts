@@ -37,10 +37,10 @@ export const update = command("update", {
     "machine-type": flag({
       short: "The machine type to update to",
     }).string(),
-    // "network-id": flag({
-    // short: "The ID of the network to create the machine in",
-    // }).ostring(),
-    "diskSize": flag({
+    "network-id": flag({
+      short: "The ID of the network to create the machine in",
+    }).ostring(),
+    "disk-size": flag({
       short: "The size of the machine's disk",
     }).number(),
     "public-ip-type": flag({
@@ -121,8 +121,8 @@ export const update = command("update", {
         id,
         name: flags.name,
         machineType: flags["machine-type"],
-        // networkId: flags["network-id"],
-        diskSize: flags.diskSize,
+        networkId: flags["network-id"],
+        diskSize: flags["disk-size"],
         publicIpType: parsedPublicIpType.data,
         autoSnapshotEnabled: flags["auto-snapshot-enabled"],
         autoSnapshotFrequency: parsedAutoSnapshotFrequency.data,

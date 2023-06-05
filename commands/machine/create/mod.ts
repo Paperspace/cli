@@ -42,7 +42,7 @@ export const create = command("create", {
     "region": flag({
       short: "The region to create the machine in",
     }).string(),
-    "diskSize": flag({
+    "disk-size": flag({
       short: "The size of the machine's disk",
     }).number(),
     "public-ip-type": flag({
@@ -133,7 +133,7 @@ export const create = command("create", {
         templateId: flags["template-id"],
         networkId: flags["network-id"],
         region: flags.region,
-        diskSize: flags.diskSize,
+        diskSize: flags["disk-size"],
         publicIpType: parsedPublicIpType.data,
         autoSnapshotEnabled: flags["auto-snapshot-enabled"],
         autoSnapshotFrequency: parsedAutoSnapshotFrequency.data,
