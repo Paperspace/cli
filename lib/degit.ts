@@ -43,6 +43,7 @@ export async function degit(
     ];
 
     logger.info(cmd.join(" "));
+    // deno-lint-ignore no-deprecated-deno-api
     const proc = Deno.run({
       cmd,
       stdout: "null",
@@ -262,6 +263,7 @@ export async function downloadTarball(
  * @returns Refs for the template
  */
 async function fetchRefs(template: DegitSource) {
+  // deno-lint-ignore no-deprecated-deno-api
   const proc = Deno.run({
     cmd: [
       "git",

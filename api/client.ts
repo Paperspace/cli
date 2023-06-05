@@ -40,6 +40,11 @@ export function client<
       } else {
         body = JSON.stringify(additionalParams);
       }
+    } else {
+      // override for rpc method
+      if (init.method === "PATCH") {
+        body = "{}";
+      }
     }
     logger.info(`${init.method} ${url}`);
 
@@ -177,7 +182,7 @@ export type Client<Path extends keyof paths, PathMethods extends Methods> = {
 export type ClientMethod<
   Path extends keyof paths,
   Method extends Methods,
-> = PathBody<Path, Method> extends never
+> = PathBody<Path, Method> extends never | Record<string, never>
   ? (PathParams<Path, Method> extends never ? (
       params: null,
       requestInit?: ApiClientRequestInit,

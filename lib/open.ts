@@ -43,6 +43,7 @@ export async function open(
     stdout: "piped",
   };
 
+  // deno-lint-ignore no-deprecated-deno-api
   const subprocess = Deno.run(runOptions);
   await subprocess.status();
   return subprocess;
