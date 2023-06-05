@@ -34,6 +34,7 @@ async function decompressProcess(
   source: string,
   destination: string,
 ): Promise<boolean> {
+  // deno-lint-ignore no-deprecated-deno-api
   const unzipProc = Deno.run({
     cmd: Deno.build.os === "windows"
       ? [
