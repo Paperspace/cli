@@ -51,13 +51,13 @@ export const delete_ = command("delete", {
 
     if (!flags.global) {
       const project = await findProject({
-        handle: flags["project-id"],
+        id: flags["project-id"],
         cwd: flags.cwd,
         quiet: flags.json,
       });
 
       const response = await loading(
-        projectSecrets.delete({ handle: project.handle, name }),
+        projectSecrets.delete({ id: project.id, name }),
       );
 
       asserts(response.ok, response);
@@ -82,7 +82,7 @@ export const delete_ = command("delete", {
       }
 
       const response = await loading(
-        teamSecrets.delete({ handle: team, name }),
+        teamSecrets.delete({ id: team, name }),
       );
 
       asserts(response.ok, response);

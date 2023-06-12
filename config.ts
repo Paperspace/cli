@@ -35,7 +35,7 @@ const configShape = {
     .nullable()
     .default(null),
 
-  projects: z.record(z.object({ handle: z.string(), path: z.string() }))
+  projects: z.record(z.object({ id: z.string(), path: z.string() }))
     .default(
       {},
     ),

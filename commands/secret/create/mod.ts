@@ -82,7 +82,7 @@ export const create = command("create", {
       }
 
       const response = await loading(
-        teamSecrets.create({ handle: team, name, value }),
+        teamSecrets.create({ id: team, name, value }),
       );
 
       asserts(response.ok, response);
@@ -95,12 +95,12 @@ export const create = command("create", {
       }
     } else {
       const project = await findProject({
-        handle: flags["project-id"],
+        id: flags["project-id"],
         cwd: flags.cwd,
         quiet: flags.json,
       });
       const response = await loading(
-        projectSecrets.create({ handle: project.handle, name, value }),
+        projectSecrets.create({ id: project.id, name, value }),
       );
 
       asserts(response.ok, response);
