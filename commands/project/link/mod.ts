@@ -58,7 +58,7 @@ export const link = command("link", {
       : path.isAbsolute(flags.cwd)
       ? flags.cwd
       : path.join(Deno.cwd(), flags.cwd);
-    let [handle] = args;
+    let [id] = args;
     const existingLinks = await config.get("projects");
 
     if (existingLinks[projectPath]) {
@@ -73,7 +73,7 @@ export const link = command("link", {
     }
     let projectName = "";
 
-    if (!handle) {
+    if (!id) {
       const existingProjects = await loading(projects.list({ limit: 50 }), {
         enabled: !flags.json,
       });
@@ -93,10 +93,10 @@ export const link = command("link", {
       );
 
       asserts(selected, "No project selected.");
-      handle = selected.handle;
+      id = selected.id;
       projectName = selected.name;
     } else {
-      const project = await loading(projects.get({ handle }), {
+      const project = await loading(projects.get({ id }), {
         enabled: !flags.json,
       });
       asserts(project.ok, project);
@@ -107,11 +107,11 @@ export const link = command("link", {
       ...existingLinks,
       [projectPath]: {
         path: projectPath,
-        handle,
+        id,
       },
     });
 
-    yield `${fmt.colors.bold(projectName)} (${handle}) linked to ${
+    yield `${fmt.colors.bold(projectName)} (${id}) linked to ${
       fmt.colors.bold(path.relative(Deno.cwd(), projectPath))
     }`;
   },

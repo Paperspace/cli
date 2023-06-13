@@ -95,7 +95,7 @@ export const init = command("init", {
     );
 
     const existingLinks = await config.get("projects");
-    let app: paths["/projects/{handle}"]["get"]["responses"]["200"]["content"][
+    let app: paths["/projects/{id}"]["get"]["responses"]["200"]["content"][
       "application/json"
     ];
     const link = existingLinks[dest];
@@ -110,9 +110,9 @@ export const init = command("init", {
       app = res.data;
     } else {
       logger.info(
-        `Project already exists, skipping creation. (link: ${link.handle})`,
+        `Project already exists, skipping creation. (link: ${link.id})`,
       );
-      const res = await projects.get({ handle: link.handle });
+      const res = await projects.get({ id: link.id });
       asserts(res.ok, res);
       app = res.data;
     }
@@ -122,7 +122,7 @@ export const init = command("init", {
       ...await config.get("projects"),
       [dest]: {
         path: dest,
-        handle: app.handle,
+        id: app.id,
       },
     });
 
@@ -131,7 +131,7 @@ export const init = command("init", {
       yield "";
       yield fmt.colors.bold("Console URL");
       yield new URL(
-        `/${team}/projects/${app.handle}/gradient-deployments`,
+        `/${team}/projects/${app.id}/gradient-deployments`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       ) + "";
       yield "";

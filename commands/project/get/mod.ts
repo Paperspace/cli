@@ -34,9 +34,9 @@ export const get = command("get", {
     requireApiKey: true,
   },
 }).run(async function* ({ args, flags }) {
-  let [handle] = args;
+  let [id] = args;
 
-  if (!handle) {
+  if (!id) {
     const existingProjects = await loading(projects.list({ limit: 50 }));
     asserts(existingProjects.ok, existingProjects);
 
@@ -54,10 +54,10 @@ export const get = command("get", {
     );
 
     asserts(selected, "No project selected.");
-    handle = selected.handle;
+    id = selected.id;
   }
 
-  const result = await loading(projects.get({ handle }), {
+  const result = await loading(projects.get({ id }), {
     enabled: !flags.json,
   });
 

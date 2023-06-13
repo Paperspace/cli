@@ -75,6 +75,49 @@ export interface paths {
      */
     delete: operations["mutation.autoscalingGroups.delete"];
   };
+  "/billing/account-standing": {
+    /**
+     * Get account standing
+     * @description Check whether the current team account is in good standing. If not, send back a message explaining why.
+     */
+    get: operations["query.billingAccountStanding.get"];
+  };
+  "/container-registries": {
+    /**
+     * List container registries
+     * @description Lists container registries for the current team.
+     */
+    get: operations["query.containerRegistries.list"];
+    /**
+     * Create a container registry
+     * @description Creates a container registry for the current team.
+     */
+    post: operations["mutation.containerRegistries.create"];
+  };
+  "/container-registries/{id}": {
+    /**
+     * List container registries
+     * @description Lists container registries for the current team.
+     */
+    get: operations["query.containerRegistries.get"];
+    /**
+     * Update a container registry
+     * @description Updates a container registry for the current team.
+     */
+    put: operations["mutation.containerRegistries.update"];
+    /**
+     * Delete a container registry
+     * @description Deletes a container registry for the current team.
+     */
+    delete: operations["mutation.containerRegistries.delete"];
+  };
+  "/container-registries/{id}/test-connection": {
+    /**
+     * Test a container registry connection
+     * @description Validate that a container registry can be connected to using the provided credentials.
+     */
+    get: operations["mutation.containerRegistries.testConnection"];
+  };
   "/deployments": {
     /**
      * List deployments
@@ -229,6 +272,13 @@ export interface paths {
      */
     patch: operations["mutation.machines.stop"];
   };
+  "/notebooks": {
+    /**
+     * List notebooks
+     * @description Lists the notebooks you have access to in the current team
+     */
+    get: operations["query.notebooks.list"];
+  };
   "/private-networks": {
     /**
      * List private networks
@@ -248,6 +298,11 @@ export interface paths {
      */
     get: operations["query.privateNetworks.get"];
     /**
+     * Update a private network
+     * @description Updates a single private network by ID.
+     */
+    put: operations["mutation.privateNetworks.update"];
+    /**
      * Delete a private network
      * @description Deletes a single private network by ID.
      */
@@ -266,7 +321,7 @@ export interface paths {
      */
     post: operations["mutation.projects.create"];
   };
-  "/projects/{handle}": {
+  "/projects/{id}": {
     /**
      * Get a project by its ID
      * @description Get a project by its ID.
@@ -283,14 +338,14 @@ export interface paths {
      */
     delete: operations["mutation.projects.delete"];
   };
-  "/projects/{handle}/activity": {
+  "/projects/{id}/activity": {
     /**
      * List a project's activity
      * @description Fetches a list of activity items for a given project.
      */
     get: operations["query.projectActivity.list"];
   };
-  "/projects/{handle}/collaborators": {
+  "/projects/{id}/collaborators": {
     /**
      * List a project's collaborators
      * @description Fetches a list of collaborators for a project.
@@ -302,21 +357,21 @@ export interface paths {
      */
     post: operations["mutation.projectCollaborators.create"];
   };
-  "/projects/{handle}/collaborators/{userHandle}": {
+  "/projects/{id}/collaborators/{userId}": {
     /**
      * Delete a project collaborator
      * @description Removes a collaborator from a project.
      */
     delete: operations["mutation.projectCollaborators.delete"];
   };
-  "/projects/{handle}/deployments": {
+  "/projects/{id}/deployments": {
     /**
      * List a project's deployments
      * @description Fetches a list of deployments for a project.
      */
     get: operations["query.projectsDeployments.list"];
   };
-  "/projects/{handle}/secrets": {
+  "/projects/{id}/secrets": {
     /**
      * List a project's secrets
      * @description Fetches a list of secrets for a project.
@@ -328,7 +383,7 @@ export interface paths {
      */
     post: operations["mutation.projectSecrets.create"];
   };
-  "/projects/{handle}/secrets/{name}": {
+  "/projects/{id}/secrets/{name}": {
     /**
      * Get a project secret
      * @description Fetches a secret for a project.
@@ -388,6 +443,11 @@ export interface paths {
      */
     get: operations["query.sharedDrives.get"];
     /**
+     * Update a shared drive
+     * @description Updates a single shared drive by ID.
+     */
+    put: operations["mutation.sharedDrives.update"];
+    /**
      * Delete a shared drive
      * @description Deletes a single shared drive by ID.
      */
@@ -406,6 +466,16 @@ export interface paths {
     post: operations["mutation.snapshots.create"];
   };
   "/snapshots/{id}": {
+    /**
+     * Get a snapshot
+     * @description Fetches a single snapshot by ID.
+     */
+    get: operations["query.snapshots.get"];
+    /**
+     * Update a snapshot
+     * @description Updates a single snapshot by ID.
+     */
+    put: operations["mutation.snapshots.update"];
     /**
      * Delete snapshot
      * @description Delete a snapshot for a machine.
@@ -462,7 +532,43 @@ export interface paths {
      */
     post: operations["mutation.startupScripts.unassign"];
   };
-  "/teams/{handle}/secrets": {
+  "/storage": {
+    /**
+     * List storage providers
+     * @description List storage providers
+     */
+    get: operations["query.storageProviders.list"];
+    /**
+     * Create a storage provider
+     * @description Create a storage provider
+     */
+    post: operations["mutation.storageProviders.create"];
+  };
+  "/storage/{id}": {
+    /**
+     * Get a storage provider
+     * @description Get a storage provider
+     */
+    get: operations["query.storageProviders.get"];
+    /**
+     * Update a storage provider
+     * @description Update a storage provider
+     */
+    put: operations["mutation.storageProviders.update"];
+    /**
+     * Delete a storage provider
+     * @description Delete a storage provider
+     */
+    delete: operations["mutation.storageProviders.delete"];
+  };
+  "/storage/utilization": {
+    /**
+     * Get storage utilization
+     * @description Get a breakdown of how storage is being used by your team
+     */
+    get: operations["query.storageUtilization.getPublic"];
+  };
+  "/teams/{id}/secrets": {
     /**
      * List a team's secrets
      * @description Fetches a list of secrets for a team.
@@ -474,7 +580,7 @@ export interface paths {
      */
     post: operations["mutation.teamSecrets.create"];
   };
-  "/teams/{handle}/secrets/{name}": {
+  "/teams/{id}/secrets/{name}": {
     /**
      * Get a team secret
      * @description Fetches a secret for a team.
@@ -509,6 +615,11 @@ export interface paths {
      * @description Fetches a single template by ID.
      */
     get: operations["query.templates.get"];
+    /**
+     * Update a template
+     * @description Updates a single template by ID.
+     */
+    put: operations["mutation.templates.update"];
     /**
      * Delete template
      * @description Delete a template.
@@ -1644,23 +1755,21 @@ export interface operations {
         content: {
           readonly "application/json":
             | ({
-              /** @description The current team in the session */
               readonly team: {
-                /** @description A unique handle for the team */
-                readonly handle: string;
-                /** @description A numeric ID for the team */
-                readonly id: number;
+                /** @description An internal, numeric ID for the team */
+                readonly analyticsId: number;
+                /** @description A unique ID for the team */
+                readonly id: string;
                 /** @description Whether the team is private or not */
                 readonly isPrivate: boolean;
                 /** @description The maximum number of machines */
                 readonly maxMachines: number;
                 /** @description The namespace for the team */
                 readonly namespace: string;
-                /** @description The team's Stripe ID */
-                readonly stripeId: number | null;
               };
-              /** @description The current user in the session */
               readonly user: {
+                /** @description An internal, numeric ID for the user */
+                readonly analyticsId: number;
                 /**
                  * Format: date-time
                  * @description The date the account was confirmed
@@ -1675,18 +1784,49 @@ export interface operations {
                 readonly email: string;
                 /** @description The user's first name */
                 readonly firstName: string | null;
-                /** @description A unique handle for the user */
-                readonly handle: string;
-                /** @description A numeric ID for the user */
-                readonly id: number;
+                /** @description A unique ID for the user */
+                readonly id: string;
                 /** @description Whether the user has a password set */
                 readonly isPasswordAuthEnabled: boolean;
+                /** @description Whether the user's phone number has been verified */
+                readonly isPhoneVerified: boolean;
                 /** @description Whether the user has a QR code based MFA confirmed */
                 readonly isQrCodeBasedMfaConfirmed: boolean;
                 /** @description Whether the user has a QR code based MFA enabled */
                 readonly isQrCodeBasedMfaEnabled: boolean;
                 /** @description The user's last name */
                 readonly lastName: string | null;
+                /** @description Metadata about the user */
+                readonly metadata: {
+                  /**
+                   * @description Core survey question-answer pairs
+                   * @default null
+                   */
+                  readonly coreSurvey?:
+                    | ({
+                      [key: string]: string | undefined;
+                    })
+                    | null;
+                  /**
+                   * @description Gradient survey question-answer pairs
+                   * @default null
+                   */
+                  readonly gradientSurvey?:
+                    | ({
+                      [key: string]: string | undefined;
+                    })
+                    | null;
+                  /**
+                   * @description Whether the user has accepted the Graphcore terms of service
+                   * @default false
+                   */
+                  readonly graphcoreTermsAccepted?: boolean;
+                  /**
+                   * @description Tags for the user
+                   * @default null
+                   */
+                  readonly tags?: string | null;
+                };
                 /** @description The teams this user is a member of */
                 readonly teamMemberships: readonly ({
                   /** @description Whether the user is an admin of the team */
@@ -1700,8 +1840,8 @@ export interface operations {
                      * @description The date the team was created
                      */
                     readonly dtCreated: Date;
-                    /** @description The handle of the team */
-                    readonly handle: string;
+                    /** @description The ID of the team */
+                    readonly id: string;
                     /** @description Whether the team is the user's team */
                     readonly isUserTeam: boolean;
                     /** @description The name of the team */
@@ -2046,6 +2186,307 @@ export interface operations {
           readonly "application/json": {
             /** @description The id of the autoscaling group. */
             readonly id: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Get account standing
+   * @description Check whether the current team account is in good standing. If not, send back a message explaining why.
+   */
+  "query.billingAccountStanding.get": {
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether the account is in good standing */
+            readonly isInGoodStanding: boolean;
+            /** @description If the account is not in good standing, these are messages explaining why. */
+            readonly messages: readonly (string)[];
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List container registries
+   * @description Lists container registries for the current team.
+   */
+  "query.containerRegistries.list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the container registry was created
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the container registry was last modified
+               */
+              readonly dtModified: Date;
+              /** @description The id of the container registry */
+              readonly id: string;
+              /** @description The name of the container registry */
+              readonly name: string;
+              /** @description The namespace of the container registry */
+              readonly namespace: string;
+              /** @description The URL of the container registry */
+              readonly url: string;
+              /** @description A username for the container registry */
+              readonly username: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Create a container registry
+   * @description Creates a container registry for the current team.
+   */
+  "mutation.containerRegistries.create": {
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the container registry */
+          readonly name: string;
+          /** @description The namespace of the container registry */
+          readonly namespace: string;
+          /** @description The password for the registry */
+          readonly password: string;
+          /**
+           * Format: uri
+           * @description The URL of the container registry
+           */
+          readonly url: string;
+          /** @description A username for the container registry */
+          readonly username: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the container registry was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the container registry was last modified
+             */
+            readonly dtModified: Date;
+            /** @description The id of the container registry */
+            readonly id: string;
+            /** @description The name of the container registry */
+            readonly name: string;
+            /** @description The namespace of the container registry */
+            readonly namespace: string;
+            /** @description The URL of the container registry */
+            readonly url: string;
+            /** @description A username for the container registry */
+            readonly username: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List container registries
+   * @description Lists container registries for the current team.
+   */
+  "query.containerRegistries.get": {
+    parameters: {
+      readonly path: {
+        /** @description The id of the container registry */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the container registry was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the container registry was last modified
+             */
+            readonly dtModified: Date;
+            /** @description The id of the container registry */
+            readonly id: string;
+            /** @description The name of the container registry */
+            readonly name: string;
+            /** @description The namespace of the container registry */
+            readonly namespace: string;
+            /** @description The URL of the container registry */
+            readonly url: string;
+            /** @description A username for the container registry */
+            readonly username: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Update a container registry
+   * @description Updates a container registry for the current team.
+   */
+  "mutation.containerRegistries.update": {
+    parameters: {
+      readonly path: {
+        /** @description The id of the container registry */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the container registry */
+          readonly name?: string;
+          /** @description The namespace of the container registry */
+          readonly namespace?: string;
+          /** @description An updated password for the registry */
+          readonly password?: string;
+          /**
+           * Format: uri
+           * @description The URL of the container registry
+           */
+          readonly url?: string;
+          /** @description A username for the container registry */
+          readonly username?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the container registry was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the container registry was last modified
+             */
+            readonly dtModified: Date;
+            /** @description The id of the container registry */
+            readonly id: string;
+            /** @description The name of the container registry */
+            readonly name: string;
+            /** @description The namespace of the container registry */
+            readonly namespace: string;
+            /** @description The URL of the container registry */
+            readonly url: string;
+            /** @description A username for the container registry */
+            readonly username: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Delete a container registry
+   * @description Deletes a container registry for the current team.
+   */
+  "mutation.containerRegistries.delete": {
+    parameters: {
+      readonly path: {
+        /** @description The id of the container registry */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the container registry was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the container registry was last modified
+             */
+            readonly dtModified: Date;
+            /** @description The id of the container registry */
+            readonly id: string;
+            /** @description The name of the container registry */
+            readonly name: string;
+            /** @description The namespace of the container registry */
+            readonly namespace: string;
+            /** @description The URL of the container registry */
+            readonly url: string;
+            /** @description A username for the container registry */
+            readonly username: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Test a container registry connection
+   * @description Validate that a container registry can be connected to using the provided credentials.
+   */
+  "mutation.containerRegistries.testConnection": {
+    parameters: {
+      readonly path: {
+        /** @description The id of the container registry */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The error message, if any */
+            readonly error?: string;
+            /** @description Whether the connection was successful */
+            readonly success: boolean;
           };
         };
       };
@@ -2431,6 +2872,22 @@ export interface operations {
                   readonly externalApplied?: Date;
                   /** @description The ID of the deployment spec */
                   readonly id: string;
+                  /**
+                   * @description Metadata about the source of the configuration
+                   * @default null
+                   */
+                  readonly metadata?:
+                    | ({
+                      readonly gitHeaders?: {
+                        readonly "x-git-actor": string;
+                        readonly "x-git-host": "github" | "gitlab";
+                        readonly "x-git-owner": string;
+                        readonly "x-git-ref": string;
+                        readonly "x-git-repo": string;
+                        readonly "x-git-sha": string;
+                      };
+                    })
+                    | null;
                   /** @description The ID of the user the deployment belongs to */
                   readonly userId: string;
                 })
@@ -3169,6 +3626,22 @@ export interface operations {
                 readonly externalApplied?: Date;
                 /** @description The ID of the deployment spec */
                 readonly id: string;
+                /**
+                 * @description Metadata about the source of the configuration
+                 * @default null
+                 */
+                readonly metadata?:
+                  | ({
+                    readonly gitHeaders?: {
+                      readonly "x-git-actor": string;
+                      readonly "x-git-host": "github" | "gitlab";
+                      readonly "x-git-owner": string;
+                      readonly "x-git-ref": string;
+                      readonly "x-git-repo": string;
+                      readonly "x-git-sha": string;
+                    };
+                  })
+                  | null;
                 /** @description The ID of the user the deployment belongs to */
                 readonly userId: string;
               })
@@ -3582,6 +4055,22 @@ export interface operations {
               readonly externalApplied?: Date;
               /** @description The ID of the deployment spec */
               readonly id: string;
+              /**
+               * @description Metadata about the source of the configuration
+               * @default null
+               */
+              readonly metadata?:
+                | ({
+                  readonly gitHeaders?: {
+                    readonly "x-git-actor": string;
+                    readonly "x-git-host": "github" | "gitlab";
+                    readonly "x-git-owner": string;
+                    readonly "x-git-ref": string;
+                    readonly "x-git-repo": string;
+                    readonly "x-git-sha": string;
+                  };
+                })
+                | null;
               /** @description The ID of the user the deployment belongs to */
               readonly userId: string;
               /** @default null */
@@ -3687,16 +4176,22 @@ export interface operations {
               readonly dtCreated: Date;
               /** @description ID of the log item */
               readonly id: string;
-              /** @description The instance ID the log is associated with. */
-              readonly instanceId?: string;
+              /**
+               * @description The instance ID the log is associated with.
+               * @default null
+               */
+              readonly instanceId?: string | null;
               /** @description The associated job ID of the log item. */
               readonly jobId: string;
               /** @description The line number of the log item. */
               readonly line: string;
               /** @description The message of the log item. */
               readonly message: string;
-              /** @description UUID representing the log item */
-              readonly uuid?: string;
+              /**
+               * @description UUID representing the log item
+               * @default null
+               */
+              readonly uuid?: string | null;
             })[];
             /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
             readonly nextPage?: string;
@@ -3787,7 +4282,7 @@ export interface operations {
              * @description The amount of replicas that are available but not ready
              * @default 0
              */
-            readonly availableReplicas?: number;
+            readonly availableReplicas?: number | null;
             readonly id: string;
             /** @description The deployment run instances */
             readonly instances: readonly ({
@@ -3833,12 +4328,12 @@ export interface operations {
              * @description The amount of replicas that are ready
              * @default 0
              */
-            readonly readyReplicas?: number;
+            readonly readyReplicas?: number | null;
             /**
              * @description The desired amount of replicas for the deployment run
              * @default 0
              */
-            readonly replicas?: number;
+            readonly replicas?: number | null;
           })[];
         };
       };
@@ -5159,7 +5654,7 @@ export interface operations {
                  */
                 readonly firstName?: string | null;
                 /** @description The ID of the user */
-                readonly handle: string;
+                readonly id: string;
                 /**
                  * @description The last name of the user
                  * @default null
@@ -5223,7 +5718,7 @@ export interface operations {
                */
               readonly firstName?: string | null;
               /** @description The ID of the user */
-              readonly handle: string;
+              readonly id: string;
               /**
                * @description The last name of the user
                * @default null
@@ -5278,7 +5773,7 @@ export interface operations {
                */
               readonly firstName?: string | null;
               /** @description The ID of the user */
-              readonly handle: string;
+              readonly id: string;
               /**
                * @description The last name of the user
                * @default null
@@ -5333,7 +5828,7 @@ export interface operations {
                */
               readonly firstName?: string | null;
               /** @description The ID of the user */
-              readonly handle: string;
+              readonly id: string;
               /**
                * @description The last name of the user
                * @default null
@@ -6058,6 +6553,118 @@ export interface operations {
     };
   };
   /**
+   * List notebooks
+   * @description Lists the notebooks you have access to in the current team
+   */
+  "query.notebooks.list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated" | "name";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        /** @description Search for notebooks by their name */
+        name?: string;
+        /** @description The state of the notebook. */
+        state?:
+          | "Cancel"
+          | "Cancelled"
+          | "Error"
+          | "Failed"
+          | "Pending"
+          | "Preempted"
+          | "Provisioned"
+          | "Running"
+          | "Stopped";
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the notebook was created
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the notebook was last modified
+               */
+              readonly dtModified: Date;
+              /**
+               * Format: date-time
+               * @description The date the notebook was last started
+               */
+              readonly dtStarted: Date;
+              /** @description The ID of the notebook */
+              readonly id: string;
+              /** @description The type of the machine the notebook is running on */
+              readonly machineType: string | null;
+              /** @description The name of the notebook */
+              readonly name: string;
+              /** @description The notebook repo ID */
+              readonly notebookRepoId: string | null;
+              /** @description The project ID */
+              readonly projectId: string;
+              /** @description The last user to start the notebook */
+              readonly startedByUser: {
+                /**
+                 * Format: email
+                 * @description The email address of the user
+                 */
+                readonly email: string;
+                /**
+                 * @description The first name of the user
+                 * @default null
+                 */
+                readonly firstName?: string | null;
+                /** @description The ID of the user */
+                readonly id: string;
+                /**
+                 * @description The last name of the user
+                 * @default null
+                 */
+                readonly lastName?: string | null;
+                /**
+                 * @description The URL of the team's profile image.
+                 * @default null
+                 */
+                readonly publicProfileImageUrl?: string | null;
+              };
+              /**
+               * @description The state of the notebook.
+               * @enum {string}
+               */
+              readonly state:
+                | "Cancel"
+                | "Cancelled"
+                | "Error"
+                | "Failed"
+                | "Pending"
+                | "Preempted"
+                | "Provisioned"
+                | "Running"
+                | "Stopped";
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * List private networks
    * @description Fetches a list of private networks.
    */
@@ -6199,6 +6806,53 @@ export interface operations {
     };
   };
   /**
+   * Update a private network
+   * @description Updates a single private network by ID.
+   */
+  "mutation.privateNetworks.update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the private network to update. */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the private network. */
+          readonly name?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the private network was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the private network was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the private network. */
+            readonly id: string;
+            /** @description The name of the private network. */
+            readonly name: string;
+            /** @description The subnet mask of the private network. */
+            readonly netmask: string;
+            /** @description The network prefix of the private network. */
+            readonly network: string;
+            /** @description The region the private network is in. */
+            readonly region: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * Delete a private network
    * @description Deletes a single private network by ID.
    */
@@ -6261,7 +6915,7 @@ export interface operations {
                */
               readonly dtDeleted?: Date;
               /** @description The ID of the project */
-              readonly handle: string;
+              readonly id: string;
               /** @description The name of the project */
               readonly name: string;
               /**
@@ -6318,7 +6972,7 @@ export interface operations {
              */
             readonly dtDeleted?: Date;
             /** @description The ID of the project */
-            readonly handle: string;
+            readonly id: string;
             /** @description The name of the project */
             readonly name: string;
             /**
@@ -6350,7 +7004,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project to get */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -6370,7 +7024,7 @@ export interface operations {
              */
             readonly dtDeleted?: Date;
             /** @description The ID of the project */
-            readonly handle: string;
+            readonly id: string;
             /** @description The name of the project */
             readonly name: string;
             /**
@@ -6402,7 +7056,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project to update */
-        handle: string;
+        id: string;
       };
     };
     readonly requestBody: {
@@ -6430,7 +7084,7 @@ export interface operations {
              */
             readonly dtDeleted?: Date;
             /** @description The ID of the project */
-            readonly handle: string;
+            readonly id: string;
             /** @description The name of the project */
             readonly name: string;
             /**
@@ -6462,7 +7116,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project to delete */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -6482,7 +7136,7 @@ export interface operations {
              */
             readonly dtDeleted?: Date;
             /** @description The ID of the project */
-            readonly handle: string;
+            readonly id: string;
             /** @description The name of the project */
             readonly name: string;
             /**
@@ -6528,7 +7182,7 @@ export interface operations {
       };
       readonly path: {
         /** @description The ID of the project to fetch activity items for */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -6628,7 +7282,7 @@ export interface operations {
       };
       readonly path: {
         /** @description The ID of the project. */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -6664,7 +7318,7 @@ export interface operations {
                  */
                 readonly firstName?: string | null;
                 /** @description The ID of the user */
-                readonly handle: string;
+                readonly id: string;
                 /**
                  * @description The last name of the user
                  * @default null
@@ -6693,14 +7347,14 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project. */
-        handle: string;
+        id: string;
       };
     };
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
           /** @description The ID of the user to add to the project. */
-          readonly userHandle: string;
+          readonly userId: string;
         };
       };
     };
@@ -6733,7 +7387,7 @@ export interface operations {
                */
               readonly firstName?: string | null;
               /** @description The ID of the user */
-              readonly handle: string;
+              readonly id: string;
               /**
                * @description The last name of the user
                * @default null
@@ -6759,9 +7413,9 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project. */
-        handle: string;
+        id: string;
         /** @description The ID of the user to remove from the project. */
-        userHandle: string;
+        userId: string;
       };
     };
     responses: {
@@ -6770,7 +7424,7 @@ export interface operations {
         content: {
           readonly "application/json": {
             /** @description The ID of the user removed from the project. */
-            readonly userHandle: string;
+            readonly userId: string;
           };
         };
       };
@@ -6797,7 +7451,7 @@ export interface operations {
       };
       readonly path: {
         /** @description The ID of the project to fetch deployments for */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -7162,6 +7816,22 @@ export interface operations {
                   readonly externalApplied?: Date;
                   /** @description The ID of the deployment spec */
                   readonly id: string;
+                  /**
+                   * @description Metadata about the source of the configuration
+                   * @default null
+                   */
+                  readonly metadata?:
+                    | ({
+                      readonly gitHeaders?: {
+                        readonly "x-git-actor": string;
+                        readonly "x-git-host": "github" | "gitlab";
+                        readonly "x-git-owner": string;
+                        readonly "x-git-ref": string;
+                        readonly "x-git-repo": string;
+                        readonly "x-git-sha": string;
+                      };
+                    })
+                    | null;
                   /** @description The ID of the user the deployment belongs to */
                   readonly userId: string;
                 })
@@ -7204,7 +7874,7 @@ export interface operations {
       };
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -7245,7 +7915,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
-        handle: string;
+        id: string;
       };
     };
     readonly requestBody: {
@@ -7289,7 +7959,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
-        handle: string;
+        id: string;
         /** @description The name of the secret, e.g. "DB_PASSWORD". */
         name: string;
       };
@@ -7325,7 +7995,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
-        handle: string;
+        id: string;
         /** @description The name of the secret, e.g. "DB_PASSWORD". */
         name: string;
       };
@@ -7351,7 +8021,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
-        handle: string;
+        id: string;
         /** @description The name of the secret, e.g. "DB_PASSWORD". */
         name: string;
       };
@@ -7701,6 +8371,62 @@ export interface operations {
     };
   };
   /**
+   * Update a shared drive
+   * @description Updates a single shared drive by ID.
+   */
+  "mutation.sharedDrives.update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the shared drive to fetch. */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the shared drive. */
+          readonly name?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the shared drive was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the shared drive was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the shared drive. */
+            readonly id: string;
+            /** @description The mount point of the shared drive. */
+            readonly mountPoint: string;
+            /** @description The name of the shared drive. */
+            readonly name: string;
+            /** @description The ID of the network the shared drive is in. */
+            readonly networkId: string;
+            /** @description The password of the shared drive. */
+            readonly password: string;
+            /** @description The region the shared drive is in. */
+            readonly region: string;
+            /**
+             * Format: int64
+             * @description The size of the shared drive.
+             */
+            readonly size: number;
+            /** @description The username of the shared drive. */
+            readonly username: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * Delete a shared drive
    * @description Deletes a single shared drive by ID.
    */
@@ -7855,6 +8581,74 @@ export interface operations {
                 | "error"
                 | "cancelled";
             };
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Get a snapshot
+   * @description Fetches a single snapshot by ID.
+   */
+  "query.snapshots.get": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the snapshot. */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the snapshot. */
+            readonly id: string;
+            /** @description Whether the snapshot was made automatically. */
+            readonly isAutoSnapshot: boolean;
+            /** @description The ID of the machine the snapshot is for. */
+            readonly machineId: string;
+            /** @description The name of the snapshot. */
+            readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Update a snapshot
+   * @description Updates a single snapshot by ID.
+   */
+  "mutation.snapshots.update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the snapshot. */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the snapshot. */
+          readonly name?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the snapshot. */
+            readonly id: string;
+            /** @description Whether the snapshot was made automatically. */
+            readonly isAutoSnapshot: boolean;
+            /** @description The ID of the machine the snapshot is for. */
+            readonly machineId: string;
+            /** @description The name of the snapshot. */
+            readonly name: string;
           };
         };
       };
@@ -8409,6 +9203,266 @@ export interface operations {
     };
   };
   /**
+   * List storage providers
+   * @description List storage providers
+   */
+  "query.storageProviders.list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /** @description The ID of the storage provider */
+              readonly id: string;
+              /** @description The name of the storage provider */
+              readonly name: string;
+              /** @description The storage provider configuration */
+              readonly s3Config: {
+                readonly accessKey: string;
+                readonly bucket: string;
+                /** Format: uri */
+                readonly endpoint: string | null;
+                readonly region?: string | null;
+                /** @default false */
+                readonly retainData?: boolean | null;
+                readonly secretAccessKey: string;
+                readonly signatureVersion?: string | null;
+              };
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Create a storage provider
+   * @description Create a storage provider
+   */
+  "mutation.storageProviders.create": {
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description Is team default */
+          readonly isTeamDefault?: boolean;
+          /** @description The name of the storage provider */
+          readonly name: string;
+          /** @description The storage provider configuration */
+          readonly s3Config: {
+            readonly accessKey: string;
+            readonly bucket: string;
+            /** Format: uri */
+            readonly endpoint: string | null;
+            readonly region?: string | null;
+            /** @default false */
+            readonly retainData?: boolean | null;
+            readonly secretAccessKey: string;
+            readonly signatureVersion?: string | null;
+          };
+          /**
+           * @description The type of storage provider
+           * @enum {string}
+           */
+          readonly storageProviderType: "s3";
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the storage provider */
+            readonly id: string;
+            /** @description The name of the storage provider */
+            readonly name: string;
+            /** @description The storage provider configuration */
+            readonly s3Config: {
+              readonly accessKey: string;
+              readonly bucket: string;
+              /** Format: uri */
+              readonly endpoint: string | null;
+              readonly region?: string | null;
+              /** @default false */
+              readonly retainData?: boolean | null;
+              readonly secretAccessKey: string;
+              readonly signatureVersion?: string | null;
+            };
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Get a storage provider
+   * @description Get a storage provider
+   */
+  "query.storageProviders.get": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the storage provider */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the storage provider */
+            readonly id: string;
+            /** @description The name of the storage provider */
+            readonly name: string;
+            /** @description The storage provider configuration */
+            readonly s3Config: {
+              readonly accessKey: string;
+              readonly bucket: string;
+              /** Format: uri */
+              readonly endpoint: string | null;
+              readonly region?: string | null;
+              /** @default false */
+              readonly retainData?: boolean | null;
+              readonly secretAccessKey: string;
+              readonly signatureVersion?: string | null;
+            };
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Update a storage provider
+   * @description Update a storage provider
+   */
+  "mutation.storageProviders.update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the storage provider */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description Is team default */
+          readonly isTeamDefault: boolean;
+          /** @description The storage provider configuration */
+          readonly s3Config: {
+            readonly accessKey: string;
+            readonly bucket: string;
+            /** Format: uri */
+            readonly endpoint: string | null;
+            readonly region?: string | null;
+            /** @default false */
+            readonly retainData?: boolean | null;
+            readonly secretAccessKey: string;
+            readonly signatureVersion?: string | null;
+          };
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the storage provider */
+            readonly id: string;
+            /** @description The name of the storage provider */
+            readonly name: string;
+            /** @description The storage provider configuration */
+            readonly s3Config: {
+              readonly accessKey: string;
+              readonly bucket: string;
+              /** Format: uri */
+              readonly endpoint: string | null;
+              readonly region?: string | null;
+              /** @default false */
+              readonly retainData?: boolean | null;
+              readonly secretAccessKey: string;
+              readonly signatureVersion?: string | null;
+            };
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Delete a storage provider
+   * @description Delete a storage provider
+   */
+  "mutation.storageProviders.delete": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the storage provider */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the storage provider */
+            readonly id: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Get storage utilization
+   * @description Get a breakdown of how storage is being used by your team
+   */
+  "query.storageUtilization.getPublic": {
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Storage used by datasets in bytes */
+            readonly datasetUsage: string;
+            /** @description Storage used by models in bytes */
+            readonly modelUsage: string;
+            /** @description Storage used by notebooks files in bytes */
+            readonly notebookWorkspaceUsage: string;
+            /** @description The amount of free storage left before you reach your plan's limit in bytes */
+            readonly remainingFreeStorage: string;
+            /** @description Persistent storage used by the notebook shared storage directory in bytes */
+            readonly sharedStorageUsage: string;
+            /** @description The amount of free storage that comes with your current plan in bytes */
+            readonly totalFreeStorage: string;
+            /** @description Total storage used by your team in bytes */
+            readonly totalUsage: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * List a team's secrets
    * @description Fetches a list of secrets for a team.
    */
@@ -8426,7 +9480,7 @@ export interface operations {
       };
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
-        handle: string;
+        id: string;
       };
     };
     responses: {
@@ -8467,7 +9521,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
-        handle: string;
+        id: string;
       };
     };
     readonly requestBody: {
@@ -8511,7 +9565,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
-        handle: string;
+        id: string;
         /** @description The name of the secret, e.g. "DB_PASSWORD". */
         name: string;
       };
@@ -8547,7 +9601,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
-        handle: string;
+        id: string;
         /** @description The name of the secret, e.g. "DB_PASSWORD". */
         name: string;
       };
@@ -8573,7 +9627,7 @@ export interface operations {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
-        handle: string;
+        id: string;
         /** @description The name of the secret, e.g. "DB_PASSWORD". */
         name: string;
       };
@@ -8853,6 +9907,69 @@ export interface operations {
     };
   };
   /**
+   * Update a template
+   * @description Updates a single template by ID.
+   */
+  "mutation.templates.update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the template to update. */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the template. */
+          readonly name: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The type of agent installed on the template. */
+            readonly agentType: string;
+            /** @description The machine types the template is available on. */
+            readonly availableMachineTypes: readonly ({
+              /** @description Whether the template is available on this machine type. */
+              readonly isAvailable: boolean;
+              /** @description The label of the machine type. */
+              readonly machineTypeLabel: string;
+            })[];
+            /** @description The default size of the template in gigabytes. */
+            readonly defaultSizeGb: number;
+            /**
+             * Format: date-time
+             * @description The date the template was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the shared drive was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the template. */
+            readonly id: string;
+            /**
+             * @description Whether the template is public.
+             * @default false
+             */
+            readonly isPublic?: boolean;
+            /** @description The name of the template. */
+            readonly name: string;
+            /** @description The operating system installed on the template. */
+            readonly operatingSystemLabel: string;
+            /** @description The ID of the parent machine. */
+            readonly parentMachineId: string;
+            /** @description The region the template is in. Public templates are in all regions. */
+            readonly region: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * Delete template
    * @description Delete a template.
    */
@@ -8913,16 +10030,6 @@ export interface operations {
    */
   "query.workflowRunLogs.list": {
     parameters: {
-      readonly query: {
-        /** @description Fetch the next page of results after this cursor. */
-        after?: string;
-        /** @description The number of items to fetch after this page. */
-        limit?: number;
-        /** @description Order results by one of these fields. */
-        orderBy?: "dtCreated";
-        /** @description The order to sort the results by. */
-        order?: "asc" | "desc";
-      };
       readonly path: {
         /** @description The ID of the workflow */
         id: string;
@@ -8945,7 +10052,7 @@ export interface operations {
              * @description When the workflow run job finished
              * @default null
              */
-            readonly dtfinished?: Date;
+            readonly dtFinished?: Date;
             /**
              * Format: date-time
              * @description When the workflow run job started
@@ -8966,16 +10073,22 @@ export interface operations {
               readonly dtCreated: Date;
               /** @description ID of the log item */
               readonly id: string;
-              /** @description The instance ID the log is associated with. */
-              readonly instanceId?: string;
+              /**
+               * @description The instance ID the log is associated with.
+               * @default null
+               */
+              readonly instanceId?: string | null;
               /** @description The associated job ID of the log item. */
               readonly jobId: string;
               /** @description The line number of the log item. */
               readonly line: string;
               /** @description The message of the log item. */
               readonly message: string;
-              /** @description UUID representing the log item */
-              readonly uuid?: string;
+              /**
+               * @description UUID representing the log item
+               * @default null
+               */
+              readonly uuid?: string | null;
             })[];
             /**
              * @description The message of the workflow run job

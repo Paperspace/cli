@@ -6882,7 +6882,7 @@
             },
             {
               "name": "list",
-              "description": "List projects in your team.\n\nPick a subset of fields to display:\n```\npspace project list -F handle -F name -F dtCreated\n```",
+              "description": "List projects in your team.\n\nPick a subset of fields to display:\n```\npspace project list -F id -F name -F dtCreated\n```",
               "summary": "List projects.",
               "usage": "  pspace project [flags]",
               "flags": [

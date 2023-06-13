@@ -19,7 +19,7 @@ export const list = command("list", {
 
     Pick a subset of fields to display:
     \`\`\`
-    ${root.name} project list -F handle -F name -F dtCreated
+    ${root.name} project list -F id -F name -F dtCreated
     \`\`\`
   `,
   commands: subCommands,

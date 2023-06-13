@@ -9,19 +9,18 @@ import { paths } from "../api/openapi.ts";
 import { printLn } from "./print.ts";
 
 export async function findProject(
-  { handle, cwd, quiet }: { cwd?: string; quiet?: boolean; handle?: string },
+  { id, cwd, quiet }: { cwd?: string; quiet?: boolean; id?: string },
 ) {
   const projectPath = cwd
     ? path.isAbsolute(cwd) ? cwd : path.join(Deno.cwd(), cwd)
     : Deno.cwd();
   const localProjects = await config.get("projects");
-  handle = handle ?? localProjects[projectPath]?.handle;
-  let project:
-    paths["/projects/{handle}"]["get"]["responses"]["200"]["content"][
-      "application/json"
-    ];
+  id = id ?? localProjects[projectPath]?.id;
+  let project: paths["/projects/{id}"]["get"]["responses"]["200"]["content"][
+    "application/json"
+  ];
 
-  if (!handle) {
+  if (!id) {
     const existingProjects = await loading(projects.list({ limit: 50 }), {
       enabled: !quiet,
     });
@@ -52,7 +51,7 @@ export async function findProject(
     asserts(selected, "No project selected.");
     project = selected;
   } else {
-    const response = await loading(projects.get({ handle }), {
+    const response = await loading(projects.get({ id }), {
       enabled: !quiet,
     });
     asserts(response.ok, response);

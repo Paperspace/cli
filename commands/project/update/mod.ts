@@ -34,7 +34,7 @@ export const update = command("update", {
   }),
 }).run(
   async function* ({ args, flags }) {
-    const [handle] = args;
+    const [id] = args;
     let { name } = flags;
 
     if (!name) {
@@ -42,7 +42,7 @@ export const update = command("update", {
       asserts(name, "You must provide a new name for the project.");
     }
 
-    const result = await loading(projects.update({ name, handle }), {
+    const result = await loading(projects.update({ name, id }), {
       enabled: !flags.json,
     });
 

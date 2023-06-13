@@ -38,13 +38,13 @@ export const list = command("list", {
   async function* ({ flags }) {
     if (!flags.global) {
       const project = await findProject({
-        handle: flags["project-id"],
+        id: flags["project-id"],
         cwd: flags.cwd,
         quiet: flags.json,
       });
       const result = await loading(
         projectSecrets.list({
-          handle: project.handle,
+          id: project.id,
           limit: flags.limit,
           after: flags.after,
           orderBy: flags.orderBy,
@@ -67,7 +67,7 @@ export const list = command("list", {
       asserts(team, "You must be in a team to list secrets.");
       const result = await loading(
         teamSecrets.list({
-          handle: team,
+          id: team,
           limit: flags.limit,
           after: flags.after,
           orderBy: flags.orderBy,

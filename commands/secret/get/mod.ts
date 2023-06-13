@@ -55,13 +55,13 @@ export const get = command("get", {
 
     if (!flags.global) {
       const project = await findProject({
-        handle: flags["project-id"],
+        id: flags["project-id"],
         cwd: flags.cwd,
         quiet: flags.json,
       });
 
       const response = await loading(
-        projectSecrets.get({ handle: project.handle, name }),
+        projectSecrets.get({ id: project.id, name }),
       );
 
       asserts(response.ok, response);
@@ -79,7 +79,7 @@ export const get = command("get", {
       asserts(team, "A team is required");
 
       const response = await loading(
-        teamSecrets.get({ handle: team, name }),
+        teamSecrets.get({ id: team, name }),
       );
 
       asserts(response.ok, response);

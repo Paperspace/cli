@@ -79,7 +79,7 @@ export const update = command("update", {
       }
 
       const response = await loading(
-        teamSecrets.update({ handle: team, name, value }),
+        teamSecrets.update({ id: team, name, value }),
       );
 
       asserts(response.ok, response);
@@ -92,12 +92,12 @@ export const update = command("update", {
       }
     } else {
       const project = await findProject({
-        handle: flags["project-id"],
+        id: flags["project-id"],
         cwd: flags.cwd,
         quiet: flags.json,
       });
       const response = await loading(
-        projectSecrets.update({ handle: project.handle, name, value }),
+        projectSecrets.update({ id: project.id, name, value }),
       );
 
       asserts(response.ok, response);

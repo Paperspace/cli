@@ -3,15 +3,15 @@ import { client } from "./client.ts";
 export const projects = {
   list: client("/projects").get,
   create: client("/projects").post,
-  get: client("/projects/{handle}").get,
-  update: client("/projects/{handle}").put,
-  // delete: client("/projects/{handle}").delete,
+  get: client("/projects/{id}").get,
+  update: client("/projects/{id}").put,
+  // delete: client("/projects/{id}").delete,
 };
 
 export const projectSecrets = {
-  list: client("/projects/{handle}/secrets").get,
-  create: client("/projects/{handle}/secrets").post,
-  get: client("/projects/{handle}/secrets/{name}").get,
-  update: client("/projects/{handle}/secrets/{name}").patch,
-  delete: client("/projects/{handle}/secrets/{name}").delete,
+  list: client("/projects/{id}/secrets").get,
+  create: client("/projects/{id}/secrets").post,
+  get: client("/projects/{id}/secrets/{name}").get,
+  update: client("/projects/{id}/secrets/{name}").patch,
+  delete: client("/projects/{id}/secrets/{name}").delete,
 };

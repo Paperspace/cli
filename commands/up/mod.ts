@@ -100,15 +100,15 @@ export async function* runUp(
   const project = await findProject({
     quiet: !flags.json,
     cwd: flags.cwd,
-    handle: flags["project-id"],
+    id: flags["project-id"],
   });
   const configFile = await appConfig.find(flags);
   const team = await config.get("team");
 
-  logger.info({ projectId: project.handle, config: configFile });
+  logger.info({ projectId: project.id, config: configFile });
   const upsert = await loading(
     deployments.upsert({
-      projectId: project.handle,
+      projectId: project.id,
       config: configFile,
     }),
     { text: "Deploying", enabled: !flags.json },
@@ -180,7 +180,7 @@ export async function* runUp(
       yield `✨ ${fmt.colors.bold("Your app is ready")}\n`;
       yield "   " + fmt.colors.bold("Console URL");
       yield "   " + new URL(
-        `/${team}/projects/${project.handle}/gradient-deployments/${deployment.id}`,
+        `/${team}/projects/${project.id}/gradient-deployments/${deployment.id}`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       ).toString();
       yield "";
@@ -190,7 +190,7 @@ export async function* runUp(
       yield `🌙 ${fmt.colors.bold("Your app was disabled")}\n`;
       yield "   " + fmt.colors.bold("Console URL");
       yield "   " + new URL(
-        `/${team}/projects/${project.handle}/gradient-deployments/${deployment.id}`,
+        `/${team}/projects/${project.id}/gradient-deployments/${deployment.id}`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       );
     }
