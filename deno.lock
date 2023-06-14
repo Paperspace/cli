@@ -269,35 +269,6 @@
     "https://deno.land/x/zod@v3.21.4/locales/en.ts": "a7a25cd23563ccb5e0eed214d9b31846305ddbcdb9c5c8f508b108943366ab4c",
     "https://deno.land/x/zod@v3.21.4/mod.ts": "64e55237cb4410e17d968cd08975566059f27638ebb0b86048031b987ba251c4",
     "https://deno.land/x/zod@v3.21.4/types.ts": "b5d061babea250de14fc63764df5b3afa24f2b088a1d797fc060ba49a0ddff28",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/deno/zod-to-json-schema.js": "52790608b8875080da38adb31db580e95160ea4ad3ee8365790e1acff6387fc2",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/index.d.ts": "6a35cd9a2721b5bc26e2b4fda01d1c56f788a41ba7558fede42340c4a72a97be",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/Options.d.ts": "0f55b75d5866b80bfe80d063fc24b2ce2baa338c459eb316935a27dfb4e5c3bf",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/Refs.d.ts": "d89013b66d577692d30ffbd425fa52dccab992768c2b76d086498dda898c1d94",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/errorMessages.d.ts": "793758266c2149213de4b43f0b923c88da356b2084aed96acb233c9b5791b369",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parseDef.d.ts": "58ab53ae728b36c78ae27eac1d860febfa1af42349478c3f56d425917986820d",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/any.d.ts": "ba739758560a9b3e696095df9b04ac5d9d76acb11e98e06e73b7a86cbffe4207",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/array.d.ts": "3555631748ed9a7c5a43775024c8f8f549db04e82bca3b5416e68ad756791fa7",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/bigint.d.ts": "8e982f3df4c7b027d54e52cf02acb25f2ccf33cadd27c8a7865c1cd6a1958211",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/boolean.d.ts": "0e8edbe744dfc3ce65e9fa2283f1f0eb2c0aaaec4df19765f51c346e45452cda",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/date.d.ts": "2041c577c7ba7bf4c71d98b79b955c0dae8aec82b800bd403f71416962ebf43a",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/enum.d.ts": "c810520a5a5b5885afdfb22e5f24913a680bbf4a6cb3298c7e7926c06fffde14",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/intersection.d.ts": "ddd5dae715ff232033f8fc4a20e993dcb7990fad5a10abdc7c08c23fd105abdf",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/literal.d.ts": "3134d443f1e9e02b2491a5ace19b003ec9a3aa4570b21a3df4a92dcb640ab101",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/map.d.ts": "212a8ae920e91b3aca2f937a9443133e479364516499e39f7dfca66d33200ffe",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/nativeEnum.d.ts": "f0ed791578b81ffe9532f1d7dc69f8042c163da4ce7e17da105cc904e2d5808a",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/never.d.ts": "adb05565c81b408a97cee9201c8539dda075c30dffce0d4ec226e5050f36bfa4",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/null.d.ts": "2007d407fb8742049ecaeac0b4c5a4c78619b64a6abb56250e65f5375ca1bbb1",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/nullable.d.ts": "4247d929e4dbc210e6c4b3a3fadc2fdbe49484cfd39613951120569fd790ff8d",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/number.d.ts": "96068895acb3a0963e466a6a6031d032e0c45fe3cc4fe01d0fb2d1aa599ee151",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/object.d.ts": "95715ae8c783fad3ceba32b20c35981bd872eb8225a3e5bead7178619aec055f",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/record.d.ts": "52ea078ba7248971232a18c994a47de3e95c904ec72c92a09f192790763e4387",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/set.d.ts": "52b4043525e2032ef19ddb7e6fd7ad23ce28285395a4ce9c34851c8fd51e4537",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/string.d.ts": "10f4dbda9b4068de9b42b5005899b68733f7fda316ef8d255f9ccaa10e8d9c94",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/tuple.d.ts": "15a5d7d3848585f5463c8d4281bc807601cd0247abc996ce084c9cb9518ae982",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/undefined.d.ts": "3a56da695cfddd03aee7835adf8934e4f357cc9bac59ea534cd282aba668b566",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/union.d.ts": "54e05b95eef7ec826866f090d7e501354ff9eae89782fabc02954cd7f815bd69",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/parsers/unknown.d.ts": "ba3886b9e5b3bd32588d57421988aeeea94afe40227334edc5d45fb0c5367c9d",
-    "https://esm.sh/v111/zod-to-json-schema@3.20.4/src/zodToJsonSchema.d.ts": "78eed4b9655aacff0a686884262fcdba7538b49860dd7d8712c107ea7567f0c8",
     "https://esm.sh/v111/zod@3.21.4/deno/zod.js": "ef6535dd2aa5c37b49464e9f474f5e59252e3f50f7f03183d43e997be3f62263",
     "https://esm.sh/v111/zod@3.21.4/index.d.ts": "b51c954b9557b1dcb03b2bf34cd136e710cb9aa276e686cac0e291249590a52a",
     "https://esm.sh/v111/zod@3.21.4/lib/ZodError.d.ts": "1f19511459549a66526d9dcc3b2288e59fa5fd4cf42b390a945d0bdc289806df",
@@ -312,11 +283,14 @@
     "https://esm.sh/v111/zod@3.21.4/lib/index.d.ts": "e6e0b04af1500398c8840582cce03d8907d6475005eb490f0e07bb33db6da66c",
     "https://esm.sh/v111/zod@3.21.4/lib/locales/en.d.ts": "f8ec1611afb8d132c6c71822718805866890cf2071025153af97508eff24e4b6",
     "https://esm.sh/v111/zod@3.21.4/lib/types.d.ts": "d7eecca2a9e02b2b2f51eaef95956f490a5780d03b32b9865068a63a26810f01",
-    "https://esm.sh/zod-to-json-schema@3.20.4": "0d0a0e35307c0904d69c7f265c254245bd738854b5489192bf69f48893e4c137"
+    "https://esm.sh/v112/zod-to-json-schema@3.20.4/deno/zod-to-json-schema.mjs": "44fabb5e833c12b2c22e5bc58227a94effd7971e29837ad9b637333c1d2981a8",
+    "https://esm.sh/v112/zod@3.21.4/deno/zod.mjs": "652b3e1f40b7dbb5b32d5c4d4fc7f1cbe06b0cf87c16cb7cd0c62f8ce9457406",
+    "https://esm.sh/zod-to-json-schema@3.20.4": "8f7f0db5c072058e1508a855afe8897189a0a177c18f72134004798c183e4c3e"
   },
   "npm": {
     "specifiers": {
-      "openapi-typescript": "openapi-typescript@6.2.0"
+      "openapi-typescript": "openapi-typescript@6.2.0",
+      "openapi-typescript@6.2.0": "openapi-typescript@6.2.0"
     },
     "packages": {
       "@nodelib/fs.scandir@2.1.5": {
