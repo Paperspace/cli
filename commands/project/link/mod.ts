@@ -112,7 +112,7 @@ export const link = command("link", {
     });
 
     yield `${fmt.colors.bold(projectName)} (${id}) linked to ${
-      fmt.colors.bold(path.relative(Deno.cwd(), projectPath))
+      fmt.colors.bold(path.relative(Deno.cwd(), projectPath) || ".")
     }`;
   },
 );
