@@ -30,7 +30,9 @@ export const login = command("login", {
 
   if (!apiKey) {
     try {
-      open(new URL("settings/apikeys", env.get("PAPERSPACE_CONSOLE_URL")) + "");
+      await open(
+        new URL("settings/apikeys", env.get("PAPERSPACE_CONSOLE_URL")) + "",
+      );
     } catch (_err) {
       // do nothing it's all good
     }
