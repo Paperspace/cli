@@ -79,7 +79,7 @@ export const root = app
     commands: [...commands, version(app), completion(app)],
   })
   // This function runs before every command.
-  .persistentPreRun(async function({ flags, ctx }) {
+  .persistentPreRun(async function ({ flags, ctx }) {
     // We use both environment variables and flags to set certain parameters
     // within the CLI. Flags take precedence over environment variables. So
     // if a flag is set, we'll use that.
@@ -116,22 +116,25 @@ export const root = app
       const hasTeams = availableTeams.length > 0;
       const loginHelper = !hasTeams
         ? `Run "${fmt.colors.bold(`${ctx.root.name} login`)}" to log in.`
-        : `Run "${fmt.colors.bold(
-          `${ctx.root.name} config set team <team name>`,
-        )
-        }" to choose a team. \n\nAvailable teams: \n › ${availableTeams.join(
-          "\n › ",
-        )
+        : `Run "${
+          fmt.colors.bold(
+            `${ctx.root.name} config set team <team name>`,
+          )
+        }" to choose a team. \n\nAvailable teams: \n › ${
+          availableTeams.join(
+            "\n › ",
+          )
         }`;
 
-      const selectMessage = `You must ${hasTeams ? "select a team" : "be logged in"
-        } to run this command.`;
+      const selectMessage = `You must ${
+        hasTeams ? "select a team" : "be logged in"
+      } to run this command.`;
 
       throw new AppError({ message: `${selectMessage}\n${loginHelper}` });
     }
   })
   // This function runs after every command.
-  .persistentPostRun(async function*({ flags, ctx }) {
+  .persistentPostRun(async function* ({ flags, ctx }) {
     // Check for a new version of the CLI after every command and print a
     // message if there is a new version.
 
@@ -150,11 +153,12 @@ export const root = app
 
     yield `\nNew version available: ${fmt.colors.bold(latestVersion)}`;
     yield fmt.colors.blue(
-      `Run "${fmt.colors.bold(ctx.root.name + " upgrade")
+      `Run "${
+        fmt.colors.bold(ctx.root.name + " upgrade")
       }" to upgrade to the latest version.`,
     );
   })
-  .run(async function*({ ctx }) {
+  .run(async function* ({ ctx }) {
     logger.debug("No command provided. Showing help.");
 
     for (const line of root.help(ctx)) {
