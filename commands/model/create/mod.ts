@@ -67,7 +67,7 @@ export const create = command("create", {
   }
 
   if (!storageProviderId) {
-    storageProviderId = await input("storage provider id:");
+    storageProviderId = await input("Storage provider ID:");
     asserts(
       storageProviderId,
       "You must provide a storage provider id for the model.",
