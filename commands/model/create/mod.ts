@@ -62,7 +62,7 @@ export const create = command("create", {
   }
 
   if (!description) {
-    description = await input("model description:");
+    description = await input("Description:");
     asserts(description, "You must provide a description for the model.");
   }
 
