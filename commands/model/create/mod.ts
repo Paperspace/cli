@@ -57,7 +57,7 @@ export const create = command("create", {
   let projectId: string | undefined = flags["project-id"];
 
   if (!name) {
-    name = await input("model name:");
+    name = await input("Name:");
     asserts(name, "You must provide a name for the model.");
   }
 
