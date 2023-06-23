@@ -20,7 +20,10 @@ export const model = command("model", {
   long: `
     Manage your Paperspace models.
 
-    For more information, see https://docs.paperspace.com/gradient/models.
+    For more information, see ${new URL(
+      "/deploying/models",
+      env.get("PAPERSPACE_DOCS_URL"),
+    )}.
   `,
   commands: subCommands,
 }).run(function* ({ ctx }) {
