@@ -75,7 +75,7 @@ export const create = command("create", {
   }
 
   if (!projectId) {
-    projectId = await input("project id, leave blank for none:");
+    projectId = await input("Project ID (Leave blank for none):");
     if (projectId === "") {
       projectId = undefined;
     }
