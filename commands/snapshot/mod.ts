@@ -1,6 +1,7 @@
 import { command } from "../../zcli.ts";
 import { create } from "./create/mod.ts";
 import { list } from "./list/mod.ts";
+import { env } from "../../env.ts";
 import { del } from "./delete/mod.ts";
 import { restore } from "./restore/mod.ts";
 
@@ -22,7 +23,10 @@ export const snapshot = command("snapshot", {
     They can be used to restore the machine to its previous state. Using snapshots is recommended
     before taking any action that could affect the usability of the machine or its network connection.
 
-    For more information, see https://docs.paperspace.com/storage/snapshots.
+    For more information, see ${new URL(
+    "/storage/snapshots",
+    env.get("PAPERSPACE_DOCS_URL"),
+  )}.
   `,
   commands: subCommands,
 }).run(function* ({ ctx }) {
