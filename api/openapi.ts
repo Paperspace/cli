@@ -9,364 +9,386 @@ export interface paths {
      * Create an app
      * @description Create an app.
      */
-    post: operations["mutation.apps.create"];
+    post: operations["apps-create"];
   };
   "/apps/{id}": {
     /**
      * Delete an app
      * @description Deletes an app. This will delete all resources associated with the app.
      */
-    delete: operations["mutation.apps.delete"];
+    delete: operations["apps-delete"];
   };
   "/apps/{id}/disable": {
     /**
      * Disable an app
      * @description Disables an app that is currently enabled. This will stop the app's deployments and make it unavailable to users.
      */
-    patch: operations["mutation.apps.disable"];
+    patch: operations["apps-disable"];
   };
   "/apps/{id}/enable": {
     /**
      * Enable an app
      * @description Enables an app that has been previously disabled. This will start the app and make it available to users.
      */
-    patch: operations["mutation.apps.enable"];
+    patch: operations["apps-enable"];
   };
   "/apps/{id}/name": {
     /**
      * Update an app's name
      * @description Change the name of an app
      */
-    patch: operations["mutation.apps.updateName"];
+    patch: operations["apps-updateName"];
   };
   "/auth/session": {
     /**
      * Get the current session
      * @description Get the current session. If a user is not logged in, this will be null. Otherwise, it will contain the current team and user.
      */
-    get: operations["query.auth.session"];
+    get: operations["auth-session"];
   };
   "/autoscaling-groups": {
     /**
      * List autoscaling groups
      * @description List autoscaling groups and filter by machine type.
      */
-    get: operations["query.autoscalingGroups.list"];
+    get: operations["autoscalingGroups-list"];
     /**
      * Create an autoscaling group
      * @description Create an autoscaling group.
      */
-    post: operations["mutation.autoscalingGroups.create"];
+    post: operations["autoscalingGroups-create"];
   };
   "/autoscaling-groups/{id}": {
     /**
      * Get an autoscaling group
      * @description Fetches a single autoscaling group by id.
      */
-    get: operations["query.autoscalingGroups.get"];
+    get: operations["autoscalingGroups-get"];
     /**
      * Update an autoscaling group
      * @description Update an autoscaling group.
      */
-    put: operations["mutation.autoscalingGroups.update"];
+    put: operations["autoscalingGroups-update"];
     /**
      * Delete an autoscaling group
      * @description Delete an autoscaling group.
      */
-    delete: operations["mutation.autoscalingGroups.delete"];
+    delete: operations["autoscalingGroups-delete"];
   };
   "/billing/account-standing": {
     /**
      * Get account standing
      * @description Check whether the current team account is in good standing. If not, send back a message explaining why.
      */
-    get: operations["query.billingAccountStanding.get"];
+    get: operations["billingAccountStanding-get"];
   };
   "/container-registries": {
     /**
      * List container registries
      * @description Lists container registries for the current team.
      */
-    get: operations["query.containerRegistries.list"];
+    get: operations["containerRegistries-list"];
     /**
      * Create a container registry
      * @description Creates a container registry for the current team.
      */
-    post: operations["mutation.containerRegistries.create"];
+    post: operations["containerRegistries-create"];
   };
   "/container-registries/{id}": {
     /**
      * List container registries
      * @description Lists container registries for the current team.
      */
-    get: operations["query.containerRegistries.get"];
+    get: operations["containerRegistries-get"];
     /**
      * Update a container registry
      * @description Updates a container registry for the current team.
      */
-    put: operations["mutation.containerRegistries.update"];
+    put: operations["containerRegistries-update"];
     /**
      * Delete a container registry
      * @description Deletes a container registry for the current team.
      */
-    delete: operations["mutation.containerRegistries.delete"];
+    delete: operations["containerRegistries-delete"];
   };
   "/container-registries/{id}/test-connection": {
     /**
      * Test a container registry connection
      * @description Validate that a container registry can be connected to using the provided credentials.
      */
-    get: operations["mutation.containerRegistries.testConnection"];
+    get: operations["containerRegistries-testConnection"];
   };
   "/datasets": {
     /**
      * List datasets
      * @description List datasets
      */
-    get: operations["query.datasets.list"];
+    get: operations["datasets-list"];
     /**
      * Create a dataset
      * @description Create a dataset
      */
-    post: operations["mutation.datasets.create"];
+    post: operations["datasets-create"];
   };
   "/datasets/{datasetId}/versions": {
+    /**
+     * List dataset versions
+     * @description List dataset versions
+     */
+    get: operations["datasetVersions-list"];
     /**
      * Create a dataset version
      * @description Create a dataset version
      */
-    post: operations["mutation.datasetVersions.create"];
+    post: operations["datasetVersions-create"];
+  };
+  "/datasets/{datasetId}/versions/{version}": {
+    /**
+     * Get a dataset version
+     * @description Get a dataset version
+     */
+    get: operations["datasetVersions-get"];
+    /**
+     * Update a dataset version
+     * @description Update a dataset version
+     */
+    put: operations["datasetVersions-update"];
+    /**
+     * Delete a dataset version
+     * @description Delete a dataset version
+     */
+    delete: operations["datasetVersions-delete"];
   };
   "/datasets/{id}": {
     /**
      * Get a dataset
      * @description Get a dataset
      */
-    get: operations["query.datasets.get"];
-    /**
-     * Delete a dataset
-     * @description Delete a dataset
-     */
-    delete: operations["mutation.datasets.delete"];
+    get: operations["datasets-get"];
     /**
      * Update a dataset
      * @description Update a dataset
      */
-    patch: operations["mutation.datasets.update"];
+    put: operations["datasets-update"];
+    /**
+     * Delete a dataset
+     * @description Delete a dataset
+     */
+    delete: operations["datasets-delete"];
   };
   "/deployments": {
     /**
      * List deployments
      * @description Fetches a list of deployments for a logged in user.
      */
-    get: operations["query.deployments.list"];
+    get: operations["deployments-list"];
     /**
      * Upsert a deployment
      * @description Submit a new deployment configuration. If a deployment does not exist, one is created. Otherwise, a deployment is updated with new configuration.
      */
-    post: operations["mutation.deployments.upsert"];
+    post: operations["deployments-upsert"];
   };
   "/deployments/{id}": {
     /**
      * Get a deployment
      * @description Fetches a single deployment by deployment ID.
      */
-    get: operations["query.deployments.get"];
+    get: operations["deployments-get"];
     /**
      * Delete a deployment
      * @description Deletes a deployment by deployment ID.
      */
-    delete: operations["mutation.deployments.delete"];
+    delete: operations["deployments-delete"];
   };
   "/deployments/{id}/history": {
     /**
      * List app history
      * @description Lists history for a given app.
      */
-    get: operations["query.deploymentHistory.list"];
+    get: operations["deploymentHistory-list"];
   };
   "/deployments/{id}/logs": {
     /**
      * List app logs
      * @description Lists logs for a given app.
      */
-    get: operations["query.deploymentLogs.list"];
+    get: operations["deploymentLogs-list"];
   };
   "/deployments/{id}/metrics": {
     /**
      * List app metrics
      * @description Lists metrics for a given app.
      */
-    get: operations["query.deploymentMetrics.get"];
+    get: operations["deploymentMetrics-get"];
   };
   "/deployments/{id}/runs": {
     /**
      * List deployment runs
      * @description Lists the active deployment runs for a deployment.
      */
-    get: operations["query.deploymentRuns.get"];
+    get: operations["deploymentRuns-get"];
   };
   "/health": {
     /**
      * Health check
      * @description Check if the API is healthy.
      */
-    get: operations["query.health"];
+    get: operations["health"];
   };
   "/machine-events": {
     /**
      * List machine events
      * @description Fetches a list of machine events.
      */
-    get: operations["query.machineEvents.list"];
+    get: operations["machineEvents-list"];
   };
   "/machine-events/{id}": {
     /**
      * Get a machine event
      * @description Fetches a single machine event by ID.
      */
-    get: operations["query.machineEvents.get"];
+    get: operations["machineEvents-get"];
   };
   "/machines": {
     /**
      * List machines
      * @description Fetches a list of machines.
      */
-    get: operations["query.machines.list"];
+    get: operations["machines-list"];
     /**
      * Create a machine
      * @description Creates a new machine.
      */
-    post: operations["mutation.machines.create"];
+    post: operations["machines-create"];
   };
   "/machines/{id}": {
     /**
      * Get a machine
      * @description Fetches a single machine by ID.
      */
-    get: operations["query.machines.get"];
+    get: operations["machines-get"];
     /**
      * Update a machine
      * @description Updates a machine.
      */
-    put: operations["mutation.machines.update"];
+    put: operations["machines-update"];
     /**
      * Delete a machine
      * @description Deletes a single machine by ID.
      */
-    delete: operations["mutation.machines.delete"];
+    delete: operations["machines-delete"];
   };
   "/machines/{id}/accessors": {
     /**
      * List accessors
      * @description Lists the team members that can explicitly access a machine.
      */
-    get: operations["query.machines.listAccessors"];
+    get: operations["machines-listAccessors"];
     /**
      * Add an accessor
      * @description Adds an accessor to a machine.
      */
-    post: operations["mutation.machines.addAccessor"];
+    post: operations["machines-addAccessor"];
   };
   "/machines/{id}/accessors/{userId}": {
     /**
      * Get an accessor
      * @description Get an accessor for a machine.
      */
-    get: operations["query.machines.getAccessor"];
+    get: operations["machines-getAccessor"];
     /**
      * Delete an accessor
      * @description Deletes an accessor from a machine.
      */
-    delete: operations["mutation.machines.removeAccessor"];
+    delete: operations["machines-removeAccessor"];
   };
   "/machines/{id}/desktop": {
     /**
      * Get desktop settings
      * @description Gets the machine settings that are used to configure desktop streaming.
      */
-    get: operations["query.machines.getDesktop"];
+    get: operations["machines-getDesktop"];
   };
   "/machines/{id}/restart": {
     /**
      * Restart a machine
      * @description Restarts a machine.
      */
-    patch: operations["mutation.machines.restart"];
+    patch: operations["machines-restart"];
   };
   "/machines/{id}/start": {
     /**
      * Start a machine
      * @description Starts a machine.
      */
-    patch: operations["mutation.machines.start"];
+    patch: operations["machines-start"];
   };
   "/machines/{id}/stop": {
     /**
      * Stop a machine
      * @description Stops a machine.
      */
-    patch: operations["mutation.machines.stop"];
+    patch: operations["machines-stop"];
   };
   "/models": {
     /**
      * List models
      * @description List models
      */
-    get: operations["query.models.list"];
+    get: operations["models-list"];
     /**
      * Create a model
      * @description Create a model
      */
-    post: operations["mutation.models.create"];
+    post: operations["models-create"];
   };
   "/models/{id}": {
     /**
      * Get a model
      * @description Get a model
      */
-    get: operations["query.models.get"];
+    get: operations["models-get"];
     /**
      * Delete a model
      * @description Delete a model
      */
-    delete: operations["mutation.models.delete"];
+    delete: operations["models-delete"];
   };
   "/notebooks": {
     /**
      * List notebooks
      * @description Lists the notebooks you have access to in the current team
      */
-    get: operations["query.notebooks.list"];
+    get: operations["notebooks-list"];
   };
   "/private-networks": {
     /**
      * List private networks
      * @description Fetches a list of private networks.
      */
-    get: operations["query.privateNetworks.list"];
+    get: operations["privateNetworks-list"];
     /**
      * Create a private network
      * @description Creates a new private network.
      */
-    post: operations["mutation.privateNetworks.create"];
+    post: operations["privateNetworks-create"];
   };
   "/private-networks/{id}": {
     /**
      * Get a private network
      * @description Fetches a single private network by ID.
      */
-    get: operations["query.privateNetworks.get"];
+    get: operations["privateNetworks-get"];
     /**
      * Update a private network
      * @description Updates a single private network by ID.
      */
-    put: operations["mutation.privateNetworks.update"];
+    put: operations["privateNetworks-update"];
     /**
      * Delete a private network
      * @description Deletes a single private network by ID.
      */
-    delete: operations["mutation.privateNetworks.delete"];
+    delete: operations["privateNetworks-delete"];
   };
   "/projects": {
     /**
@@ -374,331 +396,331 @@ export interface paths {
      * @description
      *         List projects. This endpoint supports pagination and sorting.
      */
-    get: operations["query.projects.list"];
+    get: operations["projects-list"];
     /**
      * Create a project
      * @description Create a project
      */
-    post: operations["mutation.projects.create"];
+    post: operations["projects-create"];
   };
   "/projects/{id}": {
     /**
      * Get a project by its ID
      * @description Get a project by its ID.
      */
-    get: operations["query.projects.get"];
+    get: operations["projects-get"];
     /**
      * Update a project
      * @description Update a project
      */
-    put: operations["mutation.projects.update"];
+    put: operations["projects-update"];
     /**
      * Delete a project
      * @description Delete a project
      */
-    delete: operations["mutation.projects.delete"];
+    delete: operations["projects-delete"];
   };
   "/projects/{id}/activity": {
     /**
      * List a project's activity
      * @description Fetches a list of activity items for a given project.
      */
-    get: operations["query.projectActivity.list"];
+    get: operations["projectActivity-list"];
   };
   "/projects/{id}/collaborators": {
     /**
      * List a project's collaborators
      * @description Fetches a list of collaborators for a project.
      */
-    get: operations["query.projectCollaborators.list"];
+    get: operations["projectCollaborators-list"];
     /**
      * Create a project collaborator
      * @description Adds a new collaborator to a project.
      */
-    post: operations["mutation.projectCollaborators.create"];
+    post: operations["projectCollaborators-create"];
   };
   "/projects/{id}/collaborators/{userId}": {
     /**
      * Delete a project collaborator
      * @description Removes a collaborator from a project.
      */
-    delete: operations["mutation.projectCollaborators.delete"];
+    delete: operations["projectCollaborators-delete"];
   };
   "/projects/{id}/deployments": {
     /**
      * List a project's deployments
      * @description Fetches a list of deployments for a project.
      */
-    get: operations["query.projectsDeployments.list"];
+    get: operations["projectsDeployments-list"];
   };
   "/projects/{id}/models": {
     /**
      * List a project's models
      * @description Fetches a list of models for a project.
      */
-    get: operations["query.projectModels.list"];
+    get: operations["projectModels-list"];
   };
   "/projects/{id}/secrets": {
     /**
      * List a project's secrets
      * @description Fetches a list of secrets for a project.
      */
-    get: operations["query.projectSecrets.list"];
+    get: operations["projectSecrets-list"];
     /**
      * Create a project secret
      * @description Creates a new secret for a project.
      */
-    post: operations["mutation.projectSecrets.create"];
+    post: operations["projectSecrets-create"];
   };
   "/projects/{id}/secrets/{name}": {
     /**
      * Get a project secret
      * @description Fetches a secret for a project.
      */
-    get: operations["query.projectSecrets.getProjectSecret"];
+    get: operations["projectSecrets-getProjectSecret"];
     /**
      * Delete a project secret
      * @description Deletes a secret for a project.
      */
-    delete: operations["mutation.projectSecrets.delete"];
+    delete: operations["projectSecrets-delete"];
     /**
      * Update a project secret
      * @description Update the value of a secret for a project.
      */
-    patch: operations["mutation.projectSecrets.update"];
+    patch: operations["projectSecrets-update"];
   };
   "/public-ips": {
     /**
      * List public IPs
      * @description Fetches a list of public IPs.
      */
-    get: operations["query.publicIps.list"];
+    get: operations["publicIps-list"];
     /**
      * Claim a public IP
      * @description Claims a public IP.
      */
-    post: operations["mutation.publicIps.claim"];
+    post: operations["publicIps-claim"];
   };
   "/public-ips/{ip}": {
     /**
      * Assign a public IP
      * @description Assigns a public IP to a machine.
      */
-    put: operations["mutation.publicIps.assign"];
+    put: operations["publicIps-assign"];
     /**
      * Release a public IP
      * @description Releases a public IP.
      */
-    delete: operations["mutation.publicIps.release"];
+    delete: operations["publicIps-release"];
   };
   "/shared-drives": {
     /**
      * List shared drives
      * @description Fetches a list of shared drives.
      */
-    get: operations["query.sharedDrives.list"];
+    get: operations["sharedDrives-list"];
     /**
      * Create a shared drive
      * @description Creates a new shared drive for use in a private network.
      */
-    post: operations["mutation.sharedDrives.create"];
+    post: operations["sharedDrives-create"];
   };
   "/shared-drives/{id}": {
     /**
      * Get a shared drive
      * @description Fetches a single shared drive by ID.
      */
-    get: operations["query.sharedDrives.get"];
+    get: operations["sharedDrives-get"];
     /**
      * Update a shared drive
      * @description Updates a single shared drive by ID.
      */
-    put: operations["mutation.sharedDrives.update"];
+    put: operations["sharedDrives-update"];
     /**
      * Delete a shared drive
      * @description Deletes a single shared drive by ID.
      */
-    delete: operations["mutation.sharedDrives.delete"];
+    delete: operations["sharedDrives-delete"];
   };
   "/snapshots": {
     /**
      * List snapshots
      * @description List snapshots and filter by machine.
      */
-    get: operations["query.snapshots.list"];
+    get: operations["snapshots-list"];
     /**
      * Create snapshot
      * @description Create a snapshot for a machine.
      */
-    post: operations["mutation.snapshots.create"];
+    post: operations["snapshots-create"];
   };
   "/snapshots/{id}": {
     /**
      * Get a snapshot
      * @description Fetches a single snapshot by ID.
      */
-    get: operations["query.snapshots.get"];
+    get: operations["snapshots-get"];
     /**
      * Update a snapshot
      * @description Updates a single snapshot by ID.
      */
-    put: operations["mutation.snapshots.update"];
+    put: operations["snapshots-update"];
     /**
      * Delete snapshot
      * @description Delete a snapshot for a machine.
      */
-    delete: operations["mutation.snapshots.delete"];
+    delete: operations["snapshots-delete"];
   };
   "/snapshots/{id}/restore": {
     /**
      * Restore snapshot
      * @description Restore a snapshot for a machine.
      */
-    post: operations["mutation.snapshots.restore"];
+    post: operations["snapshots-restore"];
   };
   "/startup-scripts": {
     /**
      * List startup scripts
      * @description Fetches a list of startup scripts.
      */
-    get: operations["query.startupScripts.list"];
+    get: operations["startupScripts-list"];
     /**
      * Create startup script
      * @description Create a startup script.
      */
-    post: operations["mutation.startupScripts.create"];
+    post: operations["startupScripts-create"];
   };
   "/startup-scripts/{id}": {
     /**
      * Get a startup script
      * @description Fetches a single startup script by ID.
      */
-    get: operations["query.startupScripts.get"];
+    get: operations["startupScripts-get"];
     /**
      * Update startup script
      * @description Update a startup script.
      */
-    put: operations["mutation.startupScripts.update"];
+    put: operations["startupScripts-update"];
     /**
      * Delete startup script
      * @description Delete a startup script.
      */
-    delete: operations["mutation.startupScripts.delete"];
+    delete: operations["startupScripts-delete"];
   };
   "/startup-scripts/{id}/assign": {
     /**
      * Assign startup script to machine
      * @description Assign a startup script to a machine.
      */
-    post: operations["mutation.startupScripts.assign"];
+    post: operations["startupScripts-assign"];
   };
   "/startup-scripts/{id}/unassign": {
     /**
      * Unassign startup script from machine
      * @description Unassign a startup script from a machine.
      */
-    post: operations["mutation.startupScripts.unassign"];
+    post: operations["startupScripts-unassign"];
   };
   "/storage": {
     /**
      * List storage providers
      * @description List storage providers
      */
-    get: operations["query.storageProviders.list"];
+    get: operations["storageProviders-list"];
     /**
      * Create a storage provider
      * @description Create a storage provider
      */
-    post: operations["mutation.storageProviders.create"];
+    post: operations["storageProviders-create"];
   };
   "/storage/{id}": {
     /**
      * Get a storage provider
      * @description Get a storage provider
      */
-    get: operations["query.storageProviders.get"];
+    get: operations["storageProviders-get"];
     /**
      * Update a storage provider
      * @description Update a storage provider
      */
-    put: operations["mutation.storageProviders.update"];
+    put: operations["storageProviders-update"];
     /**
      * Delete a storage provider
      * @description Delete a storage provider
      */
-    delete: operations["mutation.storageProviders.delete"];
+    delete: operations["storageProviders-delete"];
   };
   "/storage/utilization": {
     /**
      * Get storage utilization
      * @description Get a breakdown of how storage is being used by your team
      */
-    get: operations["query.storageUtilization.getPublic"];
+    get: operations["storageUtilization-getPublic"];
   };
   "/teams/{id}/secrets": {
     /**
      * List a team's secrets
      * @description Fetches a list of secrets for a team.
      */
-    get: operations["query.teamSecrets.list"];
+    get: operations["teamSecrets-list"];
     /**
      * Create a team secret
      * @description Creates a new secret for a team.
      */
-    post: operations["mutation.teamSecrets.create"];
+    post: operations["teamSecrets-create"];
   };
   "/teams/{id}/secrets/{name}": {
     /**
      * Get a team secret
      * @description Fetches a secret for a team.
      */
-    get: operations["query.teamSecrets.get"];
+    get: operations["teamSecrets-get"];
     /**
      * Delete a team secret
      * @description Deletes a secret for a team.
      */
-    delete: operations["mutation.teamSecrets.delete"];
+    delete: operations["teamSecrets-delete"];
     /**
      * Update a team secret
      * @description Update the value of a secret for a team.
      */
-    patch: operations["mutation.teamSecrets.update"];
+    patch: operations["teamSecrets-update"];
   };
   "/templates": {
     /**
      * List templates
      * @description Fetches a list of templates.
      */
-    get: operations["query.templates.list"];
+    get: operations["templates-list"];
     /**
      * Create template
      * @description Create a template for a machine.
      */
-    post: operations["mutation.templates.create"];
+    post: operations["templates-create"];
   };
   "/templates/{id}": {
     /**
      * Get a template
      * @description Fetches a single template by ID.
      */
-    get: operations["query.templates.get"];
+    get: operations["templates-get"];
     /**
      * Update a template
      * @description Updates a single template by ID.
      */
-    put: operations["mutation.templates.update"];
+    put: operations["templates-update"];
     /**
      * Delete template
      * @description Delete a template.
      */
-    delete: operations["mutation.templates.delete"];
+    delete: operations["templates-delete"];
   };
   "/workflows/{id}/runs/{runId}/logs": {
     /**
      * List workflow run logs
      * @description Lists logs for a given workflow run.
      */
-    get: operations["query.workflowRunLogs.list"];
+    get: operations["workflowRunLogs-list"];
   };
 }
 
@@ -733,7 +755,7 @@ export interface operations {
    * Create an app
    * @description Create an app.
    */
-  "mutation.apps.create": {
+  "apps-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -1004,6 +1026,16 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly accessKeyId: string;
+                  readonly endpoint?: string;
+                  readonly name: string;
+                  readonly path?: string;
+                  readonly region?: string;
+                  readonly secretAccessKey: string;
+                  /** @enum {string} */
+                  readonly type: "s3";
+                  readonly url: string;
+                } | {
                   readonly name: string;
                   /** @enum {string} */
                   readonly type: "volume";
@@ -1202,6 +1234,16 @@ export interface operations {
               };
               readonly image: string;
               readonly integrations?: readonly ({
+                readonly accessKeyId: string;
+                readonly endpoint?: string;
+                readonly name: string;
+                readonly path?: string;
+                readonly region?: string;
+                readonly secretAccessKey: string;
+                /** @enum {string} */
+                readonly type: "s3";
+                readonly url: string;
+              } | {
                 readonly name: string;
                 /** @enum {string} */
                 readonly type: "volume";
@@ -1277,7 +1319,7 @@ export interface operations {
    * Delete an app
    * @description Deletes an app. This will delete all resources associated with the app.
    */
-  "mutation.apps.delete": {
+  "apps-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the app to delete */
@@ -1301,16 +1343,11 @@ export interface operations {
    * Disable an app
    * @description Disables an app that is currently enabled. This will stop the app's deployments and make it unavailable to users.
    */
-  "mutation.apps.disable": {
+  "apps-disable": {
     parameters: {
       readonly path: {
         /** @description The ID of the app to disable */
         id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": Record<string, never>;
       };
     };
     responses: {
@@ -1585,6 +1622,16 @@ export interface operations {
                   };
                   readonly image: string;
                   readonly integrations?: readonly ({
+                    readonly accessKeyId: string;
+                    readonly endpoint?: string;
+                    readonly name: string;
+                    readonly path?: string;
+                    readonly region?: string;
+                    readonly secretAccessKey: string;
+                    /** @enum {string} */
+                    readonly type: "s3";
+                    readonly url: string;
+                  } | {
                     readonly name: string;
                     /** @enum {string} */
                     readonly type: "volume";
@@ -1783,6 +1830,16 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly accessKeyId: string;
+                  readonly endpoint?: string;
+                  readonly name: string;
+                  readonly path?: string;
+                  readonly region?: string;
+                  readonly secretAccessKey: string;
+                  /** @enum {string} */
+                  readonly type: "s3";
+                  readonly url: string;
+                } | {
                   readonly name: string;
                   /** @enum {string} */
                   readonly type: "volume";
@@ -1850,16 +1907,11 @@ export interface operations {
    * Enable an app
    * @description Enables an app that has been previously disabled. This will start the app and make it available to users.
    */
-  "mutation.apps.enable": {
+  "apps-enable": {
     parameters: {
       readonly path: {
         /** @description The ID of the app to enable */
         id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": Record<string, never>;
       };
     };
     responses: {
@@ -2134,6 +2186,16 @@ export interface operations {
                   };
                   readonly image: string;
                   readonly integrations?: readonly ({
+                    readonly accessKeyId: string;
+                    readonly endpoint?: string;
+                    readonly name: string;
+                    readonly path?: string;
+                    readonly region?: string;
+                    readonly secretAccessKey: string;
+                    /** @enum {string} */
+                    readonly type: "s3";
+                    readonly url: string;
+                  } | {
                     readonly name: string;
                     /** @enum {string} */
                     readonly type: "volume";
@@ -2332,6 +2394,16 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly accessKeyId: string;
+                  readonly endpoint?: string;
+                  readonly name: string;
+                  readonly path?: string;
+                  readonly region?: string;
+                  readonly secretAccessKey: string;
+                  /** @enum {string} */
+                  readonly type: "s3";
+                  readonly url: string;
+                } | {
                   readonly name: string;
                   /** @enum {string} */
                   readonly type: "volume";
@@ -2399,7 +2471,7 @@ export interface operations {
    * Update an app's name
    * @description Change the name of an app
    */
-  "mutation.apps.updateName": {
+  "apps-updateName": {
     parameters: {
       readonly path: {
         /** @description The ID of the app to update */
@@ -2433,7 +2505,7 @@ export interface operations {
    * Get the current session
    * @description Get the current session. If a user is not logged in, this will be null. Otherwise, it will contain the current team and user.
    */
-  "query.auth.session": {
+  "auth-session": {
     responses: {
       /** @description Successful response */
       200: {
@@ -2552,7 +2624,7 @@ export interface operations {
    * List autoscaling groups
    * @description List autoscaling groups and filter by machine type.
    */
-  "query.autoscalingGroups.list": {
+  "autoscalingGroups-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -2630,7 +2702,7 @@ export interface operations {
    * Create an autoscaling group
    * @description Create an autoscaling group.
    */
-  "mutation.autoscalingGroups.create": {
+  "autoscalingGroups-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -2709,7 +2781,7 @@ export interface operations {
    * Get an autoscaling group
    * @description Fetches a single autoscaling group by id.
    */
-  "query.autoscalingGroups.get": {
+  "autoscalingGroups-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the autoscaling group to fetch. */
@@ -2770,7 +2842,7 @@ export interface operations {
    * Update an autoscaling group
    * @description Update an autoscaling group.
    */
-  "mutation.autoscalingGroups.update": {
+  "autoscalingGroups-update": {
     parameters: {
       readonly path: {
         /** @description The id of the autoscaling group. */
@@ -2857,7 +2929,7 @@ export interface operations {
    * Delete an autoscaling group
    * @description Delete an autoscaling group.
    */
-  "mutation.autoscalingGroups.delete": {
+  "autoscalingGroups-delete": {
     parameters: {
       readonly path: {
         /** @description The id of the autoscaling group. */
@@ -2881,7 +2953,7 @@ export interface operations {
    * Get account standing
    * @description Check whether the current team account is in good standing. If not, send back a message explaining why.
    */
-  "query.billingAccountStanding.get": {
+  "billingAccountStanding-get": {
     responses: {
       /** @description Successful response */
       200: {
@@ -2901,7 +2973,7 @@ export interface operations {
    * List container registries
    * @description Lists container registries for the current team.
    */
-  "query.containerRegistries.list": {
+  "containerRegistries-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -2956,7 +3028,7 @@ export interface operations {
    * Create a container registry
    * @description Creates a container registry for the current team.
    */
-  "mutation.containerRegistries.create": {
+  "containerRegistries-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -3011,7 +3083,7 @@ export interface operations {
    * List container registries
    * @description Lists container registries for the current team.
    */
-  "query.containerRegistries.get": {
+  "containerRegistries-get": {
     parameters: {
       readonly path: {
         /** @description The id of the container registry */
@@ -3053,7 +3125,7 @@ export interface operations {
    * Update a container registry
    * @description Updates a container registry for the current team.
    */
-  "mutation.containerRegistries.update": {
+  "containerRegistries-update": {
     parameters: {
       readonly path: {
         /** @description The id of the container registry */
@@ -3114,7 +3186,7 @@ export interface operations {
    * Delete a container registry
    * @description Deletes a container registry for the current team.
    */
-  "mutation.containerRegistries.delete": {
+  "containerRegistries-delete": {
     parameters: {
       readonly path: {
         /** @description The id of the container registry */
@@ -3156,7 +3228,7 @@ export interface operations {
    * Test a container registry connection
    * @description Validate that a container registry can be connected to using the provided credentials.
    */
-  "mutation.containerRegistries.testConnection": {
+  "containerRegistries-testConnection": {
     parameters: {
       readonly path: {
         /** @description The id of the container registry */
@@ -3182,7 +3254,7 @@ export interface operations {
    * List datasets
    * @description List datasets
    */
-  "query.datasets.list": {
+  "datasets-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -3241,7 +3313,7 @@ export interface operations {
    * Create a dataset
    * @description Create a dataset
    */
-  "mutation.datasets.create": {
+  "datasets-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -3252,7 +3324,7 @@ export interface operations {
           /** @description The name of the dataset */
           readonly name: string;
           /** @description The ID of the storage provider */
-          readonly storageProviderId: string;
+          readonly storageProviderId?: string;
         };
       };
     };
@@ -3290,10 +3362,82 @@ export interface operations {
     };
   };
   /**
+   * List dataset versions
+   * @description List dataset versions
+   */
+  "datasetVersions-list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        tags?: string;
+      };
+      readonly path: {
+        /** @description The ID of the dataset */
+        datasetId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /** @description The ID of the dataset */
+              readonly datasetId: string;
+              /**
+               * Format: date-time
+               * @description The date the version was created
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the version was last modified
+               */
+              readonly dtModified: Date;
+              /** @description Whether the version is committed */
+              readonly isCommitted: boolean;
+              /** @description The description of the dataset version */
+              readonly message: string | null;
+              /** @description Metadata for the version. */
+              readonly metadata:
+                | ({
+                  [key: string]: unknown | undefined;
+                })
+                | null;
+              /** @description The tags for the version */
+              readonly tags: readonly (string)[];
+              /** @description The URL of the version */
+              readonly url: string | null;
+              /** @description The size of the dataset at this version in bytes */
+              readonly usageBytes: string | null;
+              /** @description The ID of the user that created the version */
+              readonly userId: string | null;
+              /** @description The version of the dataset */
+              readonly version: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * Create a dataset version
    * @description Create a dataset version
    */
-  "mutation.datasetVersions.create": {
+  "datasetVersions-create": {
     parameters: {
       readonly path: {
         /** @description The ID of the dataset */
@@ -3306,11 +3450,11 @@ export interface operations {
           /** @description The description of the dataset version */
           readonly message?: string;
           /** @description Metadata for the version. */
-          readonly metadata:
-            | ({
-              [key: string]: unknown | undefined;
-            })
-            | null;
+          readonly metadata?: {
+            [key: string]: unknown | undefined;
+          };
+          /** @description The tags for the version, comma-delimited */
+          readonly tags?: string;
         };
       };
     };
@@ -3341,6 +3485,8 @@ export interface operations {
                 [key: string]: unknown | undefined;
               })
               | null;
+            /** @description The tags for the version */
+            readonly tags: readonly (string)[];
             /** @description The URL of the version */
             readonly url: string | null;
             /** @description The size of the dataset at this version in bytes */
@@ -3356,10 +3502,166 @@ export interface operations {
     };
   };
   /**
+   * Get a dataset version
+   * @description Get a dataset version
+   */
+  "datasetVersions-get": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the dataset */
+        datasetId: string;
+        /** @description The version of the dataset */
+        version: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the dataset */
+            readonly datasetId: string;
+            /**
+             * Format: date-time
+             * @description The date the version was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the version was last modified
+             */
+            readonly dtModified: Date;
+            /** @description Whether the version is committed */
+            readonly isCommitted: boolean;
+            /** @description The description of the dataset version */
+            readonly message: string | null;
+            /** @description Metadata for the version. */
+            readonly metadata:
+              | ({
+                [key: string]: unknown | undefined;
+              })
+              | null;
+            /** @description The tags for the version */
+            readonly tags: readonly (string)[];
+            /** @description The URL of the version */
+            readonly url: string | null;
+            /** @description The size of the dataset at this version in bytes */
+            readonly usageBytes: string | null;
+            /** @description The ID of the user that created the version */
+            readonly userId: string | null;
+            /** @description The version of the dataset */
+            readonly version: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Update a dataset version
+   * @description Update a dataset version
+   */
+  "datasetVersions-update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the dataset */
+        datasetId: string;
+        /** @description The version of the dataset */
+        version: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description Whether the version is committed */
+          readonly isCommitted?: boolean;
+          /** @description The description of the dataset version */
+          readonly message?: string;
+          /** @description Metadata for the version. */
+          readonly metadata?: {
+            [key: string]: unknown | undefined;
+          };
+          /** @description The tags for the version, comma-delimited */
+          readonly tags?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the dataset */
+            readonly datasetId: string;
+            /**
+             * Format: date-time
+             * @description The date the version was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the version was last modified
+             */
+            readonly dtModified: Date;
+            /** @description Whether the version is committed */
+            readonly isCommitted: boolean;
+            /** @description The description of the dataset version */
+            readonly message: string | null;
+            /** @description Metadata for the version. */
+            readonly metadata:
+              | ({
+                [key: string]: unknown | undefined;
+              })
+              | null;
+            /** @description The tags for the version */
+            readonly tags: readonly (string)[];
+            /** @description The URL of the version */
+            readonly url: string | null;
+            /** @description The size of the dataset at this version in bytes */
+            readonly usageBytes: string | null;
+            /** @description The ID of the user that created the version */
+            readonly userId: string | null;
+            /** @description The version of the dataset */
+            readonly version: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Delete a dataset version
+   * @description Delete a dataset version
+   */
+  "datasetVersions-delete": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the dataset */
+        datasetId: string;
+        /** @description The version of the dataset */
+        version: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the dataset */
+            readonly datasetId: string;
+            /** @description The version of the dataset */
+            readonly version: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * Get a dataset
    * @description Get a dataset
    */
-  "query.datasets.get": {
+  "datasets-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the dataset */
@@ -3400,34 +3702,10 @@ export interface operations {
     };
   };
   /**
-   * Delete a dataset
-   * @description Delete a dataset
-   */
-  "mutation.datasets.delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the dataset */
-            readonly id: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
    * Update a dataset
    * @description Update a dataset
    */
-  "mutation.datasets.update": {
+  "datasets-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the dataset */
@@ -3478,10 +3756,34 @@ export interface operations {
     };
   };
   /**
+   * Delete a dataset
+   * @description Delete a dataset
+   */
+  "datasets-delete": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the dataset */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the dataset */
+            readonly id: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * List deployments
    * @description Fetches a list of deployments for a logged in user.
    */
-  "query.deployments.list": {
+  "deployments-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -3786,6 +4088,16 @@ export interface operations {
                           };
                           readonly image: string;
                           readonly integrations?: readonly ({
+                            readonly accessKeyId: string;
+                            readonly endpoint?: string;
+                            readonly name: string;
+                            readonly path?: string;
+                            readonly region?: string;
+                            readonly secretAccessKey: string;
+                            /** @enum {string} */
+                            readonly type: "s3";
+                            readonly url: string;
+                          } | {
                             readonly name: string;
                             /** @enum {string} */
                             readonly type: "volume";
@@ -3984,6 +4296,16 @@ export interface operations {
                         };
                         readonly image: string;
                         readonly integrations?: readonly ({
+                          readonly accessKeyId: string;
+                          readonly endpoint?: string;
+                          readonly name: string;
+                          readonly path?: string;
+                          readonly region?: string;
+                          readonly secretAccessKey: string;
+                          /** @enum {string} */
+                          readonly type: "s3";
+                          readonly url: string;
+                        } | {
                           readonly name: string;
                           /** @enum {string} */
                           readonly type: "volume";
@@ -4106,7 +4428,7 @@ export interface operations {
    * Upsert a deployment
    * @description Submit a new deployment configuration. If a deployment does not exist, one is created. Otherwise, a deployment is updated with new configuration.
    */
-  "mutation.deployments.upsert": {
+  "deployments-upsert": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -4377,6 +4699,16 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly accessKeyId: string;
+                  readonly endpoint?: string;
+                  readonly name: string;
+                  readonly path?: string;
+                  readonly region?: string;
+                  readonly secretAccessKey: string;
+                  /** @enum {string} */
+                  readonly type: "s3";
+                  readonly url: string;
+                } | {
                   readonly name: string;
                   /** @enum {string} */
                   readonly type: "volume";
@@ -4575,6 +4907,16 @@ export interface operations {
               };
               readonly image: string;
               readonly integrations?: readonly ({
+                readonly accessKeyId: string;
+                readonly endpoint?: string;
+                readonly name: string;
+                readonly path?: string;
+                readonly region?: string;
+                readonly secretAccessKey: string;
+                /** @enum {string} */
+                readonly type: "s3";
+                readonly url: string;
+              } | {
                 readonly name: string;
                 /** @enum {string} */
                 readonly type: "volume";
@@ -4657,7 +4999,7 @@ export interface operations {
    * Get a deployment
    * @description Fetches a single deployment by deployment ID.
    */
-  "query.deployments.get": {
+  "deployments-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the deployment to fetch */
@@ -4952,6 +5294,16 @@ export interface operations {
                         };
                         readonly image: string;
                         readonly integrations?: readonly ({
+                          readonly accessKeyId: string;
+                          readonly endpoint?: string;
+                          readonly name: string;
+                          readonly path?: string;
+                          readonly region?: string;
+                          readonly secretAccessKey: string;
+                          /** @enum {string} */
+                          readonly type: "s3";
+                          readonly url: string;
+                        } | {
                           readonly name: string;
                           /** @enum {string} */
                           readonly type: "volume";
@@ -5150,6 +5502,16 @@ export interface operations {
                       };
                       readonly image: string;
                       readonly integrations?: readonly ({
+                        readonly accessKeyId: string;
+                        readonly endpoint?: string;
+                        readonly name: string;
+                        readonly path?: string;
+                        readonly region?: string;
+                        readonly secretAccessKey: string;
+                        /** @enum {string} */
+                        readonly type: "s3";
+                        readonly url: string;
+                      } | {
                         readonly name: string;
                         /** @enum {string} */
                         readonly type: "volume";
@@ -5269,7 +5631,7 @@ export interface operations {
    * Delete a deployment
    * @description Deletes a deployment by deployment ID.
    */
-  "mutation.deployments.delete": {
+  "deployments-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the deployment to delete */
@@ -5293,7 +5655,7 @@ export interface operations {
    * List app history
    * @description Lists history for a given app.
    */
-  "query.deploymentHistory.list": {
+  "deploymentHistory-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -5587,6 +5949,16 @@ export interface operations {
                       };
                       readonly image: string;
                       readonly integrations?: readonly ({
+                        readonly accessKeyId: string;
+                        readonly endpoint?: string;
+                        readonly name: string;
+                        readonly path?: string;
+                        readonly region?: string;
+                        readonly secretAccessKey: string;
+                        /** @enum {string} */
+                        readonly type: "s3";
+                        readonly url: string;
+                      } | {
                         readonly name: string;
                         /** @enum {string} */
                         readonly type: "volume";
@@ -5785,6 +6157,16 @@ export interface operations {
                     };
                     readonly image: string;
                     readonly integrations?: readonly ({
+                      readonly accessKeyId: string;
+                      readonly endpoint?: string;
+                      readonly name: string;
+                      readonly path?: string;
+                      readonly region?: string;
+                      readonly secretAccessKey: string;
+                      /** @enum {string} */
+                      readonly type: "s3";
+                      readonly url: string;
+                    } | {
                       readonly name: string;
                       /** @enum {string} */
                       readonly type: "volume";
@@ -5962,7 +6344,7 @@ export interface operations {
    * List app logs
    * @description Lists logs for a given app.
    */
-  "query.deploymentLogs.list": {
+  "deploymentLogs-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -6026,7 +6408,7 @@ export interface operations {
    * List app metrics
    * @description Lists metrics for a given app.
    */
-  "query.deploymentMetrics.get": {
+  "deploymentMetrics-get": {
     parameters: {
       readonly query: {
         /** @description The metric to fetch. */
@@ -6083,7 +6465,7 @@ export interface operations {
    * List deployment runs
    * @description Lists the active deployment runs for a deployment.
    */
-  "query.deploymentRuns.get": {
+  "deploymentRuns-get": {
     parameters: {
       readonly query: {
         /** @description The latest n number of deployment runs to return */
@@ -6165,7 +6547,7 @@ export interface operations {
    * Health check
    * @description Check if the API is healthy.
    */
-  "query.health": {
+  health: {
     responses: {
       /** @description Successful response */
       200: {
@@ -6180,7 +6562,7 @@ export interface operations {
    * List machine events
    * @description Fetches a list of machine events.
    */
-  "query.machineEvents.list": {
+  "machineEvents-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -6269,7 +6651,7 @@ export interface operations {
    * Get a machine event
    * @description Fetches a single machine event by ID.
    */
-  "query.machineEvents.get": {
+  "machineEvents-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine event to fetch. */
@@ -6344,7 +6726,7 @@ export interface operations {
    * List machines
    * @description Fetches a list of machines.
    */
-  "query.machines.list": {
+  "machines-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -6519,7 +6901,7 @@ export interface operations {
    * Create a machine
    * @description Creates a new machine.
    */
-  "mutation.machines.create": {
+  "machines-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -6791,7 +7173,7 @@ export interface operations {
    * Get a machine
    * @description Fetches a single machine by ID.
    */
-  "query.machines.get": {
+  "machines-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to fetch. */
@@ -6949,7 +7331,7 @@ export interface operations {
    * Update a machine
    * @description Updates a machine.
    */
-  "mutation.machines.update": {
+  "machines-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to update. */
@@ -7213,7 +7595,7 @@ export interface operations {
    * Delete a machine
    * @description Deletes a single machine by ID.
    */
-  "mutation.machines.delete": {
+  "machines-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to delete. */
@@ -7430,7 +7812,7 @@ export interface operations {
    * List accessors
    * @description Lists the team members that can explicitly access a machine.
    */
-  "query.machines.listAccessors": {
+  "machines-listAccessors": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -7500,7 +7882,7 @@ export interface operations {
    * Add an accessor
    * @description Adds an accessor to a machine.
    */
-  "mutation.machines.addAccessor": {
+  "machines-addAccessor": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to add an accessor to. */
@@ -7561,7 +7943,7 @@ export interface operations {
    * Get an accessor
    * @description Get an accessor for a machine.
    */
-  "query.machines.getAccessor": {
+  "machines-getAccessor": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to get an accessor for. */
@@ -7616,7 +7998,7 @@ export interface operations {
    * Delete an accessor
    * @description Deletes an accessor from a machine.
    */
-  "mutation.machines.removeAccessor": {
+  "machines-removeAccessor": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to add an accessor to. */
@@ -7671,7 +8053,7 @@ export interface operations {
    * Get desktop settings
    * @description Gets the machine settings that are used to configure desktop streaming.
    */
-  "query.machines.getDesktop": {
+  "machines-getDesktop": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine. */
@@ -7711,16 +8093,11 @@ export interface operations {
    * Restart a machine
    * @description Restarts a machine.
    */
-  "mutation.machines.restart": {
+  "machines-restart": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to restart. */
         id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": Record<string, never>;
       };
     };
     responses: {
@@ -7933,16 +8310,11 @@ export interface operations {
    * Start a machine
    * @description Starts a machine.
    */
-  "mutation.machines.start": {
+  "machines-start": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to start. */
         id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": Record<string, never>;
       };
     };
     responses: {
@@ -8155,16 +8527,11 @@ export interface operations {
    * Stop a machine
    * @description Stops a machine.
    */
-  "mutation.machines.stop": {
+  "machines-stop": {
     parameters: {
       readonly path: {
         /** @description The ID of the machine to stop. */
         id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": Record<string, never>;
       };
     };
     responses: {
@@ -8377,7 +8744,7 @@ export interface operations {
    * List models
    * @description List models
    */
-  "query.models.list": {
+  "models-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -8417,7 +8784,7 @@ export interface operations {
               /** @description Whether the dataset is public */
               readonly isPublic: boolean;
               /** @description The name of the dataset */
-              readonly name: string | null;
+              readonly name: string;
               /** @description The ID of the project */
               readonly projectId: string | null;
               /** @description The ID of the storage provider */
@@ -8437,7 +8804,7 @@ export interface operations {
    * Create a model
    * @description Create a model
    */
-  "mutation.models.create": {
+  "models-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -8450,7 +8817,7 @@ export interface operations {
           /** @description The ID of the project */
           readonly projectId?: string;
           /** @description The ID of the storage provider */
-          readonly storageProviderId: string;
+          readonly storageProviderId?: string;
         };
       };
     };
@@ -8493,7 +8860,7 @@ export interface operations {
    * Get a model
    * @description Get a model
    */
-  "query.models.get": {
+  "models-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the model */
@@ -8539,7 +8906,7 @@ export interface operations {
    * Delete a model
    * @description Delete a model
    */
-  "mutation.models.delete": {
+  "models-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the model */
@@ -8563,7 +8930,7 @@ export interface operations {
    * List notebooks
    * @description Lists the notebooks you have access to in the current team
    */
-  "query.notebooks.list": {
+  "notebooks-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -8675,7 +9042,7 @@ export interface operations {
    * List private networks
    * @description Fetches a list of private networks.
    */
-  "query.privateNetworks.list": {
+  "privateNetworks-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -8729,7 +9096,7 @@ export interface operations {
    * Create a private network
    * @description Creates a new private network.
    */
-  "mutation.privateNetworks.create": {
+  "privateNetworks-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -8777,7 +9144,7 @@ export interface operations {
    * Get a private network
    * @description Fetches a single private network by ID.
    */
-  "query.privateNetworks.get": {
+  "privateNetworks-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the private network to fetch. */
@@ -8788,25 +9155,27 @@ export interface operations {
       /** @description Successful response */
       200: {
         content: {
-          readonly "application/json": {
-            /**
-             * Format: date-time
-             * @description The date the private network was created.
-             */
-            readonly dtCreated: Date;
-            /** @description The date the private network was deleted. */
-            readonly dtDeleted?: (Record<string, never> | Date) | null;
-            /** @description The ID of the private network. */
-            readonly id: string;
-            /** @description The name of the private network. */
-            readonly name: string;
-            /** @description The subnet mask of the private network. */
-            readonly netmask: string;
-            /** @description The network prefix of the private network. */
-            readonly network: string;
-            /** @description The region the private network is in. */
-            readonly region: string;
-          };
+          readonly "application/json":
+            | ({
+              /**
+               * Format: date-time
+               * @description The date the private network was created.
+               */
+              readonly dtCreated: Date;
+              /** @description The date the private network was deleted. */
+              readonly dtDeleted?: (Record<string, never> | Date) | null;
+              /** @description The ID of the private network. */
+              readonly id: string;
+              /** @description The name of the private network. */
+              readonly name: string;
+              /** @description The subnet mask of the private network. */
+              readonly netmask: string;
+              /** @description The network prefix of the private network. */
+              readonly network: string;
+              /** @description The region the private network is in. */
+              readonly region: string;
+            })
+            | null;
         };
       };
       default: components["responses"]["error"];
@@ -8816,7 +9185,7 @@ export interface operations {
    * Update a private network
    * @description Updates a single private network by ID.
    */
-  "mutation.privateNetworks.update": {
+  "privateNetworks-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the private network to update. */
@@ -8863,7 +9232,7 @@ export interface operations {
    * Delete a private network
    * @description Deletes a single private network by ID.
    */
-  "mutation.privateNetworks.delete": {
+  "privateNetworks-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the private network to delete. */
@@ -8888,7 +9257,7 @@ export interface operations {
    * @description
    *         List projects. This endpoint supports pagination and sorting.
    */
-  "query.projects.list": {
+  "projects-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -8953,7 +9322,7 @@ export interface operations {
    * Create a project
    * @description Create a project
    */
-  "mutation.projects.create": {
+  "projects-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -9007,7 +9376,7 @@ export interface operations {
    * Get a project by its ID
    * @description Get a project by its ID.
    */
-  "query.projects.get": {
+  "projects-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the project to get */
@@ -9059,7 +9428,7 @@ export interface operations {
    * Update a project
    * @description Update a project
    */
-  "mutation.projects.update": {
+  "projects-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the project to update */
@@ -9119,7 +9488,7 @@ export interface operations {
    * Delete a project
    * @description Delete a project
    */
-  "mutation.projects.delete": {
+  "projects-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the project to delete */
@@ -9171,7 +9540,7 @@ export interface operations {
    * List a project's activity
    * @description Fetches a list of activity items for a given project.
    */
-  "query.projectActivity.list": {
+  "projectActivity-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -9275,7 +9644,7 @@ export interface operations {
    * List a project's collaborators
    * @description Fetches a list of collaborators for a project.
    */
-  "query.projectCollaborators.list": {
+  "projectCollaborators-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -9350,7 +9719,7 @@ export interface operations {
    * Create a project collaborator
    * @description Adds a new collaborator to a project.
    */
-  "mutation.projectCollaborators.create": {
+  "projectCollaborators-create": {
     parameters: {
       readonly path: {
         /** @description The ID of the project. */
@@ -9416,7 +9785,7 @@ export interface operations {
    * Delete a project collaborator
    * @description Removes a collaborator from a project.
    */
-  "mutation.projectCollaborators.delete": {
+  "projectCollaborators-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the project. */
@@ -9442,7 +9811,7 @@ export interface operations {
    * List a project's deployments
    * @description Fetches a list of deployments for a project.
    */
-  "query.projectsDeployments.list": {
+  "projectsDeployments-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -9753,6 +10122,16 @@ export interface operations {
                           };
                           readonly image: string;
                           readonly integrations?: readonly ({
+                            readonly accessKeyId: string;
+                            readonly endpoint?: string;
+                            readonly name: string;
+                            readonly path?: string;
+                            readonly region?: string;
+                            readonly secretAccessKey: string;
+                            /** @enum {string} */
+                            readonly type: "s3";
+                            readonly url: string;
+                          } | {
                             readonly name: string;
                             /** @enum {string} */
                             readonly type: "volume";
@@ -9951,6 +10330,16 @@ export interface operations {
                         };
                         readonly image: string;
                         readonly integrations?: readonly ({
+                          readonly accessKeyId: string;
+                          readonly endpoint?: string;
+                          readonly name: string;
+                          readonly path?: string;
+                          readonly region?: string;
+                          readonly secretAccessKey: string;
+                          /** @enum {string} */
+                          readonly type: "s3";
+                          readonly url: string;
+                        } | {
                           readonly name: string;
                           /** @enum {string} */
                           readonly type: "volume";
@@ -10073,7 +10462,7 @@ export interface operations {
    * List a project's models
    * @description Fetches a list of models for a project.
    */
-  "query.projectModels.list": {
+  "projectModels-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -10138,7 +10527,7 @@ export interface operations {
    * List a project's secrets
    * @description Fetches a list of secrets for a project.
    */
-  "query.projectSecrets.list": {
+  "projectSecrets-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -10189,7 +10578,7 @@ export interface operations {
    * Create a project secret
    * @description Creates a new secret for a project.
    */
-  "mutation.projectSecrets.create": {
+  "projectSecrets-create": {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
@@ -10233,7 +10622,7 @@ export interface operations {
    * Get a project secret
    * @description Fetches a secret for a project.
    */
-  "query.projectSecrets.getProjectSecret": {
+  "projectSecrets-getProjectSecret": {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
@@ -10269,7 +10658,7 @@ export interface operations {
    * Delete a project secret
    * @description Deletes a secret for a project.
    */
-  "mutation.projectSecrets.delete": {
+  "projectSecrets-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
@@ -10295,7 +10684,7 @@ export interface operations {
    * Update a project secret
    * @description Update the value of a secret for a project.
    */
-  "mutation.projectSecrets.update": {
+  "projectSecrets-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the project where the secret is stored. */
@@ -10339,7 +10728,7 @@ export interface operations {
    * List public IPs
    * @description Fetches a list of public IPs.
    */
-  "query.publicIps.list": {
+  "publicIps-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -10386,7 +10775,7 @@ export interface operations {
    * Claim a public IP
    * @description Claims a public IP.
    */
-  "mutation.publicIps.claim": {
+  "publicIps-claim": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -10421,7 +10810,7 @@ export interface operations {
    * Assign a public IP
    * @description Assigns a public IP to a machine.
    */
-  "mutation.publicIps.assign": {
+  "publicIps-assign": {
     parameters: {
       readonly path: {
         /** @description The IP address of the public IP. */
@@ -10462,7 +10851,7 @@ export interface operations {
    * Release a public IP
    * @description Releases a public IP.
    */
-  "mutation.publicIps.release": {
+  "publicIps-release": {
     parameters: {
       readonly path: {
         /** @description The IP address of the public IP. */
@@ -10485,7 +10874,7 @@ export interface operations {
    * List shared drives
    * @description Fetches a list of shared drives.
    */
-  "query.sharedDrives.list": {
+  "sharedDrives-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -10548,7 +10937,7 @@ export interface operations {
    * Create a shared drive
    * @description Creates a new shared drive for use in a private network.
    */
-  "mutation.sharedDrives.create": {
+  "sharedDrives-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -10604,7 +10993,7 @@ export interface operations {
    * Get a shared drive
    * @description Fetches a single shared drive by ID.
    */
-  "query.sharedDrives.get": {
+  "sharedDrives-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the shared drive to fetch. */
@@ -10652,7 +11041,7 @@ export interface operations {
    * Update a shared drive
    * @description Updates a single shared drive by ID.
    */
-  "mutation.sharedDrives.update": {
+  "sharedDrives-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the shared drive to fetch. */
@@ -10708,7 +11097,7 @@ export interface operations {
    * Delete a shared drive
    * @description Deletes a single shared drive by ID.
    */
-  "mutation.sharedDrives.delete": {
+  "sharedDrives-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the shared drive to delete. */
@@ -10732,7 +11121,7 @@ export interface operations {
    * List snapshots
    * @description List snapshots and filter by machine.
    */
-  "query.snapshots.list": {
+  "snapshots-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -10776,7 +11165,7 @@ export interface operations {
    * Create snapshot
    * @description Create a snapshot for a machine.
    */
-  "mutation.snapshots.create": {
+  "snapshots-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -10869,7 +11258,7 @@ export interface operations {
    * Get a snapshot
    * @description Fetches a single snapshot by ID.
    */
-  "query.snapshots.get": {
+  "snapshots-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the snapshot. */
@@ -10899,7 +11288,7 @@ export interface operations {
    * Update a snapshot
    * @description Updates a single snapshot by ID.
    */
-  "mutation.snapshots.update": {
+  "snapshots-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the snapshot. */
@@ -10937,7 +11326,7 @@ export interface operations {
    * Delete snapshot
    * @description Delete a snapshot for a machine.
    */
-  "mutation.snapshots.delete": {
+  "snapshots-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the snapshot. */
@@ -11026,7 +11415,7 @@ export interface operations {
    * Restore snapshot
    * @description Restore a snapshot for a machine.
    */
-  "mutation.snapshots.restore": {
+  "snapshots-restore": {
     parameters: {
       readonly path: {
         /** @description The ID of the snapshot. */
@@ -11123,7 +11512,7 @@ export interface operations {
    * List startup scripts
    * @description Fetches a list of startup scripts.
    */
-  "query.startupScripts.list": {
+  "startupScripts-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -11181,7 +11570,7 @@ export interface operations {
    * Create startup script
    * @description Create a startup script.
    */
-  "mutation.startupScripts.create": {
+  "startupScripts-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -11234,7 +11623,7 @@ export interface operations {
    * Get a startup script
    * @description Fetches a single startup script by ID.
    */
-  "query.startupScripts.get": {
+  "startupScripts-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the startup script to fetch. */
@@ -11278,7 +11667,7 @@ export interface operations {
    * Update startup script
    * @description Update a startup script.
    */
-  "mutation.startupScripts.update": {
+  "startupScripts-update": {
     parameters: {
       readonly path: {
         /** @description The id of the startup script. */
@@ -11336,7 +11725,7 @@ export interface operations {
    * Delete startup script
    * @description Delete a startup script.
    */
-  "mutation.startupScripts.delete": {
+  "startupScripts-delete": {
     parameters: {
       readonly path: {
         /** @description The id of the startup script. */
@@ -11380,7 +11769,7 @@ export interface operations {
    * Assign startup script to machine
    * @description Assign a startup script to a machine.
    */
-  "mutation.startupScripts.assign": {
+  "startupScripts-assign": {
     parameters: {
       readonly path: {
         /** @description The id of the startup script. */
@@ -11432,7 +11821,7 @@ export interface operations {
    * Unassign startup script from machine
    * @description Unassign a startup script from a machine.
    */
-  "mutation.startupScripts.unassign": {
+  "startupScripts-unassign": {
     parameters: {
       readonly path: {
         /** @description The id of the startup script. */
@@ -11484,7 +11873,7 @@ export interface operations {
    * List storage providers
    * @description List storage providers
    */
-  "query.storageProviders.list": {
+  "storageProviders-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -11542,7 +11931,7 @@ export interface operations {
    * Create a storage provider
    * @description Create a storage provider
    */
-  "mutation.storageProviders.create": {
+  "storageProviders-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -11611,7 +12000,7 @@ export interface operations {
    * Get a storage provider
    * @description Get a storage provider
    */
-  "query.storageProviders.get": {
+  "storageProviders-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the storage provider */
@@ -11656,7 +12045,7 @@ export interface operations {
    * Update a storage provider
    * @description Update a storage provider
    */
-  "mutation.storageProviders.update": {
+  "storageProviders-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the storage provider */
@@ -11726,7 +12115,7 @@ export interface operations {
    * Delete a storage provider
    * @description Delete a storage provider
    */
-  "mutation.storageProviders.delete": {
+  "storageProviders-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the storage provider */
@@ -11750,7 +12139,7 @@ export interface operations {
    * Get storage utilization
    * @description Get a breakdown of how storage is being used by your team
    */
-  "query.storageUtilization.getPublic": {
+  "storageUtilization-getPublic": {
     responses: {
       /** @description Successful response */
       200: {
@@ -11780,7 +12169,7 @@ export interface operations {
    * List a team's secrets
    * @description Fetches a list of secrets for a team.
    */
-  "query.teamSecrets.list": {
+  "teamSecrets-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -11831,7 +12220,7 @@ export interface operations {
    * Create a team secret
    * @description Creates a new secret for a team.
    */
-  "mutation.teamSecrets.create": {
+  "teamSecrets-create": {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
@@ -11875,7 +12264,7 @@ export interface operations {
    * Get a team secret
    * @description Fetches a secret for a team.
    */
-  "query.teamSecrets.get": {
+  "teamSecrets-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
@@ -11911,7 +12300,7 @@ export interface operations {
    * Delete a team secret
    * @description Deletes a secret for a team.
    */
-  "mutation.teamSecrets.delete": {
+  "teamSecrets-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
@@ -11937,7 +12326,7 @@ export interface operations {
    * Update a team secret
    * @description Update the value of a secret for a team.
    */
-  "mutation.teamSecrets.update": {
+  "teamSecrets-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the team where the secret is stored. */
@@ -11981,7 +12370,7 @@ export interface operations {
    * List templates
    * @description Fetches a list of templates.
    */
-  "query.templates.list": {
+  "templates-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -12051,7 +12440,7 @@ export interface operations {
    * Create template
    * @description Create a template for a machine.
    */
-  "mutation.templates.create": {
+  "templates-create": {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
@@ -12169,7 +12558,7 @@ export interface operations {
    * Get a template
    * @description Fetches a single template by ID.
    */
-  "query.templates.get": {
+  "templates-get": {
     parameters: {
       readonly path: {
         /** @description The ID of the template to fetch. */
@@ -12224,7 +12613,7 @@ export interface operations {
    * Update a template
    * @description Updates a single template by ID.
    */
-  "mutation.templates.update": {
+  "templates-update": {
     parameters: {
       readonly path: {
         /** @description The ID of the template to update. */
@@ -12287,7 +12676,7 @@ export interface operations {
    * Delete template
    * @description Delete a template.
    */
-  "mutation.templates.delete": {
+  "templates-delete": {
     parameters: {
       readonly path: {
         /** @description The ID of the template to delete. */
@@ -12342,7 +12731,7 @@ export interface operations {
    * List workflow run logs
    * @description Lists logs for a given workflow run.
    */
-  "query.workflowRunLogs.list": {
+  "workflowRunLogs-list": {
     parameters: {
       readonly path: {
         /** @description The ID of the workflow */

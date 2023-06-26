@@ -53,8 +53,8 @@ export const create = command("create", {
   let name: string | undefined = flags["name"];
   let description: string | undefined = flags["description"];
   const isPublic: boolean | undefined = flags["is-public"];
-  let storageProviderId: string | undefined = flags["storage-provider-id"];
-  let projectId: string | undefined = flags["project-id"];
+  const storageProviderId: string | undefined = flags["storage-provider-id"];
+  const projectId: string | undefined = flags["project-id"];
 
   if (!name) {
     name = await input("Name:");
@@ -64,21 +64,6 @@ export const create = command("create", {
   if (!description) {
     description = await input("Description:");
     asserts(description, "You must provide a description for the model.");
-  }
-
-  if (!storageProviderId) {
-    storageProviderId = await input("Storage provider ID:");
-    asserts(
-      storageProviderId,
-      "You must provide a storage provider id for the model.",
-    );
-  }
-
-  if (!projectId) {
-    projectId = await input("Project ID (Leave blank for none):");
-    if (projectId === "") {
-      projectId = undefined;
-    }
   }
 
   const result = await loading(
