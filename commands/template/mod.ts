@@ -2,6 +2,7 @@ import { command } from "../../zcli.ts";
 import { create } from "./create/mod.ts";
 import { get } from "./get/mod.ts";
 import { list } from "./list/mod.ts";
+import { env } from "../../env.ts";
 import { del } from "./delete/mod.ts";
 
 /**
@@ -22,7 +23,10 @@ export const template = command("template", {
     They can be used to create additional machines. You can use them to
     prepopulate a machine with your desired software stack.
 
-    For more information, see https://docs.paperspace.com/compute/custom-templates.
+    For more information, see ${new URL(
+    "/compute/custom-templates",
+    env.get("PAPERSPACE_DOCS_URL"),
+  )}.
   `,
   commands: subCommands,
 }).run(function* ({ ctx }) {
