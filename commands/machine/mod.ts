@@ -3,6 +3,7 @@ import { create } from "./create/mod.ts";
 import { get } from "./get/mod.ts";
 import { list } from "./list/mod.ts";
 import { del } from "./delete/mod.ts";
+import { env } from "../../env.ts";
 import { start } from "./start/mod.ts";
 import { stop } from "./stop/mod.ts";
 import { restart } from "./restart/mod.ts";
@@ -28,7 +29,10 @@ export const machine = command("machine", {
   long: `
     Manage your Paperspace machines.
 
-    For more information, see https://docs.paperspace.com/machines.
+    For more information, see  ${new URL(
+    "/machines",
+    env.get("PAPERSPACE_DOCS_URL"),
+  )}.
   `,
   commands: subCommands,
 }).run(function* ({ ctx }) {
