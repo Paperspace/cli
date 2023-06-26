@@ -1,6 +1,5 @@
 import { asserts } from "../../../lib/asserts.ts";
 import { loading } from "../../../lib/loading.ts";
-import { input } from "../../../prompts/input.ts";
 import { args, command, flags, z } from "../../../zcli.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { fields } from "../../../flags.ts";
