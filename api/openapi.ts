@@ -9155,27 +9155,25 @@ export interface operations {
       /** @description Successful response */
       200: {
         content: {
-          readonly "application/json":
-            | ({
-              /**
-               * Format: date-time
-               * @description The date the private network was created.
-               */
-              readonly dtCreated: Date;
-              /** @description The date the private network was deleted. */
-              readonly dtDeleted?: (Record<string, never> | Date) | null;
-              /** @description The ID of the private network. */
-              readonly id: string;
-              /** @description The name of the private network. */
-              readonly name: string;
-              /** @description The subnet mask of the private network. */
-              readonly netmask: string;
-              /** @description The network prefix of the private network. */
-              readonly network: string;
-              /** @description The region the private network is in. */
-              readonly region: string;
-            })
-            | null;
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the private network was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the private network was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the private network. */
+            readonly id: string;
+            /** @description The name of the private network. */
+            readonly name: string;
+            /** @description The subnet mask of the private network. */
+            readonly netmask: string;
+            /** @description The network prefix of the private network. */
+            readonly network: string;
+            /** @description The region the private network is in. */
+            readonly region: string;
+          };
         };
       };
       default: components["responses"]["error"];
