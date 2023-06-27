@@ -5,6 +5,7 @@ import { projects } from "../api/projects.ts";
 import { publicIps } from "../api/public-ips.ts";
 import { root } from "../commands/mod.ts";
 import { get as projectGet } from "../commands/project/get/mod.ts";
+import { config as appConfig } from "../config.ts";
 import { claim as publicIpClaim } from "../commands/public-ip/claim/mod.ts";
 import { env } from "../env.ts";
 import {
@@ -15,6 +16,7 @@ import {
   resolvesNext,
   stub,
 } from "./deps.ts";
+import { credentials } from "../credentials.ts";
 
 describe("pspace", () => {
   it("should print version", async () => {
@@ -198,19 +200,34 @@ describe("pspace", () => {
       }]),
     );
 
+    const credentialsStub = stub(
+      credentials,
+      "get",
+      resolvesNext([{
+        keys: {},
+        version: 1 as const,
+      }]),
+    );
+
+    await appConfig.set("team", "keys");
+
     try {
       // this should fail
       await root.execute(["public-ip", "claim", "-r", "moo-cows-region"]);
 
       fail("Expected an error to be thrown.");
     } catch (e) {
-      asserts.assertStringIncludes(e.message, "- moo-cows-message");
+      asserts.assertStringIncludes(e.message, "Add a credit card to continue");
     } finally {
       assertSpyCalls(inGoodStandingStub, 1);
 
       assertSpyCalls(methodStub, 0);
 
       env.delete("PAPERSPACE_API_KEY");
+
+      await appConfig.delete("team");
+
+      credentialsStub.restore();
 
       inGoodStandingStub.restore();
 

@@ -142,18 +142,9 @@ export const root = app
       asserts(accountStanding.ok, accountStanding);
 
       if (!accountStanding.data.isInGoodStanding) {
-        const messages = accountStanding.data.messages.map((message) =>
-          `- ${message}`
-        ).join("\n");
-
         const team = await appConfig.get("team");
 
-        if (!team) {
-          throw new AppError({
-            message:
-              `Your account can't do that:\n${messages}\n\Contact support@paperspace.com to continue.`,
-          });
-        }
+        asserts(team, "Log in to continue.");
 
         const billingUrl = new URL(
           `/${team}/settings/billing`,
@@ -161,8 +152,7 @@ export const root = app
         );
 
         throw new AppError({
-          message:
-            `Your account can't do that:\n${messages}\n\nAdd a credit card at ${billingUrl} or contact support@paperspace.com to continue.`,
+          message: `Add a credit card to continue\n\n${billingUrl}`,
         });
       }
     }
