@@ -180,7 +180,7 @@ export async function* runUp(
       yield `✨ ${fmt.colors.bold("Your app is ready")}\n`;
       yield "   " + fmt.colors.bold("Console URL");
       yield "   " + new URL(
-        `/${team}/projects/${project.id}/gradient-deployments/${deployment.id}`,
+        `/${team}/apps/${deployment.id}`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       ).toString();
       yield "";
@@ -190,7 +190,7 @@ export async function* runUp(
       yield `🌙 ${fmt.colors.bold("Your app was disabled")}\n`;
       yield "   " + fmt.colors.bold("Console URL");
       yield "   " + new URL(
-        `/${team}/projects/${project.id}/gradient-deployments/${deployment.id}`,
+        `/${team}/apps/${deployment.id}`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       );
     }
