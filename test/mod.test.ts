@@ -1,3 +1,12 @@
+import { fail } from "https://deno.land/std@0.179.0/testing/asserts.ts";
+import { billingAccountStanding } from "../api/billing.ts";
+import { SuccessData } from "../api/client.ts";
+import { projects } from "../api/projects.ts";
+import { publicIps } from "../api/public-ips.ts";
+import { root } from "../commands/mod.ts";
+import { get as projectGet } from "../commands/project/get/mod.ts";
+import { claim as publicIpClaim } from "../commands/public-ip/claim/mod.ts";
+import { env } from "../env.ts";
 import {
   asserts,
   assertSpyCalls,
@@ -6,16 +15,6 @@ import {
   resolvesNext,
   stub,
 } from "./deps.ts";
-import { root } from "../commands/mod.ts";
-import { logger } from "../logger.ts";
-import { env } from "../env.ts";
-import { SuccessData } from "../api/client.ts";
-import { projects } from "../api/projects.ts";
-import { get as projectGet } from "../commands/project/get/mod.ts";
-import { publicIps } from "../api/public-ips.ts";
-import { claim as publicIpClaim } from "../commands/public-ip/claim/mod.ts";
-import { billingAccountStanding } from "../api/billing.ts";
-import { fail } from "https://deno.land/std@0.179.0/testing/asserts.ts";
 
 describe("pspace", () => {
   it("should print version", async () => {
