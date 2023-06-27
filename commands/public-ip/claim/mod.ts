@@ -32,6 +32,7 @@ export const claim = command("claim", {
   // set. If not, we'll throw an error.
   meta: {
     requireApiKey: true,
+    requireInGoodStanding: true,
   },
 }).run(
   async function* ({ flags }) {
