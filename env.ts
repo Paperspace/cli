@@ -18,7 +18,7 @@ export const env = baseEnv({
   PAPERSPACE_CONSOLE_URL: baseEnv
     .string()
     .url()
-    .default(`https://console.paperspace.com/`),
+    .default(`https://dashboard.paperspace.com/`),
   /**
    * A custom Paperspace Console URL
    */
