@@ -57,7 +57,7 @@ export const create = command("create", {
   }
 
   if (!description) {
-    description = await input("dataset description:");
+    description = await input("Description:");
     if (!description) {
       description = undefined;
     }
