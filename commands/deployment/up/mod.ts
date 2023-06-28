@@ -41,6 +41,7 @@ export const up = command("up", {
   // set. If not, we'll throw an error.
   meta: {
     requireApiKey: true,
+    requireInGoodStanding: true,
   },
 }).run(async function* ({ flags, ctx }) {
   for await (const line of runUp({ flags, ctx })) {
