@@ -52,7 +52,7 @@ export const create = command("create", {
   let storageProviderId: string | undefined = flags["storage-provider-id"];
 
   if (!name) {
-    name = await input("dataset name:");
+    name = await input("Name:");
     asserts(name, "You must provide a name for the dataset.");
   }
 
