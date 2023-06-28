@@ -33,8 +33,6 @@ export const list = command("list", {
   },
 }).run(
   async function* ({ flags }) {
-    const team = await config.get("team");
-    asserts(team, "You must be in a team to list datasets.");
     const result = await loading(
       datasets.list({
         limit: flags.limit,

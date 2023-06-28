@@ -49,7 +49,7 @@ export const create = command("create", {
   let name: string | undefined = flags["name"];
   let description: string | undefined = flags["description"];
   const isPublic: boolean | undefined = flags["is-public"];
-  let storageProviderId: string | undefined = flags["storage-provider-id"];
+  const storageProviderId: string | undefined = flags["storage-provider-id"];
 
   if (!name) {
     name = await input("Name:");
@@ -61,14 +61,6 @@ export const create = command("create", {
     if (!description) {
       description = undefined;
     }
-  }
-
-  if (!storageProviderId) {
-    storageProviderId = await input("Storage provider ID:");
-    asserts(
-      storageProviderId,
-      "You must provide a storage provider id for the dataset.",
-    );
   }
 
   const result = await loading(
