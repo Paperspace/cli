@@ -63,6 +63,7 @@ export const update = command("update", {
   // set. If not, we'll throw an error.
   meta: {
     requireApiKey: true,
+    requireInGoodStanding: true,
   },
 }).run(
   async function* ({ args, flags }) {
