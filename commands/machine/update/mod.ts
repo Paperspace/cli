@@ -6,6 +6,7 @@ import { loading } from "../../../lib/loading.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
 import { select } from "../../../prompts/select.ts";
 import { args, command, flag, flags, z } from "../../../zcli.ts";
+import { defaultFields } from "../mod.ts";
 import {
   MachineAutoSnapshotFrequencySchema,
   MachinePublicIpTypeSchema,
@@ -157,7 +158,9 @@ export const update = command("update", {
     if (flags.json) {
       yield pickJson(result, flags.fields);
     } else {
-      for await (const line of dataTable([result], flags.fields)) {
+      for await (
+        const line of dataTable([result], flags.fields ?? defaultFields)
+      ) {
         yield line;
       }
     }
