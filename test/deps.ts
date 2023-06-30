@@ -1,6 +1,7 @@
 export {
   assertSpyCall,
   assertSpyCalls,
+  resolvesNext,
   returnsNext,
   spy,
   stub,

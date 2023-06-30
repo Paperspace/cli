@@ -16,5 +16,5 @@ export const signup = command("signup", {
   commands: subCommands,
 }).run(function* () {
   yield "Opening Paperspace in your browser...";
-  open(new URL("/signup", env.get("PAPERSPACE_CONSOLE_URL")) + "");
+  open(new URL("/sign-up", env.get("PAPERSPACE_CONSOLE_URL")) + "");
 });
