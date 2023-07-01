@@ -28,6 +28,7 @@ import { snapshot } from "./snapshot/mod.ts";
 import { template } from "./template/mod.ts";
 import { startupScript } from "./startup-script/mod.ts";
 import { autoscalingGroup } from "./autoscaling-group/mod.ts";
+import { model } from "./model/mod.ts";
 import { billingAccountStanding } from "../api/billing.ts";
 import { asserts } from "../lib/asserts.ts";
 
@@ -57,6 +58,7 @@ export const commands = [
   template,
   up,
   upgrade,
+  model,
 ];
 
 export const root = app
