@@ -66,6 +66,8 @@ export const get = command("get", {
     asserts(response.ok, response);
     const result = response.data;
 
+    asserts(result, "No private network found.");
+
     if (flags.json) {
       yield pickJson(result, flags.fields);
     } else {
