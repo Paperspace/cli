@@ -108,7 +108,12 @@ export const init = command("init", {
       logger.info(`Project doesn't exist. Creating a new one.`);
 
       const res = await loading(
-        apps.create({ config }),
+        apps.create({
+          config: {
+            ...config,
+            name: appName,
+          },
+        }),
         {
           text: "Creating app",
           enabled: !flags.json,
