@@ -104,7 +104,6 @@ export const init = command("init", {
 
     if (!link) {
       const config = await find({});
-      asserts(config, "No app config found");
 
       logger.info(`Project doesn't exist. Creating a new one.`);
 
