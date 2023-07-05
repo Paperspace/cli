@@ -13,6 +13,11 @@ export interface paths {
   };
   "/apps/{id}": {
     /**
+     * Get an app
+     * @description Fetches an app.
+     */
+    get: operations["apps-get"];
+    /**
      * Delete an app
      * @description Deletes an app. This will delete all resources associated with the app.
      */
@@ -117,64 +122,6 @@ export interface paths {
      * @description Validate that a container registry can be connected to using the provided credentials.
      */
     get: operations["containerRegistries-testConnection"];
-  };
-  "/datasets": {
-    /**
-     * List datasets
-     * @description List datasets
-     */
-    get: operations["datasets-list"];
-    /**
-     * Create a dataset
-     * @description Create a dataset
-     */
-    post: operations["datasets-create"];
-  };
-  "/datasets/{datasetId}/versions": {
-    /**
-     * List dataset versions
-     * @description List dataset versions
-     */
-    get: operations["datasetVersions-list"];
-    /**
-     * Create a dataset version
-     * @description Create a dataset version
-     */
-    post: operations["datasetVersions-create"];
-  };
-  "/datasets/{datasetId}/versions/{version}": {
-    /**
-     * Get a dataset version
-     * @description Get a dataset version
-     */
-    get: operations["datasetVersions-get"];
-    /**
-     * Update a dataset version
-     * @description Update a dataset version
-     */
-    put: operations["datasetVersions-update"];
-    /**
-     * Delete a dataset version
-     * @description Delete a dataset version
-     */
-    delete: operations["datasetVersions-delete"];
-  };
-  "/datasets/{id}": {
-    /**
-     * Get a dataset
-     * @description Get a dataset
-     */
-    get: operations["datasets-get"];
-    /**
-     * Update a dataset
-     * @description Update a dataset
-     */
-    put: operations["datasets-update"];
-    /**
-     * Delete a dataset
-     * @description Delete a dataset
-     */
-    delete: operations["datasets-delete"];
   };
   "/deployments": {
     /**
@@ -330,30 +277,6 @@ export interface paths {
      */
     patch: operations["machines-stop"];
   };
-  "/models": {
-    /**
-     * List models
-     * @description List models
-     */
-    get: operations["models-list"];
-    /**
-     * Create a model
-     * @description Create a model
-     */
-    post: operations["models-create"];
-  };
-  "/models/{id}": {
-    /**
-     * Get a model
-     * @description Get a model
-     */
-    get: operations["models-get"];
-    /**
-     * Delete a model
-     * @description Delete a model
-     */
-    delete: operations["models-delete"];
-  };
   "/notebooks": {
     /**
      * List notebooks
@@ -427,6 +350,13 @@ export interface paths {
      */
     get: operations["projectActivity-list"];
   };
+  "/projects/{id}/apps": {
+    /**
+     * List a project's apps
+     * @description Fetches a list of apps for a project.
+     */
+    get: operations["projectApps-list"];
+  };
   "/projects/{id}/collaborators": {
     /**
      * List a project's collaborators
@@ -451,7 +381,7 @@ export interface paths {
      * List a project's deployments
      * @description Fetches a list of deployments for a project.
      */
-    get: operations["projectsDeployments-list"];
+    get: operations["projectDeployments-list"];
   };
   "/projects/{id}/models": {
     /**
@@ -459,6 +389,39 @@ export interface paths {
      * @description Fetches a list of models for a project.
      */
     get: operations["projectModels-list"];
+  };
+  "/projects/{id}/models/{modelId}": {
+    /**
+     * Add a model to a project
+     * @description Adds a model to a project.
+     */
+    post: operations["projectModels-add"];
+    /**
+     * Remove a model from project
+     * @description Remove a model from project.
+     */
+    delete: operations["projectModels-remove"];
+  };
+  "/projects/{id}/notebook/{notebookId}": {
+    /**
+     * Remove a notebook from a project
+     * @description Remove a notebook from a project.
+     */
+    delete: operations["projectNotebooks-remove"];
+  };
+  "/projects/{id}/notebooks": {
+    /**
+     * List a project's notebooks
+     * @description Fetches a list of notebooks for a project.
+     */
+    get: operations["projectNotebooks-list"];
+  };
+  "/projects/{id}/notebooks/{notebookId}": {
+    /**
+     * Add a notebook to a project
+     * @description Adds a notebook to a project.
+     */
+    post: operations["projectNotebooks-add"];
   };
   "/projects/{id}/secrets": {
     /**
@@ -763,7 +726,8 @@ export interface operations {
           readonly config:
             | (
               | ({
-                readonly apiVersion: "v0alpha0" | "latest";
+                /** @enum {string} */
+                readonly apiVersion: "v0alpha0";
                 readonly command?: readonly (string)[];
                 readonly containerRegistry?: string;
                 /** @default true */
@@ -1026,6 +990,13 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly id: string;
+                  readonly name: string;
+                  /** @default /opt/models */
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "model";
+                } | {
                   readonly accessKeyId: string;
                   readonly endpoint?: string;
                   readonly name: string;
@@ -1047,23 +1018,8 @@ export interface operations {
                   /** Format: uri */
                   readonly url: string;
                 })[];
-                readonly models?: readonly ({
-                  readonly id: string;
-                  readonly path?: string;
-                })[];
                 readonly name: string;
                 readonly region?: string;
-                readonly repositories?: {
-                  readonly dataset: string;
-                  readonly mountPath?: string;
-                  readonly repositories: readonly ({
-                    readonly name: string;
-                    readonly password?: string;
-                    readonly ref?: string;
-                    readonly url: string;
-                    readonly username?: string;
-                  })[];
-                };
                 readonly resources: {
                   readonly autoscaling?: {
                     readonly enabled?: boolean;
@@ -1234,6 +1190,13 @@ export interface operations {
               };
               readonly image: string;
               readonly integrations?: readonly ({
+                readonly id: string;
+                readonly name: string;
+                /** @default /opt/models */
+                readonly path?: string;
+                /** @enum {string} */
+                readonly type: "model";
+              } | {
                 readonly accessKeyId: string;
                 readonly endpoint?: string;
                 readonly name: string;
@@ -1255,23 +1218,8 @@ export interface operations {
                 /** Format: uri */
                 readonly url: string;
               })[];
-              readonly models?: readonly ({
-                readonly id: string;
-                readonly path?: string;
-              })[];
               readonly name: string;
               readonly region?: string;
-              readonly repositories?: {
-                readonly dataset: string;
-                readonly mountPath?: string;
-                readonly repositories: readonly ({
-                  readonly name: string;
-                  readonly password?: string;
-                  readonly ref?: string;
-                  readonly url: string;
-                  readonly username?: string;
-                })[];
-              };
               readonly resources: {
                 readonly autoscaling?: {
                   readonly enabled?: boolean;
@@ -1307,59 +1255,12 @@ export interface operations {
       200: {
         content: {
           readonly "application/json": {
-            /** @description The ID of the app */
-            readonly id: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Delete an app
-   * @description Deletes an app. This will delete all resources associated with the app.
-   */
-  "apps-delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the app to delete */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the app that was deleted */
-            readonly id: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Disable an app
-   * @description Disables an app that is currently enabled. This will stop the app's deployments and make it unavailable to users.
-   */
-  "apps-disable": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the app to disable */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
             /** @description The new deployment configuration. */
             readonly config:
               | (
                 | ({
-                  readonly apiVersion: "v0alpha0" | "latest";
+                  /** @enum {string} */
+                  readonly apiVersion: "v0alpha0";
                   readonly command?: readonly (string)[];
                   readonly containerRegistry?: string;
                   /** @default true */
@@ -1622,6 +1523,13 @@ export interface operations {
                   };
                   readonly image: string;
                   readonly integrations?: readonly ({
+                    readonly id: string;
+                    readonly name: string;
+                    /** @default /opt/models */
+                    readonly path?: string;
+                    /** @enum {string} */
+                    readonly type: "model";
+                  } | {
                     readonly accessKeyId: string;
                     readonly endpoint?: string;
                     readonly name: string;
@@ -1643,23 +1551,8 @@ export interface operations {
                     /** Format: uri */
                     readonly url: string;
                   })[];
-                  readonly models?: readonly ({
-                    readonly id: string;
-                    readonly path?: string;
-                  })[];
                   readonly name: string;
                   readonly region?: string;
-                  readonly repositories?: {
-                    readonly dataset: string;
-                    readonly mountPath?: string;
-                    readonly repositories: readonly ({
-                      readonly name: string;
-                      readonly password?: string;
-                      readonly ref?: string;
-                      readonly url: string;
-                      readonly username?: string;
-                    })[];
-                  };
                   readonly resources: {
                     readonly autoscaling?: {
                       readonly enabled?: boolean;
@@ -1830,6 +1723,13 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly id: string;
+                  readonly name: string;
+                  /** @default /opt/models */
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "model";
+                } | {
                   readonly accessKeyId: string;
                   readonly endpoint?: string;
                   readonly name: string;
@@ -1851,23 +1751,1130 @@ export interface operations {
                   /** Format: uri */
                   readonly url: string;
                 })[];
-                readonly models?: readonly ({
+                readonly name: string;
+                readonly region?: string;
+                readonly resources: {
+                  readonly autoscaling?: {
+                    readonly enabled?: boolean;
+                    readonly maxReplicas: number;
+                    readonly metrics: readonly (
+                      | {
+                        /** @enum {string} */
+                        readonly metric: "requestDuration";
+                        /** @enum {string} */
+                        readonly summary: "average";
+                        readonly value: number;
+                      }
+                      | ({
+                        /** @enum {string} */
+                        readonly metric: "cpu" | "memory";
+                        /** @enum {string} */
+                        readonly summary: "average";
+                        readonly value: number;
+                      })
+                    )[];
+                  };
+                  readonly machineType: string;
+                  readonly ports: readonly (number)[];
+                  /** @default 1 */
+                  readonly replicas?: number;
+                };
+              });
+            /** @description The ID of the app */
+            readonly id: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Get an app
+   * @description Fetches an app.
+   */
+  "apps-get": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the app to fetch */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The new deployment configuration. */
+            readonly config:
+              | (
+                | ({
+                  /** @enum {string} */
+                  readonly apiVersion: "v0alpha0";
+                  readonly command?: readonly (string)[];
+                  readonly containerRegistry?: string;
+                  /** @default true */
+                  readonly enabled?: boolean;
+                  readonly env?: readonly ({
+                    readonly name: string;
+                    readonly value: string;
+                  })[];
+                  readonly healthChecks?: {
+                    readonly liveness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly readiness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly startup?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                  };
+                  readonly image: string;
+                  readonly models?: readonly ({
+                    readonly id: string;
+                    readonly path?: string;
+                  })[];
+                  readonly name: string;
+                  /** @default 80 */
+                  readonly port?: number;
+                  readonly region?: string;
+                  readonly repositories?: {
+                    readonly dataset: string;
+                    readonly mountPath?: string;
+                    readonly repositories: readonly ({
+                      readonly name: string;
+                      readonly password?: string;
+                      readonly ref?: string;
+                      readonly url: string;
+                      readonly username?: string;
+                    })[];
+                  };
+                  readonly resources: {
+                    readonly autoscaling?: {
+                      readonly enabled?: boolean;
+                      readonly maxReplicas: number;
+                      readonly metrics: readonly (
+                        | {
+                          /** @enum {string} */
+                          readonly metric: "requestDuration";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        }
+                        | ({
+                          /** @enum {string} */
+                          readonly metric: "cpu" | "memory";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        })
+                      )[];
+                    };
+                    readonly instanceType: string;
+                    /** @default 1 */
+                    readonly replicas?: number;
+                  };
+                })
+                | ({
+                  /** @enum {string} */
+                  readonly apiVersion: "v0alpha1";
+                  readonly command?: readonly (string)[];
+                  readonly containerRegistry?: string;
+                  /** @default true */
+                  readonly enabled?: boolean;
+                  readonly env?: readonly ({
+                    readonly name: string;
+                    readonly value: string;
+                  })[];
+                  readonly healthchecks?: {
+                    readonly liveness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly readiness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly startup?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                  };
+                  readonly healthChecks?: {
+                    readonly liveness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly readiness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly startup?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                  };
+                  readonly image: string;
+                  readonly integrations?: readonly ({
+                    readonly id: string;
+                    readonly name: string;
+                    /** @default /opt/models */
+                    readonly path?: string;
+                    /** @enum {string} */
+                    readonly type: "model";
+                  } | {
+                    readonly accessKeyId: string;
+                    readonly endpoint?: string;
+                    readonly name: string;
+                    readonly path?: string;
+                    readonly region?: string;
+                    readonly secretAccessKey: string;
+                    /** @enum {string} */
+                    readonly type: "s3";
+                    readonly url: string;
+                  } | {
+                    readonly name: string;
+                    /** @enum {string} */
+                    readonly type: "volume";
+                  } | {
+                    readonly name: string;
+                    readonly path?: string;
+                    /** @enum {string} */
+                    readonly type: "git-lfs";
+                    /** Format: uri */
+                    readonly url: string;
+                  })[];
+                  readonly name: string;
+                  readonly region?: string;
+                  readonly resources: {
+                    readonly autoscaling?: {
+                      readonly enabled?: boolean;
+                      readonly maxReplicas: number;
+                      readonly metrics: readonly (
+                        | {
+                          /** @enum {string} */
+                          readonly metric: "requestDuration";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        }
+                        | ({
+                          /** @enum {string} */
+                          readonly metric: "cpu" | "memory";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        })
+                      )[];
+                    };
+                    readonly machineType: string;
+                    readonly ports: readonly (number)[];
+                    /** @default 1 */
+                    readonly replicas?: number;
+                  };
+                })
+              )
+              | ({
+                readonly apiVersion: "v1" | "latest";
+                readonly command?: readonly (string)[];
+                readonly containerRegistry?: string;
+                /** @default true */
+                readonly enabled?: boolean;
+                readonly env?: readonly ({
+                  readonly name: string;
+                  readonly value: string;
+                })[];
+                readonly healthchecks?: {
+                  readonly liveness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly readiness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly startup?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                };
+                readonly healthChecks?: {
+                  readonly liveness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly readiness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly startup?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                };
+                readonly image: string;
+                readonly integrations?: readonly ({
                   readonly id: string;
+                  readonly name: string;
+                  /** @default /opt/models */
                   readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "model";
+                } | {
+                  readonly accessKeyId: string;
+                  readonly endpoint?: string;
+                  readonly name: string;
+                  readonly path?: string;
+                  readonly region?: string;
+                  readonly secretAccessKey: string;
+                  /** @enum {string} */
+                  readonly type: "s3";
+                  readonly url: string;
+                } | {
+                  readonly name: string;
+                  /** @enum {string} */
+                  readonly type: "volume";
+                } | {
+                  readonly name: string;
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "git-lfs";
+                  /** Format: uri */
+                  readonly url: string;
                 })[];
                 readonly name: string;
                 readonly region?: string;
-                readonly repositories?: {
-                  readonly dataset: string;
-                  readonly mountPath?: string;
-                  readonly repositories: readonly ({
-                    readonly name: string;
-                    readonly password?: string;
-                    readonly ref?: string;
-                    readonly url: string;
-                    readonly username?: string;
-                  })[];
+                readonly resources: {
+                  readonly autoscaling?: {
+                    readonly enabled?: boolean;
+                    readonly maxReplicas: number;
+                    readonly metrics: readonly (
+                      | {
+                        /** @enum {string} */
+                        readonly metric: "requestDuration";
+                        /** @enum {string} */
+                        readonly summary: "average";
+                        readonly value: number;
+                      }
+                      | ({
+                        /** @enum {string} */
+                        readonly metric: "cpu" | "memory";
+                        /** @enum {string} */
+                        readonly summary: "average";
+                        readonly value: number;
+                      })
+                    )[];
+                  };
+                  readonly machineType: string;
+                  readonly ports: readonly (number)[];
+                  /** @default 1 */
+                  readonly replicas?: number;
                 };
+              });
+            /** @description The ID of the app */
+            readonly id: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Delete an app
+   * @description Deletes an app. This will delete all resources associated with the app.
+   */
+  "apps-delete": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the app to delete */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the app that was deleted */
+            readonly id: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Disable an app
+   * @description Disables an app that is currently enabled. This will stop the app's deployments and make it unavailable to users.
+   */
+  "apps-disable": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the app to disable */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The new deployment configuration. */
+            readonly config:
+              | (
+                | ({
+                  /** @enum {string} */
+                  readonly apiVersion: "v0alpha0";
+                  readonly command?: readonly (string)[];
+                  readonly containerRegistry?: string;
+                  /** @default true */
+                  readonly enabled?: boolean;
+                  readonly env?: readonly ({
+                    readonly name: string;
+                    readonly value: string;
+                  })[];
+                  readonly healthChecks?: {
+                    readonly liveness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly readiness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly startup?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                  };
+                  readonly image: string;
+                  readonly models?: readonly ({
+                    readonly id: string;
+                    readonly path?: string;
+                  })[];
+                  readonly name: string;
+                  /** @default 80 */
+                  readonly port?: number;
+                  readonly region?: string;
+                  readonly repositories?: {
+                    readonly dataset: string;
+                    readonly mountPath?: string;
+                    readonly repositories: readonly ({
+                      readonly name: string;
+                      readonly password?: string;
+                      readonly ref?: string;
+                      readonly url: string;
+                      readonly username?: string;
+                    })[];
+                  };
+                  readonly resources: {
+                    readonly autoscaling?: {
+                      readonly enabled?: boolean;
+                      readonly maxReplicas: number;
+                      readonly metrics: readonly (
+                        | {
+                          /** @enum {string} */
+                          readonly metric: "requestDuration";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        }
+                        | ({
+                          /** @enum {string} */
+                          readonly metric: "cpu" | "memory";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        })
+                      )[];
+                    };
+                    readonly instanceType: string;
+                    /** @default 1 */
+                    readonly replicas?: number;
+                  };
+                })
+                | ({
+                  /** @enum {string} */
+                  readonly apiVersion: "v0alpha1";
+                  readonly command?: readonly (string)[];
+                  readonly containerRegistry?: string;
+                  /** @default true */
+                  readonly enabled?: boolean;
+                  readonly env?: readonly ({
+                    readonly name: string;
+                    readonly value: string;
+                  })[];
+                  readonly healthchecks?: {
+                    readonly liveness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly readiness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly startup?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                  };
+                  readonly healthChecks?: {
+                    readonly liveness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly readiness?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                    readonly startup?: {
+                      readonly failureThreshold?: number;
+                      readonly headers?: readonly ({
+                        readonly name: string;
+                        readonly value: string;
+                      })[];
+                      readonly host?: string;
+                      readonly initialDelaySeconds?: number;
+                      readonly path: string;
+                      readonly periodSeconds?: number;
+                      readonly port?: number;
+                      readonly timeoutSeconds?: number;
+                    } | {
+                      readonly exec: {
+                        readonly command: readonly (string)[];
+                      };
+                      readonly failureThreshold?: number;
+                      readonly initialDelaySeconds?: number;
+                      readonly periodSeconds?: number;
+                      readonly timeoutSeconds?: number;
+                    };
+                  };
+                  readonly image: string;
+                  readonly integrations?: readonly ({
+                    readonly id: string;
+                    readonly name: string;
+                    /** @default /opt/models */
+                    readonly path?: string;
+                    /** @enum {string} */
+                    readonly type: "model";
+                  } | {
+                    readonly accessKeyId: string;
+                    readonly endpoint?: string;
+                    readonly name: string;
+                    readonly path?: string;
+                    readonly region?: string;
+                    readonly secretAccessKey: string;
+                    /** @enum {string} */
+                    readonly type: "s3";
+                    readonly url: string;
+                  } | {
+                    readonly name: string;
+                    /** @enum {string} */
+                    readonly type: "volume";
+                  } | {
+                    readonly name: string;
+                    readonly path?: string;
+                    /** @enum {string} */
+                    readonly type: "git-lfs";
+                    /** Format: uri */
+                    readonly url: string;
+                  })[];
+                  readonly name: string;
+                  readonly region?: string;
+                  readonly resources: {
+                    readonly autoscaling?: {
+                      readonly enabled?: boolean;
+                      readonly maxReplicas: number;
+                      readonly metrics: readonly (
+                        | {
+                          /** @enum {string} */
+                          readonly metric: "requestDuration";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        }
+                        | ({
+                          /** @enum {string} */
+                          readonly metric: "cpu" | "memory";
+                          /** @enum {string} */
+                          readonly summary: "average";
+                          readonly value: number;
+                        })
+                      )[];
+                    };
+                    readonly machineType: string;
+                    readonly ports: readonly (number)[];
+                    /** @default 1 */
+                    readonly replicas?: number;
+                  };
+                })
+              )
+              | ({
+                readonly apiVersion: "v1" | "latest";
+                readonly command?: readonly (string)[];
+                readonly containerRegistry?: string;
+                /** @default true */
+                readonly enabled?: boolean;
+                readonly env?: readonly ({
+                  readonly name: string;
+                  readonly value: string;
+                })[];
+                readonly healthchecks?: {
+                  readonly liveness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly readiness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly startup?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                };
+                readonly healthChecks?: {
+                  readonly liveness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly readiness?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                  readonly startup?: {
+                    readonly failureThreshold?: number;
+                    readonly headers?: readonly ({
+                      readonly name: string;
+                      readonly value: string;
+                    })[];
+                    readonly host?: string;
+                    readonly initialDelaySeconds?: number;
+                    readonly path: string;
+                    readonly periodSeconds?: number;
+                    readonly port?: number;
+                    readonly timeoutSeconds?: number;
+                  } | {
+                    readonly exec: {
+                      readonly command: readonly (string)[];
+                    };
+                    readonly failureThreshold?: number;
+                    readonly initialDelaySeconds?: number;
+                    readonly periodSeconds?: number;
+                    readonly timeoutSeconds?: number;
+                  };
+                };
+                readonly image: string;
+                readonly integrations?: readonly ({
+                  readonly id: string;
+                  readonly name: string;
+                  /** @default /opt/models */
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "model";
+                } | {
+                  readonly accessKeyId: string;
+                  readonly endpoint?: string;
+                  readonly name: string;
+                  readonly path?: string;
+                  readonly region?: string;
+                  readonly secretAccessKey: string;
+                  /** @enum {string} */
+                  readonly type: "s3";
+                  readonly url: string;
+                } | {
+                  readonly name: string;
+                  /** @enum {string} */
+                  readonly type: "volume";
+                } | {
+                  readonly name: string;
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "git-lfs";
+                  /** Format: uri */
+                  readonly url: string;
+                })[];
+                readonly name: string;
+                readonly region?: string;
                 readonly resources: {
                   readonly autoscaling?: {
                     readonly enabled?: boolean;
@@ -1923,7 +2930,8 @@ export interface operations {
             readonly config:
               | (
                 | ({
-                  readonly apiVersion: "v0alpha0" | "latest";
+                  /** @enum {string} */
+                  readonly apiVersion: "v0alpha0";
                   readonly command?: readonly (string)[];
                   readonly containerRegistry?: string;
                   /** @default true */
@@ -2186,6 +3194,13 @@ export interface operations {
                   };
                   readonly image: string;
                   readonly integrations?: readonly ({
+                    readonly id: string;
+                    readonly name: string;
+                    /** @default /opt/models */
+                    readonly path?: string;
+                    /** @enum {string} */
+                    readonly type: "model";
+                  } | {
                     readonly accessKeyId: string;
                     readonly endpoint?: string;
                     readonly name: string;
@@ -2207,23 +3222,8 @@ export interface operations {
                     /** Format: uri */
                     readonly url: string;
                   })[];
-                  readonly models?: readonly ({
-                    readonly id: string;
-                    readonly path?: string;
-                  })[];
                   readonly name: string;
                   readonly region?: string;
-                  readonly repositories?: {
-                    readonly dataset: string;
-                    readonly mountPath?: string;
-                    readonly repositories: readonly ({
-                      readonly name: string;
-                      readonly password?: string;
-                      readonly ref?: string;
-                      readonly url: string;
-                      readonly username?: string;
-                    })[];
-                  };
                   readonly resources: {
                     readonly autoscaling?: {
                       readonly enabled?: boolean;
@@ -2394,6 +3394,13 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly id: string;
+                  readonly name: string;
+                  /** @default /opt/models */
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "model";
+                } | {
                   readonly accessKeyId: string;
                   readonly endpoint?: string;
                   readonly name: string;
@@ -2415,23 +3422,8 @@ export interface operations {
                   /** Format: uri */
                   readonly url: string;
                 })[];
-                readonly models?: readonly ({
-                  readonly id: string;
-                  readonly path?: string;
-                })[];
                 readonly name: string;
                 readonly region?: string;
-                readonly repositories?: {
-                  readonly dataset: string;
-                  readonly mountPath?: string;
-                  readonly repositories: readonly ({
-                    readonly name: string;
-                    readonly password?: string;
-                    readonly ref?: string;
-                    readonly url: string;
-                    readonly username?: string;
-                  })[];
-                };
                 readonly resources: {
                   readonly autoscaling?: {
                     readonly enabled?: boolean;
@@ -2584,6 +3576,20 @@ export interface operations {
                    */
                   readonly tags?: string | null;
                 };
+                /**
+                 * @description The user's preferences
+                 * @default null
+                 */
+                readonly preferences?:
+                  | ({
+                    readonly defaultProduct?: string | null;
+                    readonly defaultTeamId?: string | null;
+                    readonly disableHotkeys?: boolean | null;
+                    readonly fontSize?: number | null;
+                    /** @enum {string|null} */
+                    readonly theme?: "light" | "dark" | null;
+                  })
+                  | null;
                 /** @description The teams this user is a member of */
                 readonly teamMemberships: readonly ({
                   /** @description Whether the user is an admin of the team */
@@ -3251,535 +4257,6 @@ export interface operations {
     };
   };
   /**
-   * List datasets
-   * @description List datasets
-   */
-  "datasets-list": {
-    parameters: {
-      readonly query: {
-        /** @description Fetch the next page of results after this cursor. */
-        after?: string;
-        /** @description The number of items to fetch after this page. */
-        limit?: number;
-        /** @description Order results by one of these fields. */
-        orderBy?: "dtCreated";
-        /** @description The order to sort the results by. */
-        order?: "asc" | "desc";
-        teamId?: string;
-        privacy?: Record<string, never> | ("PUBLIC" | "PRIVATE");
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description Whether there are more pages of results available. */
-            readonly hasMore: boolean;
-            /** @description The items on this page. */
-            readonly items: readonly ({
-              /** @description The description of the dataset */
-              readonly description: string | null;
-              /**
-               * Format: date-time
-               * @description The date the dataset was created
-               */
-              readonly dtCreated: Date;
-              /**
-               * Format: date-time
-               * @description The date the dataset was last modified
-               */
-              readonly dtModified: Date;
-              /** @description The ID of the dataset */
-              readonly id: string;
-              /** @description Whether the dataset is public */
-              readonly isPublic: boolean;
-              /** @description The name of the dataset */
-              readonly name: string | null;
-              /** @description The ID of the storage provider */
-              readonly storageProviderId: string | null;
-              /** @description The ID of the team that owns the dataset */
-              readonly teamId: string;
-            })[];
-            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
-            readonly nextPage?: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Create a dataset
-   * @description Create a dataset
-   */
-  "datasets-create": {
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The description of the dataset */
-          readonly description?: (Record<string, never> | string) | null;
-          /** @description Whether the dataset is public */
-          readonly isPublic: boolean;
-          /** @description The name of the dataset */
-          readonly name: string;
-          /** @description The ID of the storage provider */
-          readonly storageProviderId?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The description of the dataset */
-            readonly description: string | null;
-            /**
-             * Format: date-time
-             * @description The date the dataset was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the dataset was last modified
-             */
-            readonly dtModified: Date;
-            /** @description The ID of the dataset */
-            readonly id: string;
-            /** @description Whether the dataset is public */
-            readonly isPublic: boolean;
-            /** @description The name of the dataset */
-            readonly name: string | null;
-            /** @description The ID of the storage provider */
-            readonly storageProviderId: string | null;
-            /** @description The ID of the team that owns the dataset */
-            readonly teamId: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * List dataset versions
-   * @description List dataset versions
-   */
-  "datasetVersions-list": {
-    parameters: {
-      readonly query: {
-        /** @description Fetch the next page of results after this cursor. */
-        after?: string;
-        /** @description The number of items to fetch after this page. */
-        limit?: number;
-        /** @description Order results by one of these fields. */
-        orderBy?: "dtCreated";
-        /** @description The order to sort the results by. */
-        order?: "asc" | "desc";
-        tags?: string;
-      };
-      readonly path: {
-        /** @description The ID of the dataset */
-        datasetId: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description Whether there are more pages of results available. */
-            readonly hasMore: boolean;
-            /** @description The items on this page. */
-            readonly items: readonly ({
-              /** @description The ID of the dataset */
-              readonly datasetId: string;
-              /**
-               * Format: date-time
-               * @description The date the version was created
-               */
-              readonly dtCreated: Date;
-              /**
-               * Format: date-time
-               * @description The date the version was last modified
-               */
-              readonly dtModified: Date;
-              /** @description Whether the version is committed */
-              readonly isCommitted: boolean;
-              /** @description The description of the dataset version */
-              readonly message: string | null;
-              /** @description Metadata for the version. */
-              readonly metadata:
-                | ({
-                  [key: string]: unknown | undefined;
-                })
-                | null;
-              /** @description The tags for the version */
-              readonly tags: readonly (string)[];
-              /** @description The URL of the version */
-              readonly url: string | null;
-              /** @description The size of the dataset at this version in bytes */
-              readonly usageBytes: string | null;
-              /** @description The ID of the user that created the version */
-              readonly userId: string | null;
-              /** @description The version of the dataset */
-              readonly version: string;
-            })[];
-            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
-            readonly nextPage?: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Create a dataset version
-   * @description Create a dataset version
-   */
-  "datasetVersions-create": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        datasetId: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The description of the dataset version */
-          readonly message?: string;
-          /** @description Metadata for the version. */
-          readonly metadata?: {
-            [key: string]: unknown | undefined;
-          };
-          /** @description The tags for the version, comma-delimited */
-          readonly tags?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the dataset */
-            readonly datasetId: string;
-            /**
-             * Format: date-time
-             * @description The date the version was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the version was last modified
-             */
-            readonly dtModified: Date;
-            /** @description Whether the version is committed */
-            readonly isCommitted: boolean;
-            /** @description The description of the dataset version */
-            readonly message: string | null;
-            /** @description Metadata for the version. */
-            readonly metadata:
-              | ({
-                [key: string]: unknown | undefined;
-              })
-              | null;
-            /** @description The tags for the version */
-            readonly tags: readonly (string)[];
-            /** @description The URL of the version */
-            readonly url: string | null;
-            /** @description The size of the dataset at this version in bytes */
-            readonly usageBytes: string | null;
-            /** @description The ID of the user that created the version */
-            readonly userId: string | null;
-            /** @description The version of the dataset */
-            readonly version: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Get a dataset version
-   * @description Get a dataset version
-   */
-  "datasetVersions-get": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        datasetId: string;
-        /** @description The version of the dataset */
-        version: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the dataset */
-            readonly datasetId: string;
-            /**
-             * Format: date-time
-             * @description The date the version was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the version was last modified
-             */
-            readonly dtModified: Date;
-            /** @description Whether the version is committed */
-            readonly isCommitted: boolean;
-            /** @description The description of the dataset version */
-            readonly message: string | null;
-            /** @description Metadata for the version. */
-            readonly metadata:
-              | ({
-                [key: string]: unknown | undefined;
-              })
-              | null;
-            /** @description The tags for the version */
-            readonly tags: readonly (string)[];
-            /** @description The URL of the version */
-            readonly url: string | null;
-            /** @description The size of the dataset at this version in bytes */
-            readonly usageBytes: string | null;
-            /** @description The ID of the user that created the version */
-            readonly userId: string | null;
-            /** @description The version of the dataset */
-            readonly version: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Update a dataset version
-   * @description Update a dataset version
-   */
-  "datasetVersions-update": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        datasetId: string;
-        /** @description The version of the dataset */
-        version: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description Whether the version is committed */
-          readonly isCommitted?: boolean;
-          /** @description The description of the dataset version */
-          readonly message?: string;
-          /** @description Metadata for the version. */
-          readonly metadata?: {
-            [key: string]: unknown | undefined;
-          };
-          /** @description The tags for the version, comma-delimited */
-          readonly tags?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the dataset */
-            readonly datasetId: string;
-            /**
-             * Format: date-time
-             * @description The date the version was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the version was last modified
-             */
-            readonly dtModified: Date;
-            /** @description Whether the version is committed */
-            readonly isCommitted: boolean;
-            /** @description The description of the dataset version */
-            readonly message: string | null;
-            /** @description Metadata for the version. */
-            readonly metadata:
-              | ({
-                [key: string]: unknown | undefined;
-              })
-              | null;
-            /** @description The tags for the version */
-            readonly tags: readonly (string)[];
-            /** @description The URL of the version */
-            readonly url: string | null;
-            /** @description The size of the dataset at this version in bytes */
-            readonly usageBytes: string | null;
-            /** @description The ID of the user that created the version */
-            readonly userId: string | null;
-            /** @description The version of the dataset */
-            readonly version: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Delete a dataset version
-   * @description Delete a dataset version
-   */
-  "datasetVersions-delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        datasetId: string;
-        /** @description The version of the dataset */
-        version: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the dataset */
-            readonly datasetId: string;
-            /** @description The version of the dataset */
-            readonly version: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Get a dataset
-   * @description Get a dataset
-   */
-  "datasets-get": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The description of the dataset */
-            readonly description: string | null;
-            /**
-             * Format: date-time
-             * @description The date the dataset was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the dataset was last modified
-             */
-            readonly dtModified: Date;
-            /** @description The ID of the dataset */
-            readonly id: string;
-            /** @description Whether the dataset is public */
-            readonly isPublic: boolean;
-            /** @description The name of the dataset */
-            readonly name: string | null;
-            /** @description The ID of the storage provider */
-            readonly storageProviderId: string | null;
-            /** @description The ID of the team that owns the dataset */
-            readonly teamId: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Update a dataset
-   * @description Update a dataset
-   */
-  "datasets-update": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The description of the dataset */
-          readonly description?: (Record<string, never> | string) | null;
-          /** @description The name of the dataset */
-          readonly name?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The description of the dataset */
-            readonly description: string | null;
-            /**
-             * Format: date-time
-             * @description The date the dataset was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the dataset was last modified
-             */
-            readonly dtModified: Date;
-            /** @description The ID of the dataset */
-            readonly id: string;
-            /** @description Whether the dataset is public */
-            readonly isPublic: boolean;
-            /** @description The name of the dataset */
-            readonly name: string | null;
-            /** @description The ID of the storage provider */
-            readonly storageProviderId: string | null;
-            /** @description The ID of the team that owns the dataset */
-            readonly teamId: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Delete a dataset
-   * @description Delete a dataset
-   */
-  "datasets-delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the dataset */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the dataset */
-            readonly id: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
    * List deployments
    * @description Fetches a list of deployments for a logged in user.
    */
@@ -3825,7 +4302,8 @@ export interface operations {
                     | (
                       | (
                         | ({
-                          readonly apiVersion: "v0alpha0" | "latest";
+                          /** @enum {string} */
+                          readonly apiVersion: "v0alpha0";
                           readonly command?: readonly (string)[];
                           readonly containerRegistry?: string;
                           /** @default true */
@@ -4088,6 +4566,13 @@ export interface operations {
                           };
                           readonly image: string;
                           readonly integrations?: readonly ({
+                            readonly id: string;
+                            readonly name: string;
+                            /** @default /opt/models */
+                            readonly path?: string;
+                            /** @enum {string} */
+                            readonly type: "model";
+                          } | {
                             readonly accessKeyId: string;
                             readonly endpoint?: string;
                             readonly name: string;
@@ -4109,23 +4594,8 @@ export interface operations {
                             /** Format: uri */
                             readonly url: string;
                           })[];
-                          readonly models?: readonly ({
-                            readonly id: string;
-                            readonly path?: string;
-                          })[];
                           readonly name: string;
                           readonly region?: string;
-                          readonly repositories?: {
-                            readonly dataset: string;
-                            readonly mountPath?: string;
-                            readonly repositories: readonly ({
-                              readonly name: string;
-                              readonly password?: string;
-                              readonly ref?: string;
-                              readonly url: string;
-                              readonly username?: string;
-                            })[];
-                          };
                           readonly resources: {
                             readonly autoscaling?: {
                               readonly enabled?: boolean;
@@ -4296,6 +4766,13 @@ export interface operations {
                         };
                         readonly image: string;
                         readonly integrations?: readonly ({
+                          readonly id: string;
+                          readonly name: string;
+                          /** @default /opt/models */
+                          readonly path?: string;
+                          /** @enum {string} */
+                          readonly type: "model";
+                        } | {
                           readonly accessKeyId: string;
                           readonly endpoint?: string;
                           readonly name: string;
@@ -4317,23 +4794,8 @@ export interface operations {
                           /** Format: uri */
                           readonly url: string;
                         })[];
-                        readonly models?: readonly ({
-                          readonly id: string;
-                          readonly path?: string;
-                        })[];
                         readonly name: string;
                         readonly region?: string;
-                        readonly repositories?: {
-                          readonly dataset: string;
-                          readonly mountPath?: string;
-                          readonly repositories: readonly ({
-                            readonly name: string;
-                            readonly password?: string;
-                            readonly ref?: string;
-                            readonly url: string;
-                            readonly username?: string;
-                          })[];
-                        };
                         readonly resources: {
                           readonly autoscaling?: {
                             readonly enabled?: boolean;
@@ -4436,7 +4898,8 @@ export interface operations {
           readonly config:
             | (
               | ({
-                readonly apiVersion: "v0alpha0" | "latest";
+                /** @enum {string} */
+                readonly apiVersion: "v0alpha0";
                 readonly command?: readonly (string)[];
                 readonly containerRegistry?: string;
                 /** @default true */
@@ -4699,6 +5162,13 @@ export interface operations {
                 };
                 readonly image: string;
                 readonly integrations?: readonly ({
+                  readonly id: string;
+                  readonly name: string;
+                  /** @default /opt/models */
+                  readonly path?: string;
+                  /** @enum {string} */
+                  readonly type: "model";
+                } | {
                   readonly accessKeyId: string;
                   readonly endpoint?: string;
                   readonly name: string;
@@ -4720,23 +5190,8 @@ export interface operations {
                   /** Format: uri */
                   readonly url: string;
                 })[];
-                readonly models?: readonly ({
-                  readonly id: string;
-                  readonly path?: string;
-                })[];
                 readonly name: string;
                 readonly region?: string;
-                readonly repositories?: {
-                  readonly dataset: string;
-                  readonly mountPath?: string;
-                  readonly repositories: readonly ({
-                    readonly name: string;
-                    readonly password?: string;
-                    readonly ref?: string;
-                    readonly url: string;
-                    readonly username?: string;
-                  })[];
-                };
                 readonly resources: {
                   readonly autoscaling?: {
                     readonly enabled?: boolean;
@@ -4907,6 +5362,13 @@ export interface operations {
               };
               readonly image: string;
               readonly integrations?: readonly ({
+                readonly id: string;
+                readonly name: string;
+                /** @default /opt/models */
+                readonly path?: string;
+                /** @enum {string} */
+                readonly type: "model";
+              } | {
                 readonly accessKeyId: string;
                 readonly endpoint?: string;
                 readonly name: string;
@@ -4928,23 +5390,8 @@ export interface operations {
                 /** Format: uri */
                 readonly url: string;
               })[];
-              readonly models?: readonly ({
-                readonly id: string;
-                readonly path?: string;
-              })[];
               readonly name: string;
               readonly region?: string;
-              readonly repositories?: {
-                readonly dataset: string;
-                readonly mountPath?: string;
-                readonly repositories: readonly ({
-                  readonly name: string;
-                  readonly password?: string;
-                  readonly ref?: string;
-                  readonly url: string;
-                  readonly username?: string;
-                })[];
-              };
               readonly resources: {
                 readonly autoscaling?: {
                   readonly enabled?: boolean;
@@ -5031,7 +5478,8 @@ export interface operations {
                   | (
                     | (
                       | ({
-                        readonly apiVersion: "v0alpha0" | "latest";
+                        /** @enum {string} */
+                        readonly apiVersion: "v0alpha0";
                         readonly command?: readonly (string)[];
                         readonly containerRegistry?: string;
                         /** @default true */
@@ -5294,6 +5742,13 @@ export interface operations {
                         };
                         readonly image: string;
                         readonly integrations?: readonly ({
+                          readonly id: string;
+                          readonly name: string;
+                          /** @default /opt/models */
+                          readonly path?: string;
+                          /** @enum {string} */
+                          readonly type: "model";
+                        } | {
                           readonly accessKeyId: string;
                           readonly endpoint?: string;
                           readonly name: string;
@@ -5315,23 +5770,8 @@ export interface operations {
                           /** Format: uri */
                           readonly url: string;
                         })[];
-                        readonly models?: readonly ({
-                          readonly id: string;
-                          readonly path?: string;
-                        })[];
                         readonly name: string;
                         readonly region?: string;
-                        readonly repositories?: {
-                          readonly dataset: string;
-                          readonly mountPath?: string;
-                          readonly repositories: readonly ({
-                            readonly name: string;
-                            readonly password?: string;
-                            readonly ref?: string;
-                            readonly url: string;
-                            readonly username?: string;
-                          })[];
-                        };
                         readonly resources: {
                           readonly autoscaling?: {
                             readonly enabled?: boolean;
@@ -5502,6 +5942,13 @@ export interface operations {
                       };
                       readonly image: string;
                       readonly integrations?: readonly ({
+                        readonly id: string;
+                        readonly name: string;
+                        /** @default /opt/models */
+                        readonly path?: string;
+                        /** @enum {string} */
+                        readonly type: "model";
+                      } | {
                         readonly accessKeyId: string;
                         readonly endpoint?: string;
                         readonly name: string;
@@ -5523,23 +5970,8 @@ export interface operations {
                         /** Format: uri */
                         readonly url: string;
                       })[];
-                      readonly models?: readonly ({
-                        readonly id: string;
-                        readonly path?: string;
-                      })[];
                       readonly name: string;
                       readonly region?: string;
-                      readonly repositories?: {
-                        readonly dataset: string;
-                        readonly mountPath?: string;
-                        readonly repositories: readonly ({
-                          readonly name: string;
-                          readonly password?: string;
-                          readonly ref?: string;
-                          readonly url: string;
-                          readonly username?: string;
-                        })[];
-                      };
                       readonly resources: {
                         readonly autoscaling?: {
                           readonly enabled?: boolean;
@@ -5686,7 +6118,8 @@ export interface operations {
                 | (
                   | (
                     | ({
-                      readonly apiVersion: "v0alpha0" | "latest";
+                      /** @enum {string} */
+                      readonly apiVersion: "v0alpha0";
                       readonly command?: readonly (string)[];
                       readonly containerRegistry?: string;
                       /** @default true */
@@ -5949,6 +6382,13 @@ export interface operations {
                       };
                       readonly image: string;
                       readonly integrations?: readonly ({
+                        readonly id: string;
+                        readonly name: string;
+                        /** @default /opt/models */
+                        readonly path?: string;
+                        /** @enum {string} */
+                        readonly type: "model";
+                      } | {
                         readonly accessKeyId: string;
                         readonly endpoint?: string;
                         readonly name: string;
@@ -5970,23 +6410,8 @@ export interface operations {
                         /** Format: uri */
                         readonly url: string;
                       })[];
-                      readonly models?: readonly ({
-                        readonly id: string;
-                        readonly path?: string;
-                      })[];
                       readonly name: string;
                       readonly region?: string;
-                      readonly repositories?: {
-                        readonly dataset: string;
-                        readonly mountPath?: string;
-                        readonly repositories: readonly ({
-                          readonly name: string;
-                          readonly password?: string;
-                          readonly ref?: string;
-                          readonly url: string;
-                          readonly username?: string;
-                        })[];
-                      };
                       readonly resources: {
                         readonly autoscaling?: {
                           readonly enabled?: boolean;
@@ -6157,6 +6582,13 @@ export interface operations {
                     };
                     readonly image: string;
                     readonly integrations?: readonly ({
+                      readonly id: string;
+                      readonly name: string;
+                      /** @default /opt/models */
+                      readonly path?: string;
+                      /** @enum {string} */
+                      readonly type: "model";
+                    } | {
                       readonly accessKeyId: string;
                       readonly endpoint?: string;
                       readonly name: string;
@@ -6178,23 +6610,8 @@ export interface operations {
                       /** Format: uri */
                       readonly url: string;
                     })[];
-                    readonly models?: readonly ({
-                      readonly id: string;
-                      readonly path?: string;
-                    })[];
                     readonly name: string;
                     readonly region?: string;
-                    readonly repositories?: {
-                      readonly dataset: string;
-                      readonly mountPath?: string;
-                      readonly repositories: readonly ({
-                        readonly name: string;
-                        readonly password?: string;
-                        readonly ref?: string;
-                        readonly url: string;
-                        readonly username?: string;
-                      })[];
-                    };
                     readonly resources: {
                       readonly autoscaling?: {
                         readonly enabled?: boolean;
@@ -6754,12 +7171,14 @@ export interface operations {
             readonly items: readonly ({
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -6803,31 +7222,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -6972,12 +7367,14 @@ export interface operations {
             readonly data: {
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -7021,31 +7418,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -7187,12 +7560,14 @@ export interface operations {
           readonly "application/json": {
             /** @description The accelerators of the machine. */
             readonly accelerators?:
-              | readonly ({
+              | (readonly ({
                 /** @description The number of accelerators of this type. */
                 readonly count: number;
+                /** @description The amount of memory the accelerator has, if applicable. */
+                readonly memory: number | null;
                 /** @description The name of the accelerator. */
                 readonly name: string;
-              })[]
+              })[])
               | null;
             /** @description The agent type of the machine. */
             readonly agentType: string;
@@ -7236,31 +7611,7 @@ export interface operations {
             /** @description The ID of the machine. */
             readonly id: string;
             /** @description The type of the machine. */
-            readonly machineType: {
-              /** @description The number of CPUs. */
-              readonly cpus: number;
-              /** @description The name of the GPU. */
-              readonly gpu: string | null;
-              /** @description The label of the machine type. */
-              readonly label: string;
-              /** @description Metadata for the machine type. */
-              readonly metadata:
-                | ({
-                  [key: string]: unknown | undefined;
-                })
-                | null;
-              /** @description The name of the NVLink GPU. */
-              readonly nvlinkGpu: string | null;
-              /** @description The number of NVLink GPUs. */
-              readonly nvlinkGpuCount: number | null;
-              /**
-               * Format: int64
-               * @description The amount of RAM in bytes.
-               */
-              readonly ram: number;
-              /** @description Whether the machine type supports NVLink. */
-              readonly supportsNvlink: boolean;
-            };
+            readonly machineType: string;
             /** @description The name of the machine. */
             readonly name: string;
             /** @description The ID of the network the machine is on. */
@@ -7394,12 +7745,14 @@ export interface operations {
             readonly data: {
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -7443,31 +7796,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -7611,12 +7940,14 @@ export interface operations {
             readonly data: {
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -7660,31 +7991,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -8109,12 +8416,14 @@ export interface operations {
             readonly data: {
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -8158,31 +8467,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -8326,12 +8611,14 @@ export interface operations {
             readonly data: {
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -8375,31 +8662,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -8543,12 +8806,14 @@ export interface operations {
             readonly data: {
               /** @description The accelerators of the machine. */
               readonly accelerators?:
-                | readonly ({
+                | (readonly ({
                   /** @description The number of accelerators of this type. */
                   readonly count: number;
+                  /** @description The amount of memory the accelerator has, if applicable. */
+                  readonly memory: number | null;
                   /** @description The name of the accelerator. */
                   readonly name: string;
-                })[]
+                })[])
                 | null;
               /** @description The agent type of the machine. */
               readonly agentType: string;
@@ -8592,31 +8857,7 @@ export interface operations {
               /** @description The ID of the machine. */
               readonly id: string;
               /** @description The type of the machine. */
-              readonly machineType: {
-                /** @description The number of CPUs. */
-                readonly cpus: number;
-                /** @description The name of the GPU. */
-                readonly gpu: string | null;
-                /** @description The label of the machine type. */
-                readonly label: string;
-                /** @description Metadata for the machine type. */
-                readonly metadata:
-                  | ({
-                    [key: string]: unknown | undefined;
-                  })
-                  | null;
-                /** @description The name of the NVLink GPU. */
-                readonly nvlinkGpu: string | null;
-                /** @description The number of NVLink GPUs. */
-                readonly nvlinkGpuCount: number | null;
-                /**
-                 * Format: int64
-                 * @description The amount of RAM in bytes.
-                 */
-                readonly ram: number;
-                /** @description Whether the machine type supports NVLink. */
-                readonly supportsNvlink: boolean;
-              };
+              readonly machineType: string;
               /** @description The name of the machine. */
               readonly name: string;
               /** @description The ID of the network the machine is on. */
@@ -8734,192 +8975,6 @@ export interface operations {
                 | "error"
                 | "cancelled";
             };
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * List models
-   * @description List models
-   */
-  "models-list": {
-    parameters: {
-      readonly query: {
-        /** @description Fetch the next page of results after this cursor. */
-        after?: string;
-        /** @description The number of items to fetch after this page. */
-        limit?: number;
-        /** @description Order results by one of these fields. */
-        orderBy?: "dtCreated";
-        /** @description The order to sort the results by. */
-        order?: "asc" | "desc";
-        projectId?: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description Whether there are more pages of results available. */
-            readonly hasMore: boolean;
-            /** @description The items on this page. */
-            readonly items: readonly ({
-              /** @description The description of the dataset */
-              readonly description: string | null;
-              /**
-               * Format: date-time
-               * @description The date the dataset was created
-               */
-              readonly dtCreated: Date;
-              /**
-               * Format: date-time
-               * @description The date the dataset was last modified
-               */
-              readonly dtModified: Date;
-              /** @description The ID of the dataset */
-              readonly id: string;
-              /** @description Whether the dataset is public */
-              readonly isPublic: boolean;
-              /** @description The name of the dataset */
-              readonly name: string;
-              /** @description The ID of the project */
-              readonly projectId: string | null;
-              /** @description The ID of the storage provider */
-              readonly storageProviderId: string | null;
-              /** @description The ID of the team that owns the dataset */
-              readonly teamId: string;
-            })[];
-            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
-            readonly nextPage?: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Create a model
-   * @description Create a model
-   */
-  "models-create": {
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The description of the model */
-          readonly description?: (Record<string, never> | string) | null;
-          /** @description Whether the model is public */
-          readonly isPublic: boolean;
-          /** @description The name of the model */
-          readonly name: string;
-          /** @description The ID of the project */
-          readonly projectId?: string;
-          /** @description The ID of the storage provider */
-          readonly storageProviderId?: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The description of the dataset */
-            readonly description: string | null;
-            /**
-             * Format: date-time
-             * @description The date the dataset was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the dataset was last modified
-             */
-            readonly dtModified: Date;
-            /** @description The ID of the dataset */
-            readonly id: string;
-            /** @description Whether the dataset is public */
-            readonly isPublic: boolean;
-            /** @description The name of the dataset */
-            readonly name: string | null;
-            /** @description The ID of the project */
-            readonly projectId: string | null;
-            /** @description The ID of the storage provider */
-            readonly storageProviderId: string | null;
-            /** @description The ID of the team that owns the dataset */
-            readonly teamId: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Get a model
-   * @description Get a model
-   */
-  "models-get": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the model */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The description of the dataset */
-            readonly description: string | null;
-            /**
-             * Format: date-time
-             * @description The date the dataset was created
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the dataset was last modified
-             */
-            readonly dtModified: Date;
-            /** @description The ID of the dataset */
-            readonly id: string;
-            /** @description Whether the dataset is public */
-            readonly isPublic: boolean;
-            /** @description The name of the dataset */
-            readonly name: string | null;
-            /** @description The ID of the project */
-            readonly projectId: string | null;
-            /** @description The ID of the storage provider */
-            readonly storageProviderId: string | null;
-            /** @description The ID of the team that owns the dataset */
-            readonly teamId: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Delete a model
-   * @description Delete a model
-   */
-  "models-delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the model */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the model */
-            readonly id: string;
           };
         };
       };
@@ -9155,25 +9210,27 @@ export interface operations {
       /** @description Successful response */
       200: {
         content: {
-          readonly "application/json": {
-            /**
-             * Format: date-time
-             * @description The date the private network was created.
-             */
-            readonly dtCreated: Date;
-            /** @description The date the private network was deleted. */
-            readonly dtDeleted?: (Record<string, never> | Date) | null;
-            /** @description The ID of the private network. */
-            readonly id: string;
-            /** @description The name of the private network. */
-            readonly name: string;
-            /** @description The subnet mask of the private network. */
-            readonly netmask: string;
-            /** @description The network prefix of the private network. */
-            readonly network: string;
-            /** @description The region the private network is in. */
-            readonly region: string;
-          };
+          readonly "application/json":
+            | ({
+              /**
+               * Format: date-time
+               * @description The date the private network was created.
+               */
+              readonly dtCreated: Date;
+              /** @description The date the private network was deleted. */
+              readonly dtDeleted?: (Record<string, never> | Date) | null;
+              /** @description The ID of the private network. */
+              readonly id: string;
+              /** @description The name of the private network. */
+              readonly name: string;
+              /** @description The subnet mask of the private network. */
+              readonly netmask: string;
+              /** @description The network prefix of the private network. */
+              readonly network: string;
+              /** @description The region the private network is in. */
+              readonly region: string;
+            })
+            | null;
         };
       };
       default: components["responses"]["error"];
@@ -9639,10 +9696,10 @@ export interface operations {
     };
   };
   /**
-   * List a project's collaborators
-   * @description Fetches a list of collaborators for a project.
+   * List a project's apps
+   * @description Fetches a list of apps for a project.
    */
-  "projectCollaborators-list": {
+  "projectApps-list": {
     parameters: {
       readonly query: {
         /** @description Fetch the next page of results after this cursor. */
@@ -9653,178 +9710,11 @@ export interface operations {
         orderBy?: "dtCreated";
         /** @description The order to sort the results by. */
         order?: "asc" | "desc";
-      };
-      readonly path: {
-        /** @description The ID of the project. */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description Whether there are more pages of results available. */
-            readonly hasMore: boolean;
-            /** @description The items on this page. */
-            readonly items: readonly ({
-              /**
-               * Format: date-time
-               * @description The date the collaborate was added to the project
-               */
-              readonly dtCreated: Date;
-              /**
-               * Format: date-time
-               * @description The date the collaborator was removed from the project
-               * @default null
-               */
-              readonly dtDeleted?: Date;
-              /** @description The user that can access the project */
-              readonly user: {
-                /**
-                 * Format: email
-                 * @description The email address of the user
-                 */
-                readonly email: string;
-                /**
-                 * @description The first name of the user
-                 * @default null
-                 */
-                readonly firstName?: string | null;
-                /** @description The ID of the user */
-                readonly id: string;
-                /**
-                 * @description The last name of the user
-                 * @default null
-                 */
-                readonly lastName?: string | null;
-                /**
-                 * @description The URL of the team's profile image.
-                 * @default null
-                 */
-                readonly publicProfileImageUrl?: string | null;
-              };
-            })[];
-            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
-            readonly nextPage?: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Create a project collaborator
-   * @description Adds a new collaborator to a project.
-   */
-  "projectCollaborators-create": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the project. */
-        id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The ID of the user to add to the project. */
-          readonly userId: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /**
-             * Format: date-time
-             * @description The date the collaborate was added to the project
-             */
-            readonly dtCreated: Date;
-            /**
-             * Format: date-time
-             * @description The date the collaborator was removed from the project
-             * @default null
-             */
-            readonly dtDeleted?: Date;
-            /** @description The user that can access the project */
-            readonly user: {
-              /**
-               * Format: email
-               * @description The email address of the user
-               */
-              readonly email: string;
-              /**
-               * @description The first name of the user
-               * @default null
-               */
-              readonly firstName?: string | null;
-              /** @description The ID of the user */
-              readonly id: string;
-              /**
-               * @description The last name of the user
-               * @default null
-               */
-              readonly lastName?: string | null;
-              /**
-               * @description The URL of the team's profile image.
-               * @default null
-               */
-              readonly publicProfileImageUrl?: string | null;
-            };
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Delete a project collaborator
-   * @description Removes a collaborator from a project.
-   */
-  "projectCollaborators-delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the project. */
-        id: string;
-        /** @description The ID of the user to remove from the project. */
-        userId: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The ID of the user removed from the project. */
-            readonly userId: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * List a project's deployments
-   * @description Fetches a list of deployments for a project.
-   */
-  "projectsDeployments-list": {
-    parameters: {
-      readonly query: {
-        /** @description Fetch the next page of results after this cursor. */
-        after?: string;
-        /** @description The number of items to fetch after this page. */
-        limit?: number;
-        /** @description Order results by one of these fields. */
-        orderBy?: "dtCreated";
-        /** @description The order to sort the results by. */
-        order?: "asc" | "desc";
-        /** @description The name of the deployment to filter by */
+        /** @description The name of the app to filter by */
         name?: string;
       };
       readonly path: {
-        /** @description The ID of the project to fetch deployments for */
+        /** @description The ID of the project to fetch apps for */
         id: string;
       };
     };
@@ -9857,7 +9747,8 @@ export interface operations {
                     | (
                       | (
                         | ({
-                          readonly apiVersion: "v0alpha0" | "latest";
+                          /** @enum {string} */
+                          readonly apiVersion: "v0alpha0";
                           readonly command?: readonly (string)[];
                           readonly containerRegistry?: string;
                           /** @default true */
@@ -10120,6 +10011,13 @@ export interface operations {
                           };
                           readonly image: string;
                           readonly integrations?: readonly ({
+                            readonly id: string;
+                            readonly name: string;
+                            /** @default /opt/models */
+                            readonly path?: string;
+                            /** @enum {string} */
+                            readonly type: "model";
+                          } | {
                             readonly accessKeyId: string;
                             readonly endpoint?: string;
                             readonly name: string;
@@ -10141,23 +10039,8 @@ export interface operations {
                             /** Format: uri */
                             readonly url: string;
                           })[];
-                          readonly models?: readonly ({
-                            readonly id: string;
-                            readonly path?: string;
-                          })[];
                           readonly name: string;
                           readonly region?: string;
-                          readonly repositories?: {
-                            readonly dataset: string;
-                            readonly mountPath?: string;
-                            readonly repositories: readonly ({
-                              readonly name: string;
-                              readonly password?: string;
-                              readonly ref?: string;
-                              readonly url: string;
-                              readonly username?: string;
-                            })[];
-                          };
                           readonly resources: {
                             readonly autoscaling?: {
                               readonly enabled?: boolean;
@@ -10328,6 +10211,13 @@ export interface operations {
                         };
                         readonly image: string;
                         readonly integrations?: readonly ({
+                          readonly id: string;
+                          readonly name: string;
+                          /** @default /opt/models */
+                          readonly path?: string;
+                          /** @enum {string} */
+                          readonly type: "model";
+                        } | {
                           readonly accessKeyId: string;
                           readonly endpoint?: string;
                           readonly name: string;
@@ -10349,23 +10239,811 @@ export interface operations {
                           /** Format: uri */
                           readonly url: string;
                         })[];
-                        readonly models?: readonly ({
+                        readonly name: string;
+                        readonly region?: string;
+                        readonly resources: {
+                          readonly autoscaling?: {
+                            readonly enabled?: boolean;
+                            readonly maxReplicas: number;
+                            readonly metrics: readonly (
+                              | {
+                                /** @enum {string} */
+                                readonly metric: "requestDuration";
+                                /** @enum {string} */
+                                readonly summary: "average";
+                                readonly value: number;
+                              }
+                              | ({
+                                /** @enum {string} */
+                                readonly metric: "cpu" | "memory";
+                                /** @enum {string} */
+                                readonly summary: "average";
+                                readonly value: number;
+                              })
+                            )[];
+                          };
+                          readonly machineType: string;
+                          readonly ports: readonly (number)[];
+                          /** @default 1 */
+                          readonly replicas?: number;
+                        };
+                      })
+                    )
+                    | null;
+                  /** @description The ID of the deployment the spec belongs to */
+                  readonly deploymentId: string;
+                  /**
+                   * Format: date-time
+                   * @description The date the deployment was marked "healthy"
+                   * @default null
+                   */
+                  readonly dtHealthy?: Date;
+                  /**
+                   * @description The fatal configuration error. Only present if the cluster was unable to apply the entire deployment configuration. This is not the same as an instance error.
+                   * @default null
+                   */
+                  readonly error?: string | null;
+                  /**
+                   * Format: date-time
+                   * @description The date the deployment configuration was applied to the cluster
+                   * @default null
+                   */
+                  readonly externalApplied?: Date;
+                  /** @description The ID of the deployment spec */
+                  readonly id: string;
+                  /**
+                   * @description Metadata about the source of the configuration
+                   * @default null
+                   */
+                  readonly metadata?:
+                    | ({
+                      readonly gitHeaders?: {
+                        readonly "x-git-actor": string;
+                        readonly "x-git-host": "github" | "gitlab";
+                        readonly "x-git-owner": string;
+                        readonly "x-git-ref": string;
+                        readonly "x-git-repo": string;
+                        readonly "x-git-sha": string;
+                      };
+                    })
+                    | null;
+                  /** @description The ID of the user the deployment belongs to */
+                  readonly userId: string;
+                })
+                | null;
+              /**
+               * @description The last version hash for the deployment
+               * @default null
+               */
+              readonly latestSpecHash?: string | null;
+              /** @description The name of the deployment */
+              readonly name: string;
+              /** @description The ID of the project the deployment belongs to */
+              readonly projectId: string;
+              /** @description The ID of the team the deployment belongs to */
+              readonly teamId: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List a project's collaborators
+   * @description Fetches a list of collaborators for a project.
+   */
+  "projectCollaborators-list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+      };
+      readonly path: {
+        /** @description The ID of the project. */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the collaborate was added to the project
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the collaborator was removed from the project
+               * @default null
+               */
+              readonly dtDeleted?: Date;
+              /** @description The user that can access the project */
+              readonly user: {
+                /**
+                 * Format: email
+                 * @description The email address of the user
+                 */
+                readonly email: string;
+                /**
+                 * @description The first name of the user
+                 * @default null
+                 */
+                readonly firstName?: string | null;
+                /** @description The ID of the user */
+                readonly id: string;
+                /**
+                 * @description The last name of the user
+                 * @default null
+                 */
+                readonly lastName?: string | null;
+                /**
+                 * @description The URL of the team's profile image.
+                 * @default null
+                 */
+                readonly publicProfileImageUrl?: string | null;
+              };
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Create a project collaborator
+   * @description Adds a new collaborator to a project.
+   */
+  "projectCollaborators-create": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the project. */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The ID of the user to add to the project. */
+          readonly userId: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the collaborate was added to the project
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the collaborator was removed from the project
+             * @default null
+             */
+            readonly dtDeleted?: Date;
+            /** @description The user that can access the project */
+            readonly user: {
+              /**
+               * Format: email
+               * @description The email address of the user
+               */
+              readonly email: string;
+              /**
+               * @description The first name of the user
+               * @default null
+               */
+              readonly firstName?: string | null;
+              /** @description The ID of the user */
+              readonly id: string;
+              /**
+               * @description The last name of the user
+               * @default null
+               */
+              readonly lastName?: string | null;
+              /**
+               * @description The URL of the team's profile image.
+               * @default null
+               */
+              readonly publicProfileImageUrl?: string | null;
+            };
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Delete a project collaborator
+   * @description Removes a collaborator from a project.
+   */
+  "projectCollaborators-delete": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the project. */
+        id: string;
+        /** @description The ID of the user to remove from the project. */
+        userId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The ID of the user removed from the project. */
+            readonly userId: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List a project's deployments
+   * @description Fetches a list of deployments for a project.
+   */
+  "projectDeployments-list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        /** @description The name of the app to filter by */
+        name?: string;
+      };
+      readonly path: {
+        /** @description The ID of the project to fetch deployments for */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the deployment was created
+               */
+              readonly dtCreated: Date;
+              /** @description The unique endpoint for the deployment */
+              readonly endpoint: string;
+              /** @description The ID of the deployment */
+              readonly id: string;
+              /**
+               * @description The latest deployment configuration. If invalid, null is returned.
+               * @default null
+               */
+              readonly latestSpec?:
+                | ({
+                  /** @description The data for the deployment spec */
+                  readonly data?:
+                    | (
+                      | (
+                        | ({
+                          /** @enum {string} */
+                          readonly apiVersion: "v0alpha0";
+                          readonly command?: readonly (string)[];
+                          readonly containerRegistry?: string;
+                          /** @default true */
+                          readonly enabled?: boolean;
+                          readonly env?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly healthChecks?: {
+                            readonly liveness?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                            readonly readiness?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                            readonly startup?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                          };
+                          readonly image: string;
+                          readonly models?: readonly ({
+                            readonly id: string;
+                            readonly path?: string;
+                          })[];
+                          readonly name: string;
+                          /** @default 80 */
+                          readonly port?: number;
+                          readonly region?: string;
+                          readonly repositories?: {
+                            readonly dataset: string;
+                            readonly mountPath?: string;
+                            readonly repositories: readonly ({
+                              readonly name: string;
+                              readonly password?: string;
+                              readonly ref?: string;
+                              readonly url: string;
+                              readonly username?: string;
+                            })[];
+                          };
+                          readonly resources: {
+                            readonly autoscaling?: {
+                              readonly enabled?: boolean;
+                              readonly maxReplicas: number;
+                              readonly metrics: readonly (
+                                | {
+                                  /** @enum {string} */
+                                  readonly metric: "requestDuration";
+                                  /** @enum {string} */
+                                  readonly summary: "average";
+                                  readonly value: number;
+                                }
+                                | ({
+                                  /** @enum {string} */
+                                  readonly metric: "cpu" | "memory";
+                                  /** @enum {string} */
+                                  readonly summary: "average";
+                                  readonly value: number;
+                                })
+                              )[];
+                            };
+                            readonly instanceType: string;
+                            /** @default 1 */
+                            readonly replicas?: number;
+                          };
+                        })
+                        | ({
+                          /** @enum {string} */
+                          readonly apiVersion: "v0alpha1";
+                          readonly command?: readonly (string)[];
+                          readonly containerRegistry?: string;
+                          /** @default true */
+                          readonly enabled?: boolean;
+                          readonly env?: readonly ({
+                            readonly name: string;
+                            readonly value: string;
+                          })[];
+                          readonly healthchecks?: {
+                            readonly liveness?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                            readonly readiness?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                            readonly startup?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                          };
+                          readonly healthChecks?: {
+                            readonly liveness?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                            readonly readiness?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                            readonly startup?: {
+                              readonly failureThreshold?: number;
+                              readonly headers?: readonly ({
+                                readonly name: string;
+                                readonly value: string;
+                              })[];
+                              readonly host?: string;
+                              readonly initialDelaySeconds?: number;
+                              readonly path: string;
+                              readonly periodSeconds?: number;
+                              readonly port?: number;
+                              readonly timeoutSeconds?: number;
+                            } | {
+                              readonly exec: {
+                                readonly command: readonly (string)[];
+                              };
+                              readonly failureThreshold?: number;
+                              readonly initialDelaySeconds?: number;
+                              readonly periodSeconds?: number;
+                              readonly timeoutSeconds?: number;
+                            };
+                          };
+                          readonly image: string;
+                          readonly integrations?: readonly ({
+                            readonly id: string;
+                            readonly name: string;
+                            /** @default /opt/models */
+                            readonly path?: string;
+                            /** @enum {string} */
+                            readonly type: "model";
+                          } | {
+                            readonly accessKeyId: string;
+                            readonly endpoint?: string;
+                            readonly name: string;
+                            readonly path?: string;
+                            readonly region?: string;
+                            readonly secretAccessKey: string;
+                            /** @enum {string} */
+                            readonly type: "s3";
+                            readonly url: string;
+                          } | {
+                            readonly name: string;
+                            /** @enum {string} */
+                            readonly type: "volume";
+                          } | {
+                            readonly name: string;
+                            readonly path?: string;
+                            /** @enum {string} */
+                            readonly type: "git-lfs";
+                            /** Format: uri */
+                            readonly url: string;
+                          })[];
+                          readonly name: string;
+                          readonly region?: string;
+                          readonly resources: {
+                            readonly autoscaling?: {
+                              readonly enabled?: boolean;
+                              readonly maxReplicas: number;
+                              readonly metrics: readonly (
+                                | {
+                                  /** @enum {string} */
+                                  readonly metric: "requestDuration";
+                                  /** @enum {string} */
+                                  readonly summary: "average";
+                                  readonly value: number;
+                                }
+                                | ({
+                                  /** @enum {string} */
+                                  readonly metric: "cpu" | "memory";
+                                  /** @enum {string} */
+                                  readonly summary: "average";
+                                  readonly value: number;
+                                })
+                              )[];
+                            };
+                            readonly machineType: string;
+                            readonly ports: readonly (number)[];
+                            /** @default 1 */
+                            readonly replicas?: number;
+                          };
+                        })
+                      )
+                      | ({
+                        readonly apiVersion: "v1" | "latest";
+                        readonly command?: readonly (string)[];
+                        readonly containerRegistry?: string;
+                        /** @default true */
+                        readonly enabled?: boolean;
+                        readonly env?: readonly ({
+                          readonly name: string;
+                          readonly value: string;
+                        })[];
+                        readonly healthchecks?: {
+                          readonly liveness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly readiness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly startup?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                        };
+                        readonly healthChecks?: {
+                          readonly liveness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly readiness?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                          readonly startup?: {
+                            readonly failureThreshold?: number;
+                            readonly headers?: readonly ({
+                              readonly name: string;
+                              readonly value: string;
+                            })[];
+                            readonly host?: string;
+                            readonly initialDelaySeconds?: number;
+                            readonly path: string;
+                            readonly periodSeconds?: number;
+                            readonly port?: number;
+                            readonly timeoutSeconds?: number;
+                          } | {
+                            readonly exec: {
+                              readonly command: readonly (string)[];
+                            };
+                            readonly failureThreshold?: number;
+                            readonly initialDelaySeconds?: number;
+                            readonly periodSeconds?: number;
+                            readonly timeoutSeconds?: number;
+                          };
+                        };
+                        readonly image: string;
+                        readonly integrations?: readonly ({
                           readonly id: string;
+                          readonly name: string;
+                          /** @default /opt/models */
                           readonly path?: string;
+                          /** @enum {string} */
+                          readonly type: "model";
+                        } | {
+                          readonly accessKeyId: string;
+                          readonly endpoint?: string;
+                          readonly name: string;
+                          readonly path?: string;
+                          readonly region?: string;
+                          readonly secretAccessKey: string;
+                          /** @enum {string} */
+                          readonly type: "s3";
+                          readonly url: string;
+                        } | {
+                          readonly name: string;
+                          /** @enum {string} */
+                          readonly type: "volume";
+                        } | {
+                          readonly name: string;
+                          readonly path?: string;
+                          /** @enum {string} */
+                          readonly type: "git-lfs";
+                          /** Format: uri */
+                          readonly url: string;
                         })[];
                         readonly name: string;
                         readonly region?: string;
-                        readonly repositories?: {
-                          readonly dataset: string;
-                          readonly mountPath?: string;
-                          readonly repositories: readonly ({
-                            readonly name: string;
-                            readonly password?: string;
-                            readonly ref?: string;
-                            readonly url: string;
-                            readonly username?: string;
-                          })[];
-                        };
                         readonly resources: {
                           readonly autoscaling?: {
                             readonly enabled?: boolean;
@@ -10505,7 +11183,7 @@ export interface operations {
               /** @description Whether the dataset is public */
               readonly isPublic: boolean;
               /** @description The name of the dataset */
-              readonly name: string | null;
+              readonly name: string;
               /** @description The ID of the project */
               readonly projectId: string | null;
               /** @description The ID of the storage provider */
@@ -10515,6 +11193,394 @@ export interface operations {
             })[];
             /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
             readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Add a model to a project
+   * @description Adds a model to a project.
+   */
+  "projectModels-add": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the project to add the model to */
+        id: string;
+        /** @description The ID of the model to add to the project */
+        modelId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The description of the dataset */
+            readonly description: string | null;
+            /**
+             * Format: date-time
+             * @description The date the dataset was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the dataset was last modified
+             */
+            readonly dtModified: Date;
+            /** @description The ID of the dataset */
+            readonly id: string;
+            /** @description Whether the dataset is public */
+            readonly isPublic: boolean;
+            /** @description The name of the dataset */
+            readonly name: string;
+            /** @description The ID of the project */
+            readonly projectId: string | null;
+            /** @description The ID of the storage provider */
+            readonly storageProviderId: string | null;
+            /** @description The ID of the team that owns the dataset */
+            readonly teamId: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Remove a model from project
+   * @description Remove a model from project.
+   */
+  "projectModels-remove": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the project to remove the model from */
+        id: string;
+        /** @description The ID of the model to remove from the project */
+        modelId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The description of the dataset */
+            readonly description: string | null;
+            /**
+             * Format: date-time
+             * @description The date the dataset was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the dataset was last modified
+             */
+            readonly dtModified: Date;
+            /** @description The ID of the dataset */
+            readonly id: string;
+            /** @description Whether the dataset is public */
+            readonly isPublic: boolean;
+            /** @description The name of the dataset */
+            readonly name: string;
+            /** @description The ID of the project */
+            readonly projectId: string | null;
+            /** @description The ID of the storage provider */
+            readonly storageProviderId: string | null;
+            /** @description The ID of the team that owns the dataset */
+            readonly teamId: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Remove a notebook from a project
+   * @description Remove a notebook from a project.
+   */
+  "projectNotebooks-remove": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the project to remove the notebook from */
+        id: string;
+        /** @description The ID of the notebook to remove from the project */
+        notebookId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the notebook was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the notebook was last modified
+             */
+            readonly dtModified: Date;
+            /**
+             * Format: date-time
+             * @description The date the notebook was last started
+             */
+            readonly dtStarted: Date;
+            /** @description The ID of the notebook */
+            readonly id: string;
+            /** @description The type of the machine the notebook is running on */
+            readonly machineType: string | null;
+            /** @description The name of the notebook */
+            readonly name: string;
+            /** @description The notebook repo ID */
+            readonly notebookRepoId: string | null;
+            /** @description The project ID */
+            readonly projectId: string;
+            /** @description The last user to start the notebook */
+            readonly startedByUser: {
+              /**
+               * Format: email
+               * @description The email address of the user
+               */
+              readonly email: string;
+              /**
+               * @description The first name of the user
+               * @default null
+               */
+              readonly firstName?: string | null;
+              /** @description The ID of the user */
+              readonly id: string;
+              /**
+               * @description The last name of the user
+               * @default null
+               */
+              readonly lastName?: string | null;
+              /**
+               * @description The URL of the team's profile image.
+               * @default null
+               */
+              readonly publicProfileImageUrl?: string | null;
+            };
+            /**
+             * @description The state of the notebook.
+             * @enum {string}
+             */
+            readonly state:
+              | "Cancel"
+              | "Cancelled"
+              | "Error"
+              | "Failed"
+              | "Pending"
+              | "Preempted"
+              | "Provisioned"
+              | "Running"
+              | "Stopped";
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List a project's notebooks
+   * @description Fetches a list of notebooks for a project.
+   */
+  "projectNotebooks-list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated" | "name";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        /** @description The notebook name to filter by */
+        name?: string;
+        /** @description The state of the notebook. */
+        state?:
+          | "Cancel"
+          | "Cancelled"
+          | "Error"
+          | "Failed"
+          | "Pending"
+          | "Preempted"
+          | "Provisioned"
+          | "Running"
+          | "Stopped";
+      };
+      readonly path: {
+        /** @description The ID of the project to fetch notebooks for */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the notebook was created
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the notebook was last modified
+               */
+              readonly dtModified: Date;
+              /**
+               * Format: date-time
+               * @description The date the notebook was last started
+               */
+              readonly dtStarted: Date;
+              /** @description The ID of the notebook */
+              readonly id: string;
+              /** @description The type of the machine the notebook is running on */
+              readonly machineType: string | null;
+              /** @description The name of the notebook */
+              readonly name: string;
+              /** @description The notebook repo ID */
+              readonly notebookRepoId: string | null;
+              /** @description The project ID */
+              readonly projectId: string;
+              /** @description The last user to start the notebook */
+              readonly startedByUser: {
+                /**
+                 * Format: email
+                 * @description The email address of the user
+                 */
+                readonly email: string;
+                /**
+                 * @description The first name of the user
+                 * @default null
+                 */
+                readonly firstName?: string | null;
+                /** @description The ID of the user */
+                readonly id: string;
+                /**
+                 * @description The last name of the user
+                 * @default null
+                 */
+                readonly lastName?: string | null;
+                /**
+                 * @description The URL of the team's profile image.
+                 * @default null
+                 */
+                readonly publicProfileImageUrl?: string | null;
+              };
+              /**
+               * @description The state of the notebook.
+               * @enum {string}
+               */
+              readonly state:
+                | "Cancel"
+                | "Cancelled"
+                | "Error"
+                | "Failed"
+                | "Pending"
+                | "Preempted"
+                | "Provisioned"
+                | "Running"
+                | "Stopped";
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Add a notebook to a project
+   * @description Adds a notebook to a project.
+   */
+  "projectNotebooks-add": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the project to add the notebook to */
+        id: string;
+        /** @description The ID of the notebook to add to the project */
+        notebookId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the notebook was created
+             */
+            readonly dtCreated: Date;
+            /**
+             * Format: date-time
+             * @description The date the notebook was last modified
+             */
+            readonly dtModified: Date;
+            /**
+             * Format: date-time
+             * @description The date the notebook was last started
+             */
+            readonly dtStarted: Date;
+            /** @description The ID of the notebook */
+            readonly id: string;
+            /** @description The type of the machine the notebook is running on */
+            readonly machineType: string | null;
+            /** @description The name of the notebook */
+            readonly name: string;
+            /** @description The notebook repo ID */
+            readonly notebookRepoId: string | null;
+            /** @description The project ID */
+            readonly projectId: string;
+            /** @description The last user to start the notebook */
+            readonly startedByUser: {
+              /**
+               * Format: email
+               * @description The email address of the user
+               */
+              readonly email: string;
+              /**
+               * @description The first name of the user
+               * @default null
+               */
+              readonly firstName?: string | null;
+              /** @description The ID of the user */
+              readonly id: string;
+              /**
+               * @description The last name of the user
+               * @default null
+               */
+              readonly lastName?: string | null;
+              /**
+               * @description The URL of the team's profile image.
+               * @default null
+               */
+              readonly publicProfileImageUrl?: string | null;
+            };
+            /**
+             * @description The state of the notebook.
+             * @enum {string}
+             */
+            readonly state:
+              | "Cancel"
+              | "Cancelled"
+              | "Error"
+              | "Failed"
+              | "Pending"
+              | "Preempted"
+              | "Provisioned"
+              | "Running"
+              | "Stopped";
           };
         };
       };
