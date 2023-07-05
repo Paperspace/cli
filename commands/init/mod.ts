@@ -139,7 +139,7 @@ export const init = command("init", {
       yield "";
       yield fmt.colors.bold("Console URL");
       yield new URL(
-        `/${team}/projects/${app.id}/apps`,
+        `/${team}/apps/${app.id}`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       ) + "";
       yield "";
