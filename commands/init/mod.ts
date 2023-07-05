@@ -140,7 +140,7 @@ export const init = command("init", {
       yield "";
       yield fmt.colors.bold("Console URL");
       yield new URL(
-        `/${team}/projects/${app.id}/gradient-deployments`,
+        `/${team}/projects/${app.id}/apps`,
         env.get("PAPERSPACE_CONSOLE_URL"),
       ) + "";
       yield "";
