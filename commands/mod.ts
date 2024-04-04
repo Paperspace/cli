@@ -11,7 +11,7 @@ import { app, completion, fmt, version } from "../zcli.ts";
 import { autoscalingGroup } from "./autoscaling-group/mod.ts";
 import { config } from "./config/mod.ts";
 import { console } from "./console/mod.ts";
-import { dataset } from "./datasets/mod.ts";
+import { dataset } from "./dataset/mod.ts";
 import { deployment } from "./deployment/mod.ts";
 import { docs } from "./docs/mod.ts";
 import { init } from "./init/mod.ts";
