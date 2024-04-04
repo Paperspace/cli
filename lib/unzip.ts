@@ -50,6 +50,6 @@ async function decompressProcess(
   });
 
   const processStatus = (await unzipProc.status()).success;
-  Deno.close(unzipProc.rid);
+  unzipProc.close();
   return processStatus;
 }
