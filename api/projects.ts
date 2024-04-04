@@ -5,7 +5,7 @@ export const projects = {
   create: client("/projects").post,
   get: client("/projects/{id}").get,
   update: client("/projects/{id}").put,
-  // delete: client("/projects/{id}").delete,
+  delete: client("/projects/{id}").delete,
 };
 
 export const projectSecrets = {
