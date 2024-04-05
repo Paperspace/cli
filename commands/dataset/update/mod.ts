@@ -1,11 +1,11 @@
-import { sharedDrives } from "../../../api/shared-drives.ts";
+import { datasets } from "../../../api/dataset.ts";
 import { fields } from "../../../flags.ts";
 import { asserts } from "../../../lib/asserts.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { loading } from "../../../lib/loading.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
 import { input } from "../../../prompts/input.ts";
-import { args, command, flags, z } from "../../../zcli.ts";
+import { args, command, flag, flags, z } from "../../../zcli.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -14,18 +14,26 @@ import { defaultFields } from "../mod.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const del = command("delete", {
-  short: "Delete a shared drive",
+export const update = command("update", {
+  short: "Update a dataset",
   long: `
-    Delete a shared drive from a team.
+    Update a dataset in a project or team.
   `,
   commands: subCommands,
   args: args().tuple([
-    z.string().describe("The ID of the shared drive to delete"),
+    z.string().describe("The ID of the dataset to update"),
   ]).optional(),
   flags: flags({
     fields,
-  }),
+  }).merge(flags({
+    "name": flag({
+      aliases: ["n"],
+      short: "The name of the dataset",
+    }).string(),
+    "description": flag({
+      short: "The description of the dataset",
+    }).ostring(),
+  })),
   // We use command metadata in the `persistentPreRun` function to check if a
   // command requires an API key. If it does, we'll check to see if one is
   // set. If not, we'll throw an error.
@@ -40,11 +48,15 @@ export const del = command("delete", {
       id = await input("ID:", {
         filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
       });
-      asserts(id, "A shared drive ID is required");
+      asserts(id, "A dataset ID is required");
     }
 
     const response = await loading(
-      sharedDrives.delete({ id }),
+      datasets.update({
+        id,
+        name: flags.name,
+        description: flags.description,
+      }),
     );
 
     asserts(response.ok, response);

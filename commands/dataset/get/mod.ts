@@ -1,4 +1,4 @@
-import { sharedDrives } from "../../../api/shared-drives.ts";
+import { datasets } from "../../../api/dataset.ts";
 import { fields } from "../../../flags.ts";
 import { asserts } from "../../../lib/asserts.ts";
 import { dataTable } from "../../../lib/data-table.ts";
@@ -14,14 +14,14 @@ import { defaultFields } from "../mod.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const del = command("delete", {
-  short: "Delete a shared drive",
+export const get = command("get", {
+  short: "Get a dataset",
   long: `
-    Delete a shared drive from a team.
+    Get a dataset from a team.
   `,
   commands: subCommands,
   args: args().tuple([
-    z.string().describe("The ID of the shared drive to delete"),
+    z.string().describe("The ID of the dataset to get"),
   ]).optional(),
   flags: flags({
     fields,
@@ -40,11 +40,11 @@ export const del = command("delete", {
       id = await input("ID:", {
         filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
       });
-      asserts(id, "A shared drive ID is required");
+      asserts(id, "A dataset ID is required");
     }
 
     const response = await loading(
-      sharedDrives.delete({ id }),
+      datasets.get({ id }),
     );
 
     asserts(response.ok, response);

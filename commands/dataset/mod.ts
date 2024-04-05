@@ -1,15 +1,17 @@
+import { env } from "../../env.ts";
 import { command } from "../../zcli.ts";
 import { create } from "./create/mod.ts";
+import { del } from "./delete/mod.ts";
 import { get } from "./get/mod.ts";
-import { link } from "./link/mod.ts";
 import { list } from "./list/mod.ts";
 import { update } from "./update/mod.ts";
-import { delete_ } from "./delete/mod.ts";
 
 export const defaultFields = [
   "id",
   "name",
-  "repoName",
+  "description",
+  "storageProviderId",
+  "isPublic",
 ];
 
 /**
@@ -17,19 +19,26 @@ export const defaultFields = [
  * or change its name unless you're no longer using `zcli add`.
  */
 const subCommands: ReturnType<typeof command>[] = [
+  create,
   get,
   list,
-  create,
+  del,
   update,
-  link,
-  delete_,
 ];
 
-export const project = command("project", {
-  short: "Manage your Paperspace projects.",
+export const dataset = command("dataset", {
+  short: "Manage your datasets",
+  long: `
+    Manage your datasets.
+
+    For more information, see ${new URL(
+    "/storage/datasets",
+    env.get("PAPERSPACE_DOCS_URL"),
+  )}.
+  `,
   commands: subCommands,
 }).run(function* ({ ctx }) {
-  for (const line of project.help(ctx)) {
+  for (const line of dataset.help(ctx)) {
     yield line;
   }
 });

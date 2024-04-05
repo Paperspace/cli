@@ -1,11 +1,10 @@
-import { sharedDrives } from "../../../api/shared-drives.ts";
+import { datasets } from "../../../api/dataset.ts";
 import { fields } from "../../../flags.ts";
 import { asserts } from "../../../lib/asserts.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { loading } from "../../../lib/loading.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
-import { input } from "../../../prompts/input.ts";
-import { args, command, flags, z } from "../../../zcli.ts";
+import { command, flag, flags } from "../../../zcli.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -14,37 +13,45 @@ import { defaultFields } from "../mod.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const del = command("delete", {
-  short: "Delete a shared drive",
+export const create = command("create", {
+  short: "Create a dataset",
   long: `
-    Delete a shared drive from a team.
+    Create a dataset.
   `,
   commands: subCommands,
-  args: args().tuple([
-    z.string().describe("The ID of the shared drive to delete"),
-  ]).optional(),
   flags: flags({
     fields,
-  }),
+  }).merge(flags({
+    "name": flag({
+      aliases: ["n"],
+      short: "The name of the dataset",
+    }).string(),
+    "description": flag({
+      short: "The description of the dataset",
+    }).ostring(),
+    "storage-provider-id": flag({
+      short: "The ID of the storage provider to use for the dataset",
+    }).ostring(),
+    "is-public": flag({
+      short: "Whether the dataset is public",
+    }).oboolean(),
+  })),
   // We use command metadata in the `persistentPreRun` function to check if a
   // command requires an API key. If it does, we'll check to see if one is
   // set. If not, we'll throw an error.
   meta: {
     requireApiKey: true,
+    requireInGoodStanding: true,
   },
 }).run(
-  async function* ({ args, flags }) {
-    let [id] = args;
-
-    if (!id) {
-      id = await input("ID:", {
-        filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
-      });
-      asserts(id, "A shared drive ID is required");
-    }
-
+  async function* ({ flags }) {
     const response = await loading(
-      sharedDrives.delete({ id }),
+      datasets.create({
+        name: flags.name,
+        description: flags.description,
+        storageProviderId: flags["storage-provider-id"],
+        isPublic: flags["is-public"] ?? false,
+      }),
     );
 
     asserts(response.ok, response);
