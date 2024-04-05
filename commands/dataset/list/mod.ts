@@ -45,9 +45,7 @@ export const list = command("list", {
       datasets.list({
         limit: flags.limit,
         after: flags.after,
-        orderBy: "name",
         order: flags.asc ? "asc" : undefined,
-        name: flags.name,
       }),
       { enabled: !flags.json },
     );
