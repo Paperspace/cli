@@ -21,7 +21,7 @@ export const update = command("update", {
   `,
   commands: subCommands,
   args: args().tuple([
-    z.string().describe("The ID of the startup script to update"),
+    z.string().describe("The ID of the dataset to update"),
   ]).optional(),
   flags: flags({
     fields,
@@ -48,7 +48,7 @@ export const update = command("update", {
       id = await input("ID:", {
         filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
       });
-      asserts(id, "A startup script ID is required");
+      asserts(id, "A dataset ID is required");
     }
 
     const response = await loading(
