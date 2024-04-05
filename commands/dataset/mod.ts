@@ -4,6 +4,7 @@ import { create } from "./create/mod.ts";
 import { del } from "./delete/mod.ts";
 import { get } from "./get/mod.ts";
 import { list } from "./list/mod.ts";
+import { update } from "./update/mod.ts";
 
 export const defaultFields = [
   "id",
@@ -22,6 +23,7 @@ const subCommands: ReturnType<typeof command>[] = [
   get,
   list,
   del,
+  update,
 ];
 
 export const dataset = command("dataset", {

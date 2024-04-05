@@ -5,7 +5,7 @@ import { asserts } from "../../../lib/asserts.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { loading } from "../../../lib/loading.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
-import { command, flag, flags } from "../../../zcli.ts";
+import { command } from "../../../zcli.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -25,12 +25,7 @@ export const list = command("list", {
     \`\`\`
   `,
   commands: subCommands,
-  flags: psFlags.paginator.merge(flags({
-    "name": flag({
-      aliases: ["n"],
-      short: "Filter by name.",
-    }).ostring(),
-  })),
+  flags: psFlags.paginator,
   // We use command metadata in the `persistentPreRun` function to check if a
   // command requires an API key. If it does, we'll check to see if one is
   // set. If not, we'll throw an error.
