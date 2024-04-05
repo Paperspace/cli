@@ -1,9 +1,10 @@
 import { command } from "../../zcli.ts";
-import { get } from "./get/mod.ts";
-import { list } from "./list/mod.ts";
 import { create } from "./create/mod.ts";
-import { update } from "./update/mod.ts";
+import { get } from "./get/mod.ts";
 import { link } from "./link/mod.ts";
+import { list } from "./list/mod.ts";
+import { update } from "./update/mod.ts";
+import { delete_ } from "./delete/mod.ts";
 
 export const defaultFields = [
   "id",
@@ -21,6 +22,7 @@ const subCommands: ReturnType<typeof command>[] = [
   create,
   update,
   link,
+  delete_,
 ];
 
 export const project = command("project", {

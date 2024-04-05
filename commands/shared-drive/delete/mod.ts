@@ -1,11 +1,11 @@
+import { sharedDrives } from "../../../api/shared-drives.ts";
+import { fields } from "../../../flags.ts";
 import { asserts } from "../../../lib/asserts.ts";
+import { dataTable } from "../../../lib/data-table.ts";
 import { loading } from "../../../lib/loading.ts";
+import { pickJson } from "../../../lib/pick-json.ts";
 import { input } from "../../../prompts/input.ts";
 import { args, command, flags, z } from "../../../zcli.ts";
-import { dataTable } from "../../../lib/data-table.ts";
-import { fields } from "../../../flags.ts";
-import { pickJson } from "../../../lib/pick-json.ts";
-import { templates } from "../../../api/templates.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -15,13 +15,13 @@ import { defaultFields } from "../mod.ts";
 const subCommands: ReturnType<typeof command>[] = [];
 
 export const del = command("delete", {
-  short: "Delete a template",
+  short: "Delete a shared drive",
   long: `
-    Delete a template from a team.
+    Delete a shared drive from a team.
   `,
   commands: subCommands,
   args: args().tuple([
-    z.string().describe("The ID of the template to delete"),
+    z.string().describe("The ID of the shared drive to delete"),
   ]).optional(),
   flags: flags({
     fields,
@@ -40,11 +40,11 @@ export const del = command("delete", {
       id = await input("ID:", {
         filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
       });
-      asserts(id, "A template ID is required");
+      asserts(id, "A shared drive ID is required");
     }
 
     const response = await loading(
-      templates.delete({ id }),
+      sharedDrives.delete({ id }),
     );
 
     asserts(response.ok, response);
