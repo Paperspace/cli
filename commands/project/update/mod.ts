@@ -33,6 +33,12 @@ export const update = command("update", {
     }).string().min(1).max(120).optional(),
     fields: psFlags.fields,
   }),
+  // We use command metadata in the `persistentPreRun` function to check if a
+  // command requires an API key. If it does, we'll check to see if one is
+  // set. If not, we'll throw an error.
+  meta: {
+    requireApiKey: true,
+  },
 }).run(
   async function* ({ args, flags }) {
     const [id] = args;
