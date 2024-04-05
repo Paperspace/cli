@@ -1,4 +1,3 @@
-import { update } from "../commands/dataset/update/mod.ts";
 import { client } from "./client.ts";
 
 export const datasets = {
