@@ -57,5 +57,9 @@ describe("pspace project", () => {
     it("link should fail", async () => {
       await assertLogin(() => root.execute(["project", "link"]));
     });
+
+    it("delete should fail", async () => {
+      await assertLogin(() => root.execute(["project", "delete", "moo-cows"]));
+    });
   });
 });
