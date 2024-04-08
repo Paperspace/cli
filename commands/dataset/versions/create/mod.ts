@@ -20,7 +20,8 @@ const subCommands: ReturnType<typeof command>[] = [];
 export const create = command("create", {
   short: "Create a dataset version",
   long: `
-    Create a dataset version.
+    Create a dataset version. This command will prompt you for an ID if you don't
+    provide one.
   `,
   commands: subCommands,
   args: args().tuple([

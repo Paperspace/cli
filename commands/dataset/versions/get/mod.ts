@@ -17,7 +17,8 @@ const subCommands: ReturnType<typeof command>[] = [];
 export const get = command("get", {
   short: "Get a dataset version",
   long: `
-    Get a dataset version from a team.
+    Get a dataset version from a team. This command will prompt you for an ID
+    if you don't provide one.
   `,
   commands: subCommands,
   args: args().tuple([

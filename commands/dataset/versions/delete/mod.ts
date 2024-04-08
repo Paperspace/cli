@@ -18,7 +18,8 @@ const subCommands: ReturnType<typeof command>[] = [];
 export const del = command("delete", {
   short: "Delete a dataset version",
   long: `
-    Delete a dataset version from a team.
+    Delete a dataset version from a team. This command will prompt you for an ID
+    if you don't provide one.
   `,
   commands: subCommands,
   args: args().tuple([
