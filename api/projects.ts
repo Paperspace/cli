@@ -15,3 +15,9 @@ export const projectSecrets = {
   update: client("/projects/{id}/secrets/{name}").patch,
   delete: client("/projects/{id}/secrets/{name}").delete,
 };
+
+export const projectTags = {
+  list: client("/projects/{id}/tags").get,
+  create: client("/projects/{id}/tags").post,
+  delete: client("/projects/{id}/tags").delete,
+};
