@@ -16,8 +16,8 @@ const subCommands: ReturnType<typeof command>[] = [];
 export const delete_ = command("delete", {
   short: "Delete a project tag.",
   long: `
-    Delete a project by its name. If you don't provide a name, this command will
-    prompt you for one.
+    Delete a project tag by its name. If you don't provide a name, this command
+    will prompt you for one.
   `,
   commands: subCommands,
   args: args().tuple([
