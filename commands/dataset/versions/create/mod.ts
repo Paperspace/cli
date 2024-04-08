@@ -4,6 +4,7 @@ import { asserts } from "../../../../lib/asserts.ts";
 import { dataTable } from "../../../../lib/data-table.ts";
 import { loading } from "../../../../lib/loading.ts";
 import { pickJson } from "../../../../lib/pick-json.ts";
+import { input } from "../../../../prompts/input.ts";
 import { select } from "../../../../prompts/select.ts";
 import { z } from "../../../../zcli.ts";
 import { args } from "../../../../zcli.ts";
@@ -22,15 +23,14 @@ export const create = command("create", {
     Create a dataset version.
   `,
   commands: subCommands,
-  args: args().tuple([z.string().describe("The ID of the dataset.")])
+  args: args().tuple([
+    z.string().describe("The ID of the dataset."),
+    z.string().describe("The description of the dataset version."),
+  ])
     .optional(),
   flags: flags({
     fields,
   }).merge(flags({
-    "message": flag({
-      aliases: ["m"],
-      short: "The description of the dataset version",
-    }).string(),
     "tags": flag({
       short: "The tags for the version, comma-delimited",
     }).ostring(),
@@ -44,7 +44,7 @@ export const create = command("create", {
   },
 }).run(
   async function* ({ args, flags }) {
-    let [datasetId] = args;
+    let [datasetId, message] = args;
 
     if (!datasetId) {
       const existingProjects = await loading(datasets.list({ limit: 50 }), {
@@ -69,10 +69,15 @@ export const create = command("create", {
       datasetId = selected.id;
     }
 
+    if (!message) {
+      message = await input("Description:");
+      asserts(message, "A description is required");
+    }
+
     const response = await loading(
       datasetVersions.create({
         datasetId,
-        message: flags.message,
+        message: message,
         tags: flags.tags,
       }),
     );
