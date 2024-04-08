@@ -28,6 +28,7 @@ import { sharedDrive } from "./shared-drive/mod.ts";
 import { signup } from "./signup/mod.ts";
 import { snapshot } from "./snapshot/mod.ts";
 import { startupScript } from "./startup-script/mod.ts";
+import { storageProvider } from "./storage-provider/mod.ts";
 import { template } from "./template/mod.ts";
 import { up } from "./up/mod.ts";
 import { getLatestVersion, upgrade } from "./upgrade/mod.ts";
@@ -56,6 +57,7 @@ export const commands = [
   snapshot,
   sharedDrive,
   startupScript,
+  storageProvider,
   template,
   up,
   upgrade,
