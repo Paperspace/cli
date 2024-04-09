@@ -7,3 +7,7 @@ export const teamSecrets = {
   update: client("/teams/{id}/secrets/{name}").patch,
   delete: client("/teams/{id}/secrets/{name}").delete,
 };
+
+export const teamUsers = {
+  list: client("/teams/{teamId}/users").get,
+};

@@ -760,6 +760,25 @@ export interface paths {
      */
     patch: operations["teamSecrets-update"];
   };
+  "/teams/{teamId}/users": {
+    /**
+     * List team members
+     * @description List team members
+     */
+    get: operations["teamMemberships-listByTeamId"];
+  };
+  "/teams/{teamId}/users/{userId}": {
+    /**
+     * Update a team membership
+     * @description Update a team membership
+     */
+    put: operations["teamMemberships-update"];
+    /**
+     * Remove a user from a team
+     * @description Remove a user from a team
+     */
+    delete: operations["teamMemberships-removeUser"];
+  };
   "/templates": {
     /**
      * List templates
@@ -15036,6 +15055,172 @@ export interface operations {
             readonly dtModified: Date;
             /** @description The name of the secret, e.g. "DB_PASSWORD". */
             readonly name: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List team members
+   * @description List team members
+   */
+  "teamMemberships-listByTeamId": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtConfirmed";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        /** @description Filter team members by their role on the team. */
+        role?: "member" | "admin" | "owner";
+      };
+      readonly path: {
+        /** @description The team's ID */
+        teamId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /**
+               * Format: date-time
+               * @description The date the user confirmed their membership
+               * @default null
+               */
+              readonly dtConfirmed?: Date;
+              /** @description Whether the user is an admin of the team */
+              readonly isAdmin: boolean;
+              /** @description Whether the user is the owner of the team */
+              readonly isOwner: boolean;
+              readonly user: {
+                /** @description The email address of the user */
+                readonly email: string;
+                /**
+                 * @description The first name of the user
+                 * @default null
+                 */
+                readonly firstName?: string | null;
+                /** @description The ID of the user */
+                readonly id: string;
+                /**
+                 * Format: date-time
+                 * @description The date the user was last active.
+                 * @default null
+                 */
+                readonly lastActive?: Date;
+                /**
+                 * @description The last name of the user
+                 * @default null
+                 */
+                readonly lastName?: string | null;
+                /**
+                 * @description The URL of the team's profile image.
+                 * @default null
+                 */
+                readonly publicProfileImageUrl?: string | null;
+              };
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Update a team membership
+   * @description Update a team membership
+   */
+  "teamMemberships-update": {
+    parameters: {
+      readonly path: {
+        /** @description The team's ID */
+        teamId: string;
+        /** @description The user's ID */
+        userId: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description Whether the user will gain admin access or not */
+          readonly isAdmin: boolean;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the user confirmed their membership
+             * @default null
+             */
+            readonly dtConfirmed?: Date;
+            /**
+             * Format: date-time
+             * @description The date the user was removed from the team
+             * @default null
+             */
+            readonly dtDeleted?: Date;
+            /** @description Whether the user is an admin of the team */
+            readonly isAdmin: boolean;
+            /** @description Whether the user is the owner of the team */
+            readonly isOwner: boolean;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Remove a user from a team
+   * @description Remove a user from a team
+   */
+  "teamMemberships-removeUser": {
+    parameters: {
+      readonly path: {
+        /** @description The team's ID */
+        teamId: string;
+        /** @description The user's ID */
+        userId: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /**
+             * Format: date-time
+             * @description The date the user confirmed their membership
+             * @default null
+             */
+            readonly dtConfirmed?: Date;
+            /**
+             * Format: date-time
+             * @description The date the user was removed from the team
+             * @default null
+             */
+            readonly dtDeleted?: Date;
+            /** @description Whether the user is an admin of the team */
+            readonly isAdmin: boolean;
+            /** @description Whether the user is the owner of the team */
+            readonly isOwner: boolean;
           };
         };
       };
