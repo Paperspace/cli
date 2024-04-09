@@ -5,14 +5,10 @@ import { del } from "./delete/mod.ts";
 import { get } from "./get/mod.ts";
 import { list } from "./list/mod.ts";
 import { update } from "./update/mod.ts";
-import { datasetVersion } from "./versions/mod.ts";
 
 export const defaultFields = [
   "id",
   "name",
-  "description",
-  "storageProviderId",
-  "isPublic",
 ];
 
 /**
@@ -25,22 +21,21 @@ const subCommands: ReturnType<typeof command>[] = [
   list,
   del,
   update,
-  datasetVersion,
 ];
 
-export const dataset = command("dataset", {
-  short: "Manage your datasets",
+export const storageProvider = command("storage-provider", {
+  short: "Manage your storage providers",
   long: `
-    Manage your datasets.
+    Manage your storage providers.
 
     For more information, see ${new URL(
-    "/storage/datasets",
+    "/storage/storageProviders",
     env.get("PAPERSPACE_DOCS_URL"),
   )}.
   `,
   commands: subCommands,
 }).run(function* ({ ctx }) {
-  for (const line of dataset.help(ctx)) {
+  for (const line of storageProvider.help(ctx)) {
     yield line;
   }
 });
