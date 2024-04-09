@@ -695,7 +695,7 @@ export interface paths {
      */
     post: operations["startupScripts-unassign"];
   };
-  "/storage": {
+  "/storage-providers": {
     /**
      * List storage providers
      * @description List storage providers
@@ -707,7 +707,7 @@ export interface paths {
      */
     post: operations["storageProviders-create"];
   };
-  "/storage/{id}": {
+  "/storage-providers/{id}": {
     /**
      * Get a storage provider
      * @description Get a storage provider
@@ -724,7 +724,7 @@ export interface paths {
      */
     delete: operations["storageProviders-delete"];
   };
-  "/storage/utilization": {
+  "/storage-providers/utilization": {
     /**
      * Get storage utilization
      * @description Get a breakdown of how storage is being used by your team
