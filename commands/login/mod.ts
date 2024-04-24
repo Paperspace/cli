@@ -26,7 +26,7 @@ export const login = command("login", {
     .tuple([z.string().describe("An API key to log in with.")])
     .optional(),
 }).run(async function* ({ args }) {
-  let apiKey: string | undefined = args[0];
+  let apiKey: string | undefined = args[0] ?? flags["api-key"];
 
   if (!apiKey) {
     try {
