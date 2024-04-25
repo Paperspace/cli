@@ -29,13 +29,13 @@ export async function loading<Promised extends Promise<any>>(
   }
 
   async function spin() {
-    await write(cursorHide());
+    await write(cursorHide(), Deno.stderr);
 
     while (spinning) {
-      await writeLn(frames[i++ % frames.length] + " " + text);
+      await writeLn(frames[i++ % frames.length] + " " + text, Deno.stderr);
       await new Promise<void>((resolve) =>
         setTimeout(async () => {
-          await write(cursorUp(1) + eraseDown());
+          await write(cursorUp(1) + eraseDown(), Deno.stderr);
           resolve();
         }, 100)
       );
@@ -47,13 +47,13 @@ export async function loading<Promised extends Promise<any>>(
       spinning = false;
       return value;
     }).catch(async (error) => {
-      await write(cursorUp(1) + eraseDown() + cursorShow());
+      await write(cursorUp(1) + eraseDown() + cursorShow(), Deno.stderr);
       throw error;
     }),
     spin(),
   ]);
 
-  await write(cursorShow());
+  await write(cursorShow(), Deno.stderr);
   return value;
 }
 
