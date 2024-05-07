@@ -1,10 +1,11 @@
 import { asserts } from "../../../lib/asserts.ts";
 import { loading } from "../../../lib/loading.ts";
-import { command, flag, flags } from "../../../zcli.ts";
+import { input } from "../../../prompts/input.ts";
+import { args, command, flags, z } from "../../../zcli.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { fields } from "../../../flags.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
-import { templates } from "../../../api/templates.ts";
+import { customTemplates } from "../../../api/templates.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -13,38 +14,37 @@ import { defaultFields } from "../mod.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const create = command("create", {
-  short: "Create a template",
+export const get = command("get", {
+  short: "Get a custom template",
   long: `
-    Create a template from a machine.
+    Get a custom template from a team.
   `,
   commands: subCommands,
+  args: args().tuple([
+    z.string().describe("The ID of the custom template to get"),
+  ]).optional(),
   flags: flags({
     fields,
-  }).merge(flags({
-    "name": flag({
-      aliases: ["n"],
-      short: "The name of the template",
-    }).string(),
-    "machine-id": flag({
-      aliases: ["m"],
-      short: "The ID of the machine to create a template from",
-    }).string(),
-  })),
+  }),
   // We use command metadata in the `persistentPreRun` function to check if a
   // command requires an API key. If it does, we'll check to see if one is
   // set. If not, we'll throw an error.
   meta: {
     requireApiKey: true,
-    requireInGoodStanding: true,
   },
 }).run(
-  async function* ({ flags }) {
+  async function* ({ args, flags }) {
+    let [id] = args;
+
+    if (!id) {
+      id = await input("ID:", {
+        filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
+      });
+      asserts(id, "A custom template ID is required");
+    }
+
     const response = await loading(
-      templates.create({
-        name: flags.name,
-        machineId: flags["machine-id"],
-      }),
+      customTemplates.get({ id }),
     );
 
     asserts(response.ok, response);

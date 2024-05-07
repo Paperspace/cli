@@ -123,6 +123,35 @@ export interface paths {
      */
     get: operations["containerRegistries-testConnection"];
   };
+  "/custom-templates": {
+    /**
+     * List templates
+     * @description Fetches a list of templates.
+     */
+    get: operations["customTemplates-list"];
+    /**
+     * Create template
+     * @description Create a template for a machine.
+     */
+    post: operations["customTemplates-create"];
+  };
+  "/custom-templates/{id}": {
+    /**
+     * Get a template
+     * @description Fetches a single template by ID.
+     */
+    get: operations["customTemplates-get"];
+    /**
+     * Update a template
+     * @description Updates a single template by ID.
+     */
+    put: operations["customTemplates-update"];
+    /**
+     * Delete template
+     * @description Delete a template.
+     */
+    delete: operations["customTemplates-delete"];
+  };
   "/datasets": {
     /**
      * List datasets
@@ -377,6 +406,13 @@ export interface paths {
      * @description Fetches a notebook.
      */
     get: operations["notebooks-get"];
+  };
+  "/os-templates": {
+    /**
+     * List OS templates
+     * @description Fetches a list of OS templates.
+     */
+    get: operations["osTemplates-list"];
   };
   "/private-networks": {
     /**
@@ -779,35 +815,6 @@ export interface paths {
      */
     delete: operations["teamMemberships-removeUser"];
   };
-  "/templates": {
-    /**
-     * List templates
-     * @description Fetches a list of templates.
-     */
-    get: operations["templates-list"];
-    /**
-     * Create template
-     * @description Create a template for a machine.
-     */
-    post: operations["templates-create"];
-  };
-  "/templates/{id}": {
-    /**
-     * Get a template
-     * @description Fetches a single template by ID.
-     */
-    get: operations["templates-get"];
-    /**
-     * Update a template
-     * @description Updates a single template by ID.
-     */
-    put: operations["templates-update"];
-    /**
-     * Delete template
-     * @description Delete a template.
-     */
-    delete: operations["templates-delete"];
-  };
   "/workflows": {
     /** List all workflows */
     get: operations["workflows-list"];
@@ -859,9 +866,7 @@ export interface components {
       content: {
         readonly "application/json": {
           readonly code: string;
-          readonly issues?: readonly ({
-            readonly message: string;
-          })[];
+          readonly details?: Record<string, never>;
           readonly message: string;
         };
       };
@@ -4586,6 +4591,342 @@ export interface operations {
     };
   };
   /**
+   * List templates
+   * @description Fetches a list of templates.
+   */
+  "customTemplates-list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "dtCreated" | "name";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        name?: string;
+        machineId?: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /** @description The type of agent installed on the template. */
+              readonly agentType: string;
+              /** @description The machine types the template is available on. */
+              readonly availableMachineTypes: readonly ({
+                /** @description Whether the template is available on this machine type. */
+                readonly isAvailable: boolean;
+                /** @description The label of the machine type. */
+                readonly machineTypeLabel: string;
+              })[];
+              /** @description The default size of the template in gigabytes. */
+              readonly defaultSizeGb: number;
+              /**
+               * Format: date-time
+               * @description The date the template was created.
+               */
+              readonly dtCreated: Date;
+              /** @description The date the shared drive was deleted. */
+              readonly dtDeleted?: (Record<string, never> | Date) | null;
+              /** @description The ID of the template. */
+              readonly id: string;
+              /** @description The name of the template. */
+              readonly name: string;
+              /** @description The operating system installed on the template. */
+              readonly operatingSystemLabel: string;
+              /** @description The ID of the parent machine. */
+              readonly parentMachineId: string;
+              /** @description The region the template is in. */
+              readonly region: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Create template
+   * @description Create a template for a machine.
+   */
+  "customTemplates-create": {
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The ID of the machine to create a template from. */
+          readonly machineId: string;
+          /** @description The name of the template. */
+          readonly name: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The template. */
+            readonly data: {
+              /** @description The type of agent installed on the template. */
+              readonly agentType: string;
+              /** @description The machine types the template is available on. */
+              readonly availableMachineTypes: readonly ({
+                /** @description Whether the template is available on this machine type. */
+                readonly isAvailable: boolean;
+                /** @description The label of the machine type. */
+                readonly machineTypeLabel: string;
+              })[];
+              /** @description The default size of the template in gigabytes. */
+              readonly defaultSizeGb: number;
+              /**
+               * Format: date-time
+               * @description The date the template was created.
+               */
+              readonly dtCreated: Date;
+              /** @description The date the shared drive was deleted. */
+              readonly dtDeleted?: (Record<string, never> | Date) | null;
+              /** @description The ID of the template. */
+              readonly id: string;
+              /** @description The name of the template. */
+              readonly name: string;
+              /** @description The operating system installed on the template. */
+              readonly operatingSystemLabel: string;
+              /** @description The ID of the parent machine. */
+              readonly parentMachineId: string;
+              /** @description The region the template is in. */
+              readonly region: string;
+            };
+            /** @description The machine event to poll for the async operation. */
+            readonly event: {
+              /**
+               * Format: date-time
+               * @description The date the event was created.
+               */
+              readonly dtCreated: Date;
+              /**
+               * Format: date-time
+               * @description The date the event was finished.
+               */
+              readonly dtFinished: Date;
+              /**
+               * Format: date-time
+               * @description The date the event was started.
+               */
+              readonly dtStarted: Date;
+              /** @description The error message of the event, if any. */
+              readonly error: string | null;
+              /** @description The ID of the event. */
+              readonly id: string;
+              /** @description The ID of the machine the event is for. */
+              readonly machineId: string | null;
+              /**
+               * @description The name of the event, e.g. "create".
+               * @enum {string}
+               */
+              readonly name:
+                | "bill-sessions"
+                | "bill-upgrade"
+                | "create"
+                | "deactivate"
+                | "restart"
+                | "snapshot-create"
+                | "snapshot-delete"
+                | "snapshot-restore"
+                | "start"
+                | "stop"
+                | "template-create"
+                | "template-delete"
+                | "template-distribute"
+                | "template-import"
+                | "vm-migrate"
+                | "vm-shutdown-force"
+                | "vm-upgrade";
+              /**
+               * @description The state of the event, e.g. "done".
+               * @enum {string}
+               */
+              readonly state:
+                | "new"
+                | "in progress"
+                | "done"
+                | "error"
+                | "cancelled";
+            };
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Get a template
+   * @description Fetches a single template by ID.
+   */
+  "customTemplates-get": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the template to fetch. */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The type of agent installed on the template. */
+            readonly agentType: string;
+            /** @description The machine types the template is available on. */
+            readonly availableMachineTypes: readonly ({
+              /** @description Whether the template is available on this machine type. */
+              readonly isAvailable: boolean;
+              /** @description The label of the machine type. */
+              readonly machineTypeLabel: string;
+            })[];
+            /** @description The default size of the template in gigabytes. */
+            readonly defaultSizeGb: number;
+            /**
+             * Format: date-time
+             * @description The date the template was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the shared drive was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the template. */
+            readonly id: string;
+            /** @description The name of the template. */
+            readonly name: string;
+            /** @description The operating system installed on the template. */
+            readonly operatingSystemLabel: string;
+            /** @description The ID of the parent machine. */
+            readonly parentMachineId: string;
+            /** @description The region the template is in. */
+            readonly region: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Update a template
+   * @description Updates a single template by ID.
+   */
+  "customTemplates-update": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the template to update. */
+        id: string;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": {
+          /** @description The name of the template. */
+          readonly name: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The type of agent installed on the template. */
+            readonly agentType: string;
+            /** @description The machine types the template is available on. */
+            readonly availableMachineTypes: readonly ({
+              /** @description Whether the template is available on this machine type. */
+              readonly isAvailable: boolean;
+              /** @description The label of the machine type. */
+              readonly machineTypeLabel: string;
+            })[];
+            /** @description The default size of the template in gigabytes. */
+            readonly defaultSizeGb: number;
+            /**
+             * Format: date-time
+             * @description The date the template was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the shared drive was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the template. */
+            readonly id: string;
+            /** @description The name of the template. */
+            readonly name: string;
+            /** @description The operating system installed on the template. */
+            readonly operatingSystemLabel: string;
+            /** @description The ID of the parent machine. */
+            readonly parentMachineId: string;
+            /** @description The region the template is in. */
+            readonly region: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * Delete template
+   * @description Delete a template.
+   */
+  "customTemplates-delete": {
+    parameters: {
+      readonly path: {
+        /** @description The ID of the template to delete. */
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description The type of agent installed on the template. */
+            readonly agentType: string;
+            /** @description The machine types the template is available on. */
+            readonly availableMachineTypes: readonly ({
+              /** @description Whether the template is available on this machine type. */
+              readonly isAvailable: boolean;
+              /** @description The label of the machine type. */
+              readonly machineTypeLabel: string;
+            })[];
+            /** @description The default size of the template in gigabytes. */
+            readonly defaultSizeGb: number;
+            /**
+             * Format: date-time
+             * @description The date the template was created.
+             */
+            readonly dtCreated: Date;
+            /** @description The date the shared drive was deleted. */
+            readonly dtDeleted?: (Record<string, never> | Date) | null;
+            /** @description The ID of the template. */
+            readonly id: string;
+            /** @description The name of the template. */
+            readonly name: string;
+            /** @description The operating system installed on the template. */
+            readonly operatingSystemLabel: string;
+            /** @description The ID of the parent machine. */
+            readonly parentMachineId: string;
+            /** @description The region the template is in. */
+            readonly region: string;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
    * List datasets
    * @description List datasets
    */
@@ -8271,7 +8612,10 @@ export interface operations {
           readonly autoSnapshotSaveCount?: number;
           /** @description The disk size in gigabytes. */
           readonly diskSize: number;
-          /** @description Whether to email the password. */
+          /**
+           * @description Whether to email the password.
+           * @default true
+           */
           readonly emailPassword?: boolean;
           /** @description Whether to enable NVLink. */
           readonly enableNvlink?: boolean;
@@ -10315,7 +10659,7 @@ export interface operations {
     readonly requestBody: {
       readonly content: {
         readonly "application/json": {
-          readonly clusterId: string;
+          readonly clusterId?: string;
           readonly command?: string;
           readonly container?: string;
           readonly isPublic: boolean;
@@ -10511,6 +10855,64 @@ export interface operations {
              * @default null
              */
             readonly token?: string | null;
+          };
+        };
+      };
+      default: components["responses"]["error"];
+    };
+  };
+  /**
+   * List OS templates
+   * @description Fetches a list of OS templates.
+   */
+  "osTemplates-list": {
+    parameters: {
+      readonly query: {
+        /** @description Fetch the next page of results after this cursor. */
+        after?: string;
+        /** @description The number of items to fetch after this page. */
+        limit?: number;
+        /** @description Order results by one of these fields. */
+        orderBy?: "name";
+        /** @description The order to sort the results by. */
+        order?: "asc" | "desc";
+        name?: string;
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        content: {
+          readonly "application/json": {
+            /** @description Whether there are more pages of results available. */
+            readonly hasMore: boolean;
+            /** @description The items on this page. */
+            readonly items: readonly ({
+              /** @description The type of agent installed on the template. */
+              readonly agentType: string;
+              /** @description The machine types the template is available on. */
+              readonly availableMachineTypes: readonly ({
+                /** @description Whether the template is available on this machine type. */
+                readonly isAvailable: boolean;
+                /** @description The label of the machine type. */
+                readonly machineTypeLabel: string;
+              })[];
+              /** @description The default size of the template in gigabytes. */
+              readonly defaultSizeGb: number | null;
+              /**
+               * Format: date-time
+               * @description The date the template was created.
+               */
+              readonly dtCreated: Date;
+              /** @description The ID of the template. */
+              readonly id: string;
+              /** @description The name of the template. */
+              readonly name: string;
+              /** @description The operating system installed on the template. */
+              readonly operatingSystemLabel: string;
+            })[];
+            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
+            readonly nextPage?: string;
           };
         };
       };
@@ -15221,367 +15623,6 @@ export interface operations {
             readonly isAdmin: boolean;
             /** @description Whether the user is the owner of the team */
             readonly isOwner: boolean;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * List templates
-   * @description Fetches a list of templates.
-   */
-  "templates-list": {
-    parameters: {
-      readonly query: {
-        /** @description Fetch the next page of results after this cursor. */
-        after?: string;
-        /** @description The number of items to fetch after this page. */
-        limit?: number;
-        /** @description Order results by one of these fields. */
-        orderBy?: "dtCreated" | "name";
-        /** @description The order to sort the results by. */
-        order?: "asc" | "desc";
-        name?: string;
-        machineId?: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description Whether there are more pages of results available. */
-            readonly hasMore: boolean;
-            /** @description The items on this page. */
-            readonly items: readonly ({
-              /** @description The type of agent installed on the template. */
-              readonly agentType: string;
-              /** @description The machine types the template is available on. */
-              readonly availableMachineTypes: readonly ({
-                /** @description Whether the template is available on this machine type. */
-                readonly isAvailable: boolean;
-                /** @description The label of the machine type. */
-                readonly machineTypeLabel: string;
-              })[];
-              /** @description The default size of the template in gigabytes. */
-              readonly defaultSizeGb: number;
-              /**
-               * Format: date-time
-               * @description The date the template was created.
-               */
-              readonly dtCreated: Date;
-              /** @description The date the shared drive was deleted. */
-              readonly dtDeleted?: (Record<string, never> | Date) | null;
-              /** @description The ID of the template. */
-              readonly id: string;
-              /**
-               * @description Whether the template is public.
-               * @default false
-               */
-              readonly isPublic?: boolean;
-              /** @description The name of the template. */
-              readonly name: string;
-              /** @description The operating system installed on the template. */
-              readonly operatingSystemLabel: string;
-              /** @description The ID of the parent machine. */
-              readonly parentMachineId: string;
-              /** @description The region the template is in. Public templates are in all regions. */
-              readonly region: string;
-            })[];
-            /** @description The cursor required to fetch the next page of results. i.e. `?after=nextPage`. This is `null` when there is no next page. */
-            readonly nextPage?: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Create template
-   * @description Create a template for a machine.
-   */
-  "templates-create": {
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The ID of the machine to create a template from. */
-          readonly machineId: string;
-          /** @description The name of the template. */
-          readonly name: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The template. */
-            readonly data: {
-              /** @description The type of agent installed on the template. */
-              readonly agentType: string;
-              /** @description The machine types the template is available on. */
-              readonly availableMachineTypes: readonly ({
-                /** @description Whether the template is available on this machine type. */
-                readonly isAvailable: boolean;
-                /** @description The label of the machine type. */
-                readonly machineTypeLabel: string;
-              })[];
-              /** @description The default size of the template in gigabytes. */
-              readonly defaultSizeGb: number;
-              /**
-               * Format: date-time
-               * @description The date the template was created.
-               */
-              readonly dtCreated: Date;
-              /** @description The date the shared drive was deleted. */
-              readonly dtDeleted?: (Record<string, never> | Date) | null;
-              /** @description The ID of the template. */
-              readonly id: string;
-              /**
-               * @description Whether the template is public.
-               * @default false
-               */
-              readonly isPublic?: boolean;
-              /** @description The name of the template. */
-              readonly name: string;
-              /** @description The operating system installed on the template. */
-              readonly operatingSystemLabel: string;
-              /** @description The ID of the parent machine. */
-              readonly parentMachineId: string;
-              /** @description The region the template is in. Public templates are in all regions. */
-              readonly region: string;
-            };
-            /** @description The machine event to poll for the async operation. */
-            readonly event: {
-              /**
-               * Format: date-time
-               * @description The date the event was created.
-               */
-              readonly dtCreated: Date;
-              /**
-               * Format: date-time
-               * @description The date the event was finished.
-               */
-              readonly dtFinished: Date;
-              /**
-               * Format: date-time
-               * @description The date the event was started.
-               */
-              readonly dtStarted: Date;
-              /** @description The error message of the event, if any. */
-              readonly error: string | null;
-              /** @description The ID of the event. */
-              readonly id: string;
-              /** @description The ID of the machine the event is for. */
-              readonly machineId: string | null;
-              /**
-               * @description The name of the event, e.g. "create".
-               * @enum {string}
-               */
-              readonly name:
-                | "bill-sessions"
-                | "bill-upgrade"
-                | "create"
-                | "deactivate"
-                | "restart"
-                | "snapshot-create"
-                | "snapshot-delete"
-                | "snapshot-restore"
-                | "start"
-                | "stop"
-                | "template-create"
-                | "template-delete"
-                | "template-distribute"
-                | "template-import"
-                | "vm-migrate"
-                | "vm-shutdown-force"
-                | "vm-upgrade";
-              /**
-               * @description The state of the event, e.g. "done".
-               * @enum {string}
-               */
-              readonly state:
-                | "new"
-                | "in progress"
-                | "done"
-                | "error"
-                | "cancelled";
-            };
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Get a template
-   * @description Fetches a single template by ID.
-   */
-  "templates-get": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the template to fetch. */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The type of agent installed on the template. */
-            readonly agentType: string;
-            /** @description The machine types the template is available on. */
-            readonly availableMachineTypes: readonly ({
-              /** @description Whether the template is available on this machine type. */
-              readonly isAvailable: boolean;
-              /** @description The label of the machine type. */
-              readonly machineTypeLabel: string;
-            })[];
-            /** @description The default size of the template in gigabytes. */
-            readonly defaultSizeGb: number;
-            /**
-             * Format: date-time
-             * @description The date the template was created.
-             */
-            readonly dtCreated: Date;
-            /** @description The date the shared drive was deleted. */
-            readonly dtDeleted?: (Record<string, never> | Date) | null;
-            /** @description The ID of the template. */
-            readonly id: string;
-            /**
-             * @description Whether the template is public.
-             * @default false
-             */
-            readonly isPublic?: boolean;
-            /** @description The name of the template. */
-            readonly name: string;
-            /** @description The operating system installed on the template. */
-            readonly operatingSystemLabel: string;
-            /** @description The ID of the parent machine. */
-            readonly parentMachineId: string;
-            /** @description The region the template is in. Public templates are in all regions. */
-            readonly region: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Update a template
-   * @description Updates a single template by ID.
-   */
-  "templates-update": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the template to update. */
-        id: string;
-      };
-    };
-    readonly requestBody: {
-      readonly content: {
-        readonly "application/json": {
-          /** @description The name of the template. */
-          readonly name: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The type of agent installed on the template. */
-            readonly agentType: string;
-            /** @description The machine types the template is available on. */
-            readonly availableMachineTypes: readonly ({
-              /** @description Whether the template is available on this machine type. */
-              readonly isAvailable: boolean;
-              /** @description The label of the machine type. */
-              readonly machineTypeLabel: string;
-            })[];
-            /** @description The default size of the template in gigabytes. */
-            readonly defaultSizeGb: number;
-            /**
-             * Format: date-time
-             * @description The date the template was created.
-             */
-            readonly dtCreated: Date;
-            /** @description The date the shared drive was deleted. */
-            readonly dtDeleted?: (Record<string, never> | Date) | null;
-            /** @description The ID of the template. */
-            readonly id: string;
-            /**
-             * @description Whether the template is public.
-             * @default false
-             */
-            readonly isPublic?: boolean;
-            /** @description The name of the template. */
-            readonly name: string;
-            /** @description The operating system installed on the template. */
-            readonly operatingSystemLabel: string;
-            /** @description The ID of the parent machine. */
-            readonly parentMachineId: string;
-            /** @description The region the template is in. Public templates are in all regions. */
-            readonly region: string;
-          };
-        };
-      };
-      default: components["responses"]["error"];
-    };
-  };
-  /**
-   * Delete template
-   * @description Delete a template.
-   */
-  "templates-delete": {
-    parameters: {
-      readonly path: {
-        /** @description The ID of the template to delete. */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful response */
-      200: {
-        content: {
-          readonly "application/json": {
-            /** @description The type of agent installed on the template. */
-            readonly agentType: string;
-            /** @description The machine types the template is available on. */
-            readonly availableMachineTypes: readonly ({
-              /** @description Whether the template is available on this machine type. */
-              readonly isAvailable: boolean;
-              /** @description The label of the machine type. */
-              readonly machineTypeLabel: string;
-            })[];
-            /** @description The default size of the template in gigabytes. */
-            readonly defaultSizeGb: number;
-            /**
-             * Format: date-time
-             * @description The date the template was created.
-             */
-            readonly dtCreated: Date;
-            /** @description The date the shared drive was deleted. */
-            readonly dtDeleted?: (Record<string, never> | Date) | null;
-            /** @description The ID of the template. */
-            readonly id: string;
-            /**
-             * @description Whether the template is public.
-             * @default false
-             */
-            readonly isPublic?: boolean;
-            /** @description The name of the template. */
-            readonly name: string;
-            /** @description The operating system installed on the template. */
-            readonly operatingSystemLabel: string;
-            /** @description The ID of the parent machine. */
-            readonly parentMachineId: string;
-            /** @description The region the template is in. Public templates are in all regions. */
-            readonly region: string;
           };
         };
       };
