@@ -1,11 +1,10 @@
 import { asserts } from "../../../lib/asserts.ts";
 import { loading } from "../../../lib/loading.ts";
-import { input } from "../../../prompts/input.ts";
-import { args, command, flags, z } from "../../../zcli.ts";
+import { command, flag, flags } from "../../../zcli.ts";
 import { dataTable } from "../../../lib/data-table.ts";
 import { fields } from "../../../flags.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
-import { templates } from "../../../api/templates.ts";
+import { customTemplates } from "../../../api/templates.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -14,37 +13,38 @@ import { defaultFields } from "../mod.ts";
  */
 const subCommands: ReturnType<typeof command>[] = [];
 
-export const del = command("delete", {
-  short: "Delete a template",
+export const create = command("create", {
+  short: "Create a custom template",
   long: `
-    Delete a template from a team.
+    Create a custom template from a machine.
   `,
   commands: subCommands,
-  args: args().tuple([
-    z.string().describe("The ID of the template to delete"),
-  ]).optional(),
   flags: flags({
     fields,
-  }),
+  }).merge(flags({
+    "name": flag({
+      aliases: ["n"],
+      short: "The name of the custom template",
+    }).string(),
+    "machine-id": flag({
+      aliases: ["m"],
+      short: "The ID of the machine to create a custom template from",
+    }).string(),
+  })),
   // We use command metadata in the `persistentPreRun` function to check if a
   // command requires an API key. If it does, we'll check to see if one is
   // set. If not, we'll throw an error.
   meta: {
     requireApiKey: true,
+    requireInGoodStanding: true,
   },
 }).run(
-  async function* ({ args, flags }) {
-    let [id] = args;
-
-    if (!id) {
-      id = await input("ID:", {
-        filter: (v) => !!v.sequence.match(/[a-zA-Z0-9_-]/),
-      });
-      asserts(id, "A template ID is required");
-    }
-
+  async function* ({ flags }) {
     const response = await loading(
-      templates.delete({ id }),
+      customTemplates.create({
+        name: flags.name,
+        machineId: flags["machine-id"],
+      }),
     );
 
     asserts(response.ok, response);

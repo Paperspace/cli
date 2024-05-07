@@ -4,8 +4,7 @@ import { dataTable } from "../../../lib/data-table.ts";
 import { loading } from "../../../lib/loading.ts";
 import * as psFlags from "../../../flags.ts";
 import { pickJson } from "../../../lib/pick-json.ts";
-import { config } from "../../../config.ts";
-import { templates } from "../../../api/templates.ts";
+import { osTemplates } from "../../../api/templates.ts";
 import { defaultFields } from "../mod.ts";
 
 /**
@@ -15,25 +14,17 @@ import { defaultFields } from "../mod.ts";
 const subCommands: ReturnType<typeof command>[] = [];
 
 export const list = command("list", {
-  short: "List templates.",
+  short: "List OS templates.",
   long: ({ root }) => `
-    List templates in your team.
+    List OS templates.
 
     Pick a subset of fields to display:
     \`\`\`
-    ${root.name} template list -F name -F dtModified
+    ${root.name} os-template list -F name
     \`\`\`
   `,
   commands: subCommands,
   flags: psFlags.paginator.merge(flags({
-    "machine-id": flag({
-      aliases: ["m"],
-      short: "The ID of the machine the event is for",
-      long: `
-      The ID of the machine the event is for. If not specified, all events
-      will be returned.
-    `,
-    }).ostring(),
     "name": flag({
       aliases: ["n"],
       short: "Filter by name.",
@@ -47,15 +38,12 @@ export const list = command("list", {
   },
 }).run(
   async function* ({ flags }) {
-    const team = await config.get("team");
-    asserts(team, "You must be in a team to list templates.");
     const result = await loading(
-      templates.list({
+      osTemplates.list({
         limit: flags.limit,
         after: flags.after,
-        orderBy: "dtCreated",
+        orderBy: "name",
         order: flags.asc ? "asc" : undefined,
-        machineId: flags["machine-id"],
         name: flags.name,
       }),
       { enabled: !flags.json },
