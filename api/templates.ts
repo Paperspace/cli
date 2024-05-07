@@ -1,8 +1,12 @@
 import { client } from "./client.ts";
 
-export const templates = {
-  create: client("/templates").post,
-  get: client("/templates/{id}").get,
-  list: client("/templates").get,
-  delete: client("/templates/{id}").delete,
+export const customTemplates = {
+  create: client("/custom-templates").post,
+  get: client("/custom-templates/{id}").get,
+  list: client("/custom-templates").get,
+  delete: client("/custom-templates/{id}").delete,
+};
+
+export const osTemplates = {
+  list: client("/os-templates").get,
 };

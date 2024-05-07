@@ -71,13 +71,13 @@ export class DegitError extends AppError {
 export class ApiClientError extends AppError {
   readonly name = "ApiClientError";
   readonly code: ApiClientErrorCode;
-  readonly issues:
-    components["responses"]["error"]["content"]["application/json"]["issues"];
+  readonly details:
+    components["responses"]["error"]["content"]["application/json"]["details"];
 
   constructor({
     message,
     code,
-    issues,
+    details,
   }:
     & Omit<
       components["responses"]["error"]["content"]["application/json"],
@@ -88,7 +88,7 @@ export class ApiClientError extends AppError {
     }) {
     super({ message, exitCode: 1 });
     this.code = code;
-    this.issues = issues;
+    this.details = details;
   }
 }
 
