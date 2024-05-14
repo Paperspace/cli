@@ -49,4 +49,4 @@ for (const command of json.commands) {
   renderCommand([command.name], command);
 }
 
-await Deno.writeTextFile(".assets/paperspace.md", markdown);
+await Deno.writeTextFile(".assets/pspace.md", markdown);
