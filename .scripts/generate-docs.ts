@@ -1,9 +1,6 @@
 import { app } from "../zcli.ts";
 import { root } from "../commands/mod.ts";
-import {
-  zcliJson,
-  ZcliJsonCommand,
-} from "https://deno.land/x/zcli@1.3.3/zcli-json.ts";
+import { zcliJson, ZcliJsonCommand } from "./zcli-json.ts";
 
 // Read the markdown file adjacent to this script
 const json = await zcliJson(app, root);
@@ -15,18 +12,15 @@ await Deno.writeTextFile(
 );
 
 // Also generate markdown for the CLI
-let markdown = "";
-markdown += "# Paperspace CLI\n\n";
-markdown += json.info.description + "\n\n";
-
-function renderCommand(path: string[], command: ZcliJsonCommand) {
-  markdown += `## ${path.join(" ")}\n\n`;
+async function renderCommand(path: string[], command: ZcliJsonCommand) {
+  let markdown = "";
+  markdown += `# ${path.join(" ")}\n\n`;
   markdown += command.description + "\n\n";
-  markdown += "### Usage\n\n";
+  markdown += "## Usage\n\n";
   markdown += `\`\`\`\n`;
   markdown += `${command.usage}\n`;
   markdown += "\`\`\`\n\n";
-  markdown += "### Flags\n\n";
+  markdown += "## Flags\n\n";
   markdown += "| Name | Aliases | Description | Required |\n";
   markdown += "| --- | --- | --- | --- |\n";
   for (const flag of command.flags) {
@@ -40,13 +34,20 @@ function renderCommand(path: string[], command: ZcliJsonCommand) {
   for (const subcommand of command.commands) {
     markdown += `- [${subcommand.name}](#${subcommand.name})\n`;
   }
+
+  if (path.length >= 2) {
+    await Deno.mkdir(`.assets/${path.slice(0, -1).join("/")}`, {
+      recursive: true,
+    });
+  }
+  await Deno.writeTextFile(`.assets/${path.join("/")}.md`, markdown, {
+    create: true,
+  });
   for (const subcommand of command.commands) {
-    renderCommand([...path, subcommand.name], subcommand);
+    await renderCommand([...path, subcommand.name], subcommand);
   }
 }
 
 for (const command of json.commands) {
-  renderCommand([command.name], command);
+  await renderCommand([command.name], command);
 }
-
-await Deno.writeTextFile(".assets/pspace.md", markdown);
