@@ -1,22 +1,24 @@
 ## pspace init
 
-Create a new Paperspace app. This will create a new directory with a
-default app structure. You can optionally specify a name for the app
-and a template to use. If no template is specified, the default
-template will be used.
+Create a new Paperspace app. This will create a new directory with a default app
+structure. You can optionally specify a name for the app and a template to use.
+If no template is specified, the default template will be used.
 
 Create a new app in the current directory.
+
 ```
 $ pspace init
 ```
 
 Create a new app named "my-app" relative to the current directory.
+
 ```
 $ pspace init my-app
 ```
 
-Create a new app named "my-app" relative to the current directory using
-a template from the Paperspace GitHub organization.
+Create a new app named "my-app" relative to the current directory using a
+template from the Paperspace GitHub organization.
+
 ```
 $ pspace init my-app -t Paperspace/gradio-demo
 ```
@@ -24,17 +26,18 @@ $ pspace init my-app -t Paperspace/gradio-demo
 ### Usage
 
 ```
-  init [arguments] [flags]
+init [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| template | t | A template to use when creating the app. This can be a URL 
-to a git repository or a shorthand template name.
+| Name                                              | Aliases | Description                                                | Required |
+| ------------------------------------------------- | ------- | ---------------------------------------------------------- | -------- |
+| template                                          | t       | A template to use when creating the app. This can be a URL |          |
+| to a git repository or a shorthand template name. |         |                                                            |          |
 
 These templates are equivalent:
+
 ```
 user/repo
 github:user/repo
@@ -43,6 +46,7 @@ https://github.com/user/repo
 ```
 
 Download from GitLab:
+
 ```
 gitlab:user/repo
 git@gitlab.com:user/repo
@@ -50,6 +54,7 @@ https://gitlab.com/user/repo
 ```
 
 Download from Bitbucket
+
 ```
 bitbucket:user/repo
 git@bitbucket.org:user/repo
@@ -57,7 +62,8 @@ https://bitbucket.org/user/repo
 ```
 
 Specify a tag or branch:
-```
+
+````
 user/repo#dev       # branch
 user/repo#v1.2.3    # release tag
 user/repo#1234abcd  # commit hash
@@ -74,4 +80,4 @@ SSH key configured with GitHub, Bitbucket, or GitLab. | false |
 | help | h | Show help for a command | false |
 
 #### Subcommands
-
+````

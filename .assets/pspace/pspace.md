@@ -1,30 +1,30 @@
 ## pspace
 
-A CLI for using the Paperspace API. 
+A CLI for using the Paperspace API.
 
 It allows you to authenticate, launch deployments, do logging, and more.
 
-* Deploy an ML app with the `deployment` command
-* View a deployed app with the `deployment open` command
-* Check the status of a deployment with the `deployment status` command
+- Deploy an ML app with the `deployment` command
+- View a deployed app with the `deployment open` command
+- Check the status of a deployment with the `deployment status` command
 
 Read the full documentation at: https://docs.paperspace.com/
 
 ### Usage
 
 ```
-  pspace [command]
-  pspace [flags]
+pspace [command]
+pspace [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -56,27 +56,28 @@ Read the full documentation at: https://docs.paperspace.com/
 - [up](#up)
 - [upgrade](#upgrade)
 - [version](#version)
+
 ## pspace autoscaling-group
 
-Manage your autoscaling groups. Autoscaling groups enable using
-the Kubernetes cluster-autoscaler to automatically scale your cluster.
-You can also autoscaling groups as a primitive for your own autoscaler.
+Manage your autoscaling groups. Autoscaling groups enable using the Kubernetes
+cluster-autoscaler to automatically scale your cluster. You can also autoscaling
+groups as a primitive for your own autoscaler.
 
 ### Usage
 
 ```
-  autoscaling-group [command]
-  autoscaling-group [flags]
+autoscaling-group [command]
+autoscaling-group [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -86,6 +87,7 @@ You can also autoscaling groups as a primitive for your own autoscaler.
 - [help](#help)
 - [list](#list)
 - [update](#update)
+
 ## pspace autoscaling-group create
 
 Create an autoscaling group.
@@ -93,27 +95,27 @@ Create an autoscaling group.
 ### Usage
 
 ```
-  autoscaling-group create [flags]
+autoscaling-group create [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| name | n | The name of the autoscaling group | true |
-| cluster-id |  | The ID of the cluster | true |
-| machine-type |  | The machine type for the autoscaling group | true |
-| network-id |  | The ID of the network for the autoscaling group | true |
-| template-id |  | The ID of the template for the autoscaling group | true |
-| startup-script-id |  | The ID of the startup script for the autoscaling group | true |
-| max |  | The maximum number of active machines in the autoscaling group | true |
-| min |  | The minimum number of active machines in the autoscaling group | true |
-| provisioning-timeout |  | The timeout for provisioning machines in the autoscaling group, in minutes | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name                 | Aliases | Description                                                                | Required |
+| -------------------- | ------- | -------------------------------------------------------------------------- | -------- |
+| fields               | F       | The fields to include in the response.                                     | false    |
+| name                 | n       | The name of the autoscaling group                                          | true     |
+| cluster-id           |         | The ID of the cluster                                                      | true     |
+| machine-type         |         | The machine type for the autoscaling group                                 | true     |
+| network-id           |         | The ID of the network for the autoscaling group                            | true     |
+| template-id          |         | The ID of the template for the autoscaling group                           | true     |
+| startup-script-id    |         | The ID of the startup script for the autoscaling group                     | true     |
+| max                  |         | The maximum number of active machines in the autoscaling group             | true     |
+| min                  |         | The minimum number of active machines in the autoscaling group             | true     |
+| provisioning-timeout |         | The timeout for provisioning machines in the autoscaling group, in minutes | false    |
+| log-level            | l       | Enable debug logging.                                                      | false    |
+| json                 | j       | Output JSON                                                                | false    |
+| api-key              |         | A Paperspace public API Key used for authenticating requests               | false    |
+| help                 | h       | Show help for a command                                                    | false    |
 
 #### Subcommands
 
@@ -124,18 +126,18 @@ Delete an autoscaling group from a team.
 ### Usage
 
 ```
-  autoscaling-group delete [arguments] [flags]
+autoscaling-group delete [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -146,18 +148,18 @@ Get an autoscaling group from a team.
 ### Usage
 
 ```
-  autoscaling-group get [arguments] [flags]
+autoscaling-group get [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -168,27 +170,29 @@ Show help for a autoscaling-group command
 ### Usage
 
 ```
-  autoscaling-group help [command]
-  autoscaling-group help [arguments] [flags]
+autoscaling-group help [command]
+autoscaling-group help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace autoscaling-group help commands
 
 List autoscaling-group commands
 
 Example:
+
 ```
 $ autoscaling-group help commands commands
 ```
@@ -196,18 +200,18 @@ $ autoscaling-group help commands commands
 ### Usage
 
 ```
-  autoscaling-group help commands [flags]
+autoscaling-group help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -216,6 +220,7 @@ $ autoscaling-group help commands commands
 List autoscaling groups in your team.
 
 Pick a subset of fields to display:
+
 ```
 pspace autoscaling-group list -F name -F dtCreated
 ```
@@ -223,25 +228,25 @@ pspace autoscaling-group list -F name -F dtCreated
 ### Usage
 
 ```
-  autoscaling-group list [flags]
+autoscaling-group list [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| limit |  | The number of items to return in the next page. | false |
-| after |  | The cursor to fetch the next results from. | false |
-| orderBy |  | The field to order items by. | false |
-| asc |  | Whether to order items ascending. | false |
-| desc |  | Whether to order items descending. | false |
-| fields | F | The fields to include in the response. | false |
-| cluster-id |  | Filter by cluster ID. | false |
-| machine-type |  | Filter by machine type. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name         | Aliases | Description                                                  | Required |
+| ------------ | ------- | ------------------------------------------------------------ | -------- |
+| limit        |         | The number of items to return in the next page.              | false    |
+| after        |         | The cursor to fetch the next results from.                   | false    |
+| orderBy      |         | The field to order items by.                                 | false    |
+| asc          |         | Whether to order items ascending.                            | false    |
+| desc         |         | Whether to order items descending.                           | false    |
+| fields       | F       | The fields to include in the response.                       | false    |
+| cluster-id   |         | Filter by cluster ID.                                        | false    |
+| machine-type |         | Filter by machine type.                                      | false    |
+| log-level    | l       | Enable debug logging.                                        | false    |
+| json         | j       | Output JSON                                                  | false    |
+| api-key      |         | A Paperspace public API Key used for authenticating requests | false    |
+| help         | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -252,51 +257,51 @@ Update an autoscaling group.
 ### Usage
 
 ```
-  autoscaling-group update [arguments] [flags]
+autoscaling-group update [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| name | n | The name of the autoscaling group | false |
-| cluster-id |  | The ID of the cluster | false |
-| machine-type |  | The machine type for the autoscaling group | false |
-| network-id |  | The ID of the network for the autoscaling group | false |
-| template-id |  | The ID of the template for the autoscaling group | false |
-| startup-script-id |  | The ID of the startup script for the autoscaling group | false |
-| max |  | The maximum number of active machines in the autoscaling group | false |
-| min |  | The minimum number of active machines in the autoscaling group | false |
-| provisioning-timeout |  | The timeout for provisioning machines in the autoscaling group, in minutes | false |
-| current |  | The desired number of active machines in the autoscaling group | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name                 | Aliases | Description                                                                | Required |
+| -------------------- | ------- | -------------------------------------------------------------------------- | -------- |
+| fields               | F       | The fields to include in the response.                                     | false    |
+| name                 | n       | The name of the autoscaling group                                          | false    |
+| cluster-id           |         | The ID of the cluster                                                      | false    |
+| machine-type         |         | The machine type for the autoscaling group                                 | false    |
+| network-id           |         | The ID of the network for the autoscaling group                            | false    |
+| template-id          |         | The ID of the template for the autoscaling group                           | false    |
+| startup-script-id    |         | The ID of the startup script for the autoscaling group                     | false    |
+| max                  |         | The maximum number of active machines in the autoscaling group             | false    |
+| min                  |         | The minimum number of active machines in the autoscaling group             | false    |
+| provisioning-timeout |         | The timeout for provisioning machines in the autoscaling group, in minutes | false    |
+| current              |         | The desired number of active machines in the autoscaling group             | false    |
+| log-level            | l       | Enable debug logging.                                                      | false    |
+| json                 | j       | Output JSON                                                                | false    |
+| api-key              |         | A Paperspace public API Key used for authenticating requests               | false    |
+| help                 | h       | Show help for a command                                                    | false    |
 
 #### Subcommands
 
 ## pspace completion
 
-Generate an autocompletion script for pspace in the specified shell.
-See each sub-command's help for details on how to use the generated script.
+Generate an autocompletion script for pspace in the specified shell. See each
+sub-command's help for details on how to use the generated script.
 
 ### Usage
 
 ```
-  completion [command]
-  completion [flags]
+completion [command]
+completion [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -304,14 +309,16 @@ See each sub-command's help for details on how to use the generated script.
 - [fish](#fish)
 - [help](#help)
 - [zsh](#zsh)
+
 ## pspace completion bash
 
 Generate the autocompletion script for the bash shell.
 
-This script depends on the `bash-completion` package.
-If it is not installed already, you can install it via your OS's package manager.
+This script depends on the `bash-completion` package. If it is not installed
+already, you can install it via your OS's package manager.
 
 To load completions in your current shell session:
+
 ```
 $ source <(completion bash bash)
 ```
@@ -319,11 +326,13 @@ $ source <(completion bash bash)
 To load completions for every new session, execute once:
 
 Linux:
+
 ```
 $ completion bash bash > /etc/bash_completion.d/pspace
 ```
 
 macOS:
+
 ```
 $ completion bash bash > /usr/local/etc/bash_completion.d/pspace
 ```
@@ -333,17 +342,17 @@ You will need to start a new shell for this setup to take effect.
 ### Usage
 
 ```
-  completion bash [flags]
+completion bash [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -352,11 +361,13 @@ You will need to start a new shell for this setup to take effect.
 Generate the autocompletion script for the fish shell.
 
 To load completions in your current shell session:
+
 ```
 $ completion fish fish | source
 ```
 
 To load completions for every new session, execute once:
+
 ```
 $ completion fish fish > ~/.config/fish/completions/pspace.fish
 ```
@@ -366,18 +377,18 @@ You will need to start a new shell for this setup to take effect.
 ### Usage
 
 ```
-  completion fish [flags]
+completion fish [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| no-descriptions |  | Disable completion descriptions | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name            | Aliases | Description                                                  | Required |
+| --------------- | ------- | ------------------------------------------------------------ | -------- |
+| no-descriptions |         | Disable completion descriptions                              | false    |
+| log-level       | l       | Enable debug logging.                                        | false    |
+| json            | j       | Output JSON                                                  | false    |
+| api-key         |         | A Paperspace public API Key used for authenticating requests | false    |
+| help            | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -388,27 +399,29 @@ Show help for a completion command
 ### Usage
 
 ```
-  completion help [command]
-  completion help [arguments] [flags]
+completion help [command]
+completion help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace completion help commands
 
 List completion commands
 
 Example:
+
 ```
 $ completion help commands commands
 ```
@@ -416,18 +429,18 @@ $ completion help commands commands
 ### Usage
 
 ```
-  completion help commands [flags]
+completion help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -435,8 +448,8 @@ $ completion help commands commands
 
 Generate the autocompletion script for the zsh shell.
 
-If shell completion is not already enabled in your environment you will need
-to enable it.  You can execute the following once:
+If shell completion is not already enabled in your environment you will need to
+enable it. You can execute the following once:
 
 ```
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
@@ -445,16 +458,19 @@ $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 To load completions for every new session, execute once:
 
 Linux:
+
 ```
 $ completion zsh zsh > "${fpath[1]}/_pspace"
 ```
 
 macOS:
+
 ```
 $ completion zsh zsh > /usr/local/share/zsh/site-functions/_pspace
 ```
 
 Oh My Zsh:
+
 ```
 $ completion zsh zsh > ~/.oh-my-zsh/completions/_pspace
 ```
@@ -464,30 +480,31 @@ You will need to start a new shell for this setup to take effect.
 ### Usage
 
 ```
-  completion zsh [flags]
+completion zsh [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| no-descriptions |  | Disable completion descriptions | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name            | Aliases | Description                                                  | Required |
+| --------------- | ------- | ------------------------------------------------------------ | -------- |
+| no-descriptions |         | Disable completion descriptions                              | false    |
+| log-level       | l       | Enable debug logging.                                        | false    |
+| json            | j       | Output JSON                                                  | false    |
+| api-key         |         | A Paperspace public API Key used for authenticating requests | false    |
+| help            | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 ## pspace config
 
-This command manages your Paperspace configuration. You can use it to set, get, and 
-delete configuration values. Running this command without any subcommands will print 
-your current configuration.
+This command manages your Paperspace configuration. You can use it to set, get,
+and delete configuration values. Running this command without any subcommands
+will print your current configuration.
 
-Your configuration is stored in a TOML file at `~/.paperspace/config.toml`. 
+Your configuration is stored in a TOML file at `~/.paperspace/config.toml`.
 
-For example, to set the current team, run: 
+For example, to set the current team, run:
+
 ```
 pspace config set team "my-team"
 ```
@@ -495,18 +512,18 @@ pspace config set team "my-team"
 ### Usage
 
 ```
-  config [command]
-  config [flags]
+config [command]
+config [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -514,6 +531,7 @@ pspace config set team "my-team"
 - [get](#get)
 - [help](#help)
 - [set](#set)
+
 ## pspace config delete
 
 Delete a configuration value.
@@ -521,17 +539,17 @@ Delete a configuration value.
 ### Usage
 
 ```
-  config delete <arguments> [flags]
+config delete <arguments> [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -541,6 +559,7 @@ This command gets a configuration value. You can pass a key to get a specific
 value, or you can pass no arguments to get all configuration values.
 
 For example, to get the current team run:
+
 ```
 pspace config get team
 ```
@@ -548,17 +567,17 @@ pspace config get team
 ### Usage
 
 ```
-  config get [arguments] [flags]
+config get [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -569,27 +588,29 @@ Show help for a config command
 ### Usage
 
 ```
-  config help [command]
-  config help [arguments] [flags]
+config help [command]
+config help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace config help commands
 
 List config commands
 
 Example:
+
 ```
 $ config help commands commands
 ```
@@ -597,18 +618,18 @@ $ config help commands commands
 ### Usage
 
 ```
-  config help commands [flags]
+config help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -619,17 +640,17 @@ Set a configuration value.
 ### Usage
 
 ```
-  config set [arguments] [arguments...] [flags]
+config set [arguments] [arguments...] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -640,43 +661,43 @@ This command opens the Paperspace web console in your browser.
 ### Usage
 
 ```
-  console [flags]
+console [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 ## pspace custom-template
 
-Manage your custom templates. Custom templates are a backup of your
-machine's disk. They can be used to create additional machines. You
-can use them to prepopulate a machine with your desired software stack.
+Manage your custom templates. Custom templates are a backup of your machine's
+disk. They can be used to create additional machines. You can use them to
+prepopulate a machine with your desired software stack.
 
 For more information, see https://docs.paperspace.com/compute/custom-templates.
 
 ### Usage
 
 ```
-  custom-template [command]
-  custom-template [flags]
+custom-template [command]
+custom-template [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -685,6 +706,7 @@ For more information, see https://docs.paperspace.com/compute/custom-templates.
 - [get](#get)
 - [help](#help)
 - [list](#list)
+
 ## pspace custom-template create
 
 Create a custom template from a machine.
@@ -692,20 +714,20 @@ Create a custom template from a machine.
 ### Usage
 
 ```
-  custom-template create [flags]
+custom-template create [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| name | n | The name of the custom template | true |
-| machine-id | m | The ID of the machine to create a custom template from | true |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name       | Aliases | Description                                                  | Required |
+| ---------- | ------- | ------------------------------------------------------------ | -------- |
+| fields     | F       | The fields to include in the response.                       | false    |
+| name       | n       | The name of the custom template                              | true     |
+| machine-id | m       | The ID of the machine to create a custom template from       | true     |
+| log-level  | l       | Enable debug logging.                                        | false    |
+| json       | j       | Output JSON                                                  | false    |
+| api-key    |         | A Paperspace public API Key used for authenticating requests | false    |
+| help       | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -716,18 +738,18 @@ Delete a custom template from a team.
 ### Usage
 
 ```
-  custom-template delete [arguments] [flags]
+custom-template delete [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -738,18 +760,18 @@ Get a custom template from a team.
 ### Usage
 
 ```
-  custom-template get [arguments] [flags]
+custom-template get [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -760,27 +782,29 @@ Show help for a custom-template command
 ### Usage
 
 ```
-  custom-template help [command]
-  custom-template help [arguments] [flags]
+custom-template help [command]
+custom-template help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace custom-template help commands
 
 List custom-template commands
 
 Example:
+
 ```
 $ custom-template help commands commands
 ```
@@ -788,18 +812,18 @@ $ custom-template help commands commands
 ### Usage
 
 ```
-  custom-template help commands [flags]
+custom-template help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -808,6 +832,7 @@ $ custom-template help commands commands
 List custom templates in your team.
 
 Pick a subset of fields to display:
+
 ```
 pspace custom-template list -F name -F dtModified
 ```
@@ -815,26 +840,26 @@ pspace custom-template list -F name -F dtModified
 ### Usage
 
 ```
-  custom-template list [flags]
+custom-template list [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| limit |  | The number of items to return in the next page. | false |
-| after |  | The cursor to fetch the next results from. | false |
-| orderBy |  | The field to order items by. | false |
-| asc |  | Whether to order items ascending. | false |
-| desc |  | Whether to order items descending. | false |
-| fields | F | The fields to include in the response. | false |
-| machine-id | m | The ID of the machine the event is for. If not specified, all events
-will be returned. | false |
-| name | n | Filter by name. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name              | Aliases | Description                                                          | Required |
+| ----------------- | ------- | -------------------------------------------------------------------- | -------- |
+| limit             |         | The number of items to return in the next page.                      | false    |
+| after             |         | The cursor to fetch the next results from.                           | false    |
+| orderBy           |         | The field to order items by.                                         | false    |
+| asc               |         | Whether to order items ascending.                                    | false    |
+| desc              |         | Whether to order items descending.                                   | false    |
+| fields            | F       | The fields to include in the response.                               | false    |
+| machine-id        | m       | The ID of the machine the event is for. If not specified, all events |          |
+| will be returned. | false   |                                                                      |          |
+| name              | n       | Filter by name.                                                      | false    |
+| log-level         | l       | Enable debug logging.                                                | false    |
+| json              | j       | Output JSON                                                          | false    |
+| api-key           |         | A Paperspace public API Key used for authenticating requests         | false    |
+| help              | h       | Show help for a command                                              | false    |
 
 #### Subcommands
 
@@ -847,18 +872,18 @@ For more information, see https://docs.paperspace.com/storage/datasets.
 ### Usage
 
 ```
-  dataset [command]
-  dataset [flags]
+dataset [command]
+dataset [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -869,6 +894,7 @@ For more information, see https://docs.paperspace.com/storage/datasets.
 - [list](#list)
 - [update](#update)
 - [versions](#versions)
+
 ## pspace dataset create
 
 Create a dataset.
@@ -876,22 +902,22 @@ Create a dataset.
 ### Usage
 
 ```
-  dataset create [flags]
+dataset create [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| name | n | The name of the dataset | true |
-| description |  | The description of the dataset | false |
-| storage-provider-id |  | The ID of the storage provider to use for the dataset | false |
-| is-public |  | Whether the dataset is public | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name                | Aliases | Description                                                  | Required |
+| ------------------- | ------- | ------------------------------------------------------------ | -------- |
+| fields              | F       | The fields to include in the response.                       | false    |
+| name                | n       | The name of the dataset                                      | true     |
+| description         |         | The description of the dataset                               | false    |
+| storage-provider-id |         | The ID of the storage provider to use for the dataset        | false    |
+| is-public           |         | Whether the dataset is public                                | false    |
+| log-level           | l       | Enable debug logging.                                        | false    |
+| json                | j       | Output JSON                                                  | false    |
+| api-key             |         | A Paperspace public API Key used for authenticating requests | false    |
+| help                | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -902,18 +928,18 @@ Delete a dataset from a team.
 ### Usage
 
 ```
-  dataset delete [arguments] [flags]
+dataset delete [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -924,18 +950,18 @@ Get a dataset from a team.
 ### Usage
 
 ```
-  dataset get [arguments] [flags]
+dataset get [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -946,27 +972,29 @@ Show help for a dataset command
 ### Usage
 
 ```
-  dataset help [command]
-  dataset help [arguments] [flags]
+dataset help [command]
+dataset help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace dataset help commands
 
 List dataset commands
 
 Example:
+
 ```
 $ dataset help commands commands
 ```
@@ -974,18 +1002,18 @@ $ dataset help commands commands
 ### Usage
 
 ```
-  dataset help commands [flags]
+dataset help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -994,6 +1022,7 @@ $ dataset help commands commands
 List datasets in your team or project.
 
 Pick a subset of fields to display:
+
 ```
 pspace dataset list -F name -F dtModified
 ```
@@ -1001,23 +1030,23 @@ pspace dataset list -F name -F dtModified
 ### Usage
 
 ```
-  dataset list [flags]
+dataset list [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| limit |  | The number of items to return in the next page. | false |
-| after |  | The cursor to fetch the next results from. | false |
-| orderBy |  | The field to order items by. | false |
-| asc |  | Whether to order items ascending. | false |
-| desc |  | Whether to order items descending. | false |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| limit     |         | The number of items to return in the next page.              | false    |
+| after     |         | The cursor to fetch the next results from.                   | false    |
+| orderBy   |         | The field to order items by.                                 | false    |
+| asc       |         | Whether to order items ascending.                            | false    |
+| desc      |         | Whether to order items descending.                           | false    |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1028,20 +1057,20 @@ Update a dataset in a project or team.
 ### Usage
 
 ```
-  dataset update [arguments] [flags]
+dataset update [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| name | n | The name of the dataset | true |
-| description |  | The description of the dataset | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name        | Aliases | Description                                                  | Required |
+| ----------- | ------- | ------------------------------------------------------------ | -------- |
+| fields      | F       | The fields to include in the response.                       | false    |
+| name        | n       | The name of the dataset                                      | true     |
+| description |         | The description of the dataset                               | false    |
+| log-level   | l       | Enable debug logging.                                        | false    |
+| json        | j       | Output JSON                                                  | false    |
+| api-key     |         | A Paperspace public API Key used for authenticating requests | false    |
+| help        | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1054,18 +1083,18 @@ For more information, see https://docs.paperspace.com/storage/datasetVersions.
 ### Usage
 
 ```
-  dataset versions [command]
-  dataset versions [flags]
+dataset versions [command]
+dataset versions [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1075,6 +1104,7 @@ For more information, see https://docs.paperspace.com/storage/datasetVersions.
 - [help](#help)
 - [list](#list)
 - [update](#update)
+
 ## pspace dataset versions create
 
 Create a dataset version. This command will prompt you for an ID if you don't
@@ -1083,65 +1113,65 @@ provide one.
 ### Usage
 
 ```
-  dataset versions create [arguments] [arguments] [flags]
+dataset versions create [arguments] [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| tags |  | The tags for the version, comma-delimited | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| tags      |         | The tags for the version, comma-delimited                    | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 ## pspace dataset versions delete
 
-Delete a dataset version from a team. This command will prompt you for an ID
-if you don't provide one.
+Delete a dataset version from a team. This command will prompt you for an ID if
+you don't provide one.
 
 ### Usage
 
 ```
-  dataset versions delete [arguments] [arguments] [flags]
+dataset versions delete [arguments] [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 ## pspace dataset versions get
 
-Get a dataset version from a team. This command will prompt you for an ID
-if you don't provide one.
+Get a dataset version from a team. This command will prompt you for an ID if you
+don't provide one.
 
 ### Usage
 
 ```
-  dataset versions get [arguments] [arguments] [flags]
+dataset versions get [arguments] [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1152,27 +1182,29 @@ Show help for a versions command
 ### Usage
 
 ```
-  dataset versions help [command]
-  dataset versions help [arguments] [flags]
+dataset versions help [command]
+dataset versions help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace dataset versions help commands
 
 List versions commands
 
 Example:
+
 ```
 $ dataset versions help commands commands
 ```
@@ -1180,18 +1212,18 @@ $ dataset versions help commands commands
 ### Usage
 
 ```
-  dataset versions help commands [flags]
+dataset versions help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -1200,6 +1232,7 @@ $ dataset versions help commands commands
 List dataset versions in your team or project.
 
 Pick a subset of fields to display:
+
 ```
 pspace dataset versions list <dataset-id> -F name -F dtModified
 ```
@@ -1207,23 +1240,23 @@ pspace dataset versions list <dataset-id> -F name -F dtModified
 ### Usage
 
 ```
-  dataset versions list [arguments] [flags]
+dataset versions list [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| limit |  | The number of items to return in the next page. | false |
-| after |  | The cursor to fetch the next results from. | false |
-| orderBy |  | The field to order items by. | false |
-| asc |  | Whether to order items ascending. | false |
-| desc |  | Whether to order items descending. | false |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| limit     |         | The number of items to return in the next page.              | false    |
+| after     |         | The cursor to fetch the next results from.                   | false    |
+| orderBy   |         | The field to order items by.                                 | false    |
+| asc       |         | Whether to order items ascending.                            | false    |
+| desc      |         | Whether to order items descending.                           | false    |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1234,20 +1267,20 @@ Update a dataset version in a project or team.
 ### Usage
 
 ```
-  dataset versions update [arguments] [arguments] [flags]
+dataset versions update [arguments] [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| message | m | The description of the dataset version | true |
-| tags |  | The tags for the version, comma-delimited | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| message   | m       | The description of the dataset version                       | true     |
+| tags      |         | The tags for the version, comma-delimited                    | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1258,18 +1291,18 @@ Effortlessly deploy ML apps to Paperspace.
 ### Usage
 
 ```
-  deployment [command]
-  deployment [flags]
+deployment [command]
+deployment [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1278,6 +1311,7 @@ Effortlessly deploy ML apps to Paperspace.
 - [help](#help)
 - [list](#list)
 - [up](#up)
+
 ## pspace deployment delete
 
 Delete a deployment by its ID. If you don't provide an ID, this command will
@@ -1290,30 +1324,31 @@ pspace deployment delete 123e4567-e89b-12d3-a456-426614174000
 ### Usage
 
 ```
-  deployment delete [arguments] [flags]
+deployment delete [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 ## pspace deployment get
 
-Get a deployment by its ID. If you don't provide an ID, this command will
-prompt you for one based on the deployments you have access to.
+Get a deployment by its ID. If you don't provide an ID, this command will prompt
+you for one based on the deployments you have access to.
 
 ```
 pspace deployment get 123e4567-e89b-12d3-a456-426614174000
 ```
 
 Pick a subset of fields to display:
+
 ```
 pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 ```
@@ -1321,18 +1356,18 @@ pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 ### Usage
 
 ```
-  deployment get [arguments] [flags]
+deployment get [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1343,27 +1378,29 @@ Show help for a deployment command
 ### Usage
 
 ```
-  deployment help [command]
-  deployment help [arguments] [flags]
+deployment help [command]
+deployment help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace deployment help commands
 
 List deployment commands
 
 Example:
+
 ```
 $ deployment help commands commands
 ```
@@ -1371,18 +1408,18 @@ $ deployment help commands commands
 ### Usage
 
 ```
-  deployment help commands [flags]
+deployment help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
@@ -1391,6 +1428,7 @@ $ deployment help commands commands
 List deployments in your team.
 
 Pick a subset of fields to display:
+
 ```
 pspace deployment list -F id -F name
 ```
@@ -1398,48 +1436,52 @@ pspace deployment list -F id -F name
 ### Usage
 
 ```
-  deployment list [flags]
+deployment list [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| limit |  | The number of items to return in the next page. | false |
-| after |  | The cursor to fetch the next results from. | false |
-| orderBy |  | The field to order items by. | false |
-| asc |  | Whether to order items ascending. | false |
-| desc |  | Whether to order items descending. | false |
-| fields | F | The fields to include in the response. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| limit     |         | The number of items to return in the next page.              | false    |
+| after     |         | The cursor to fetch the next results from.                   | false    |
+| orderBy   |         | The field to order items by.                                 | false    |
+| asc       |         | Whether to order items ascending.                            | false    |
+| desc      |         | Whether to order items descending.                           | false    |
+| fields    | F       | The fields to include in the response.                       | false    |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 ## pspace deployment up
 
-This will create a new deployment for your app or update it if it already exists. 
-You can optionally specify a path to a config file. If no config file is specified, 
-the default config file paths will be tried.
+This will create a new deployment for your app or update it if it already
+exists. You can optionally specify a path to a config file. If no config file is
+specified, the default config file paths will be tried.
 
 Create a new deployment for the app in the current directory.
+
 ```
 $ pspace deployment create
 ```
 
 Create a new deployment using a config file.
+
 ```
 $ pspace deployment create -c paperspace.json
 ```
 
 Create a new deployment for an app in a different directory.
+
 ```
 $ pspace deployment create --cwd ../my-app
 ```
 
 Create a new deployment for an app in a specific project.
+
 ```
 $ pspace deployment create --project-id 1234
 ```
@@ -1447,14 +1489,14 @@ $ pspace deployment create --project-id 1234
 ### Usage
 
 ```
-  deployment up [flags]
+deployment up [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| config | c | The path to the config file. Defaults to our default config file paths.
+| Name   | Aliases | Description                                                             | Required |
+| ------ | ------- | ----------------------------------------------------------------------- | -------- |
+| config | c       | The path to the config file. Defaults to our default config file paths. |          |
 
 The default config file paths are in order of precedence:
 
@@ -1467,39 +1509,38 @@ The default config file paths are in order of precedence:
 - `.paperspace/app.yml`
 - `.paperspace/app.json`
 - `.paperspace/app.jsonc`
-- `.paperspace/app.toml` | false |
-| project-id | p | The ID of the project to deploy to. | false |
-| cwd |  | The directory to deploy the app from. Defaults to the current directory. | false |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+- `.paperspace/app.toml` | false | | project-id | p | The ID of the project to
+  deploy to. | false | | cwd | | The directory to deploy the app from. Defaults
+  to the current directory. | false | | log-level | l | Enable debug logging. |
+  false | | json | j | Output JSON | false | | api-key | | A Paperspace public
+  API Key used for authenticating requests | false | | help | h | Show help for
+  a command | false |
 
 #### Subcommands
 
 ## pspace docs
 
-This command opens the Paperspace documentation in your browser.
-You can optionally pass an argument that will take you to a specific 
-docs page.
+This command opens the Paperspace documentation in your browser. You can
+optionally pass an argument that will take you to a specific docs page.
 
 Valid pages are:
-  - `d`, `deployment`
+
+- `d`, `deployment`
 
 ### Usage
 
 ```
-  docs [arguments] [flags]
+docs [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
@@ -1510,27 +1551,29 @@ Show help for a pspace command
 ### Usage
 
 ```
-  help [command]
-  help [arguments] [flags]
+help [command]
+help [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
 
 - [commands](#commands)
+
 ## pspace help commands
 
 List pspace commands
 
 Example:
+
 ```
 $ help commands commands
 ```
@@ -1538,40 +1581,42 @@ $ help commands commands
 ### Usage
 
 ```
-  help commands [flags]
+help commands [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
-| all | a | Show all commands, including hidden ones | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
+| all       | a       | Show all commands, including hidden ones                     | false    |
 
 #### Subcommands
 
 ## pspace init
 
-Create a new Paperspace app. This will create a new directory with a
-default app structure. You can optionally specify a name for the app
-and a template to use. If no template is specified, the default
-template will be used.
+Create a new Paperspace app. This will create a new directory with a default app
+structure. You can optionally specify a name for the app and a template to use.
+If no template is specified, the default template will be used.
 
 Create a new app in the current directory.
+
 ```
 $ pspace init
 ```
 
 Create a new app named "my-app" relative to the current directory.
+
 ```
 $ pspace init my-app
 ```
 
-Create a new app named "my-app" relative to the current directory using
-a template from the Paperspace GitHub organization.
+Create a new app named "my-app" relative to the current directory using a
+template from the Paperspace GitHub organization.
+
 ```
 $ pspace init my-app -t Paperspace/gradio-demo
 ```
@@ -1579,17 +1624,18 @@ $ pspace init my-app -t Paperspace/gradio-demo
 ### Usage
 
 ```
-  init [arguments] [flags]
+init [arguments] [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| template | t | A template to use when creating the app. This can be a URL 
-to a git repository or a shorthand template name.
+| Name                                              | Aliases | Description                                                | Required |
+| ------------------------------------------------- | ------- | ---------------------------------------------------------- | -------- |
+| template                                          | t       | A template to use when creating the app. This can be a URL |          |
+| to a git repository or a shorthand template name. |         |                                                            |          |
 
 These templates are equivalent:
+
 ```
 user/repo
 github:user/repo
@@ -1598,6 +1644,7 @@ https://github.com/user/repo
 ```
 
 Download from GitLab:
+
 ```
 gitlab:user/repo
 git@gitlab.com:user/repo
@@ -1605,6 +1652,7 @@ https://gitlab.com/user/repo
 ```
 
 Download from Bitbucket
+
 ```
 bitbucket:user/repo
 git@bitbucket.org:user/repo
@@ -1612,7 +1660,8 @@ https://bitbucket.org/user/repo
 ```
 
 Specify a tag or branch:
-```
+
+````
 user/repo#dev       # branch
 user/repo#v1.2.3    # release tag
 user/repo#1234abcd  # commit hash
@@ -1635,11 +1684,11 @@ SSH key configured with GitHub, Bitbucket, or GitLab. | false |
 Log in to the CLI using your Paperspace API key or by opening the web console.
 
 ### Usage
+````
+
+login [arguments] [flags]
 
 ```
-  login [arguments] [flags]
-```
-
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1656,11 +1705,11 @@ Log in to the CLI using your Paperspace API key or by opening the web console.
 Log out of the CLI for the current team, a specific team, or all teams.
 
 ### Usage
-
-```
-  logout [arguments...] [flags]
 ```
 
+logout [arguments...] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1680,12 +1729,11 @@ Manage your Paperspace machines.
 For more information, see  https://docs.paperspace.com/machines.
 
 ### Usage
-
-```
-  machine [command]
-  machine [flags]
 ```
 
+machine [command] machine [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1711,11 +1759,11 @@ For more information, see  https://docs.paperspace.com/machines.
 Create a machine.
 
 ### Usage
-
-```
-  machine create [flags]
 ```
 
+machine create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1754,11 +1802,11 @@ Create a machine.
 Delete a machine from a team.
 
 ### Usage
-
-```
-  machine delete [arguments] [flags]
 ```
 
+machine delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1776,11 +1824,11 @@ Delete a machine from a team.
 Get a machine from a team.
 
 ### Usage
-
-```
-  machine get [arguments] [flags]
 ```
 
+machine get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1798,12 +1846,11 @@ Get a machine from a team.
 Show help for a machine command
 
 ### Usage
-
-```
-  machine help [command]
-  machine help [arguments] [flags]
 ```
 
+machine help [command] machine help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1822,15 +1869,16 @@ List machine commands
 
 Example:
 ```
+
 $ machine help commands commands
-```
 
+```
 ### Usage
-
-```
-  machine help commands [flags]
 ```
 
+machine help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1849,15 +1897,16 @@ List machines in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace machine list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  machine list [flags]
 ```
 
+machine list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1884,11 +1933,11 @@ pspace machine list -F name -F dtModified
 Restart a machine from a team.
 
 ### Usage
-
-```
-  machine restart [arguments] [flags]
 ```
 
+machine restart [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1906,11 +1955,11 @@ Restart a machine from a team.
 Start a machine from a team.
 
 ### Usage
-
-```
-  machine start [arguments] [flags]
 ```
 
+machine start [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1928,11 +1977,11 @@ Start a machine from a team.
 Stop a machine from a team.
 
 ### Usage
-
-```
-  machine stop [arguments] [flags]
 ```
 
+machine stop [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1950,11 +1999,11 @@ Stop a machine from a team.
 Update a machine's settings.
 
 ### Usage
-
-```
-  machine update [arguments] [flags]
 ```
 
+machine update [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -1990,12 +2039,11 @@ which can be tracked using this command.
 For more information, see https://docs.paperspace.com/machines.
 
 ### Usage
-
-```
-  machine-event [command]
-  machine-event [flags]
 ```
 
+machine-event [command] machine-event [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2015,11 +2063,11 @@ For more information, see https://docs.paperspace.com/machines.
 Get a machine event from a team.
 
 ### Usage
-
-```
-  machine-event get [arguments] [flags]
 ```
 
+machine-event get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2037,12 +2085,11 @@ Get a machine event from a team.
 Show help for a machine-event command
 
 ### Usage
-
-```
-  machine-event help [command]
-  machine-event help [arguments] [flags]
 ```
 
+machine-event help [command] machine-event help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2061,15 +2108,16 @@ List machine-event commands
 
 Example:
 ```
+
 $ machine-event help commands commands
-```
 
+```
 ### Usage
-
-```
-  machine-event help commands [flags]
 ```
 
+machine-event help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2088,15 +2136,16 @@ List machine events in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace machine-event list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  machine-event list [flags]
 ```
 
+machine-event list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2123,12 +2172,11 @@ Manage your Paperspace models.
 For more information, see https://docs.paperspace.com/deploying/models.
 
 ### Usage
-
-```
-  model [command]
-  model [flags]
 ```
 
+model [command] model [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2151,11 +2199,11 @@ Create a new model. This command will prompt you for a name if you don't
 provide one.
 
 ### Usage
-
-```
-  model create [flags]
 ```
 
+model create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2178,11 +2226,11 @@ provide one.
 Delete a model from a team.
 
 ### Usage
-
-```
-  model delete [arguments] [flags]
 ```
 
+model delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2200,11 +2248,11 @@ Delete a model from a team.
 Get a model from a team.
 
 ### Usage
-
-```
-  model get [arguments] [flags]
 ```
 
+model get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2222,12 +2270,11 @@ Get a model from a team.
 Show help for a model command
 
 ### Usage
-
-```
-  model help [command]
-  model help [arguments] [flags]
 ```
 
+model help [command] model help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2246,15 +2293,16 @@ List model commands
 
 Example:
 ```
+
 $ model help commands commands
-```
 
+```
 ### Usage
-
-```
-  model help commands [flags]
 ```
 
+model help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2273,15 +2321,16 @@ List models in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace model list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  model list [flags]
 ```
 
+model list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2307,12 +2356,11 @@ you can use to create a new machine.
 For more information, see https://docs.paperspace.com/compute/os-templates.
 
 ### Usage
-
-```
-  os-template [command]
-  os-template [flags]
 ```
 
+os-template [command] os-template [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2331,12 +2379,11 @@ For more information, see https://docs.paperspace.com/compute/os-templates.
 Show help for a os-template command
 
 ### Usage
-
-```
-  os-template help [command]
-  os-template help [arguments] [flags]
 ```
 
+os-template help [command] os-template help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2355,15 +2402,16 @@ List os-template commands
 
 Example:
 ```
+
 $ os-template help commands commands
-```
 
+```
 ### Usage
-
-```
-  os-template help commands [flags]
 ```
 
+os-template help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2382,15 +2430,16 @@ List OS templates.
 
 Pick a subset of fields to display:
 ```
+
 pspace os-template list -F name
-```
 
+```
 ### Usage
-
-```
-  os-template list [flags]
 ```
 
+os-template list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2418,12 +2467,11 @@ and direct connections to your on-premise network.
 For more information, see https://docs.paperspace.com/networking/private-networks.
 
 ### Usage
-
-```
-  private-network [command]
-  private-network [flags]
 ```
 
+private-network [command] private-network [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2445,11 +2493,11 @@ For more information, see https://docs.paperspace.com/networking/private-network
 Create a private network.
 
 ### Usage
-
-```
-  private-network create [flags]
 ```
 
+private-network create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2469,11 +2517,11 @@ Create a private network.
 Delete a private network from a team.
 
 ### Usage
-
-```
-  private-network delete [arguments] [flags]
 ```
 
+private-network delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2491,11 +2539,11 @@ Delete a private network from a team.
 Get a private network from a team.
 
 ### Usage
-
-```
-  private-network get [arguments] [flags]
 ```
 
+private-network get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2513,12 +2561,11 @@ Get a private network from a team.
 Show help for a private-network command
 
 ### Usage
-
-```
-  private-network help [command]
-  private-network help [arguments] [flags]
 ```
 
+private-network help [command] private-network help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2537,15 +2584,16 @@ List private-network commands
 
 Example:
 ```
+
 $ private-network help commands commands
-```
 
+```
 ### Usage
-
-```
-  private-network help commands [flags]
 ```
 
+private-network help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2564,15 +2612,16 @@ List private networks in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace private-network list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  private-network list [flags]
 ```
 
+private-network list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2597,12 +2646,11 @@ pspace private-network list -F name -F dtModified
 Manage your Paperspace projects.
 
 ### Usage
-
-```
-  project [command]
-  project [flags]
 ```
 
+project [command] project [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2627,11 +2675,11 @@ Create a new project. This command will prompt you for a name if you don't
 provide one.
 
 ### Usage
-
-```
-  project create [arguments] [flags]
 ```
 
+project create [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2650,11 +2698,11 @@ Delete a project by its ID. If you don't provide an ID, this command will
 prompt you for one based on the projects you have access to.
 
 ### Usage
-
-```
-  project delete [arguments] [flags]
 ```
 
+project delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2673,11 +2721,11 @@ Get a project by its ID. If you don't provide an ID, this command will
 prompt you for one based on the projects you have access to.
 
 ### Usage
-
-```
-  project get [arguments] [flags]
 ```
 
+project get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2695,12 +2743,11 @@ prompt you for one based on the projects you have access to.
 Show help for a project command
 
 ### Usage
-
-```
-  project help [command]
-  project help [arguments] [flags]
 ```
 
+project help [command] project help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2719,15 +2766,16 @@ List project commands
 
 Example:
 ```
+
 $ project help commands commands
-```
 
+```
 ### Usage
-
-```
-  project help commands [flags]
 ```
 
+project help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2748,25 +2796,28 @@ when communicating with the Paperspace API.
 
 Link a project to the current directory.
 ```
-$ pspace link
-```
 
+$ pspace link
+
+```
 Link a project to a different directory.
 ```
-$ pspace link --cwd ../my-app
-```
 
+$ pspace link --cwd ../my-app
+
+```
 Link a project and specify a project ID.
 ```
+
 $ pspace link pzwf2g05ubegj
-```
 
+```
 ### Usage
-
-```
-  project link [arguments] [flags]
 ```
 
+project link [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2785,15 +2836,16 @@ List projects in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace project list -F id -F name -F dtCreated
-```
 
+```
 ### Usage
-
-```
-  project list [flags]
 ```
 
+project list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2817,15 +2869,16 @@ Update an existing project.
 
 Example:
 ```
+
 pspace project update psukfyemho7 --name my-cool-project
-```
 
+```
 ### Usage
-
-```
-  pspace project update <project-id> [flags]
 ```
 
+pspace project update <project-id> [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2846,12 +2899,11 @@ Manage your public IPs. Public IP addresses allow your compute machines to be re
 For more information, see https://docs.paperspace.com/networking/public-ips.
 
 ### Usage
-
-```
-  public-ip [command]
-  public-ip [flags]
 ```
 
+public-ip [command] public-ip [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2873,11 +2925,11 @@ For more information, see https://docs.paperspace.com/networking/public-ips.
 Assign a public IP to a machine.
 
 ### Usage
-
-```
-  public-ip assign [arguments] [flags]
 ```
 
+public-ip assign [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2896,11 +2948,11 @@ Assign a public IP to a machine.
 Claim a public IP for a team.
 
 ### Usage
-
-```
-  public-ip claim [flags]
 ```
 
+public-ip claim [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2919,12 +2971,11 @@ Claim a public IP for a team.
 Show help for a public-ip command
 
 ### Usage
-
-```
-  public-ip help [command]
-  public-ip help [arguments] [flags]
 ```
 
+public-ip help [command] public-ip help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2943,15 +2994,16 @@ List public-ip commands
 
 Example:
 ```
+
 $ public-ip help commands commands
-```
 
+```
 ### Usage
-
-```
-  public-ip help commands [flags]
 ```
 
+public-ip help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -2970,15 +3022,16 @@ List public IPs in your team or project.
 
 Pick a subset of fields to display:
 ```
+
 pspace public-ip list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  public-ip list [flags]
 ```
 
+public-ip list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3002,11 +3055,11 @@ pspace public-ip list -F name -F dtModified
 Release a public IP from a team. This will unassign it from its assigned machine, if any.
 
 ### Usage
-
-```
-  public-ip release [arguments] [flags]
 ```
 
+public-ip release [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3034,12 +3087,11 @@ Secrets can be created at the following levels:
 For more information, see https://docs.paperspace.com/secrets.
 
 ### Usage
-
-```
-  secret [command]
-  secret [flags]
 ```
 
+secret [command] secret [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3062,11 +3114,11 @@ For more information, see https://docs.paperspace.com/secrets.
 Create a secret in a project or team.
 
 ### Usage
-
-```
-  secret create [arguments] [arguments] [flags]
 ```
 
+secret create [arguments] [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3091,11 +3143,11 @@ a project. | false |
 Delete a secret from a project or team.
 
 ### Usage
-
-```
-  secret delete [arguments] [flags]
 ```
 
+secret delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3120,11 +3172,11 @@ a project. | false |
 Get a secret from a project or team.
 
 ### Usage
-
-```
-  secret get [arguments] [flags]
 ```
 
+secret get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3150,12 +3202,11 @@ a project. | false |
 Show help for a secret command
 
 ### Usage
-
-```
-  secret help [command]
-  secret help [arguments] [flags]
 ```
 
+secret help [command] secret help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3174,15 +3225,16 @@ List secret commands
 
 Example:
 ```
+
 $ secret help commands commands
-```
 
+```
 ### Usage
-
-```
-  secret help commands [flags]
 ```
 
+secret help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3201,15 +3253,16 @@ List secrets in your team or project.
 
 Pick a subset of fields to display:
 ```
+
 pspace secret list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  secret list [flags]
 ```
 
+secret list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3240,11 +3293,11 @@ a project. | false |
 Update a secret in a project or team.
 
 ### Usage
-
-```
-  secret update [arguments] [arguments] [flags]
 ```
 
+secret update [arguments] [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3273,12 +3326,11 @@ in the same private network.
 For more information, see https://docs.paperspace.com/storage/shared-drives.
 
 ### Usage
-
-```
-  shared-drive [command]
-  shared-drive [flags]
 ```
 
+shared-drive [command] shared-drive [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3300,11 +3352,11 @@ For more information, see https://docs.paperspace.com/storage/shared-drives.
 Create a shared drive.
 
 ### Usage
-
-```
-  shared-drive create [flags]
 ```
 
+shared-drive create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3326,11 +3378,11 @@ Create a shared drive.
 Delete a shared drive from a team.
 
 ### Usage
-
-```
-  shared-drive delete [arguments] [flags]
 ```
 
+shared-drive delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3348,11 +3400,11 @@ Delete a shared drive from a team.
 Get a shared drive from a team.
 
 ### Usage
-
-```
-  shared-drive get [arguments] [flags]
 ```
 
+shared-drive get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3370,12 +3422,11 @@ Get a shared drive from a team.
 Show help for a shared-drive command
 
 ### Usage
-
-```
-  shared-drive help [command]
-  shared-drive help [arguments] [flags]
 ```
 
+shared-drive help [command] shared-drive help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3394,15 +3445,16 @@ List shared-drive commands
 
 Example:
 ```
+
 $ shared-drive help commands commands
-```
 
+```
 ### Usage
-
-```
-  shared-drive help commands [flags]
 ```
 
+shared-drive help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3421,15 +3473,16 @@ List shared drives in your team or project.
 
 Pick a subset of fields to display:
 ```
+
 pspace shared-drive list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  shared-drive list [flags]
 ```
 
+shared-drive list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3454,11 +3507,11 @@ pspace shared-drive list -F name -F dtModified
 This command opens the Paperspace signup page in your browser.
 
 ### Usage
-
-```
-  signup [flags]
 ```
 
+signup [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3479,12 +3532,11 @@ before taking any action that could affect the usability of the machine or its n
 For more information, see https://docs.paperspace.com/storage/snapshots.
 
 ### Usage
-
-```
-  snapshot [command]
-  snapshot [flags]
 ```
 
+snapshot [command] snapshot [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3506,11 +3558,11 @@ For more information, see https://docs.paperspace.com/storage/snapshots.
 Create a snapshot from a machine.
 
 ### Usage
-
-```
-  snapshot create [flags]
 ```
 
+snapshot create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3530,11 +3582,11 @@ Create a snapshot from a machine.
 Delete a snapshot from a team.
 
 ### Usage
-
-```
-  snapshot delete [arguments] [flags]
 ```
 
+snapshot delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3552,12 +3604,11 @@ Delete a snapshot from a team.
 Show help for a snapshot command
 
 ### Usage
-
-```
-  snapshot help [command]
-  snapshot help [arguments] [flags]
 ```
 
+snapshot help [command] snapshot help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3576,15 +3627,16 @@ List snapshot commands
 
 Example:
 ```
+
 $ snapshot help commands commands
-```
 
+```
 ### Usage
-
-```
-  snapshot help commands [flags]
 ```
 
+snapshot help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3603,15 +3655,16 @@ List snapshots in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace snapshot list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  snapshot list [flags]
 ```
 
+snapshot list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3636,11 +3689,11 @@ will be returned. | false |
 Restore a machine to a snapshot.
 
 ### Usage
-
-```
-  snapshot restore [arguments] [flags]
 ```
 
+snapshot restore [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3660,12 +3713,11 @@ Manage your startup scripts. Startup scripts allow you to configure a machine
 on first boot or on every boot.
 
 ### Usage
-
-```
-  startup-script [command]
-  startup-script [flags]
 ```
 
+startup-script [command] startup-script [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3690,11 +3742,11 @@ on first boot or on every boot.
 Assign a startup script to a machine.
 
 ### Usage
-
-```
-  startup-script assign [arguments] [flags]
 ```
 
+startup-script assign [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3713,11 +3765,11 @@ Assign a startup script to a machine.
 Create a startup script.
 
 ### Usage
-
-```
-  startup-script create [flags]
 ```
 
+startup-script create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3738,11 +3790,11 @@ Create a startup script.
 Delete a startup script from a team.
 
 ### Usage
-
-```
-  startup-script delete [arguments] [flags]
 ```
 
+startup-script delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3760,11 +3812,11 @@ Delete a startup script from a team.
 Get a startup script from a team.
 
 ### Usage
-
-```
-  startup-script get [arguments] [flags]
 ```
 
+startup-script get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3782,12 +3834,11 @@ Get a startup script from a team.
 Show help for a startup-script command
 
 ### Usage
-
-```
-  startup-script help [command]
-  startup-script help [arguments] [flags]
 ```
 
+startup-script help [command] startup-script help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3806,15 +3857,16 @@ List startup-script commands
 
 Example:
 ```
+
 $ startup-script help commands commands
-```
 
+```
 ### Usage
-
-```
-  startup-script help commands [flags]
 ```
 
+startup-script help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3833,15 +3885,16 @@ List startup scripts in your team.
 
 Pick a subset of fields to display:
 ```
+
 pspace startup-script list -F name -F dtCreated
-```
 
+```
 ### Usage
-
-```
-  startup-script list [flags]
 ```
 
+startup-script list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3865,11 +3918,11 @@ pspace startup-script list -F name -F dtCreated
 Unassign a startup script from a machine.
 
 ### Usage
-
-```
-  startup-script unassign [arguments] [flags]
 ```
 
+startup-script unassign [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3888,11 +3941,11 @@ Unassign a startup script from a machine.
 Update a startup script.
 
 ### Usage
-
-```
-  startup-script update [arguments] [flags]
 ```
 
+startup-script update [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3916,12 +3969,11 @@ Manage your storage providers.
 For more information, see https://docs.paperspace.com/storage/storageProviders.
 
 ### Usage
-
-```
-  storage-provider [command]
-  storage-provider [flags]
 ```
 
+storage-provider [command] storage-provider [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3944,12 +3996,11 @@ For more information, see https://docs.paperspace.com/storage/storageProviders.
 Create a storage provider.
 
 ### Usage
-
-```
-  storage-provider create [command]
-  storage-provider create [flags]
 ```
 
+storage-provider create [command] storage-provider create [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3968,12 +4019,12 @@ Create a storage provider.
 Show help for a create command
 
 ### Usage
-
-```
-  storage-provider create help [command]
-  storage-provider create help [arguments] [flags]
 ```
 
+storage-provider create help [command] storage-provider create help [arguments]
+[flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -3992,15 +4043,16 @@ List create commands
 
 Example:
 ```
+
 $ storage-provider create help commands commands
-```
 
+```
 ### Usage
-
-```
-  storage-provider create help commands [flags]
 ```
 
+storage-provider create help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4018,11 +4070,11 @@ $ storage-provider create help commands commands
 Create an S3 storage provider.
 
 ### Usage
-
-```
-  storage-provider create s3 [flags]
 ```
 
+storage-provider create s3 [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4049,11 +4101,11 @@ Create an S3 storage provider.
 Delete a storage provider from a team.
 
 ### Usage
-
-```
-  storage-provider delete [arguments] [flags]
 ```
 
+storage-provider delete [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4071,11 +4123,11 @@ Delete a storage provider from a team.
 Get a storage provider from a team.
 
 ### Usage
-
-```
-  storage-provider get [arguments] [flags]
 ```
 
+storage-provider get [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4093,12 +4145,11 @@ Get a storage provider from a team.
 Show help for a storage-provider command
 
 ### Usage
-
-```
-  storage-provider help [command]
-  storage-provider help [arguments] [flags]
 ```
 
+storage-provider help [command] storage-provider help [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4117,15 +4168,16 @@ List storage-provider commands
 
 Example:
 ```
+
 $ storage-provider help commands commands
-```
 
+```
 ### Usage
-
-```
-  storage-provider help commands [flags]
 ```
 
+storage-provider help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4144,15 +4196,16 @@ List storage providers in your team or project.
 
 Pick a subset of fields to display:
 ```
+
 pspace storage provider list -F name -F dtModified
-```
 
+```
 ### Usage
-
-```
-  storage-provider list [flags]
 ```
 
+storage-provider list [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4175,12 +4228,11 @@ pspace storage provider list -F name -F dtModified
 Update a storage provider.
 
 ### Usage
-
-```
-  storage-provider update [command]
-  storage-provider update [flags]
 ```
 
+storage-provider update [command] storage-provider update [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4199,12 +4251,12 @@ Update a storage provider.
 Show help for a update command
 
 ### Usage
-
-```
-  storage-provider update help [command]
-  storage-provider update help [arguments] [flags]
 ```
 
+storage-provider update help [command] storage-provider update help [arguments]
+[flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4223,15 +4275,16 @@ List update commands
 
 Example:
 ```
+
 $ storage-provider update help commands commands
-```
 
+```
 ### Usage
-
-```
-  storage-provider update help commands [flags]
 ```
 
+storage-provider update help commands [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4249,11 +4302,11 @@ $ storage-provider update help commands commands
 Update an S3 storage provider in a project or team.
 
 ### Usage
-
-```
-  storage-provider update s3 [arguments] [flags]
 ```
 
+storage-provider update s3 [arguments] [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4283,25 +4336,28 @@ config file paths will be tried.
 
 Deploy the app in the current directory.
 ```
-$ pspace up
-```
 
+$ pspace up
+
+```
 Deploy the app using a config file.
 ```
-$ pspace up -c paperspace.json
-```
 
+$ pspace up -c paperspace.json
+
+```
 Deploy an app in a different directory.
 ```
+
 $ pspace up --cwd ../my-app
-```
 
+```
 ### Usage
-
-```
-  up [flags]
 ```
 
+up [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4337,21 +4393,23 @@ If you used a package manager like `brew` to install `pspace`,
 you should use that to upgrade in order to avoid potential permissions 
 issues. For example, for `brew` you can upgrade by running:
 ```
-brew upgrade pspace
-```
 
+brew upgrade pspace
+
+```
 If you installed `pspace` using the install script, you can upgrade by
 running:
 ```
+
 pspace upgrade
-```
 
+```
 ### Usage
-
-```
-  upgrade [flags]
 ```
 
+upgrade [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4368,11 +4426,11 @@ pspace upgrade
 Shows version information command, including version number and build date.
 
 ### Usage
-
-```
-  version [flags]
 ```
 
+version [flags]
+
+```
 ### Flags
 
 | Name | Aliases | Description | Required |
@@ -4383,4 +4441,4 @@ Shows version information command, including version number and build date.
 | help | h | Show help for a command | false |
 
 #### Subcommands
-
+```

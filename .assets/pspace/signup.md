@@ -5,17 +5,16 @@ This command opens the Paperspace signup page in your browser.
 ### Usage
 
 ```
-  signup [flags]
+signup [flags]
 ```
 
 ### Flags
 
-| Name | Aliases | Description | Required |
-| --- | --- | --- | --- |
-| log-level | l | Enable debug logging. | false |
-| json | j | Output JSON | false |
-| api-key |  | A Paperspace public API Key used for authenticating requests | false |
-| help | h | Show help for a command | false |
+| Name      | Aliases | Description                                                  | Required |
+| --------- | ------- | ------------------------------------------------------------ | -------- |
+| log-level | l       | Enable debug logging.                                        | false    |
+| json      | j       | Output JSON                                                  | false    |
+| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
+| help      | h       | Show help for a command                                      | false    |
 
 #### Subcommands
-
