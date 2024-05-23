@@ -1,4 +1,4 @@
-# pspace init
+## pspace init
 
 Create a new Paperspace app. This will create a new directory with a
 default app structure. You can optionally specify a name for the app
@@ -21,13 +21,13 @@ a template from the Paperspace GitHub organization.
 $ pspace init my-app -t Paperspace/gradio-demo
 ```
 
-## Usage
+### Usage
 
 ```
   init [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -73,5 +73,5 @@ SSH key configured with GitHub, Bitbucket, or GitLab. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

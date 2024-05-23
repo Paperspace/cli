@@ -1,14 +1,14 @@
-# pspace console
+## pspace console
 
 This command opens the Paperspace web console in your browser.
 
-## Usage
+### Usage
 
 ```
   console [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -17,5 +17,5 @@ This command opens the Paperspace web console in your browser.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

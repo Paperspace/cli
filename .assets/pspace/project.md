@@ -1,15 +1,15 @@
-# pspace project
+## pspace project
 
 Manage your Paperspace projects.
 
-## Usage
+### Usage
 
 ```
   project [command]
   project [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -18,7 +18,7 @@ Manage your Paperspace projects.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -27,18 +27,18 @@ Manage your Paperspace projects.
 - [link](#link)
 - [list](#list)
 - [update](#update)
-# pspace project create
+## pspace project create
 
 Create a new project. This command will prompt you for a name if you don't
 provide one.
 
-## Usage
+### Usage
 
 ```
   project create [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -48,20 +48,20 @@ provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project delete
+## pspace project delete
 
 Delete a project by its ID. If you don't provide an ID, this command will
 prompt you for one based on the projects you have access to.
 
-## Usage
+### Usage
 
 ```
   project delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -71,20 +71,20 @@ prompt you for one based on the projects you have access to.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project get
+## pspace project get
 
 Get a project by its ID. If you don't provide an ID, this command will
 prompt you for one based on the projects you have access to.
 
-## Usage
+### Usage
 
 ```
   project get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -94,20 +94,20 @@ prompt you for one based on the projects you have access to.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project help
+## pspace project help
 
 Show help for a project command
 
-## Usage
+### Usage
 
 ```
   project help [command]
   project help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -116,10 +116,10 @@ Show help for a project command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace project help commands
+## pspace project help commands
 
 List project commands
 
@@ -128,13 +128,13 @@ Example:
 $ project help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   project help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -144,9 +144,9 @@ $ project help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project link
+## pspace project link
 
 This will link a remote project to a local directory. Commands that
 depend on a project ID will use the project ID of the linked project
@@ -167,13 +167,13 @@ Link a project and specify a project ID.
 $ pspace link pzwf2g05ubegj
 ```
 
-## Usage
+### Usage
 
 ```
   project link [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -183,9 +183,9 @@ $ pspace link pzwf2g05ubegj
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project list
+## pspace project list
 
 List projects in your team.
 
@@ -194,13 +194,13 @@ Pick a subset of fields to display:
 pspace project list -F id -F name -F dtCreated
 ```
 
-## Usage
+### Usage
 
 ```
   project list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -215,9 +215,9 @@ pspace project list -F id -F name -F dtCreated
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project update
+## pspace project update
 
 Update an existing project.
 
@@ -226,13 +226,13 @@ Example:
 pspace project update psukfyemho7 --name my-cool-project
 ```
 
-## Usage
+### Usage
 
 ```
   pspace project update <project-id> [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -243,5 +243,5 @@ pspace project update psukfyemho7 --name my-cool-project
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,17 +1,17 @@
-# pspace machine
+## pspace machine
 
 Manage your Paperspace machines.
 
 For more information, see  https://docs.paperspace.com/machines.
 
-## Usage
+### Usage
 
 ```
   machine [command]
   machine [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ For more information, see  https://docs.paperspace.com/machines.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -31,17 +31,17 @@ For more information, see  https://docs.paperspace.com/machines.
 - [start](#start)
 - [stop](#stop)
 - [update](#update)
-# pspace machine create
+## pspace machine create
 
 Create a machine.
 
-## Usage
+### Usage
 
 ```
   machine create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -72,19 +72,19 @@ Create a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine delete
+## pspace machine delete
 
 Delete a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -94,19 +94,19 @@ Delete a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine get
+## pspace machine get
 
 Get a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -116,20 +116,20 @@ Get a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine help
+## pspace machine help
 
 Show help for a machine command
 
-## Usage
+### Usage
 
 ```
   machine help [command]
   machine help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -138,10 +138,10 @@ Show help for a machine command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace machine help commands
+## pspace machine help commands
 
 List machine commands
 
@@ -150,13 +150,13 @@ Example:
 $ machine help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   machine help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -166,9 +166,9 @@ $ machine help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine list
+## pspace machine list
 
 List machines in your team.
 
@@ -177,13 +177,13 @@ Pick a subset of fields to display:
 pspace machine list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   machine list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -202,19 +202,19 @@ pspace machine list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine restart
+## pspace machine restart
 
 Restart a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine restart [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -224,19 +224,19 @@ Restart a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine start
+## pspace machine start
 
 Start a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine start [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -246,19 +246,19 @@ Start a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine stop
+## pspace machine stop
 
 Stop a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine stop [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -268,19 +268,19 @@ Stop a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine update
+## pspace machine update
 
 Update a machine's settings.
 
-## Usage
+### Usage
 
 ```
   machine update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -304,5 +304,5 @@ Update a machine's settings.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

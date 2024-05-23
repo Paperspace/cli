@@ -1,4 +1,4 @@
-# pspace secret
+## pspace secret
 
 Manage your Paperspace secrets. Secrets are used to store sensitive
 information such as API keys, passwords, and other credentials. Secrets 
@@ -12,14 +12,14 @@ Secrets can be created at the following levels:
 
 For more information, see https://docs.paperspace.com/secrets.
 
-## Usage
+### Usage
 
 ```
   secret [command]
   secret [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ For more information, see https://docs.paperspace.com/secrets.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -36,17 +36,17 @@ For more information, see https://docs.paperspace.com/secrets.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace secret create
+## pspace secret create
 
 Create a secret in a project or team.
 
-## Usage
+### Usage
 
 ```
   secret create [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -63,19 +63,19 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret delete
+## pspace secret delete
 
 Delete a secret from a project or team.
 
-## Usage
+### Usage
 
 ```
   secret delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -92,19 +92,19 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret get
+## pspace secret get
 
 Get a secret from a project or team.
 
-## Usage
+### Usage
 
 ```
   secret get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -122,20 +122,20 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret help
+## pspace secret help
 
 Show help for a secret command
 
-## Usage
+### Usage
 
 ```
   secret help [command]
   secret help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -144,10 +144,10 @@ Show help for a secret command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace secret help commands
+## pspace secret help commands
 
 List secret commands
 
@@ -156,13 +156,13 @@ Example:
 $ secret help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   secret help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -172,9 +172,9 @@ $ secret help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret list
+## pspace secret list
 
 List secrets in your team or project.
 
@@ -183,13 +183,13 @@ Pick a subset of fields to display:
 pspace secret list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   secret list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -212,19 +212,19 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret update
+## pspace secret update
 
 Update a secret in a project or team.
 
-## Usage
+### Usage
 
 ```
   secret update [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -241,5 +241,5 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

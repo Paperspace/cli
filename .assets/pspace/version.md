@@ -1,14 +1,14 @@
-# pspace version
+## pspace version
 
 Shows version information command, including version number and build date.
 
-## Usage
+### Usage
 
 ```
   version [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -17,5 +17,5 @@ Shows version information command, including version number and build date.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

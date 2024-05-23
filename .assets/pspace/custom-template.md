@@ -1,4 +1,4 @@
-# pspace custom-template
+## pspace custom-template
 
 Manage your custom templates. Custom templates are a backup of your
 machine's disk. They can be used to create additional machines. You
@@ -6,14 +6,14 @@ can use them to prepopulate a machine with your desired software stack.
 
 For more information, see https://docs.paperspace.com/compute/custom-templates.
 
-## Usage
+### Usage
 
 ```
   custom-template [command]
   custom-template [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -22,24 +22,24 @@ For more information, see https://docs.paperspace.com/compute/custom-templates.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace custom-template create
+## pspace custom-template create
 
 Create a custom template from a machine.
 
-## Usage
+### Usage
 
 ```
   custom-template create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -51,19 +51,19 @@ Create a custom template from a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template delete
+## pspace custom-template delete
 
 Delete a custom template from a team.
 
-## Usage
+### Usage
 
 ```
   custom-template delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -73,19 +73,19 @@ Delete a custom template from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template get
+## pspace custom-template get
 
 Get a custom template from a team.
 
-## Usage
+### Usage
 
 ```
   custom-template get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -95,20 +95,20 @@ Get a custom template from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template help
+## pspace custom-template help
 
 Show help for a custom-template command
 
-## Usage
+### Usage
 
 ```
   custom-template help [command]
   custom-template help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -117,10 +117,10 @@ Show help for a custom-template command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace custom-template help commands
+## pspace custom-template help commands
 
 List custom-template commands
 
@@ -129,13 +129,13 @@ Example:
 $ custom-template help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   custom-template help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -145,9 +145,9 @@ $ custom-template help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template list
+## pspace custom-template list
 
 List custom templates in your team.
 
@@ -156,13 +156,13 @@ Pick a subset of fields to display:
 pspace custom-template list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   custom-template list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -180,5 +180,5 @@ will be returned. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

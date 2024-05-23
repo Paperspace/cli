@@ -1,17 +1,17 @@
-# pspace model
+## pspace model
 
 Manage your Paperspace models.
 
 For more information, see https://docs.paperspace.com/deploying/models.
 
-## Usage
+### Usage
 
 ```
   model [command]
   model [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -20,25 +20,25 @@ For more information, see https://docs.paperspace.com/deploying/models.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace model create
+## pspace model create
 
 Create a new model. This command will prompt you for a name if you don't
 provide one.
 
-## Usage
+### Usage
 
 ```
   model create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -53,19 +53,19 @@ provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model delete
+## pspace model delete
 
 Delete a model from a team.
 
-## Usage
+### Usage
 
 ```
   model delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -75,19 +75,19 @@ Delete a model from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model get
+## pspace model get
 
 Get a model from a team.
 
-## Usage
+### Usage
 
 ```
   model get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -97,20 +97,20 @@ Get a model from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model help
+## pspace model help
 
 Show help for a model command
 
-## Usage
+### Usage
 
 ```
   model help [command]
   model help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -119,10 +119,10 @@ Show help for a model command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace model help commands
+## pspace model help commands
 
 List model commands
 
@@ -131,13 +131,13 @@ Example:
 $ model help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   model help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -147,9 +147,9 @@ $ model help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model list
+## pspace model list
 
 List models in your team.
 
@@ -158,13 +158,13 @@ Pick a subset of fields to display:
 pspace model list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   model list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -179,5 +179,5 @@ pspace model list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

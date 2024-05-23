@@ -1,17 +1,17 @@
-# pspace autoscaling-group
+## pspace autoscaling-group
 
 Manage your autoscaling groups. Autoscaling groups enable using
 the Kubernetes cluster-autoscaler to automatically scale your cluster.
 You can also autoscaling groups as a primitive for your own autoscaler.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group [command]
   autoscaling-group [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ You can also autoscaling groups as a primitive for your own autoscaler.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -28,17 +28,17 @@ You can also autoscaling groups as a primitive for your own autoscaler.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace autoscaling-group create
+## pspace autoscaling-group create
 
 Create an autoscaling group.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -57,19 +57,19 @@ Create an autoscaling group.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group delete
+## pspace autoscaling-group delete
 
 Delete an autoscaling group from a team.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -79,19 +79,19 @@ Delete an autoscaling group from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group get
+## pspace autoscaling-group get
 
 Get an autoscaling group from a team.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -101,20 +101,20 @@ Get an autoscaling group from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group help
+## pspace autoscaling-group help
 
 Show help for a autoscaling-group command
 
-## Usage
+### Usage
 
 ```
   autoscaling-group help [command]
   autoscaling-group help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -123,10 +123,10 @@ Show help for a autoscaling-group command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace autoscaling-group help commands
+## pspace autoscaling-group help commands
 
 List autoscaling-group commands
 
@@ -135,13 +135,13 @@ Example:
 $ autoscaling-group help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   autoscaling-group help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -151,9 +151,9 @@ $ autoscaling-group help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group list
+## pspace autoscaling-group list
 
 List autoscaling groups in your team.
 
@@ -162,13 +162,13 @@ Pick a subset of fields to display:
 pspace autoscaling-group list -F name -F dtCreated
 ```
 
-## Usage
+### Usage
 
 ```
   autoscaling-group list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -185,19 +185,19 @@ pspace autoscaling-group list -F name -F dtCreated
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group update
+## pspace autoscaling-group update
 
 Update an autoscaling group.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -217,5 +217,5 @@ Update an autoscaling group.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

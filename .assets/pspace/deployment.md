@@ -1,15 +1,15 @@
-# pspace deployment
+## pspace deployment
 
 Effortlessly deploy ML apps to Paperspace.
 
-## Usage
+### Usage
 
 ```
   deployment [command]
   deployment [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -18,14 +18,14 @@ Effortlessly deploy ML apps to Paperspace.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
 - [up](#up)
-# pspace deployment delete
+## pspace deployment delete
 
 Delete a deployment by its ID. If you don't provide an ID, this command will
 prompt you for one based on the deployments you have access to.
@@ -34,13 +34,13 @@ prompt you for one based on the deployments you have access to.
 pspace deployment delete 123e4567-e89b-12d3-a456-426614174000
 ```
 
-## Usage
+### Usage
 
 ```
   deployment delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -49,9 +49,9 @@ pspace deployment delete 123e4567-e89b-12d3-a456-426614174000
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment get
+## pspace deployment get
 
 Get a deployment by its ID. If you don't provide an ID, this command will
 prompt you for one based on the deployments you have access to.
@@ -65,13 +65,13 @@ Pick a subset of fields to display:
 pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 ```
 
-## Usage
+### Usage
 
 ```
   deployment get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -81,20 +81,20 @@ pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment help
+## pspace deployment help
 
 Show help for a deployment command
 
-## Usage
+### Usage
 
 ```
   deployment help [command]
   deployment help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -103,10 +103,10 @@ Show help for a deployment command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace deployment help commands
+## pspace deployment help commands
 
 List deployment commands
 
@@ -115,13 +115,13 @@ Example:
 $ deployment help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   deployment help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -131,9 +131,9 @@ $ deployment help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment list
+## pspace deployment list
 
 List deployments in your team.
 
@@ -142,13 +142,13 @@ Pick a subset of fields to display:
 pspace deployment list -F id -F name
 ```
 
-## Usage
+### Usage
 
 ```
   deployment list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -163,9 +163,9 @@ pspace deployment list -F id -F name
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment up
+## pspace deployment up
 
 This will create a new deployment for your app or update it if it already exists. 
 You can optionally specify a path to a config file. If no config file is specified, 
@@ -191,13 +191,13 @@ Create a new deployment for an app in a specific project.
 $ pspace deployment create --project-id 1234
 ```
 
-## Usage
+### Usage
 
 ```
   deployment up [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -222,5 +222,5 @@ The default config file paths are in order of precedence:
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,14 +1,14 @@
-# pspace logout
+## pspace logout
 
 Log out of the CLI for the current team, a specific team, or all teams.
 
-## Usage
+### Usage
 
 ```
   logout [arguments...] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -18,5 +18,5 @@ Log out of the CLI for the current team, a specific team, or all teams.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

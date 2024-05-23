@@ -1,4 +1,4 @@
-# pspace upgrade
+## pspace upgrade
 
 This command upgrades [1mpspace[22m to the latest version.
 
@@ -15,13 +15,13 @@ running:
 pspace upgrade
 ```
 
-## Usage
+### Usage
 
 ```
   upgrade [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -30,5 +30,5 @@ pspace upgrade
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

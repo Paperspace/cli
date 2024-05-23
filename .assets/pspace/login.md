@@ -1,14 +1,14 @@
-# pspace login
+## pspace login
 
 Log in to the CLI using your Paperspace API key or by opening the web console.
 
-## Usage
+### Usage
 
 ```
   login [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -17,5 +17,5 @@ Log in to the CLI using your Paperspace API key or by opening the web console.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

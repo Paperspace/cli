@@ -1,17 +1,17 @@
-# pspace dataset
+## pspace dataset
 
 Manage your datasets.
 
 For more information, see https://docs.paperspace.com/storage/datasets.
 
-## Usage
+### Usage
 
 ```
   dataset [command]
   dataset [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ For more information, see https://docs.paperspace.com/storage/datasets.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -29,17 +29,17 @@ For more information, see https://docs.paperspace.com/storage/datasets.
 - [list](#list)
 - [update](#update)
 - [versions](#versions)
-# pspace dataset create
+## pspace dataset create
 
 Create a dataset.
 
-## Usage
+### Usage
 
 ```
   dataset create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -53,19 +53,19 @@ Create a dataset.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset delete
+## pspace dataset delete
 
 Delete a dataset from a team.
 
-## Usage
+### Usage
 
 ```
   dataset delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -75,19 +75,19 @@ Delete a dataset from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset get
+## pspace dataset get
 
 Get a dataset from a team.
 
-## Usage
+### Usage
 
 ```
   dataset get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -97,20 +97,20 @@ Get a dataset from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset help
+## pspace dataset help
 
 Show help for a dataset command
 
-## Usage
+### Usage
 
 ```
   dataset help [command]
   dataset help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -119,10 +119,10 @@ Show help for a dataset command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace dataset help commands
+## pspace dataset help commands
 
 List dataset commands
 
@@ -131,13 +131,13 @@ Example:
 $ dataset help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   dataset help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -147,9 +147,9 @@ $ dataset help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset list
+## pspace dataset list
 
 List datasets in your team or project.
 
@@ -158,13 +158,13 @@ Pick a subset of fields to display:
 pspace dataset list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   dataset list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -179,19 +179,19 @@ pspace dataset list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset update
+## pspace dataset update
 
 Update a dataset in a project or team.
 
-## Usage
+### Usage
 
 ```
   dataset update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -203,22 +203,22 @@ Update a dataset in a project or team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions
+## pspace dataset versions
 
 Manage your dataset versions.
 
 For more information, see https://docs.paperspace.com/storage/datasetVersions.
 
-## Usage
+### Usage
 
 ```
   dataset versions [command]
   dataset versions [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -227,7 +227,7 @@ For more information, see https://docs.paperspace.com/storage/datasetVersions.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -235,18 +235,18 @@ For more information, see https://docs.paperspace.com/storage/datasetVersions.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace dataset versions create
+## pspace dataset versions create
 
 Create a dataset version. This command will prompt you for an ID if you don't
 provide one.
 
-## Usage
+### Usage
 
 ```
   dataset versions create [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -257,20 +257,20 @@ provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions delete
+## pspace dataset versions delete
 
 Delete a dataset version from a team. This command will prompt you for an ID
 if you don't provide one.
 
-## Usage
+### Usage
 
 ```
   dataset versions delete [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -280,20 +280,20 @@ if you don't provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions get
+## pspace dataset versions get
 
 Get a dataset version from a team. This command will prompt you for an ID
 if you don't provide one.
 
-## Usage
+### Usage
 
 ```
   dataset versions get [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -303,20 +303,20 @@ if you don't provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions help
+## pspace dataset versions help
 
 Show help for a versions command
 
-## Usage
+### Usage
 
 ```
   dataset versions help [command]
   dataset versions help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -325,10 +325,10 @@ Show help for a versions command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace dataset versions help commands
+## pspace dataset versions help commands
 
 List versions commands
 
@@ -337,13 +337,13 @@ Example:
 $ dataset versions help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   dataset versions help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -353,9 +353,9 @@ $ dataset versions help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions list
+## pspace dataset versions list
 
 List dataset versions in your team or project.
 
@@ -364,13 +364,13 @@ Pick a subset of fields to display:
 pspace dataset versions list <dataset-id> -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   dataset versions list [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -385,19 +385,19 @@ pspace dataset versions list <dataset-id> -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions update
+## pspace dataset versions update
 
 Update a dataset version in a project or team.
 
-## Usage
+### Usage
 
 ```
   dataset versions update [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -409,5 +409,5 @@ Update a dataset version in a project or team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

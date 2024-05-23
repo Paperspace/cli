@@ -1,4 +1,4 @@
-# pspace private-network
+## pspace private-network
 
 Manage your private networks. Private networks are logically isolated networks
 for your machines and shared drives. They can also be used for site-to-site VPNs
@@ -6,14 +6,14 @@ and direct connections to your on-premise network.
 
 For more information, see https://docs.paperspace.com/networking/private-networks.
 
-## Usage
+### Usage
 
 ```
   private-network [command]
   private-network [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -22,24 +22,24 @@ For more information, see https://docs.paperspace.com/networking/private-network
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace private-network create
+## pspace private-network create
 
 Create a private network.
 
-## Usage
+### Usage
 
 ```
   private-network create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -51,19 +51,19 @@ Create a private network.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network delete
+## pspace private-network delete
 
 Delete a private network from a team.
 
-## Usage
+### Usage
 
 ```
   private-network delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -73,19 +73,19 @@ Delete a private network from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network get
+## pspace private-network get
 
 Get a private network from a team.
 
-## Usage
+### Usage
 
 ```
   private-network get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -95,20 +95,20 @@ Get a private network from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network help
+## pspace private-network help
 
 Show help for a private-network command
 
-## Usage
+### Usage
 
 ```
   private-network help [command]
   private-network help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -117,10 +117,10 @@ Show help for a private-network command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace private-network help commands
+## pspace private-network help commands
 
 List private-network commands
 
@@ -129,13 +129,13 @@ Example:
 $ private-network help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   private-network help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -145,9 +145,9 @@ $ private-network help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network list
+## pspace private-network list
 
 List private networks in your team.
 
@@ -156,13 +156,13 @@ Pick a subset of fields to display:
 pspace private-network list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   private-network list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -179,5 +179,5 @@ pspace private-network list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,4 +1,4 @@
-# pspace up
+## pspace up
 
 This will upsert an app config and deploy your app to Paperspace. You can optionally 
 specify a path to a config file. If no config file is specified, the default
@@ -19,13 +19,13 @@ Deploy an app in a different directory.
 $ pspace up --cwd ../my-app
 ```
 
-## Usage
+### Usage
 
 ```
   up [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -50,5 +50,5 @@ The default config file paths are in order of precedence:
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,16 +1,16 @@
-# pspace completion
+## pspace completion
 
 Generate an autocompletion script for pspace in the specified shell.
 See each sub-command's help for details on how to use the generated script.
 
-## Usage
+### Usage
 
 ```
   completion [command]
   completion [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -19,13 +19,13 @@ See each sub-command's help for details on how to use the generated script.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [bash](#bash)
 - [fish](#fish)
 - [help](#help)
 - [zsh](#zsh)
-# pspace completion bash
+## pspace completion bash
 
 Generate the autocompletion script for the bash shell.
 
@@ -51,13 +51,13 @@ $ completion bash bash > /usr/local/etc/bash_completion.d/pspace
 
 You will need to start a new shell for this setup to take effect.
 
-## Usage
+### Usage
 
 ```
   completion bash [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -66,9 +66,9 @@ You will need to start a new shell for this setup to take effect.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion fish
+## pspace completion fish
 
 Generate the autocompletion script for the fish shell.
 
@@ -84,13 +84,13 @@ $ completion fish fish > ~/.config/fish/completions/pspace.fish
 
 You will need to start a new shell for this setup to take effect.
 
-## Usage
+### Usage
 
 ```
   completion fish [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -100,20 +100,20 @@ You will need to start a new shell for this setup to take effect.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion help
+## pspace completion help
 
 Show help for a completion command
 
-## Usage
+### Usage
 
 ```
   completion help [command]
   completion help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -122,10 +122,10 @@ Show help for a completion command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace completion help commands
+## pspace completion help commands
 
 List completion commands
 
@@ -134,13 +134,13 @@ Example:
 $ completion help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   completion help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -150,9 +150,9 @@ $ completion help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion zsh
+## pspace completion zsh
 
 Generate the autocompletion script for the zsh shell.
 
@@ -182,13 +182,13 @@ $ completion zsh zsh > ~/.oh-my-zsh/completions/_pspace
 
 You will need to start a new shell for this setup to take effect.
 
-## Usage
+### Usage
 
 ```
   completion zsh [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -198,5 +198,5 @@ You will need to start a new shell for this setup to take effect.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,4 +1,4 @@
-# pspace
+## pspace
 
 A CLI for using the Paperspace API. 
 
@@ -10,14 +10,14 @@ It allows you to authenticate, launch deployments, do logging, and more.
 
 Read the full documentation at: https://docs.paperspace.com/
 
-## Usage
+### Usage
 
 ```
   pspace [command]
   pspace [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ Read the full documentation at: https://docs.paperspace.com/
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [autoscaling-group](#autoscaling-group)
 - [completion](#completion)
@@ -56,20 +56,20 @@ Read the full documentation at: https://docs.paperspace.com/
 - [up](#up)
 - [upgrade](#upgrade)
 - [version](#version)
-# pspace autoscaling-group
+## pspace autoscaling-group
 
 Manage your autoscaling groups. Autoscaling groups enable using
 the Kubernetes cluster-autoscaler to automatically scale your cluster.
 You can also autoscaling groups as a primitive for your own autoscaler.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group [command]
   autoscaling-group [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -78,7 +78,7 @@ You can also autoscaling groups as a primitive for your own autoscaler.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -86,17 +86,17 @@ You can also autoscaling groups as a primitive for your own autoscaler.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace autoscaling-group create
+## pspace autoscaling-group create
 
 Create an autoscaling group.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -115,19 +115,19 @@ Create an autoscaling group.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group delete
+## pspace autoscaling-group delete
 
 Delete an autoscaling group from a team.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -137,19 +137,19 @@ Delete an autoscaling group from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group get
+## pspace autoscaling-group get
 
 Get an autoscaling group from a team.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -159,20 +159,20 @@ Get an autoscaling group from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group help
+## pspace autoscaling-group help
 
 Show help for a autoscaling-group command
 
-## Usage
+### Usage
 
 ```
   autoscaling-group help [command]
   autoscaling-group help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -181,10 +181,10 @@ Show help for a autoscaling-group command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace autoscaling-group help commands
+## pspace autoscaling-group help commands
 
 List autoscaling-group commands
 
@@ -193,13 +193,13 @@ Example:
 $ autoscaling-group help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   autoscaling-group help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -209,9 +209,9 @@ $ autoscaling-group help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group list
+## pspace autoscaling-group list
 
 List autoscaling groups in your team.
 
@@ -220,13 +220,13 @@ Pick a subset of fields to display:
 pspace autoscaling-group list -F name -F dtCreated
 ```
 
-## Usage
+### Usage
 
 ```
   autoscaling-group list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -243,19 +243,19 @@ pspace autoscaling-group list -F name -F dtCreated
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace autoscaling-group update
+## pspace autoscaling-group update
 
 Update an autoscaling group.
 
-## Usage
+### Usage
 
 ```
   autoscaling-group update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -275,21 +275,21 @@ Update an autoscaling group.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion
+## pspace completion
 
 Generate an autocompletion script for pspace in the specified shell.
 See each sub-command's help for details on how to use the generated script.
 
-## Usage
+### Usage
 
 ```
   completion [command]
   completion [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -298,13 +298,13 @@ See each sub-command's help for details on how to use the generated script.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [bash](#bash)
 - [fish](#fish)
 - [help](#help)
 - [zsh](#zsh)
-# pspace completion bash
+## pspace completion bash
 
 Generate the autocompletion script for the bash shell.
 
@@ -330,13 +330,13 @@ $ completion bash bash > /usr/local/etc/bash_completion.d/pspace
 
 You will need to start a new shell for this setup to take effect.
 
-## Usage
+### Usage
 
 ```
   completion bash [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -345,9 +345,9 @@ You will need to start a new shell for this setup to take effect.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion fish
+## pspace completion fish
 
 Generate the autocompletion script for the fish shell.
 
@@ -363,13 +363,13 @@ $ completion fish fish > ~/.config/fish/completions/pspace.fish
 
 You will need to start a new shell for this setup to take effect.
 
-## Usage
+### Usage
 
 ```
   completion fish [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -379,20 +379,20 @@ You will need to start a new shell for this setup to take effect.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion help
+## pspace completion help
 
 Show help for a completion command
 
-## Usage
+### Usage
 
 ```
   completion help [command]
   completion help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -401,10 +401,10 @@ Show help for a completion command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace completion help commands
+## pspace completion help commands
 
 List completion commands
 
@@ -413,13 +413,13 @@ Example:
 $ completion help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   completion help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -429,9 +429,9 @@ $ completion help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace completion zsh
+## pspace completion zsh
 
 Generate the autocompletion script for the zsh shell.
 
@@ -461,13 +461,13 @@ $ completion zsh zsh > ~/.oh-my-zsh/completions/_pspace
 
 You will need to start a new shell for this setup to take effect.
 
-## Usage
+### Usage
 
 ```
   completion zsh [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -477,9 +477,9 @@ You will need to start a new shell for this setup to take effect.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config
+## pspace config
 
 This command manages your Paperspace configuration. You can use it to set, get, and 
 delete configuration values. Running this command without any subcommands will print 
@@ -492,14 +492,14 @@ For example, to set the current team, run:
 pspace config set team "my-team"
 ```
 
-## Usage
+### Usage
 
 ```
   config [command]
   config [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -508,23 +508,23 @@ pspace config set team "my-team"
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [set](#set)
-# pspace config delete
+## pspace config delete
 
 Delete a configuration value.
 
-## Usage
+### Usage
 
 ```
   config delete <arguments> [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -533,9 +533,9 @@ Delete a configuration value.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config get
+## pspace config get
 
 This command gets a configuration value. You can pass a key to get a specific
 value, or you can pass no arguments to get all configuration values.
@@ -545,13 +545,13 @@ For example, to get the current team run:
 pspace config get team
 ```
 
-## Usage
+### Usage
 
 ```
   config get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -560,20 +560,20 @@ pspace config get team
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config help
+## pspace config help
 
 Show help for a config command
 
-## Usage
+### Usage
 
 ```
   config help [command]
   config help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -582,10 +582,10 @@ Show help for a config command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace config help commands
+## pspace config help commands
 
 List config commands
 
@@ -594,13 +594,13 @@ Example:
 $ config help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   config help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -610,19 +610,19 @@ $ config help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config set
+## pspace config set
 
 Set a configuration value.
 
-## Usage
+### Usage
 
 ```
   config set [arguments] [arguments...] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -631,19 +631,19 @@ Set a configuration value.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace console
+## pspace console
 
 This command opens the Paperspace web console in your browser.
 
-## Usage
+### Usage
 
 ```
   console [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -652,9 +652,9 @@ This command opens the Paperspace web console in your browser.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template
+## pspace custom-template
 
 Manage your custom templates. Custom templates are a backup of your
 machine's disk. They can be used to create additional machines. You
@@ -662,14 +662,14 @@ can use them to prepopulate a machine with your desired software stack.
 
 For more information, see https://docs.paperspace.com/compute/custom-templates.
 
-## Usage
+### Usage
 
 ```
   custom-template [command]
   custom-template [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -678,24 +678,24 @@ For more information, see https://docs.paperspace.com/compute/custom-templates.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace custom-template create
+## pspace custom-template create
 
 Create a custom template from a machine.
 
-## Usage
+### Usage
 
 ```
   custom-template create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -707,19 +707,19 @@ Create a custom template from a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template delete
+## pspace custom-template delete
 
 Delete a custom template from a team.
 
-## Usage
+### Usage
 
 ```
   custom-template delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -729,19 +729,19 @@ Delete a custom template from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template get
+## pspace custom-template get
 
 Get a custom template from a team.
 
-## Usage
+### Usage
 
 ```
   custom-template get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -751,20 +751,20 @@ Get a custom template from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template help
+## pspace custom-template help
 
 Show help for a custom-template command
 
-## Usage
+### Usage
 
 ```
   custom-template help [command]
   custom-template help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -773,10 +773,10 @@ Show help for a custom-template command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace custom-template help commands
+## pspace custom-template help commands
 
 List custom-template commands
 
@@ -785,13 +785,13 @@ Example:
 $ custom-template help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   custom-template help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -801,9 +801,9 @@ $ custom-template help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace custom-template list
+## pspace custom-template list
 
 List custom templates in your team.
 
@@ -812,13 +812,13 @@ Pick a subset of fields to display:
 pspace custom-template list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   custom-template list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -836,22 +836,22 @@ will be returned. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset
+## pspace dataset
 
 Manage your datasets.
 
 For more information, see https://docs.paperspace.com/storage/datasets.
 
-## Usage
+### Usage
 
 ```
   dataset [command]
   dataset [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -860,7 +860,7 @@ For more information, see https://docs.paperspace.com/storage/datasets.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -869,17 +869,17 @@ For more information, see https://docs.paperspace.com/storage/datasets.
 - [list](#list)
 - [update](#update)
 - [versions](#versions)
-# pspace dataset create
+## pspace dataset create
 
 Create a dataset.
 
-## Usage
+### Usage
 
 ```
   dataset create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -893,19 +893,19 @@ Create a dataset.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset delete
+## pspace dataset delete
 
 Delete a dataset from a team.
 
-## Usage
+### Usage
 
 ```
   dataset delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -915,19 +915,19 @@ Delete a dataset from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset get
+## pspace dataset get
 
 Get a dataset from a team.
 
-## Usage
+### Usage
 
 ```
   dataset get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -937,20 +937,20 @@ Get a dataset from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset help
+## pspace dataset help
 
 Show help for a dataset command
 
-## Usage
+### Usage
 
 ```
   dataset help [command]
   dataset help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -959,10 +959,10 @@ Show help for a dataset command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace dataset help commands
+## pspace dataset help commands
 
 List dataset commands
 
@@ -971,13 +971,13 @@ Example:
 $ dataset help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   dataset help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -987,9 +987,9 @@ $ dataset help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset list
+## pspace dataset list
 
 List datasets in your team or project.
 
@@ -998,13 +998,13 @@ Pick a subset of fields to display:
 pspace dataset list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   dataset list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1019,19 +1019,19 @@ pspace dataset list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset update
+## pspace dataset update
 
 Update a dataset in a project or team.
 
-## Usage
+### Usage
 
 ```
   dataset update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1043,22 +1043,22 @@ Update a dataset in a project or team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions
+## pspace dataset versions
 
 Manage your dataset versions.
 
 For more information, see https://docs.paperspace.com/storage/datasetVersions.
 
-## Usage
+### Usage
 
 ```
   dataset versions [command]
   dataset versions [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1067,7 +1067,7 @@ For more information, see https://docs.paperspace.com/storage/datasetVersions.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -1075,18 +1075,18 @@ For more information, see https://docs.paperspace.com/storage/datasetVersions.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace dataset versions create
+## pspace dataset versions create
 
 Create a dataset version. This command will prompt you for an ID if you don't
 provide one.
 
-## Usage
+### Usage
 
 ```
   dataset versions create [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1097,20 +1097,20 @@ provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions delete
+## pspace dataset versions delete
 
 Delete a dataset version from a team. This command will prompt you for an ID
 if you don't provide one.
 
-## Usage
+### Usage
 
 ```
   dataset versions delete [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1120,20 +1120,20 @@ if you don't provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions get
+## pspace dataset versions get
 
 Get a dataset version from a team. This command will prompt you for an ID
 if you don't provide one.
 
-## Usage
+### Usage
 
 ```
   dataset versions get [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1143,20 +1143,20 @@ if you don't provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions help
+## pspace dataset versions help
 
 Show help for a versions command
 
-## Usage
+### Usage
 
 ```
   dataset versions help [command]
   dataset versions help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1165,10 +1165,10 @@ Show help for a versions command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace dataset versions help commands
+## pspace dataset versions help commands
 
 List versions commands
 
@@ -1177,13 +1177,13 @@ Example:
 $ dataset versions help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   dataset versions help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1193,9 +1193,9 @@ $ dataset versions help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions list
+## pspace dataset versions list
 
 List dataset versions in your team or project.
 
@@ -1204,13 +1204,13 @@ Pick a subset of fields to display:
 pspace dataset versions list <dataset-id> -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   dataset versions list [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1225,19 +1225,19 @@ pspace dataset versions list <dataset-id> -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace dataset versions update
+## pspace dataset versions update
 
 Update a dataset version in a project or team.
 
-## Usage
+### Usage
 
 ```
   dataset versions update [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1249,20 +1249,20 @@ Update a dataset version in a project or team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment
+## pspace deployment
 
 Effortlessly deploy ML apps to Paperspace.
 
-## Usage
+### Usage
 
 ```
   deployment [command]
   deployment [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1271,14 +1271,14 @@ Effortlessly deploy ML apps to Paperspace.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
 - [up](#up)
-# pspace deployment delete
+## pspace deployment delete
 
 Delete a deployment by its ID. If you don't provide an ID, this command will
 prompt you for one based on the deployments you have access to.
@@ -1287,13 +1287,13 @@ prompt you for one based on the deployments you have access to.
 pspace deployment delete 123e4567-e89b-12d3-a456-426614174000
 ```
 
-## Usage
+### Usage
 
 ```
   deployment delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1302,9 +1302,9 @@ pspace deployment delete 123e4567-e89b-12d3-a456-426614174000
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment get
+## pspace deployment get
 
 Get a deployment by its ID. If you don't provide an ID, this command will
 prompt you for one based on the deployments you have access to.
@@ -1318,13 +1318,13 @@ Pick a subset of fields to display:
 pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 ```
 
-## Usage
+### Usage
 
 ```
   deployment get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1334,20 +1334,20 @@ pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment help
+## pspace deployment help
 
 Show help for a deployment command
 
-## Usage
+### Usage
 
 ```
   deployment help [command]
   deployment help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1356,10 +1356,10 @@ Show help for a deployment command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace deployment help commands
+## pspace deployment help commands
 
 List deployment commands
 
@@ -1368,13 +1368,13 @@ Example:
 $ deployment help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   deployment help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1384,9 +1384,9 @@ $ deployment help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment list
+## pspace deployment list
 
 List deployments in your team.
 
@@ -1395,13 +1395,13 @@ Pick a subset of fields to display:
 pspace deployment list -F id -F name
 ```
 
-## Usage
+### Usage
 
 ```
   deployment list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1416,9 +1416,9 @@ pspace deployment list -F id -F name
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace deployment up
+## pspace deployment up
 
 This will create a new deployment for your app or update it if it already exists. 
 You can optionally specify a path to a config file. If no config file is specified, 
@@ -1444,13 +1444,13 @@ Create a new deployment for an app in a specific project.
 $ pspace deployment create --project-id 1234
 ```
 
-## Usage
+### Usage
 
 ```
   deployment up [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1475,9 +1475,9 @@ The default config file paths are in order of precedence:
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace docs
+## pspace docs
 
 This command opens the Paperspace documentation in your browser.
 You can optionally pass an argument that will take you to a specific 
@@ -1486,13 +1486,13 @@ docs page.
 Valid pages are:
   - `d`, `deployment`
 
-## Usage
+### Usage
 
 ```
   docs [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1501,20 +1501,20 @@ Valid pages are:
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace help
+## pspace help
 
 Show help for a pspace command
 
-## Usage
+### Usage
 
 ```
   help [command]
   help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1523,10 +1523,10 @@ Show help for a pspace command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace help commands
+## pspace help commands
 
 List pspace commands
 
@@ -1535,13 +1535,13 @@ Example:
 $ help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1551,9 +1551,9 @@ $ help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace init
+## pspace init
 
 Create a new Paperspace app. This will create a new directory with a
 default app structure. You can optionally specify a name for the app
@@ -1576,13 +1576,13 @@ a template from the Paperspace GitHub organization.
 $ pspace init my-app -t Paperspace/gradio-demo
 ```
 
-## Usage
+### Usage
 
 ```
   init [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1628,19 +1628,19 @@ SSH key configured with GitHub, Bitbucket, or GitLab. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace login
+## pspace login
 
 Log in to the CLI using your Paperspace API key or by opening the web console.
 
-## Usage
+### Usage
 
 ```
   login [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1649,19 +1649,19 @@ Log in to the CLI using your Paperspace API key or by opening the web console.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace logout
+## pspace logout
 
 Log out of the CLI for the current team, a specific team, or all teams.
 
-## Usage
+### Usage
 
 ```
   logout [arguments...] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1671,22 +1671,22 @@ Log out of the CLI for the current team, a specific team, or all teams.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine
+## pspace machine
 
 Manage your Paperspace machines.
 
 For more information, see  https://docs.paperspace.com/machines.
 
-## Usage
+### Usage
 
 ```
   machine [command]
   machine [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1695,7 +1695,7 @@ For more information, see  https://docs.paperspace.com/machines.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -1706,17 +1706,17 @@ For more information, see  https://docs.paperspace.com/machines.
 - [start](#start)
 - [stop](#stop)
 - [update](#update)
-# pspace machine create
+## pspace machine create
 
 Create a machine.
 
-## Usage
+### Usage
 
 ```
   machine create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1747,19 +1747,19 @@ Create a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine delete
+## pspace machine delete
 
 Delete a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1769,19 +1769,19 @@ Delete a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine get
+## pspace machine get
 
 Get a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1791,20 +1791,20 @@ Get a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine help
+## pspace machine help
 
 Show help for a machine command
 
-## Usage
+### Usage
 
 ```
   machine help [command]
   machine help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1813,10 +1813,10 @@ Show help for a machine command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace machine help commands
+## pspace machine help commands
 
 List machine commands
 
@@ -1825,13 +1825,13 @@ Example:
 $ machine help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   machine help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1841,9 +1841,9 @@ $ machine help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine list
+## pspace machine list
 
 List machines in your team.
 
@@ -1852,13 +1852,13 @@ Pick a subset of fields to display:
 pspace machine list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   machine list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1877,19 +1877,19 @@ pspace machine list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine restart
+## pspace machine restart
 
 Restart a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine restart [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1899,19 +1899,19 @@ Restart a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine start
+## pspace machine start
 
 Start a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine start [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1921,19 +1921,19 @@ Start a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine stop
+## pspace machine stop
 
 Stop a machine from a team.
 
-## Usage
+### Usage
 
 ```
   machine stop [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1943,19 +1943,19 @@ Stop a machine from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine update
+## pspace machine update
 
 Update a machine's settings.
 
-## Usage
+### Usage
 
 ```
   machine update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -1979,9 +1979,9 @@ Update a machine's settings.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine-event
+## pspace machine-event
 
 Manage your machine events. Events are asynchronous tasks performed by our system on your machines.
 Not all machine commands are asynchronous. For those that are, a machine event will be returned
@@ -1989,14 +1989,14 @@ which can be tracked using this command.
 
 For more information, see https://docs.paperspace.com/machines.
 
-## Usage
+### Usage
 
 ```
   machine-event [command]
   machine-event [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2005,22 +2005,22 @@ For more information, see https://docs.paperspace.com/machines.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace machine-event get
+## pspace machine-event get
 
 Get a machine event from a team.
 
-## Usage
+### Usage
 
 ```
   machine-event get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2030,20 +2030,20 @@ Get a machine event from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine-event help
+## pspace machine-event help
 
 Show help for a machine-event command
 
-## Usage
+### Usage
 
 ```
   machine-event help [command]
   machine-event help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2052,10 +2052,10 @@ Show help for a machine-event command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace machine-event help commands
+## pspace machine-event help commands
 
 List machine-event commands
 
@@ -2064,13 +2064,13 @@ Example:
 $ machine-event help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   machine-event help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2080,9 +2080,9 @@ $ machine-event help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine-event list
+## pspace machine-event list
 
 List machine events in your team.
 
@@ -2091,13 +2091,13 @@ Pick a subset of fields to display:
 pspace machine-event list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   machine-event list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2114,22 +2114,22 @@ will be returned. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model
+## pspace model
 
 Manage your Paperspace models.
 
 For more information, see https://docs.paperspace.com/deploying/models.
 
-## Usage
+### Usage
 
 ```
   model [command]
   model [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2138,25 +2138,25 @@ For more information, see https://docs.paperspace.com/deploying/models.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace model create
+## pspace model create
 
 Create a new model. This command will prompt you for a name if you don't
 provide one.
 
-## Usage
+### Usage
 
 ```
   model create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2171,19 +2171,19 @@ provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model delete
+## pspace model delete
 
 Delete a model from a team.
 
-## Usage
+### Usage
 
 ```
   model delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2193,19 +2193,19 @@ Delete a model from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model get
+## pspace model get
 
 Get a model from a team.
 
-## Usage
+### Usage
 
 ```
   model get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2215,20 +2215,20 @@ Get a model from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model help
+## pspace model help
 
 Show help for a model command
 
-## Usage
+### Usage
 
 ```
   model help [command]
   model help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2237,10 +2237,10 @@ Show help for a model command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace model help commands
+## pspace model help commands
 
 List model commands
 
@@ -2249,13 +2249,13 @@ Example:
 $ model help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   model help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2265,9 +2265,9 @@ $ model help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace model list
+## pspace model list
 
 List models in your team.
 
@@ -2276,13 +2276,13 @@ Pick a subset of fields to display:
 pspace model list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   model list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2297,23 +2297,23 @@ pspace model list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace os-template
+## pspace os-template
 
 List OS templates. OS templates are pre-configured virtual machines that
 you can use to create a new machine.
 
 For more information, see https://docs.paperspace.com/compute/os-templates.
 
-## Usage
+### Usage
 
 ```
   os-template [command]
   os-template [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2322,22 +2322,22 @@ For more information, see https://docs.paperspace.com/compute/os-templates.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [help](#help)
 - [list](#list)
-# pspace os-template help
+## pspace os-template help
 
 Show help for a os-template command
 
-## Usage
+### Usage
 
 ```
   os-template help [command]
   os-template help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2346,10 +2346,10 @@ Show help for a os-template command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace os-template help commands
+## pspace os-template help commands
 
 List os-template commands
 
@@ -2358,13 +2358,13 @@ Example:
 $ os-template help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   os-template help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2374,9 +2374,9 @@ $ os-template help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace os-template list
+## pspace os-template list
 
 List OS templates.
 
@@ -2385,13 +2385,13 @@ Pick a subset of fields to display:
 pspace os-template list -F name
 ```
 
-## Usage
+### Usage
 
 ```
   os-template list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2407,9 +2407,9 @@ pspace os-template list -F name
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network
+## pspace private-network
 
 Manage your private networks. Private networks are logically isolated networks
 for your machines and shared drives. They can also be used for site-to-site VPNs
@@ -2417,14 +2417,14 @@ and direct connections to your on-premise network.
 
 For more information, see https://docs.paperspace.com/networking/private-networks.
 
-## Usage
+### Usage
 
 ```
   private-network [command]
   private-network [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2433,24 +2433,24 @@ For more information, see https://docs.paperspace.com/networking/private-network
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace private-network create
+## pspace private-network create
 
 Create a private network.
 
-## Usage
+### Usage
 
 ```
   private-network create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2462,19 +2462,19 @@ Create a private network.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network delete
+## pspace private-network delete
 
 Delete a private network from a team.
 
-## Usage
+### Usage
 
 ```
   private-network delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2484,19 +2484,19 @@ Delete a private network from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network get
+## pspace private-network get
 
 Get a private network from a team.
 
-## Usage
+### Usage
 
 ```
   private-network get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2506,20 +2506,20 @@ Get a private network from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network help
+## pspace private-network help
 
 Show help for a private-network command
 
-## Usage
+### Usage
 
 ```
   private-network help [command]
   private-network help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2528,10 +2528,10 @@ Show help for a private-network command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace private-network help commands
+## pspace private-network help commands
 
 List private-network commands
 
@@ -2540,13 +2540,13 @@ Example:
 $ private-network help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   private-network help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2556,9 +2556,9 @@ $ private-network help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace private-network list
+## pspace private-network list
 
 List private networks in your team.
 
@@ -2567,13 +2567,13 @@ Pick a subset of fields to display:
 pspace private-network list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   private-network list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2590,20 +2590,20 @@ pspace private-network list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project
+## pspace project
 
 Manage your Paperspace projects.
 
-## Usage
+### Usage
 
 ```
   project [command]
   project [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2612,7 +2612,7 @@ Manage your Paperspace projects.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -2621,18 +2621,18 @@ Manage your Paperspace projects.
 - [link](#link)
 - [list](#list)
 - [update](#update)
-# pspace project create
+## pspace project create
 
 Create a new project. This command will prompt you for a name if you don't
 provide one.
 
-## Usage
+### Usage
 
 ```
   project create [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2642,20 +2642,20 @@ provide one.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project delete
+## pspace project delete
 
 Delete a project by its ID. If you don't provide an ID, this command will
 prompt you for one based on the projects you have access to.
 
-## Usage
+### Usage
 
 ```
   project delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2665,20 +2665,20 @@ prompt you for one based on the projects you have access to.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project get
+## pspace project get
 
 Get a project by its ID. If you don't provide an ID, this command will
 prompt you for one based on the projects you have access to.
 
-## Usage
+### Usage
 
 ```
   project get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2688,20 +2688,20 @@ prompt you for one based on the projects you have access to.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project help
+## pspace project help
 
 Show help for a project command
 
-## Usage
+### Usage
 
 ```
   project help [command]
   project help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2710,10 +2710,10 @@ Show help for a project command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace project help commands
+## pspace project help commands
 
 List project commands
 
@@ -2722,13 +2722,13 @@ Example:
 $ project help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   project help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2738,9 +2738,9 @@ $ project help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project link
+## pspace project link
 
 This will link a remote project to a local directory. Commands that
 depend on a project ID will use the project ID of the linked project
@@ -2761,13 +2761,13 @@ Link a project and specify a project ID.
 $ pspace link pzwf2g05ubegj
 ```
 
-## Usage
+### Usage
 
 ```
   project link [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2777,9 +2777,9 @@ $ pspace link pzwf2g05ubegj
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project list
+## pspace project list
 
 List projects in your team.
 
@@ -2788,13 +2788,13 @@ Pick a subset of fields to display:
 pspace project list -F id -F name -F dtCreated
 ```
 
-## Usage
+### Usage
 
 ```
   project list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2809,9 +2809,9 @@ pspace project list -F id -F name -F dtCreated
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace project update
+## pspace project update
 
 Update an existing project.
 
@@ -2820,13 +2820,13 @@ Example:
 pspace project update psukfyemho7 --name my-cool-project
 ```
 
-## Usage
+### Usage
 
 ```
   pspace project update <project-id> [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2837,22 +2837,22 @@ pspace project update psukfyemho7 --name my-cool-project
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip
+## pspace public-ip
 
 Manage your public IPs. Public IP addresses allow your compute machines to be reachable over the internet.
 
 For more information, see https://docs.paperspace.com/networking/public-ips.
 
-## Usage
+### Usage
 
 ```
   public-ip [command]
   public-ip [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2861,24 +2861,24 @@ For more information, see https://docs.paperspace.com/networking/public-ips.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [assign](#assign)
 - [claim](#claim)
 - [help](#help)
 - [list](#list)
 - [release](#release)
-# pspace public-ip assign
+## pspace public-ip assign
 
 Assign a public IP to a machine.
 
-## Usage
+### Usage
 
 ```
   public-ip assign [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2889,19 +2889,19 @@ Assign a public IP to a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip claim
+## pspace public-ip claim
 
 Claim a public IP for a team.
 
-## Usage
+### Usage
 
 ```
   public-ip claim [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2912,20 +2912,20 @@ Claim a public IP for a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip help
+## pspace public-ip help
 
 Show help for a public-ip command
 
-## Usage
+### Usage
 
 ```
   public-ip help [command]
   public-ip help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2934,10 +2934,10 @@ Show help for a public-ip command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace public-ip help commands
+## pspace public-ip help commands
 
 List public-ip commands
 
@@ -2946,13 +2946,13 @@ Example:
 $ public-ip help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   public-ip help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2962,9 +2962,9 @@ $ public-ip help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip list
+## pspace public-ip list
 
 List public IPs in your team or project.
 
@@ -2973,13 +2973,13 @@ Pick a subset of fields to display:
 pspace public-ip list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   public-ip list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -2995,19 +2995,19 @@ pspace public-ip list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip release
+## pspace public-ip release
 
 Release a public IP from a team. This will unassign it from its assigned machine, if any.
 
-## Usage
+### Usage
 
 ```
   public-ip release [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3017,9 +3017,9 @@ Release a public IP from a team. This will unassign it from its assigned machine
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret
+## pspace secret
 
 Manage your Paperspace secrets. Secrets are used to store sensitive
 information such as API keys, passwords, and other credentials. Secrets 
@@ -3033,14 +3033,14 @@ Secrets can be created at the following levels:
 
 For more information, see https://docs.paperspace.com/secrets.
 
-## Usage
+### Usage
 
 ```
   secret [command]
   secret [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3049,7 +3049,7 @@ For more information, see https://docs.paperspace.com/secrets.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -3057,17 +3057,17 @@ For more information, see https://docs.paperspace.com/secrets.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace secret create
+## pspace secret create
 
 Create a secret in a project or team.
 
-## Usage
+### Usage
 
 ```
   secret create [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3084,19 +3084,19 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret delete
+## pspace secret delete
 
 Delete a secret from a project or team.
 
-## Usage
+### Usage
 
 ```
   secret delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3113,19 +3113,19 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret get
+## pspace secret get
 
 Get a secret from a project or team.
 
-## Usage
+### Usage
 
 ```
   secret get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3143,20 +3143,20 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret help
+## pspace secret help
 
 Show help for a secret command
 
-## Usage
+### Usage
 
 ```
   secret help [command]
   secret help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3165,10 +3165,10 @@ Show help for a secret command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace secret help commands
+## pspace secret help commands
 
 List secret commands
 
@@ -3177,13 +3177,13 @@ Example:
 $ secret help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   secret help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3193,9 +3193,9 @@ $ secret help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret list
+## pspace secret list
 
 List secrets in your team or project.
 
@@ -3204,13 +3204,13 @@ Pick a subset of fields to display:
 pspace secret list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   secret list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3233,19 +3233,19 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace secret update
+## pspace secret update
 
 Update a secret in a project or team.
 
-## Usage
+### Usage
 
 ```
   secret update [arguments] [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3262,9 +3262,9 @@ a project. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive
+## pspace shared-drive
 
 Manage your shared drives. Shared drives are used to centralize data
 used by your team. Shared drives can be mounted on any Paperspace machine
@@ -3272,14 +3272,14 @@ in the same private network.
 
 For more information, see https://docs.paperspace.com/storage/shared-drives.
 
-## Usage
+### Usage
 
 ```
   shared-drive [command]
   shared-drive [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3288,24 +3288,24 @@ For more information, see https://docs.paperspace.com/storage/shared-drives.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace shared-drive create
+## pspace shared-drive create
 
 Create a shared drive.
 
-## Usage
+### Usage
 
 ```
   shared-drive create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3319,19 +3319,19 @@ Create a shared drive.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive delete
+## pspace shared-drive delete
 
 Delete a shared drive from a team.
 
-## Usage
+### Usage
 
 ```
   shared-drive delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3341,19 +3341,19 @@ Delete a shared drive from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive get
+## pspace shared-drive get
 
 Get a shared drive from a team.
 
-## Usage
+### Usage
 
 ```
   shared-drive get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3363,20 +3363,20 @@ Get a shared drive from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive help
+## pspace shared-drive help
 
 Show help for a shared-drive command
 
-## Usage
+### Usage
 
 ```
   shared-drive help [command]
   shared-drive help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3385,10 +3385,10 @@ Show help for a shared-drive command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace shared-drive help commands
+## pspace shared-drive help commands
 
 List shared-drive commands
 
@@ -3397,13 +3397,13 @@ Example:
 $ shared-drive help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   shared-drive help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3413,9 +3413,9 @@ $ shared-drive help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive list
+## pspace shared-drive list
 
 List shared drives in your team or project.
 
@@ -3424,13 +3424,13 @@ Pick a subset of fields to display:
 pspace shared-drive list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   shared-drive list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3447,19 +3447,19 @@ pspace shared-drive list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace signup
+## pspace signup
 
 This command opens the Paperspace signup page in your browser.
 
-## Usage
+### Usage
 
 ```
   signup [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3468,9 +3468,9 @@ This command opens the Paperspace signup page in your browser.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot
+## pspace snapshot
 
 Manage your snapshots. Snapshots are copies of your machine's disk at a point in time.
 They can be used to restore the machine to its previous state. Using snapshots is recommended
@@ -3478,14 +3478,14 @@ before taking any action that could affect the usability of the machine or its n
 
 For more information, see https://docs.paperspace.com/storage/snapshots.
 
-## Usage
+### Usage
 
 ```
   snapshot [command]
   snapshot [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3494,24 +3494,24 @@ For more information, see https://docs.paperspace.com/storage/snapshots.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [help](#help)
 - [list](#list)
 - [restore](#restore)
-# pspace snapshot create
+## pspace snapshot create
 
 Create a snapshot from a machine.
 
-## Usage
+### Usage
 
 ```
   snapshot create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3523,19 +3523,19 @@ Create a snapshot from a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot delete
+## pspace snapshot delete
 
 Delete a snapshot from a team.
 
-## Usage
+### Usage
 
 ```
   snapshot delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3545,20 +3545,20 @@ Delete a snapshot from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot help
+## pspace snapshot help
 
 Show help for a snapshot command
 
-## Usage
+### Usage
 
 ```
   snapshot help [command]
   snapshot help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3567,10 +3567,10 @@ Show help for a snapshot command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace snapshot help commands
+## pspace snapshot help commands
 
 List snapshot commands
 
@@ -3579,13 +3579,13 @@ Example:
 $ snapshot help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   snapshot help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3595,9 +3595,9 @@ $ snapshot help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot list
+## pspace snapshot list
 
 List snapshots in your team.
 
@@ -3606,13 +3606,13 @@ Pick a subset of fields to display:
 pspace snapshot list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   snapshot list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3629,19 +3629,19 @@ will be returned. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot restore
+## pspace snapshot restore
 
 Restore a machine to a snapshot.
 
-## Usage
+### Usage
 
 ```
   snapshot restore [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3652,21 +3652,21 @@ Restore a machine to a snapshot.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script
+## pspace startup-script
 
 Manage your startup scripts. Startup scripts allow you to configure a machine
 on first boot or on every boot.
 
-## Usage
+### Usage
 
 ```
   startup-script [command]
   startup-script [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3675,7 +3675,7 @@ on first boot or on every boot.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [assign](#assign)
 - [create](#create)
@@ -3685,17 +3685,17 @@ on first boot or on every boot.
 - [list](#list)
 - [unassign](#unassign)
 - [update](#update)
-# pspace startup-script assign
+## pspace startup-script assign
 
 Assign a startup script to a machine.
 
-## Usage
+### Usage
 
 ```
   startup-script assign [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3706,19 +3706,19 @@ Assign a startup script to a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script create
+## pspace startup-script create
 
 Create a startup script.
 
-## Usage
+### Usage
 
 ```
   startup-script create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3731,19 +3731,19 @@ Create a startup script.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script delete
+## pspace startup-script delete
 
 Delete a startup script from a team.
 
-## Usage
+### Usage
 
 ```
   startup-script delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3753,19 +3753,19 @@ Delete a startup script from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script get
+## pspace startup-script get
 
 Get a startup script from a team.
 
-## Usage
+### Usage
 
 ```
   startup-script get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3775,20 +3775,20 @@ Get a startup script from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script help
+## pspace startup-script help
 
 Show help for a startup-script command
 
-## Usage
+### Usage
 
 ```
   startup-script help [command]
   startup-script help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3797,10 +3797,10 @@ Show help for a startup-script command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace startup-script help commands
+## pspace startup-script help commands
 
 List startup-script commands
 
@@ -3809,13 +3809,13 @@ Example:
 $ startup-script help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   startup-script help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3825,9 +3825,9 @@ $ startup-script help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script list
+## pspace startup-script list
 
 List startup scripts in your team.
 
@@ -3836,13 +3836,13 @@ Pick a subset of fields to display:
 pspace startup-script list -F name -F dtCreated
 ```
 
-## Usage
+### Usage
 
 ```
   startup-script list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3858,19 +3858,19 @@ pspace startup-script list -F name -F dtCreated
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script unassign
+## pspace startup-script unassign
 
 Unassign a startup script from a machine.
 
-## Usage
+### Usage
 
 ```
   startup-script unassign [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3881,19 +3881,19 @@ Unassign a startup script from a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script update
+## pspace startup-script update
 
 Update a startup script.
 
-## Usage
+### Usage
 
 ```
   startup-script update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3907,22 +3907,22 @@ Update a startup script.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider
+## pspace storage-provider
 
 Manage your storage providers.
 
 For more information, see https://docs.paperspace.com/storage/storageProviders.
 
-## Usage
+### Usage
 
 ```
   storage-provider [command]
   storage-provider [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3931,7 +3931,7 @@ For more information, see https://docs.paperspace.com/storage/storageProviders.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -3939,18 +3939,18 @@ For more information, see https://docs.paperspace.com/storage/storageProviders.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace storage-provider create
+## pspace storage-provider create
 
 Create a storage provider.
 
-## Usage
+### Usage
 
 ```
   storage-provider create [command]
   storage-provider create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3959,22 +3959,22 @@ Create a storage provider.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [help](#help)
 - [s3](#s3)
-# pspace storage-provider create help
+## pspace storage-provider create help
 
 Show help for a create command
 
-## Usage
+### Usage
 
 ```
   storage-provider create help [command]
   storage-provider create help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -3983,10 +3983,10 @@ Show help for a create command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace storage-provider create help commands
+## pspace storage-provider create help commands
 
 List create commands
 
@@ -3995,13 +3995,13 @@ Example:
 $ storage-provider create help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider create help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4011,19 +4011,19 @@ $ storage-provider create help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider create s3
+## pspace storage-provider create s3
 
 Create an S3 storage provider.
 
-## Usage
+### Usage
 
 ```
   storage-provider create s3 [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4042,19 +4042,19 @@ Create an S3 storage provider.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider delete
+## pspace storage-provider delete
 
 Delete a storage provider from a team.
 
-## Usage
+### Usage
 
 ```
   storage-provider delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4064,19 +4064,19 @@ Delete a storage provider from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider get
+## pspace storage-provider get
 
 Get a storage provider from a team.
 
-## Usage
+### Usage
 
 ```
   storage-provider get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4086,20 +4086,20 @@ Get a storage provider from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider help
+## pspace storage-provider help
 
 Show help for a storage-provider command
 
-## Usage
+### Usage
 
 ```
   storage-provider help [command]
   storage-provider help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4108,10 +4108,10 @@ Show help for a storage-provider command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace storage-provider help commands
+## pspace storage-provider help commands
 
 List storage-provider commands
 
@@ -4120,13 +4120,13 @@ Example:
 $ storage-provider help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4136,9 +4136,9 @@ $ storage-provider help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider list
+## pspace storage-provider list
 
 List storage providers in your team or project.
 
@@ -4147,13 +4147,13 @@ Pick a subset of fields to display:
 pspace storage provider list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4168,20 +4168,20 @@ pspace storage provider list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider update
+## pspace storage-provider update
 
 Update a storage provider.
 
-## Usage
+### Usage
 
 ```
   storage-provider update [command]
   storage-provider update [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4190,22 +4190,22 @@ Update a storage provider.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [help](#help)
 - [s3](#s3)
-# pspace storage-provider update help
+## pspace storage-provider update help
 
 Show help for a update command
 
-## Usage
+### Usage
 
 ```
   storage-provider update help [command]
   storage-provider update help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4214,10 +4214,10 @@ Show help for a update command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace storage-provider update help commands
+## pspace storage-provider update help commands
 
 List update commands
 
@@ -4226,13 +4226,13 @@ Example:
 $ storage-provider update help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider update help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4242,19 +4242,19 @@ $ storage-provider update help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider update s3
+## pspace storage-provider update s3
 
 Update an S3 storage provider in a project or team.
 
-## Usage
+### Usage
 
 ```
   storage-provider update s3 [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4273,9 +4273,9 @@ Update an S3 storage provider in a project or team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace up
+## pspace up
 
 This will upsert an app config and deploy your app to Paperspace. You can optionally 
 specify a path to a config file. If no config file is specified, the default
@@ -4296,13 +4296,13 @@ Deploy an app in a different directory.
 $ pspace up --cwd ../my-app
 ```
 
-## Usage
+### Usage
 
 ```
   up [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4327,9 +4327,9 @@ The default config file paths are in order of precedence:
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace upgrade
+## pspace upgrade
 
 This command upgrades [1mpspace[22m to the latest version.
 
@@ -4346,13 +4346,13 @@ running:
 pspace upgrade
 ```
 
-## Usage
+### Usage
 
 ```
   upgrade [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4361,19 +4361,19 @@ pspace upgrade
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace version
+## pspace version
 
 Shows version information command, including version number and build date.
 
-## Usage
+### Usage
 
 ```
   version [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -4382,5 +4382,5 @@ Shows version information command, including version number and build date.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

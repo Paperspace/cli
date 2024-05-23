@@ -1,18 +1,18 @@
-# pspace os-template
+## pspace os-template
 
 List OS templates. OS templates are pre-configured virtual machines that
 you can use to create a new machine.
 
 For more information, see https://docs.paperspace.com/compute/os-templates.
 
-## Usage
+### Usage
 
 ```
   os-template [command]
   os-template [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -21,22 +21,22 @@ For more information, see https://docs.paperspace.com/compute/os-templates.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [help](#help)
 - [list](#list)
-# pspace os-template help
+## pspace os-template help
 
 Show help for a os-template command
 
-## Usage
+### Usage
 
 ```
   os-template help [command]
   os-template help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -45,10 +45,10 @@ Show help for a os-template command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace os-template help commands
+## pspace os-template help commands
 
 List os-template commands
 
@@ -57,13 +57,13 @@ Example:
 $ os-template help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   os-template help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -73,9 +73,9 @@ $ os-template help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace os-template list
+## pspace os-template list
 
 List OS templates.
 
@@ -84,13 +84,13 @@ Pick a subset of fields to display:
 pspace os-template list -F name
 ```
 
-## Usage
+### Usage
 
 ```
   os-template list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -106,5 +106,5 @@ pspace os-template list -F name
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

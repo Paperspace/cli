@@ -15,13 +15,13 @@ let markdown = "";
 
 // Also generate markdown for the CLI
 async function renderCommand(path: string[], command: ZcliJsonCommand) {
-  markdown += `# ${path.join(" ")}\n\n`;
+  markdown += `## ${path.join(" ")}\n\n`;
   markdown += command.description + "\n\n";
-  markdown += "## Usage\n\n";
+  markdown += "### Usage\n\n";
   markdown += `\`\`\`\n`;
   markdown += `${command.usage}\n`;
   markdown += "\`\`\`\n\n";
-  markdown += "## Flags\n\n";
+  markdown += "### Flags\n\n";
   markdown += "| Name | Aliases | Description | Required |\n";
   markdown += "| --- | --- | --- | --- |\n";
   for (const flag of command.flags) {
@@ -31,7 +31,7 @@ async function renderCommand(path: string[], command: ZcliJsonCommand) {
   }
   markdown += "\n";
 
-  markdown += "### Subcommands\n\n";
+  markdown += "#### Subcommands\n\n";
   for (const subcommand of command.commands) {
     markdown += `- [${subcommand.name}](#${subcommand.name})\n`;
   }

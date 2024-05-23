@@ -1,4 +1,4 @@
-# pspace shared-drive
+## pspace shared-drive
 
 Manage your shared drives. Shared drives are used to centralize data
 used by your team. Shared drives can be mounted on any Paperspace machine
@@ -6,14 +6,14 @@ in the same private network.
 
 For more information, see https://docs.paperspace.com/storage/shared-drives.
 
-## Usage
+### Usage
 
 ```
   shared-drive [command]
   shared-drive [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -22,24 +22,24 @@ For more information, see https://docs.paperspace.com/storage/shared-drives.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace shared-drive create
+## pspace shared-drive create
 
 Create a shared drive.
 
-## Usage
+### Usage
 
 ```
   shared-drive create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -53,19 +53,19 @@ Create a shared drive.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive delete
+## pspace shared-drive delete
 
 Delete a shared drive from a team.
 
-## Usage
+### Usage
 
 ```
   shared-drive delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -75,19 +75,19 @@ Delete a shared drive from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive get
+## pspace shared-drive get
 
 Get a shared drive from a team.
 
-## Usage
+### Usage
 
 ```
   shared-drive get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -97,20 +97,20 @@ Get a shared drive from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive help
+## pspace shared-drive help
 
 Show help for a shared-drive command
 
-## Usage
+### Usage
 
 ```
   shared-drive help [command]
   shared-drive help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -119,10 +119,10 @@ Show help for a shared-drive command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace shared-drive help commands
+## pspace shared-drive help commands
 
 List shared-drive commands
 
@@ -131,13 +131,13 @@ Example:
 $ shared-drive help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   shared-drive help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -147,9 +147,9 @@ $ shared-drive help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace shared-drive list
+## pspace shared-drive list
 
 List shared drives in your team or project.
 
@@ -158,13 +158,13 @@ Pick a subset of fields to display:
 pspace shared-drive list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   shared-drive list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -181,5 +181,5 @@ pspace shared-drive list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

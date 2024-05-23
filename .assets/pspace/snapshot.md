@@ -1,4 +1,4 @@
-# pspace snapshot
+## pspace snapshot
 
 Manage your snapshots. Snapshots are copies of your machine's disk at a point in time.
 They can be used to restore the machine to its previous state. Using snapshots is recommended
@@ -6,14 +6,14 @@ before taking any action that could affect the usability of the machine or its n
 
 For more information, see https://docs.paperspace.com/storage/snapshots.
 
-## Usage
+### Usage
 
 ```
   snapshot [command]
   snapshot [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -22,24 +22,24 @@ For more information, see https://docs.paperspace.com/storage/snapshots.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
 - [help](#help)
 - [list](#list)
 - [restore](#restore)
-# pspace snapshot create
+## pspace snapshot create
 
 Create a snapshot from a machine.
 
-## Usage
+### Usage
 
 ```
   snapshot create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -51,19 +51,19 @@ Create a snapshot from a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot delete
+## pspace snapshot delete
 
 Delete a snapshot from a team.
 
-## Usage
+### Usage
 
 ```
   snapshot delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -73,20 +73,20 @@ Delete a snapshot from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot help
+## pspace snapshot help
 
 Show help for a snapshot command
 
-## Usage
+### Usage
 
 ```
   snapshot help [command]
   snapshot help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -95,10 +95,10 @@ Show help for a snapshot command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace snapshot help commands
+## pspace snapshot help commands
 
 List snapshot commands
 
@@ -107,13 +107,13 @@ Example:
 $ snapshot help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   snapshot help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -123,9 +123,9 @@ $ snapshot help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot list
+## pspace snapshot list
 
 List snapshots in your team.
 
@@ -134,13 +134,13 @@ Pick a subset of fields to display:
 pspace snapshot list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   snapshot list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -157,19 +157,19 @@ will be returned. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace snapshot restore
+## pspace snapshot restore
 
 Restore a machine to a snapshot.
 
-## Usage
+### Usage
 
 ```
   snapshot restore [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -180,5 +180,5 @@ Restore a machine to a snapshot.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

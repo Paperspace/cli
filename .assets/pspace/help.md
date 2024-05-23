@@ -1,15 +1,15 @@
-# pspace help
+## pspace help
 
 Show help for a pspace command
 
-## Usage
+### Usage
 
 ```
   help [command]
   help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -18,10 +18,10 @@ Show help for a pspace command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace help commands
+## pspace help commands
 
 List pspace commands
 
@@ -30,13 +30,13 @@ Example:
 $ help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -46,5 +46,5 @@ $ help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,17 +1,17 @@
-# pspace public-ip
+## pspace public-ip
 
 Manage your public IPs. Public IP addresses allow your compute machines to be reachable over the internet.
 
 For more information, see https://docs.paperspace.com/networking/public-ips.
 
-## Usage
+### Usage
 
 ```
   public-ip [command]
   public-ip [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -20,24 +20,24 @@ For more information, see https://docs.paperspace.com/networking/public-ips.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [assign](#assign)
 - [claim](#claim)
 - [help](#help)
 - [list](#list)
 - [release](#release)
-# pspace public-ip assign
+## pspace public-ip assign
 
 Assign a public IP to a machine.
 
-## Usage
+### Usage
 
 ```
   public-ip assign [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -48,19 +48,19 @@ Assign a public IP to a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip claim
+## pspace public-ip claim
 
 Claim a public IP for a team.
 
-## Usage
+### Usage
 
 ```
   public-ip claim [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -71,20 +71,20 @@ Claim a public IP for a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip help
+## pspace public-ip help
 
 Show help for a public-ip command
 
-## Usage
+### Usage
 
 ```
   public-ip help [command]
   public-ip help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -93,10 +93,10 @@ Show help for a public-ip command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace public-ip help commands
+## pspace public-ip help commands
 
 List public-ip commands
 
@@ -105,13 +105,13 @@ Example:
 $ public-ip help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   public-ip help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -121,9 +121,9 @@ $ public-ip help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip list
+## pspace public-ip list
 
 List public IPs in your team or project.
 
@@ -132,13 +132,13 @@ Pick a subset of fields to display:
 pspace public-ip list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   public-ip list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -154,19 +154,19 @@ pspace public-ip list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace public-ip release
+## pspace public-ip release
 
 Release a public IP from a team. This will unassign it from its assigned machine, if any.
 
-## Usage
+### Usage
 
 ```
   public-ip release [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -176,5 +176,5 @@ Release a public IP from a team. This will unassign it from its assigned machine
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

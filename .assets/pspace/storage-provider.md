@@ -1,17 +1,17 @@
-# pspace storage-provider
+## pspace storage-provider
 
 Manage your storage providers.
 
 For more information, see https://docs.paperspace.com/storage/storageProviders.
 
-## Usage
+### Usage
 
 ```
   storage-provider [command]
   storage-provider [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ For more information, see https://docs.paperspace.com/storage/storageProviders.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [create](#create)
 - [delete](#delete)
@@ -28,18 +28,18 @@ For more information, see https://docs.paperspace.com/storage/storageProviders.
 - [help](#help)
 - [list](#list)
 - [update](#update)
-# pspace storage-provider create
+## pspace storage-provider create
 
 Create a storage provider.
 
-## Usage
+### Usage
 
 ```
   storage-provider create [command]
   storage-provider create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -48,22 +48,22 @@ Create a storage provider.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [help](#help)
 - [s3](#s3)
-# pspace storage-provider create help
+## pspace storage-provider create help
 
 Show help for a create command
 
-## Usage
+### Usage
 
 ```
   storage-provider create help [command]
   storage-provider create help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -72,10 +72,10 @@ Show help for a create command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace storage-provider create help commands
+## pspace storage-provider create help commands
 
 List create commands
 
@@ -84,13 +84,13 @@ Example:
 $ storage-provider create help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider create help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -100,19 +100,19 @@ $ storage-provider create help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider create s3
+## pspace storage-provider create s3
 
 Create an S3 storage provider.
 
-## Usage
+### Usage
 
 ```
   storage-provider create s3 [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -131,19 +131,19 @@ Create an S3 storage provider.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider delete
+## pspace storage-provider delete
 
 Delete a storage provider from a team.
 
-## Usage
+### Usage
 
 ```
   storage-provider delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -153,19 +153,19 @@ Delete a storage provider from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider get
+## pspace storage-provider get
 
 Get a storage provider from a team.
 
-## Usage
+### Usage
 
 ```
   storage-provider get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -175,20 +175,20 @@ Get a storage provider from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider help
+## pspace storage-provider help
 
 Show help for a storage-provider command
 
-## Usage
+### Usage
 
 ```
   storage-provider help [command]
   storage-provider help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -197,10 +197,10 @@ Show help for a storage-provider command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace storage-provider help commands
+## pspace storage-provider help commands
 
 List storage-provider commands
 
@@ -209,13 +209,13 @@ Example:
 $ storage-provider help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -225,9 +225,9 @@ $ storage-provider help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider list
+## pspace storage-provider list
 
 List storage providers in your team or project.
 
@@ -236,13 +236,13 @@ Pick a subset of fields to display:
 pspace storage provider list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -257,20 +257,20 @@ pspace storage provider list -F name -F dtModified
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider update
+## pspace storage-provider update
 
 Update a storage provider.
 
-## Usage
+### Usage
 
 ```
   storage-provider update [command]
   storage-provider update [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -279,22 +279,22 @@ Update a storage provider.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [help](#help)
 - [s3](#s3)
-# pspace storage-provider update help
+## pspace storage-provider update help
 
 Show help for a update command
 
-## Usage
+### Usage
 
 ```
   storage-provider update help [command]
   storage-provider update help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -303,10 +303,10 @@ Show help for a update command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace storage-provider update help commands
+## pspace storage-provider update help commands
 
 List update commands
 
@@ -315,13 +315,13 @@ Example:
 $ storage-provider update help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   storage-provider update help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -331,19 +331,19 @@ $ storage-provider update help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace storage-provider update s3
+## pspace storage-provider update s3
 
 Update an S3 storage provider in a project or team.
 
-## Usage
+### Usage
 
 ```
   storage-provider update s3 [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -362,5 +362,5 @@ Update an S3 storage provider in a project or team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

@@ -1,16 +1,16 @@
-# pspace startup-script
+## pspace startup-script
 
 Manage your startup scripts. Startup scripts allow you to configure a machine
 on first boot or on every boot.
 
-## Usage
+### Usage
 
 ```
   startup-script [command]
   startup-script [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -19,7 +19,7 @@ on first boot or on every boot.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [assign](#assign)
 - [create](#create)
@@ -29,17 +29,17 @@ on first boot or on every boot.
 - [list](#list)
 - [unassign](#unassign)
 - [update](#update)
-# pspace startup-script assign
+## pspace startup-script assign
 
 Assign a startup script to a machine.
 
-## Usage
+### Usage
 
 ```
   startup-script assign [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -50,19 +50,19 @@ Assign a startup script to a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script create
+## pspace startup-script create
 
 Create a startup script.
 
-## Usage
+### Usage
 
 ```
   startup-script create [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -75,19 +75,19 @@ Create a startup script.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script delete
+## pspace startup-script delete
 
 Delete a startup script from a team.
 
-## Usage
+### Usage
 
 ```
   startup-script delete [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -97,19 +97,19 @@ Delete a startup script from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script get
+## pspace startup-script get
 
 Get a startup script from a team.
 
-## Usage
+### Usage
 
 ```
   startup-script get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -119,20 +119,20 @@ Get a startup script from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script help
+## pspace startup-script help
 
 Show help for a startup-script command
 
-## Usage
+### Usage
 
 ```
   startup-script help [command]
   startup-script help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -141,10 +141,10 @@ Show help for a startup-script command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace startup-script help commands
+## pspace startup-script help commands
 
 List startup-script commands
 
@@ -153,13 +153,13 @@ Example:
 $ startup-script help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   startup-script help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -169,9 +169,9 @@ $ startup-script help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script list
+## pspace startup-script list
 
 List startup scripts in your team.
 
@@ -180,13 +180,13 @@ Pick a subset of fields to display:
 pspace startup-script list -F name -F dtCreated
 ```
 
-## Usage
+### Usage
 
 ```
   startup-script list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -202,19 +202,19 @@ pspace startup-script list -F name -F dtCreated
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script unassign
+## pspace startup-script unassign
 
 Unassign a startup script from a machine.
 
-## Usage
+### Usage
 
 ```
   startup-script unassign [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -225,19 +225,19 @@ Unassign a startup script from a machine.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace startup-script update
+## pspace startup-script update
 
 Update a startup script.
 
-## Usage
+### Usage
 
 ```
   startup-script update [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -251,5 +251,5 @@ Update a startup script.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

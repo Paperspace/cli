@@ -1,4 +1,4 @@
-# pspace machine-event
+## pspace machine-event
 
 Manage your machine events. Events are asynchronous tasks performed by our system on your machines.
 Not all machine commands are asynchronous. For those that are, a machine event will be returned
@@ -6,14 +6,14 @@ which can be tracked using this command.
 
 For more information, see https://docs.paperspace.com/machines.
 
-## Usage
+### Usage
 
 ```
   machine-event [command]
   machine-event [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -22,22 +22,22 @@ For more information, see https://docs.paperspace.com/machines.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [get](#get)
 - [help](#help)
 - [list](#list)
-# pspace machine-event get
+## pspace machine-event get
 
 Get a machine event from a team.
 
-## Usage
+### Usage
 
 ```
   machine-event get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -47,20 +47,20 @@ Get a machine event from a team.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine-event help
+## pspace machine-event help
 
 Show help for a machine-event command
 
-## Usage
+### Usage
 
 ```
   machine-event help [command]
   machine-event help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -69,10 +69,10 @@ Show help for a machine-event command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace machine-event help commands
+## pspace machine-event help commands
 
 List machine-event commands
 
@@ -81,13 +81,13 @@ Example:
 $ machine-event help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   machine-event help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -97,9 +97,9 @@ $ machine-event help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace machine-event list
+## pspace machine-event list
 
 List machine events in your team.
 
@@ -108,13 +108,13 @@ Pick a subset of fields to display:
 pspace machine-event list -F name -F dtModified
 ```
 
-## Usage
+### Usage
 
 ```
   machine-event list [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -131,5 +131,5 @@ will be returned. | false |
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

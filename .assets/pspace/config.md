@@ -1,4 +1,4 @@
-# pspace config
+## pspace config
 
 This command manages your Paperspace configuration. You can use it to set, get, and 
 delete configuration values. Running this command without any subcommands will print 
@@ -11,14 +11,14 @@ For example, to set the current team, run:
 pspace config set team "my-team"
 ```
 
-## Usage
+### Usage
 
 ```
   config [command]
   config [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -27,23 +27,23 @@ pspace config set team "my-team"
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [delete](#delete)
 - [get](#get)
 - [help](#help)
 - [set](#set)
-# pspace config delete
+## pspace config delete
 
 Delete a configuration value.
 
-## Usage
+### Usage
 
 ```
   config delete <arguments> [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -52,9 +52,9 @@ Delete a configuration value.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config get
+## pspace config get
 
 This command gets a configuration value. You can pass a key to get a specific
 value, or you can pass no arguments to get all configuration values.
@@ -64,13 +64,13 @@ For example, to get the current team run:
 pspace config get team
 ```
 
-## Usage
+### Usage
 
 ```
   config get [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -79,20 +79,20 @@ pspace config get team
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config help
+## pspace config help
 
 Show help for a config command
 
-## Usage
+### Usage
 
 ```
   config help [command]
   config help [arguments] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -101,10 +101,10 @@ Show help for a config command
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
 - [commands](#commands)
-# pspace config help commands
+## pspace config help commands
 
 List config commands
 
@@ -113,13 +113,13 @@ Example:
 $ config help commands commands
 ```
 
-## Usage
+### Usage
 
 ```
   config help commands [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -129,19 +129,19 @@ $ config help commands commands
 | help | h | Show help for a command | false |
 | all | a | Show all commands, including hidden ones | false |
 
-### Subcommands
+#### Subcommands
 
-# pspace config set
+## pspace config set
 
 Set a configuration value.
 
-## Usage
+### Usage
 
 ```
   config set [arguments] [arguments...] [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -150,5 +150,5 @@ Set a configuration value.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 

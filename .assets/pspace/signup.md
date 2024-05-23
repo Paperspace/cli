@@ -1,14 +1,14 @@
-# pspace signup
+## pspace signup
 
 This command opens the Paperspace signup page in your browser.
 
-## Usage
+### Usage
 
 ```
   signup [flags]
 ```
 
-## Flags
+### Flags
 
 | Name | Aliases | Description | Required |
 | --- | --- | --- | --- |
@@ -17,5 +17,5 @@ This command opens the Paperspace signup page in your browser.
 | api-key |  | A Paperspace public API Key used for authenticating requests | false |
 | help | h | Show help for a command | false |
 
-### Subcommands
+#### Subcommands
 
