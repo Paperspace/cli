@@ -10,8 +10,8 @@ For more information, see https://docs.paperspace.com/machines.
 ### Usage
 
 ```
-machine-event [command]
-machine-event [flags]
+pspace machine-event [command]
+pspace machine-event [flags]
 ```
 
 ### Flags
@@ -36,7 +36,7 @@ Get a machine event from a team.
 ### Usage
 
 ```
-machine-event get [arguments] [flags]
+pspace machine-event get [arguments] [flags]
 ```
 
 ### Flags
@@ -58,8 +58,8 @@ Show help for a machine-event command
 ### Usage
 
 ```
-machine-event help [command]
-machine-event help [arguments] [flags]
+pspace machine-event help [command]
+pspace machine-event help [arguments] [flags]
 ```
 
 ### Flags
@@ -75,34 +75,6 @@ machine-event help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace machine-event help commands
-
-List machine-event commands
-
-Example:
-
-```
-$ machine-event help commands commands
-```
-
-### Usage
-
-```
-machine-event help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace machine-event list
 
 List machine events in your team.
@@ -116,7 +88,7 @@ pspace machine-event list -F name -F dtModified
 ### Usage
 
 ```
-machine-event list [flags]
+pspace machine-event list [flags]
 ```
 
 ### Flags

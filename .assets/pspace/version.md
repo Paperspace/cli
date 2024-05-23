@@ -5,7 +5,7 @@ Shows version information command, including version number and build date.
 ### Usage
 
 ```
-version [flags]
+pspace version [flags]
 ```
 
 ### Flags

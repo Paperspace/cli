@@ -10,7 +10,7 @@ Valid pages are:
 ### Usage
 
 ```
-docs [arguments] [flags]
+pspace docs [arguments] [flags]
 ```
 
 ### Flags

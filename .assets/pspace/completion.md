@@ -6,8 +6,8 @@ sub-command's help for details on how to use the generated script.
 ### Usage
 
 ```
-completion [command]
-completion [flags]
+pspace completion [command]
+pspace completion [flags]
 ```
 
 ### Flags
@@ -36,7 +36,7 @@ already, you can install it via your OS's package manager.
 To load completions in your current shell session:
 
 ```
-$ source <(completion bash bash)
+$ source <(pspace completion bash bash)
 ```
 
 To load completions for every new session, execute once:
@@ -44,13 +44,13 @@ To load completions for every new session, execute once:
 Linux:
 
 ```
-$ completion bash bash > /etc/bash_completion.d/pspace
+$ pspace completion bash bash > /etc/bash_completion.d/pspace
 ```
 
 macOS:
 
 ```
-$ completion bash bash > /usr/local/etc/bash_completion.d/pspace
+$ pspace completion bash bash > /usr/local/etc/bash_completion.d/pspace
 ```
 
 You will need to start a new shell for this setup to take effect.
@@ -58,7 +58,7 @@ You will need to start a new shell for this setup to take effect.
 ### Usage
 
 ```
-completion bash [flags]
+pspace completion bash [flags]
 ```
 
 ### Flags
@@ -79,13 +79,13 @@ Generate the autocompletion script for the fish shell.
 To load completions in your current shell session:
 
 ```
-$ completion fish fish | source
+$ pspace completion fish fish | source
 ```
 
 To load completions for every new session, execute once:
 
 ```
-$ completion fish fish > ~/.config/fish/completions/pspace.fish
+$ pspace completion fish fish > ~/.config/fish/completions/pspace.fish
 ```
 
 You will need to start a new shell for this setup to take effect.
@@ -93,7 +93,7 @@ You will need to start a new shell for this setup to take effect.
 ### Usage
 
 ```
-completion fish [flags]
+pspace completion fish [flags]
 ```
 
 ### Flags
@@ -115,8 +115,8 @@ Show help for a completion command
 ### Usage
 
 ```
-completion help [command]
-completion help [arguments] [flags]
+pspace completion help [command]
+pspace completion help [arguments] [flags]
 ```
 
 ### Flags
@@ -131,34 +131,6 @@ completion help [arguments] [flags]
 #### Subcommands
 
 - [commands](#commands)
-
-## pspace completion help commands
-
-List completion commands
-
-Example:
-
-```
-$ completion help commands commands
-```
-
-### Usage
-
-```
-completion help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
 
 ## pspace completion zsh
 
@@ -176,19 +148,19 @@ To load completions for every new session, execute once:
 Linux:
 
 ```
-$ completion zsh zsh > "${fpath[1]}/_pspace"
+$ pspace completion zsh zsh > "${fpath[1]}/_pspace"
 ```
 
 macOS:
 
 ```
-$ completion zsh zsh > /usr/local/share/zsh/site-functions/_pspace
+$ pspace completion zsh zsh > /usr/local/share/zsh/site-functions/_pspace
 ```
 
 Oh My Zsh:
 
 ```
-$ completion zsh zsh > ~/.oh-my-zsh/completions/_pspace
+$ pspace completion zsh zsh > ~/.oh-my-zsh/completions/_pspace
 ```
 
 You will need to start a new shell for this setup to take effect.
@@ -196,7 +168,7 @@ You will need to start a new shell for this setup to take effect.
 ### Usage
 
 ```
-completion zsh [flags]
+pspace completion zsh [flags]
 ```
 
 ### Flags

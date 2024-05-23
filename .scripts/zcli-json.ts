@@ -168,7 +168,7 @@ export async function zcliJson<
             description: root.long(ctx) || root.short(ctx) || "",
             summary: root.short(ctx) || "",
           },
-          commands: [generateCommand(root, [])],
+          commands: [generateCommand(root, [root.name])],
         };
       });
   }

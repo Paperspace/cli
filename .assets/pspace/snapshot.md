@@ -10,8 +10,8 @@ For more information, see https://docs.paperspace.com/storage/snapshots.
 ### Usage
 
 ```
-snapshot [command]
-snapshot [flags]
+pspace snapshot [command]
+pspace snapshot [flags]
 ```
 
 ### Flags
@@ -38,7 +38,7 @@ Create a snapshot from a machine.
 ### Usage
 
 ```
-snapshot create [flags]
+pspace snapshot create [flags]
 ```
 
 ### Flags
@@ -62,7 +62,7 @@ Delete a snapshot from a team.
 ### Usage
 
 ```
-snapshot delete [arguments] [flags]
+pspace snapshot delete [arguments] [flags]
 ```
 
 ### Flags
@@ -84,8 +84,8 @@ Show help for a snapshot command
 ### Usage
 
 ```
-snapshot help [command]
-snapshot help [arguments] [flags]
+pspace snapshot help [command]
+pspace snapshot help [arguments] [flags]
 ```
 
 ### Flags
@@ -101,34 +101,6 @@ snapshot help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace snapshot help commands
-
-List snapshot commands
-
-Example:
-
-```
-$ snapshot help commands commands
-```
-
-### Usage
-
-```
-snapshot help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace snapshot list
 
 List snapshots in your team.
@@ -142,7 +114,7 @@ pspace snapshot list -F name -F dtModified
 ### Usage
 
 ```
-snapshot list [flags]
+pspace snapshot list [flags]
 ```
 
 ### Flags
@@ -171,7 +143,7 @@ Restore a machine to a snapshot.
 ### Usage
 
 ```
-snapshot restore [arguments] [flags]
+pspace snapshot restore [arguments] [flags]
 ```
 
 ### Flags

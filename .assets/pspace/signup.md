@@ -5,7 +5,7 @@ This command opens the Paperspace signup page in your browser.
 ### Usage
 
 ```
-signup [flags]
+pspace signup [flags]
 ```
 
 ### Flags

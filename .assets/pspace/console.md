@@ -5,7 +5,7 @@ This command opens the Paperspace web console in your browser.
 ### Usage
 
 ```
-console [flags]
+pspace console [flags]
 ```
 
 ### Flags

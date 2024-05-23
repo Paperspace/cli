@@ -7,8 +7,8 @@ For more information, see https://docs.paperspace.com/machines.
 ### Usage
 
 ```
-machine [command]
-machine [flags]
+pspace machine [command]
+pspace machine [flags]
 ```
 
 ### Flags
@@ -39,7 +39,7 @@ Create a machine.
 ### Usage
 
 ```
-machine create [flags]
+pspace machine create [flags]
 ```
 
 ### Flags
@@ -82,7 +82,7 @@ Delete a machine from a team.
 ### Usage
 
 ```
-machine delete [arguments] [flags]
+pspace machine delete [arguments] [flags]
 ```
 
 ### Flags
@@ -104,7 +104,7 @@ Get a machine from a team.
 ### Usage
 
 ```
-machine get [arguments] [flags]
+pspace machine get [arguments] [flags]
 ```
 
 ### Flags
@@ -126,8 +126,8 @@ Show help for a machine command
 ### Usage
 
 ```
-machine help [command]
-machine help [arguments] [flags]
+pspace machine help [command]
+pspace machine help [arguments] [flags]
 ```
 
 ### Flags
@@ -143,34 +143,6 @@ machine help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace machine help commands
-
-List machine commands
-
-Example:
-
-```
-$ machine help commands commands
-```
-
-### Usage
-
-```
-machine help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace machine list
 
 List machines in your team.
@@ -184,7 +156,7 @@ pspace machine list -F name -F dtModified
 ### Usage
 
 ```
-machine list [flags]
+pspace machine list [flags]
 ```
 
 ### Flags
@@ -215,7 +187,7 @@ Restart a machine from a team.
 ### Usage
 
 ```
-machine restart [arguments] [flags]
+pspace machine restart [arguments] [flags]
 ```
 
 ### Flags
@@ -237,7 +209,7 @@ Start a machine from a team.
 ### Usage
 
 ```
-machine start [arguments] [flags]
+pspace machine start [arguments] [flags]
 ```
 
 ### Flags
@@ -259,7 +231,7 @@ Stop a machine from a team.
 ### Usage
 
 ```
-machine stop [arguments] [flags]
+pspace machine stop [arguments] [flags]
 ```
 
 ### Flags
@@ -281,7 +253,7 @@ Update a machine's settings.
 ### Usage
 
 ```
-machine update [arguments] [flags]
+pspace machine update [arguments] [flags]
 ```
 
 ### Flags

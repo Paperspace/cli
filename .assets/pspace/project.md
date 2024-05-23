@@ -5,8 +5,8 @@ Manage your Paperspace projects.
 ### Usage
 
 ```
-project [command]
-project [flags]
+pspace project [command]
+pspace project [flags]
 ```
 
 ### Flags
@@ -36,7 +36,7 @@ provide one.
 ### Usage
 
 ```
-project create [arguments] [flags]
+pspace project create [arguments] [flags]
 ```
 
 ### Flags
@@ -59,7 +59,7 @@ you for one based on the projects you have access to.
 ### Usage
 
 ```
-project delete [arguments] [flags]
+pspace project delete [arguments] [flags]
 ```
 
 ### Flags
@@ -82,7 +82,7 @@ you for one based on the projects you have access to.
 ### Usage
 
 ```
-project get [arguments] [flags]
+pspace project get [arguments] [flags]
 ```
 
 ### Flags
@@ -104,8 +104,8 @@ Show help for a project command
 ### Usage
 
 ```
-project help [command]
-project help [arguments] [flags]
+pspace project help [command]
+pspace project help [arguments] [flags]
 ```
 
 ### Flags
@@ -120,34 +120,6 @@ project help [arguments] [flags]
 #### Subcommands
 
 - [commands](#commands)
-
-## pspace project help commands
-
-List project commands
-
-Example:
-
-```
-$ project help commands commands
-```
-
-### Usage
-
-```
-project help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
 
 ## pspace project link
 
@@ -176,7 +148,7 @@ $ pspace link pzwf2g05ubegj
 ### Usage
 
 ```
-project link [arguments] [flags]
+pspace project link [arguments] [flags]
 ```
 
 ### Flags
@@ -204,7 +176,7 @@ pspace project list -F id -F name -F dtCreated
 ### Usage
 
 ```
-project list [flags]
+pspace project list [flags]
 ```
 
 ### Flags

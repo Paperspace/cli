@@ -5,7 +5,7 @@ Log out of the CLI for the current team, a specific team, or all teams.
 ### Usage
 
 ```
-logout [arguments...] [flags]
+pspace logout [arguments...] [flags]
 ```
 
 ### Flags

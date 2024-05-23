@@ -7,8 +7,8 @@ groups as a primitive for your own autoscaler.
 ### Usage
 
 ```
-autoscaling-group [command]
-autoscaling-group [flags]
+pspace autoscaling-group [command]
+pspace autoscaling-group [flags]
 ```
 
 ### Flags
@@ -36,7 +36,7 @@ Create an autoscaling group.
 ### Usage
 
 ```
-autoscaling-group create [flags]
+pspace autoscaling-group create [flags]
 ```
 
 ### Flags
@@ -67,7 +67,7 @@ Delete an autoscaling group from a team.
 ### Usage
 
 ```
-autoscaling-group delete [arguments] [flags]
+pspace autoscaling-group delete [arguments] [flags]
 ```
 
 ### Flags
@@ -89,7 +89,7 @@ Get an autoscaling group from a team.
 ### Usage
 
 ```
-autoscaling-group get [arguments] [flags]
+pspace autoscaling-group get [arguments] [flags]
 ```
 
 ### Flags
@@ -111,8 +111,8 @@ Show help for a autoscaling-group command
 ### Usage
 
 ```
-autoscaling-group help [command]
-autoscaling-group help [arguments] [flags]
+pspace autoscaling-group help [command]
+pspace autoscaling-group help [arguments] [flags]
 ```
 
 ### Flags
@@ -128,34 +128,6 @@ autoscaling-group help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace autoscaling-group help commands
-
-List autoscaling-group commands
-
-Example:
-
-```
-$ autoscaling-group help commands commands
-```
-
-### Usage
-
-```
-autoscaling-group help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace autoscaling-group list
 
 List autoscaling groups in your team.
@@ -169,7 +141,7 @@ pspace autoscaling-group list -F name -F dtCreated
 ### Usage
 
 ```
-autoscaling-group list [flags]
+pspace autoscaling-group list [flags]
 ```
 
 ### Flags
@@ -198,7 +170,7 @@ Update an autoscaling group.
 ### Usage
 
 ```
-autoscaling-group update [arguments] [flags]
+pspace autoscaling-group update [arguments] [flags]
 ```
 
 ### Flags

@@ -9,8 +9,8 @@ For more information, see https://docs.paperspace.com/compute/custom-templates.
 ### Usage
 
 ```
-custom-template [command]
-custom-template [flags]
+pspace custom-template [command]
+pspace custom-template [flags]
 ```
 
 ### Flags
@@ -37,7 +37,7 @@ Create a custom template from a machine.
 ### Usage
 
 ```
-custom-template create [flags]
+pspace custom-template create [flags]
 ```
 
 ### Flags
@@ -61,7 +61,7 @@ Delete a custom template from a team.
 ### Usage
 
 ```
-custom-template delete [arguments] [flags]
+pspace custom-template delete [arguments] [flags]
 ```
 
 ### Flags
@@ -83,7 +83,7 @@ Get a custom template from a team.
 ### Usage
 
 ```
-custom-template get [arguments] [flags]
+pspace custom-template get [arguments] [flags]
 ```
 
 ### Flags
@@ -105,8 +105,8 @@ Show help for a custom-template command
 ### Usage
 
 ```
-custom-template help [command]
-custom-template help [arguments] [flags]
+pspace custom-template help [command]
+pspace custom-template help [arguments] [flags]
 ```
 
 ### Flags
@@ -122,34 +122,6 @@ custom-template help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace custom-template help commands
-
-List custom-template commands
-
-Example:
-
-```
-$ custom-template help commands commands
-```
-
-### Usage
-
-```
-custom-template help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace custom-template list
 
 List custom templates in your team.
@@ -163,7 +135,7 @@ pspace custom-template list -F name -F dtModified
 ### Usage
 
 ```
-custom-template list [flags]
+pspace custom-template list [flags]
 ```
 
 ### Flags

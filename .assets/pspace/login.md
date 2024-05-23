@@ -5,7 +5,7 @@ Log in to the CLI using your Paperspace API key or by opening the web console.
 ### Usage
 
 ```
-login [arguments] [flags]
+pspace login [arguments] [flags]
 ```
 
 ### Flags

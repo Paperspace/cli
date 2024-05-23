@@ -6,8 +6,8 @@ first boot or on every boot.
 ### Usage
 
 ```
-startup-script [command]
-startup-script [flags]
+pspace startup-script [command]
+pspace startup-script [flags]
 ```
 
 ### Flags
@@ -37,7 +37,7 @@ Assign a startup script to a machine.
 ### Usage
 
 ```
-startup-script assign [arguments] [flags]
+pspace startup-script assign [arguments] [flags]
 ```
 
 ### Flags
@@ -60,7 +60,7 @@ Create a startup script.
 ### Usage
 
 ```
-startup-script create [flags]
+pspace startup-script create [flags]
 ```
 
 ### Flags
@@ -85,7 +85,7 @@ Delete a startup script from a team.
 ### Usage
 
 ```
-startup-script delete [arguments] [flags]
+pspace startup-script delete [arguments] [flags]
 ```
 
 ### Flags
@@ -107,7 +107,7 @@ Get a startup script from a team.
 ### Usage
 
 ```
-startup-script get [arguments] [flags]
+pspace startup-script get [arguments] [flags]
 ```
 
 ### Flags
@@ -129,8 +129,8 @@ Show help for a startup-script command
 ### Usage
 
 ```
-startup-script help [command]
-startup-script help [arguments] [flags]
+pspace startup-script help [command]
+pspace startup-script help [arguments] [flags]
 ```
 
 ### Flags
@@ -146,34 +146,6 @@ startup-script help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace startup-script help commands
-
-List startup-script commands
-
-Example:
-
-```
-$ startup-script help commands commands
-```
-
-### Usage
-
-```
-startup-script help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace startup-script list
 
 List startup scripts in your team.
@@ -187,7 +159,7 @@ pspace startup-script list -F name -F dtCreated
 ### Usage
 
 ```
-startup-script list [flags]
+pspace startup-script list [flags]
 ```
 
 ### Flags
@@ -215,7 +187,7 @@ Unassign a startup script from a machine.
 ### Usage
 
 ```
-startup-script unassign [arguments] [flags]
+pspace startup-script unassign [arguments] [flags]
 ```
 
 ### Flags
@@ -238,7 +210,7 @@ Update a startup script.
 ### Usage
 
 ```
-startup-script update [arguments] [flags]
+pspace startup-script update [arguments] [flags]
 ```
 
 ### Flags

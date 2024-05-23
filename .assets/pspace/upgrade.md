@@ -19,7 +19,7 @@ pspace upgrade
 ### Usage
 
 ```
-upgrade [flags]
+pspace upgrade [flags]
 ```
 
 ### Flags

@@ -25,7 +25,7 @@ $ pspace up --cwd ../my-app
 ### Usage
 
 ```
-up [flags]
+pspace up [flags]
 ```
 
 ### Flags

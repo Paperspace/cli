@@ -15,8 +15,8 @@ pspace config set team "my-team"
 ### Usage
 
 ```
-config [command]
-config [flags]
+pspace config [command]
+pspace config [flags]
 ```
 
 ### Flags
@@ -42,7 +42,7 @@ Delete a configuration value.
 ### Usage
 
 ```
-config delete <arguments> [flags]
+pspace config delete <arguments> [flags]
 ```
 
 ### Flags
@@ -70,7 +70,7 @@ pspace config get team
 ### Usage
 
 ```
-config get [arguments] [flags]
+pspace config get [arguments] [flags]
 ```
 
 ### Flags
@@ -91,8 +91,8 @@ Show help for a config command
 ### Usage
 
 ```
-config help [command]
-config help [arguments] [flags]
+pspace config help [command]
+pspace config help [arguments] [flags]
 ```
 
 ### Flags
@@ -108,34 +108,6 @@ config help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace config help commands
-
-List config commands
-
-Example:
-
-```
-$ config help commands commands
-```
-
-### Usage
-
-```
-config help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace config set
 
 Set a configuration value.
@@ -143,7 +115,7 @@ Set a configuration value.
 ### Usage
 
 ```
-config set [arguments] [arguments...] [flags]
+pspace config set [arguments] [arguments...] [flags]
 ```
 
 ### Flags

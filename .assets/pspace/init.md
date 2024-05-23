@@ -26,7 +26,7 @@ $ pspace init my-app -t Paperspace/gradio-demo
 ### Usage
 
 ```
-init [arguments] [flags]
+pspace init [arguments] [flags]
 ```
 
 ### Flags

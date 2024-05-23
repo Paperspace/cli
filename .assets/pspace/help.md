@@ -5,8 +5,8 @@ Show help for a pspace command
 ### Usage
 
 ```
-help [command]
-help [arguments] [flags]
+pspace help [command]
+pspace help [arguments] [flags]
 ```
 
 ### Flags
@@ -29,13 +29,13 @@ List pspace commands
 Example:
 
 ```
-$ help commands commands
+$ pspace help commands commands
 ```
 
 ### Usage
 
 ```
-help commands [flags]
+pspace help commands [flags]
 ```
 
 ### Flags

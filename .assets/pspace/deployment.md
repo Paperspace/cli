@@ -5,8 +5,8 @@ Effortlessly deploy ML apps to Paperspace.
 ### Usage
 
 ```
-deployment [command]
-deployment [flags]
+pspace deployment [command]
+pspace deployment [flags]
 ```
 
 ### Flags
@@ -38,7 +38,7 @@ pspace deployment delete 123e4567-e89b-12d3-a456-426614174000
 ### Usage
 
 ```
-deployment delete [arguments] [flags]
+pspace deployment delete [arguments] [flags]
 ```
 
 ### Flags
@@ -70,7 +70,7 @@ pspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name
 ### Usage
 
 ```
-deployment get [arguments] [flags]
+pspace deployment get [arguments] [flags]
 ```
 
 ### Flags
@@ -92,8 +92,8 @@ Show help for a deployment command
 ### Usage
 
 ```
-deployment help [command]
-deployment help [arguments] [flags]
+pspace deployment help [command]
+pspace deployment help [arguments] [flags]
 ```
 
 ### Flags
@@ -109,34 +109,6 @@ deployment help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace deployment help commands
-
-List deployment commands
-
-Example:
-
-```
-$ deployment help commands commands
-```
-
-### Usage
-
-```
-deployment help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace deployment list
 
 List deployments in your team.
@@ -150,7 +122,7 @@ pspace deployment list -F id -F name
 ### Usage
 
 ```
-deployment list [flags]
+pspace deployment list [flags]
 ```
 
 ### Flags
@@ -203,7 +175,7 @@ $ pspace deployment create --project-id 1234
 ### Usage
 
 ```
-deployment up [flags]
+pspace deployment up [flags]
 ```
 
 ### Flags

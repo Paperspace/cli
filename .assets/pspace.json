@@ -4,7 +4,7 @@
     "name": "pspace",
     "version": "0.1.0-dev",
     "commit": "development",
-    "buildDate": "2024-05-23T19:42:58.057Z",
+    "buildDate": "2024-05-23T22:39:21.821Z",
     "description": "A CLI for using the Paperspace API. \n\nIt allows you to authenticate, launch deployments, do logging, and more.\n\n* Deploy an ML app with the `deployment` command\n* View a deployed app with the `deployment open` command\n* Check the status of a deployment with the `deployment status` command\n\nRead the full documentation at: https://docs.paperspace.com/",
     "summary": "A CLI for using the Paperspace API."
   },
@@ -91,7 +91,7 @@
           "name": "autoscaling-group",
           "description": "Manage your autoscaling groups. Autoscaling groups enable using\nthe Kubernetes cluster-autoscaler to automatically scale your cluster.\nYou can also autoscaling groups as a primitive for your own autoscaler.",
           "summary": "Manage your autoscaling groups",
-          "usage": "  autoscaling-group [command]\n  autoscaling-group [flags]",
+          "usage": "  pspace autoscaling-group [command]\n  pspace autoscaling-group [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -169,7 +169,7 @@
               "name": "create",
               "description": "Create an autoscaling group.",
               "summary": "Create an autoscaling group",
-              "usage": "  autoscaling-group create [flags]",
+              "usage": "  pspace autoscaling-group create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -392,7 +392,7 @@
               "name": "delete",
               "description": "Delete an autoscaling group from a team.",
               "summary": "Delete an autoscaling group",
-              "usage": "  autoscaling-group delete [arguments] [flags]",
+              "usage": "  pspace autoscaling-group delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -504,7 +504,7 @@
               "name": "get",
               "description": "Get an autoscaling group from a team.",
               "summary": "Get an autoscaling group",
-              "usage": "  autoscaling-group get [arguments] [flags]",
+              "usage": "  pspace autoscaling-group get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -616,7 +616,7 @@
               "name": "help",
               "description": "Show help for a autoscaling-group command",
               "summary": "Show help for a autoscaling-group command",
-              "usage": "  autoscaling-group help [command]\n  autoscaling-group help [arguments] [flags]",
+              "usage": "  pspace autoscaling-group help [command]\n  pspace autoscaling-group help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -717,9 +717,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List autoscaling-group commands\n\nExample:\n```\n$ autoscaling-group help commands commands\n```",
+                  "description": "List autoscaling-group commands\n\nExample:\n```\n$ pspace autoscaling-group help commands commands\n```",
                   "summary": "List autoscaling-group commands",
-                  "usage": "  autoscaling-group help commands [flags]",
+                  "usage": "  pspace autoscaling-group help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -817,7 +817,7 @@
               "name": "list",
               "description": "List autoscaling groups in your team.\n\nPick a subset of fields to display:\n```\npspace autoscaling-group list -F name -F dtCreated\n```",
               "summary": "List autoscaling groups.",
-              "usage": "  autoscaling-group list [flags]",
+              "usage": "  pspace autoscaling-group list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -1013,7 +1013,7 @@
               "name": "update",
               "description": "Update an autoscaling group.",
               "summary": "Update an autoscaling group",
-              "usage": "  autoscaling-group update [arguments] [flags]",
+              "usage": "  pspace autoscaling-group update [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -1269,7 +1269,7 @@
           "name": "completion",
           "description": "Generate an autocompletion script for pspace in the specified shell.\nSee each sub-command's help for details on how to use the generated script.",
           "summary": "Generate an autocompletion script for the specified shell",
-          "usage": "  completion [command]\n  completion [flags]",
+          "usage": "  pspace completion [command]\n  pspace completion [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -1345,9 +1345,9 @@
           "commands": [
             {
               "name": "bash",
-              "description": "Generate the autocompletion script for the bash shell.\n\nThis script depends on the `bash-completion` package.\nIf it is not installed already, you can install it via your OS's package manager.\n\nTo load completions in your current shell session:\n```\n$ source <(completion bash bash)\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ completion bash bash > /etc/bash_completion.d/pspace\n```\n\nmacOS:\n```\n$ completion bash bash > /usr/local/etc/bash_completion.d/pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "description": "Generate the autocompletion script for the bash shell.\n\nThis script depends on the `bash-completion` package.\nIf it is not installed already, you can install it via your OS's package manager.\n\nTo load completions in your current shell session:\n```\n$ source <(pspace completion bash bash)\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion bash bash > /etc/bash_completion.d/pspace\n```\n\nmacOS:\n```\n$ pspace completion bash bash > /usr/local/etc/bash_completion.d/pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
               "summary": "Generate an autocompletion script for the bash shell",
-              "usage": "  completion bash [flags]",
+              "usage": "  pspace completion bash [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -1424,9 +1424,9 @@
             },
             {
               "name": "fish",
-              "description": "Generate the autocompletion script for the fish shell.\n\nTo load completions in your current shell session:\n```\n$ completion fish fish | source\n```\n\nTo load completions for every new session, execute once:\n```\n$ completion fish fish > ~/.config/fish/completions/pspace.fish\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "description": "Generate the autocompletion script for the fish shell.\n\nTo load completions in your current shell session:\n```\n$ pspace completion fish fish | source\n```\n\nTo load completions for every new session, execute once:\n```\n$ pspace completion fish fish > ~/.config/fish/completions/pspace.fish\n```\n\nYou will need to start a new shell for this setup to take effect.",
               "summary": "Generate an autocompletion script for the fish shell",
-              "usage": "  completion fish [flags]",
+              "usage": "  pspace completion fish [flags]",
               "flags": [
                 {
                   "name": "no-descriptions",
@@ -1520,7 +1520,7 @@
               "name": "help",
               "description": "Show help for a completion command",
               "summary": "Show help for a completion command",
-              "usage": "  completion help [command]\n  completion help [arguments] [flags]",
+              "usage": "  pspace completion help [command]\n  pspace completion help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -1619,9 +1619,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List completion commands\n\nExample:\n```\n$ completion help commands commands\n```",
+                  "description": "List completion commands\n\nExample:\n```\n$ pspace completion help commands commands\n```",
                   "summary": "List completion commands",
-                  "usage": "  completion help commands [flags]",
+                  "usage": "  pspace completion help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -1717,9 +1717,9 @@
             },
             {
               "name": "zsh",
-              "description": "Generate the autocompletion script for the zsh shell.\n\nIf shell completion is not already enabled in your environment you will need\nto enable it.  You can execute the following once:\n\n```\n$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ completion zsh zsh > \"${fpath[1]}/_pspace\"\n```\n\nmacOS:\n```\n$ completion zsh zsh > /usr/local/share/zsh/site-functions/_pspace\n```\n\nOh My Zsh:\n```\n$ completion zsh zsh > ~/.oh-my-zsh/completions/_pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
+              "description": "Generate the autocompletion script for the zsh shell.\n\nIf shell completion is not already enabled in your environment you will need\nto enable it.  You can execute the following once:\n\n```\n$ echo \"autoload -U compinit; compinit\" >> ~/.zshrc\n```\n\nTo load completions for every new session, execute once:\n\nLinux:\n```\n$ pspace completion zsh zsh > \"${fpath[1]}/_pspace\"\n```\n\nmacOS:\n```\n$ pspace completion zsh zsh > /usr/local/share/zsh/site-functions/_pspace\n```\n\nOh My Zsh:\n```\n$ pspace completion zsh zsh > ~/.oh-my-zsh/completions/_pspace\n```\n\nYou will need to start a new shell for this setup to take effect.",
               "summary": "Generate an autocompletion script for the zsh shell",
-              "usage": "  completion zsh [flags]",
+              "usage": "  pspace completion zsh [flags]",
               "flags": [
                 {
                   "name": "no-descriptions",
@@ -1815,7 +1815,7 @@
           "name": "config",
           "description": "This command manages your Paperspace configuration. You can use it to set, get, and \ndelete configuration values. Running this command without any subcommands will print \nyour current configuration.\n\nYour configuration is stored in a TOML file at `~/.paperspace/config.toml`. \n\nFor example, to set the current team, run: \n```\npspace config set team \"my-team\"\n```",
           "summary": "Manage your local Paperspace configuration.",
-          "usage": "  config [command]\n  config [flags]",
+          "usage": "  pspace config [command]\n  pspace config [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -1893,7 +1893,7 @@
               "name": "delete",
               "description": "Delete a configuration value.",
               "summary": "Delete a configuration value.",
-              "usage": "  config delete <arguments> [flags]",
+              "usage": "  pspace config delete <arguments> [flags]",
               "arguments": {
                 "description": "",
                 "summary": "The key to delete.",
@@ -1994,7 +1994,7 @@
               "name": "get",
               "description": "This command gets a configuration value. You can pass a key to get a specific\nvalue, or you can pass no arguments to get all configuration values.\n\nFor example, to get the current team run:\n```\npspace config get team\n```",
               "summary": "Get a configuration value.",
-              "usage": "  config get [arguments] [flags]",
+              "usage": "  pspace config get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "The key to get.",
@@ -2095,7 +2095,7 @@
               "name": "help",
               "description": "Show help for a config command",
               "summary": "Show help for a config command",
-              "usage": "  config help [command]\n  config help [arguments] [flags]",
+              "usage": "  pspace config help [command]\n  pspace config help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -2194,9 +2194,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List config commands\n\nExample:\n```\n$ config help commands commands\n```",
+                  "description": "List config commands\n\nExample:\n```\n$ pspace config help commands commands\n```",
                   "summary": "List config commands",
-                  "usage": "  config help commands [flags]",
+                  "usage": "  pspace config help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -2294,7 +2294,7 @@
               "name": "set",
               "description": "Set a configuration value.",
               "summary": "Set a configuration value.",
-              "usage": "  config set [arguments] [arguments...] [flags]",
+              "usage": "  pspace config set [arguments] [arguments...] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "The key/value pair to set.",
@@ -2408,7 +2408,7 @@
           "name": "console",
           "description": "This command opens the Paperspace web console in your browser.",
           "summary": "Open the Paperspace web console.",
-          "usage": "  console [flags]",
+          "usage": "  pspace console [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -2487,7 +2487,7 @@
           "name": "custom-template",
           "description": "Manage your custom templates. Custom templates are a backup of your\nmachine's disk. They can be used to create additional machines. You\ncan use them to prepopulate a machine with your desired software stack.\n\nFor more information, see https://docs.paperspace.com/compute/custom-templates.",
           "summary": "Manage your custom templates",
-          "usage": "  custom-template [command]\n  custom-template [flags]",
+          "usage": "  pspace custom-template [command]\n  pspace custom-template [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -2565,7 +2565,7 @@
               "name": "create",
               "description": "Create a custom template from a machine.",
               "summary": "Create a custom template",
-              "usage": "  custom-template create [flags]",
+              "usage": "  pspace custom-template create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -2692,7 +2692,7 @@
               "name": "delete",
               "description": "Delete a custom template from a team.",
               "summary": "Delete a custom template",
-              "usage": "  custom-template delete [arguments] [flags]",
+              "usage": "  pspace custom-template delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -2804,7 +2804,7 @@
               "name": "get",
               "description": "Get a custom template from a team.",
               "summary": "Get a custom template",
-              "usage": "  custom-template get [arguments] [flags]",
+              "usage": "  pspace custom-template get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -2916,7 +2916,7 @@
               "name": "help",
               "description": "Show help for a custom-template command",
               "summary": "Show help for a custom-template command",
-              "usage": "  custom-template help [command]\n  custom-template help [arguments] [flags]",
+              "usage": "  pspace custom-template help [command]\n  pspace custom-template help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3016,9 +3016,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List custom-template commands\n\nExample:\n```\n$ custom-template help commands commands\n```",
+                  "description": "List custom-template commands\n\nExample:\n```\n$ pspace custom-template help commands commands\n```",
                   "summary": "List custom-template commands",
-                  "usage": "  custom-template help commands [flags]",
+                  "usage": "  pspace custom-template help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -3116,7 +3116,7 @@
               "name": "list",
               "description": "List custom templates in your team.\n\nPick a subset of fields to display:\n```\npspace custom-template list -F name -F dtModified\n```",
               "summary": "List custom templates.",
-              "usage": "  custom-template list [flags]",
+              "usage": "  pspace custom-template list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -3318,7 +3318,7 @@
           "name": "dataset",
           "description": "Manage your datasets.\n\nFor more information, see https://docs.paperspace.com/storage/datasets.",
           "summary": "Manage your datasets",
-          "usage": "  dataset [command]\n  dataset [flags]",
+          "usage": "  pspace dataset [command]\n  pspace dataset [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -3396,7 +3396,7 @@
               "name": "create",
               "description": "Create a dataset.",
               "summary": "Create a dataset",
-              "usage": "  dataset create [flags]",
+              "usage": "  pspace dataset create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -3549,7 +3549,7 @@
               "name": "delete",
               "description": "Delete a dataset from a team.",
               "summary": "Delete a dataset",
-              "usage": "  dataset delete [arguments] [flags]",
+              "usage": "  pspace dataset delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3661,7 +3661,7 @@
               "name": "get",
               "description": "Get a dataset from a team.",
               "summary": "Get a dataset",
-              "usage": "  dataset get [arguments] [flags]",
+              "usage": "  pspace dataset get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3773,7 +3773,7 @@
               "name": "help",
               "description": "Show help for a dataset command",
               "summary": "Show help for a dataset command",
-              "usage": "  dataset help [command]\n  dataset help [arguments] [flags]",
+              "usage": "  pspace dataset help [command]\n  pspace dataset help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -3875,9 +3875,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List dataset commands\n\nExample:\n```\n$ dataset help commands commands\n```",
+                  "description": "List dataset commands\n\nExample:\n```\n$ pspace dataset help commands commands\n```",
                   "summary": "List dataset commands",
-                  "usage": "  dataset help commands [flags]",
+                  "usage": "  pspace dataset help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -3975,7 +3975,7 @@
               "name": "list",
               "description": "List datasets in your team or project.\n\nPick a subset of fields to display:\n```\npspace dataset list -F name -F dtModified\n```",
               "summary": "List datasets.",
-              "usage": "  dataset list [flags]",
+              "usage": "  pspace dataset list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -4143,7 +4143,7 @@
               "name": "update",
               "description": "Update a dataset in a project or team.",
               "summary": "Update a dataset",
-              "usage": "  dataset update [arguments] [flags]",
+              "usage": "  pspace dataset update [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -4285,7 +4285,7 @@
               "name": "versions",
               "description": "Manage your dataset versions.\n\nFor more information, see https://docs.paperspace.com/storage/datasetVersions.",
               "summary": "Manage your dataset versions",
-              "usage": "  dataset versions [command]\n  dataset versions [flags]",
+              "usage": "  pspace dataset versions [command]\n  pspace dataset versions [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -4363,7 +4363,7 @@
                   "name": "create",
                   "description": "Create a dataset version. This command will prompt you for an ID if you don't\nprovide one.",
                   "summary": "Create a dataset version",
-                  "usage": "  dataset versions create [arguments] [arguments] [flags]",
+                  "usage": "  pspace dataset versions create [arguments] [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -4500,7 +4500,7 @@
                   "name": "delete",
                   "description": "Delete a dataset version from a team. This command will prompt you for an ID\nif you don't provide one.",
                   "summary": "Delete a dataset version",
-                  "usage": "  dataset versions delete [arguments] [arguments] [flags]",
+                  "usage": "  pspace dataset versions delete [arguments] [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -4623,7 +4623,7 @@
                   "name": "get",
                   "description": "Get a dataset version from a team. This command will prompt you for an ID\nif you don't provide one.",
                   "summary": "Get a dataset version",
-                  "usage": "  dataset versions get [arguments] [arguments] [flags]",
+                  "usage": "  pspace dataset versions get [arguments] [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -4746,7 +4746,7 @@
                   "name": "help",
                   "description": "Show help for a versions command",
                   "summary": "Show help for a versions command",
-                  "usage": "  dataset versions help [command]\n  dataset versions help [arguments] [flags]",
+                  "usage": "  pspace dataset versions help [command]\n  pspace dataset versions help [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -4847,9 +4847,9 @@
                   "commands": [
                     {
                       "name": "commands",
-                      "description": "List versions commands\n\nExample:\n```\n$ dataset versions help commands commands\n```",
+                      "description": "List versions commands\n\nExample:\n```\n$ pspace dataset versions help commands commands\n```",
                       "summary": "List versions commands",
-                      "usage": "  dataset versions help commands [flags]",
+                      "usage": "  pspace dataset versions help commands [flags]",
                       "flags": [
                         {
                           "name": "log-level",
@@ -4947,7 +4947,7 @@
                   "name": "list",
                   "description": "List dataset versions in your team or project.\n\nPick a subset of fields to display:\n```\npspace dataset versions list <dataset-id> -F name -F dtModified\n```",
                   "summary": "List dataset versions.",
-                  "usage": "  dataset versions list [arguments] [flags]",
+                  "usage": "  pspace dataset versions list [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -5132,7 +5132,7 @@
                   "name": "update",
                   "description": "Update a dataset version in a project or team.",
                   "summary": "Update a dataset version",
-                  "usage": "  dataset versions update [arguments] [arguments] [flags]",
+                  "usage": "  pspace dataset versions update [arguments] [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -5289,7 +5289,7 @@
           "name": "deployment",
           "description": "Effortlessly deploy ML apps to Paperspace.",
           "summary": "Effortlessly deploy ML apps to Paperspace.",
-          "usage": "  deployment [command]\n  deployment [flags]",
+          "usage": "  pspace deployment [command]\n  pspace deployment [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -5367,7 +5367,7 @@
               "name": "delete",
               "description": "Delete a deployment by its ID. If you don't provide an ID, this command will\nprompt you for one based on the deployments you have access to.\n\n```\npspace deployment delete 123e4567-e89b-12d3-a456-426614174000\n```",
               "summary": "Delete a deployment.",
-              "usage": "  deployment delete [arguments] [flags]",
+              "usage": "  pspace deployment delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -5463,7 +5463,7 @@
               "name": "get",
               "description": "Get a deployment by its ID. If you don't provide an ID, this command will\nprompt you for one based on the deployments you have access to.\n\n```\npspace deployment get 123e4567-e89b-12d3-a456-426614174000\n```\n\nPick a subset of fields to display:\n```\npspace deployment get 123e4567-e89b-12d3-a456-426614174000 -F name\n```",
               "summary": "Get a deployment.",
-              "usage": "  deployment get [arguments] [flags]",
+              "usage": "  pspace deployment get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -5575,7 +5575,7 @@
               "name": "help",
               "description": "Show help for a deployment command",
               "summary": "Show help for a deployment command",
-              "usage": "  deployment help [command]\n  deployment help [arguments] [flags]",
+              "usage": "  pspace deployment help [command]\n  pspace deployment help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -5675,9 +5675,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List deployment commands\n\nExample:\n```\n$ deployment help commands commands\n```",
+                  "description": "List deployment commands\n\nExample:\n```\n$ pspace deployment help commands commands\n```",
                   "summary": "List deployment commands",
-                  "usage": "  deployment help commands [flags]",
+                  "usage": "  pspace deployment help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -5775,7 +5775,7 @@
               "name": "list",
               "description": "List deployments in your team.\n\nPick a subset of fields to display:\n```\npspace deployment list -F id -F name\n```",
               "summary": "List deployments.",
-              "usage": "  deployment list [flags]",
+              "usage": "  pspace deployment list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -5943,7 +5943,7 @@
               "name": "up",
               "description": "This will create a new deployment for your app or update it if it already exists. \nYou can optionally specify a path to a config file. If no config file is specified, \nthe default config file paths will be tried.\n\nCreate a new deployment for the app in the current directory.\n```\n$ pspace deployment create\n```\n\nCreate a new deployment using a config file.\n```\n$ pspace deployment create -c paperspace.json\n```\n\nCreate a new deployment for an app in a different directory.\n```\n$ pspace deployment create --cwd ../my-app\n```\n\nCreate a new deployment for an app in a specific project.\n```\n$ pspace deployment create --project-id 1234\n```",
               "summary": "Create or update a deployment",
-              "usage": "  deployment up [flags]",
+              "usage": "  pspace deployment up [flags]",
               "flags": [
                 {
                   "name": "config",
@@ -6070,7 +6070,7 @@
           "name": "docs",
           "description": "This command opens the Paperspace documentation in your browser.\nYou can optionally pass an argument that will take you to a specific \ndocs page.\n\nValid pages are:\n  - `d`, `deployment`",
           "summary": "Open Paperspace documention in your default browser.",
-          "usage": "  docs [arguments] [flags]",
+          "usage": "  pspace docs [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "",
@@ -6170,7 +6170,7 @@
           "name": "help",
           "description": "Show help for a pspace command",
           "summary": "Show help for a pspace command",
-          "usage": "  help [command]\n  help [arguments] [flags]",
+          "usage": "  pspace help [command]\n  pspace help [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "",
@@ -6293,9 +6293,9 @@
           "commands": [
             {
               "name": "commands",
-              "description": "List pspace commands\n\nExample:\n```\n$ help commands commands\n```",
+              "description": "List pspace commands\n\nExample:\n```\n$ pspace help commands commands\n```",
               "summary": "List pspace commands",
-              "usage": "  help commands [flags]",
+              "usage": "  pspace help commands [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -6393,7 +6393,7 @@
           "name": "init",
           "description": "Create a new Paperspace app. This will create a new directory with a\ndefault app structure. You can optionally specify a name for the app\nand a template to use. If no template is specified, the default\ntemplate will be used.\n\nCreate a new app in the current directory.\n```\n$ pspace init\n```\n\nCreate a new app named \"my-app\" relative to the current directory.\n```\n$ pspace init my-app\n```\n\nCreate a new app named \"my-app\" relative to the current directory using\na template from the Paperspace GitHub organization.\n```\n$ pspace init my-app -t Paperspace/gradio-demo\n```",
           "summary": "Create a new Paperspace app",
-          "usage": "  init [arguments] [flags]",
+          "usage": "  pspace init [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "The directory to create the app in. Defaults to the current directory.",
@@ -6564,7 +6564,7 @@
           "name": "login",
           "description": "Log in to the CLI using your Paperspace API key or by opening the web console.",
           "summary": "Log in to the CLI.",
-          "usage": "  login [arguments] [flags]",
+          "usage": "  pspace login [arguments] [flags]",
           "arguments": {
             "description": "",
             "summary": "",
@@ -6660,7 +6660,7 @@
           "name": "logout",
           "description": "Log out of the CLI for the current team, a specific team, or all teams.",
           "summary": "Log out of the CLI.",
-          "usage": "  logout [arguments...] [flags]",
+          "usage": "  pspace logout [arguments...] [flags]",
           "arguments": {
             "description": "",
             "summary": "The teams to logout of.",
@@ -6772,7 +6772,7 @@
           "name": "machine",
           "description": "Manage your Paperspace machines.\n\nFor more information, see  https://docs.paperspace.com/machines.",
           "summary": "Manage your Paperspace machines",
-          "usage": "  machine [command]\n  machine [flags]",
+          "usage": "  pspace machine [command]\n  pspace machine [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -6850,7 +6850,7 @@
               "name": "create",
               "description": "Create a machine.",
               "summary": "Create a machine",
-              "usage": "  machine create [flags]",
+              "usage": "  pspace machine create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -7241,7 +7241,7 @@
               "name": "delete",
               "description": "Delete a machine from a team.",
               "summary": "Delete a machine",
-              "usage": "  machine delete [arguments] [flags]",
+              "usage": "  pspace machine delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -7353,7 +7353,7 @@
               "name": "get",
               "description": "Get a machine from a team.",
               "summary": "Get a machine",
-              "usage": "  machine get [arguments] [flags]",
+              "usage": "  pspace machine get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -7465,7 +7465,7 @@
               "name": "help",
               "description": "Show help for a machine command",
               "summary": "Show help for a machine command",
-              "usage": "  machine help [command]\n  machine help [arguments] [flags]",
+              "usage": "  pspace machine help [command]\n  pspace machine help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -7569,9 +7569,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List machine commands\n\nExample:\n```\n$ machine help commands commands\n```",
+                  "description": "List machine commands\n\nExample:\n```\n$ pspace machine help commands commands\n```",
                   "summary": "List machine commands",
-                  "usage": "  machine help commands [flags]",
+                  "usage": "  pspace machine help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -7669,7 +7669,7 @@
               "name": "list",
               "description": "List machines in your team.\n\nPick a subset of fields to display:\n```\npspace machine list -F name -F dtModified\n```",
               "summary": "List machines.",
-              "usage": "  machine list [flags]",
+              "usage": "  pspace machine list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -7901,7 +7901,7 @@
               "name": "restart",
               "description": "Restart a machine from a team.",
               "summary": "Restart a machine",
-              "usage": "  machine restart [arguments] [flags]",
+              "usage": "  pspace machine restart [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -8013,7 +8013,7 @@
               "name": "start",
               "description": "Start a machine from a team.",
               "summary": "Start a machine",
-              "usage": "  machine start [arguments] [flags]",
+              "usage": "  pspace machine start [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -8125,7 +8125,7 @@
               "name": "stop",
               "description": "Stop a machine from a team.",
               "summary": "Stop a machine",
-              "usage": "  machine stop [arguments] [flags]",
+              "usage": "  pspace machine stop [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -8237,7 +8237,7 @@
               "name": "update",
               "description": "Update a machine's settings.",
               "summary": "Update a machine",
-              "usage": "  machine update [arguments] [flags]",
+              "usage": "  pspace machine update [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -8549,7 +8549,7 @@
           "name": "machine-event",
           "description": "Manage your machine events. Events are asynchronous tasks performed by our system on your machines.\nNot all machine commands are asynchronous. For those that are, a machine event will be returned\nwhich can be tracked using this command.\n\nFor more information, see https://docs.paperspace.com/machines.",
           "summary": "Manage your machine events",
-          "usage": "  machine-event [command]\n  machine-event [flags]",
+          "usage": "  pspace machine-event [command]\n  pspace machine-event [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -8627,7 +8627,7 @@
               "name": "get",
               "description": "Get a machine event from a team.",
               "summary": "Get a machine event",
-              "usage": "  machine-event get [arguments] [flags]",
+              "usage": "  pspace machine-event get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -8739,7 +8739,7 @@
               "name": "help",
               "description": "Show help for a machine-event command",
               "summary": "Show help for a machine-event command",
-              "usage": "  machine-event help [command]\n  machine-event help [arguments] [flags]",
+              "usage": "  pspace machine-event help [command]\n  pspace machine-event help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -8837,9 +8837,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List machine-event commands\n\nExample:\n```\n$ machine-event help commands commands\n```",
+                  "description": "List machine-event commands\n\nExample:\n```\n$ pspace machine-event help commands commands\n```",
                   "summary": "List machine-event commands",
-                  "usage": "  machine-event help commands [flags]",
+                  "usage": "  pspace machine-event help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -8937,7 +8937,7 @@
               "name": "list",
               "description": "List machine events in your team.\n\nPick a subset of fields to display:\n```\npspace machine-event list -F name -F dtModified\n```",
               "summary": "List machine events.",
-              "usage": "  machine-event list [flags]",
+              "usage": "  pspace machine-event list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -9123,7 +9123,7 @@
           "name": "model",
           "description": "Manage your Paperspace models.\n\nFor more information, see https://docs.paperspace.com/deploying/models.",
           "summary": "Manage your Paperspace models",
-          "usage": "  model [command]\n  model [flags]",
+          "usage": "  pspace model [command]\n  pspace model [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -9201,7 +9201,7 @@
               "name": "create",
               "description": "Create a new model. This command will prompt you for a name if you don't\nprovide one.",
               "summary": "Create a new model",
-              "usage": "  model create [flags]",
+              "usage": "  pspace model create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -9374,7 +9374,7 @@
               "name": "delete",
               "description": "Delete a model from a team.",
               "summary": "Delete a model",
-              "usage": "  model delete [arguments] [flags]",
+              "usage": "  pspace model delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -9486,7 +9486,7 @@
               "name": "get",
               "description": "Get a model from a team.",
               "summary": "Get a model",
-              "usage": "  model get [arguments] [flags]",
+              "usage": "  pspace model get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -9598,7 +9598,7 @@
               "name": "help",
               "description": "Show help for a model command",
               "summary": "Show help for a model command",
-              "usage": "  model help [command]\n  model help [arguments] [flags]",
+              "usage": "  pspace model help [command]\n  pspace model help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -9698,9 +9698,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List model commands\n\nExample:\n```\n$ model help commands commands\n```",
+                  "description": "List model commands\n\nExample:\n```\n$ pspace model help commands commands\n```",
                   "summary": "List model commands",
-                  "usage": "  model help commands [flags]",
+                  "usage": "  pspace model help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -9798,7 +9798,7 @@
               "name": "list",
               "description": "List models in your team.\n\nPick a subset of fields to display:\n```\npspace model list -F name -F dtModified\n```",
               "summary": "List models.",
-              "usage": "  model list [flags]",
+              "usage": "  pspace model list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -9968,7 +9968,7 @@
           "name": "os-template",
           "description": "List OS templates. OS templates are pre-configured virtual machines that\nyou can use to create a new machine.\n\nFor more information, see https://docs.paperspace.com/compute/os-templates.",
           "summary": "List OS templates",
-          "usage": "  os-template [command]\n  os-template [flags]",
+          "usage": "  pspace os-template [command]\n  pspace os-template [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -10046,7 +10046,7 @@
               "name": "help",
               "description": "Show help for a os-template command",
               "summary": "Show help for a os-template command",
-              "usage": "  os-template help [command]\n  os-template help [arguments] [flags]",
+              "usage": "  pspace os-template help [command]\n  pspace os-template help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -10143,9 +10143,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List os-template commands\n\nExample:\n```\n$ os-template help commands commands\n```",
+                  "description": "List os-template commands\n\nExample:\n```\n$ pspace os-template help commands commands\n```",
                   "summary": "List os-template commands",
-                  "usage": "  os-template help commands [flags]",
+                  "usage": "  pspace os-template help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -10243,7 +10243,7 @@
               "name": "list",
               "description": "List OS templates.\n\nPick a subset of fields to display:\n```\npspace os-template list -F name\n```",
               "summary": "List OS templates.",
-              "usage": "  os-template list [flags]",
+              "usage": "  pspace os-template list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -10429,7 +10429,7 @@
           "name": "private-network",
           "description": "Manage your private networks. Private networks are logically isolated networks\nfor your machines and shared drives. They can also be used for site-to-site VPNs\nand direct connections to your on-premise network.\n\nFor more information, see https://docs.paperspace.com/networking/private-networks.",
           "summary": "Manage your private networks",
-          "usage": "  private-network [command]\n  private-network [flags]",
+          "usage": "  pspace private-network [command]\n  pspace private-network [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -10507,7 +10507,7 @@
               "name": "create",
               "description": "Create a private network.",
               "summary": "Create a private network",
-              "usage": "  private-network create [flags]",
+              "usage": "  pspace private-network create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -10632,7 +10632,7 @@
               "name": "delete",
               "description": "Delete a private network from a team.",
               "summary": "Delete a private network",
-              "usage": "  private-network delete [arguments] [flags]",
+              "usage": "  pspace private-network delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -10744,7 +10744,7 @@
               "name": "get",
               "description": "Get a private network from a team.",
               "summary": "Get a private network",
-              "usage": "  private-network get [arguments] [flags]",
+              "usage": "  pspace private-network get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -10856,7 +10856,7 @@
               "name": "help",
               "description": "Show help for a private-network command",
               "summary": "Show help for a private-network command",
-              "usage": "  private-network help [command]\n  private-network help [arguments] [flags]",
+              "usage": "  pspace private-network help [command]\n  pspace private-network help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -10956,9 +10956,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List private-network commands\n\nExample:\n```\n$ private-network help commands commands\n```",
+                  "description": "List private-network commands\n\nExample:\n```\n$ pspace private-network help commands commands\n```",
                   "summary": "List private-network commands",
-                  "usage": "  private-network help commands [flags]",
+                  "usage": "  pspace private-network help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -11056,7 +11056,7 @@
               "name": "list",
               "description": "List private networks in your team.\n\nPick a subset of fields to display:\n```\npspace private-network list -F name -F dtModified\n```",
               "summary": "List private networks.",
-              "usage": "  private-network list [flags]",
+              "usage": "  pspace private-network list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -11258,7 +11258,7 @@
           "name": "project",
           "description": "Manage your Paperspace projects.",
           "summary": "Manage your Paperspace projects.",
-          "usage": "  project [command]\n  project [flags]",
+          "usage": "  pspace project [command]\n  pspace project [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -11336,7 +11336,7 @@
               "name": "create",
               "description": "Create a new project. This command will prompt you for a name if you don't\nprovide one.",
               "summary": "Create a new project",
-              "usage": "  project create [arguments] [flags]",
+              "usage": "  pspace project create [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "Create a project with these properties.",
@@ -11449,7 +11449,7 @@
               "name": "delete",
               "description": "Delete a project by its ID. If you don't provide an ID, this command will\nprompt you for one based on the projects you have access to.",
               "summary": "Delete a project.",
-              "usage": "  project delete [arguments] [flags]",
+              "usage": "  pspace project delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -11561,7 +11561,7 @@
               "name": "get",
               "description": "Get a project by its ID. If you don't provide an ID, this command will\nprompt you for one based on the projects you have access to.",
               "summary": "Get a project.",
-              "usage": "  project get [arguments] [flags]",
+              "usage": "  pspace project get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -11673,7 +11673,7 @@
               "name": "help",
               "description": "Show help for a project command",
               "summary": "Show help for a project command",
-              "usage": "  project help [command]\n  project help [arguments] [flags]",
+              "usage": "  pspace project help [command]\n  pspace project help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -11775,9 +11775,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List project commands\n\nExample:\n```\n$ project help commands commands\n```",
+                  "description": "List project commands\n\nExample:\n```\n$ pspace project help commands commands\n```",
                   "summary": "List project commands",
-                  "usage": "  project help commands [flags]",
+                  "usage": "  pspace project help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -11875,7 +11875,7 @@
               "name": "link",
               "description": "This will link a remote project to a local directory. Commands that\ndepend on a project ID will use the project ID of the linked project\nwhen communicating with the Paperspace API.\n\nLink a project to the current directory.\n```\n$ pspace link\n```\n\nLink a project to a different directory.\n```\n$ pspace link --cwd ../my-app\n```\n\nLink a project and specify a project ID.\n```\n$ pspace link pzwf2g05ubegj\n```",
               "summary": "Link a remote project to ",
-              "usage": "  project link [arguments] [flags]",
+              "usage": "  pspace project link [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "A project ID. If not provided, you will be prompted to select one.",
@@ -11985,7 +11985,7 @@
               "name": "list",
               "description": "List projects in your team.\n\nPick a subset of fields to display:\n```\npspace project list -F id -F name -F dtCreated\n```",
               "summary": "List projects.",
-              "usage": "  project list [flags]",
+              "usage": "  pspace project list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -12283,7 +12283,7 @@
           "name": "public-ip",
           "description": "Manage your public IPs. Public IP addresses allow your compute machines to be reachable over the internet.\n\nFor more information, see https://docs.paperspace.com/networking/public-ips.",
           "summary": "Manage your public IPs",
-          "usage": "  public-ip [command]\n  public-ip [flags]",
+          "usage": "  pspace public-ip [command]\n  pspace public-ip [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -12361,7 +12361,7 @@
               "name": "assign",
               "description": "Assign a public IP to a machine.",
               "summary": "Assign a public IP",
-              "usage": "  public-ip assign [arguments] [flags]",
+              "usage": "  pspace public-ip assign [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -12492,7 +12492,7 @@
               "name": "claim",
               "description": "Claim a public IP for a team.",
               "summary": "Claim a public IP",
-              "usage": "  public-ip claim [flags]",
+              "usage": "  pspace public-ip claim [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -12603,7 +12603,7 @@
               "name": "help",
               "description": "Show help for a public-ip command",
               "summary": "Show help for a public-ip command",
-              "usage": "  public-ip help [command]\n  public-ip help [arguments] [flags]",
+              "usage": "  pspace public-ip help [command]\n  pspace public-ip help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -12703,9 +12703,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List public-ip commands\n\nExample:\n```\n$ public-ip help commands commands\n```",
+                  "description": "List public-ip commands\n\nExample:\n```\n$ pspace public-ip help commands commands\n```",
                   "summary": "List public-ip commands",
-                  "usage": "  public-ip help commands [flags]",
+                  "usage": "  pspace public-ip help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -12803,7 +12803,7 @@
               "name": "list",
               "description": "List public IPs in your team or project.\n\nPick a subset of fields to display:\n```\npspace public-ip list -F name -F dtModified\n```",
               "summary": "List public IPs.",
-              "usage": "  public-ip list [flags]",
+              "usage": "  pspace public-ip list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -12987,7 +12987,7 @@
               "name": "release",
               "description": "Release a public IP from a team. This will unassign it from its assigned machine, if any.",
               "summary": "Release a public IP",
-              "usage": "  public-ip release [arguments] [flags]",
+              "usage": "  pspace public-ip release [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -13101,7 +13101,7 @@
           "name": "secret",
           "description": "Manage your Paperspace secrets. Secrets are used to store sensitive\ninformation such as API keys, passwords, and other credentials. Secrets \ncan be safely injected into workloads as environment variables. An environment \nvariable that uses a Secret will not reveal the contents of the secret itself.\n\nSecrets can be created at the following levels:\n\n- Project (default): these secrets are applied to all resources in a project\n- Global: these secrets can be applied to all resources on your current team\n\nFor more information, see https://docs.paperspace.com/secrets.",
           "summary": "Manage your Paperspace secrets",
-          "usage": "  secret [command]\n  secret [flags]",
+          "usage": "  pspace secret [command]\n  pspace secret [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -13179,7 +13179,7 @@
               "name": "create",
               "description": "Create a secret in a project or team.",
               "summary": "Create a secret",
-              "usage": "  secret create [arguments] [arguments] [flags]",
+              "usage": "  pspace secret create [arguments] [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -13337,7 +13337,7 @@
               "name": "delete",
               "description": "Delete a secret from a project or team.",
               "summary": "Delete a secret",
-              "usage": "  secret delete [arguments] [flags]",
+              "usage": "  pspace secret delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -13482,7 +13482,7 @@
               "name": "get",
               "description": "Get a secret from a project or team.",
               "summary": "Get a secret",
-              "usage": "  secret get [arguments] [flags]",
+              "usage": "  pspace secret get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -13643,7 +13643,7 @@
               "name": "help",
               "description": "Show help for a secret command",
               "summary": "Show help for a secret command",
-              "usage": "  secret help [command]\n  secret help [arguments] [flags]",
+              "usage": "  pspace secret help [command]\n  pspace secret help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -13744,9 +13744,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List secret commands\n\nExample:\n```\n$ secret help commands commands\n```",
+                  "description": "List secret commands\n\nExample:\n```\n$ pspace secret help commands commands\n```",
                   "summary": "List secret commands",
-                  "usage": "  secret help commands [flags]",
+                  "usage": "  pspace secret help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -13844,7 +13844,7 @@
               "name": "list",
               "description": "List secrets in your team or project.\n\nPick a subset of fields to display:\n```\npspace secret list -F name -F dtModified\n```",
               "summary": "List secrets.",
-              "usage": "  secret list [flags]",
+              "usage": "  pspace secret list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -14058,7 +14058,7 @@
               "name": "update",
               "description": "Update a secret in a project or team.",
               "summary": "Update a secret",
-              "usage": "  secret update [arguments] [arguments] [flags]",
+              "usage": "  pspace secret update [arguments] [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -14218,7 +14218,7 @@
           "name": "shared-drive",
           "description": "Manage your shared drives. Shared drives are used to centralize data\nused by your team. Shared drives can be mounted on any Paperspace machine\nin the same private network.\n\nFor more information, see https://docs.paperspace.com/storage/shared-drives.",
           "summary": "Manage your shared drives",
-          "usage": "  shared-drive [command]\n  shared-drive [flags]",
+          "usage": "  pspace shared-drive [command]\n  pspace shared-drive [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -14296,7 +14296,7 @@
               "name": "create",
               "description": "Create a shared drive.",
               "summary": "Create a shared drive",
-              "usage": "  shared-drive create [flags]",
+              "usage": "  pspace shared-drive create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -14449,7 +14449,7 @@
               "name": "delete",
               "description": "Delete a shared drive from a team.",
               "summary": "Delete a shared drive",
-              "usage": "  shared-drive delete [arguments] [flags]",
+              "usage": "  pspace shared-drive delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -14561,7 +14561,7 @@
               "name": "get",
               "description": "Get a shared drive from a team.",
               "summary": "Get a shared drive",
-              "usage": "  shared-drive get [arguments] [flags]",
+              "usage": "  pspace shared-drive get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -14673,7 +14673,7 @@
               "name": "help",
               "description": "Show help for a shared-drive command",
               "summary": "Show help for a shared-drive command",
-              "usage": "  shared-drive help [command]\n  shared-drive help [arguments] [flags]",
+              "usage": "  pspace shared-drive help [command]\n  pspace shared-drive help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -14773,9 +14773,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List shared-drive commands\n\nExample:\n```\n$ shared-drive help commands commands\n```",
+                  "description": "List shared-drive commands\n\nExample:\n```\n$ pspace shared-drive help commands commands\n```",
                   "summary": "List shared-drive commands",
-                  "usage": "  shared-drive help commands [flags]",
+                  "usage": "  pspace shared-drive help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -14873,7 +14873,7 @@
               "name": "list",
               "description": "List shared drives in your team or project.\n\nPick a subset of fields to display:\n```\npspace shared-drive list -F name -F dtModified\n```",
               "summary": "List shared drives.",
-              "usage": "  shared-drive list [flags]",
+              "usage": "  pspace shared-drive list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -15075,7 +15075,7 @@
           "name": "signup",
           "description": "This command opens the Paperspace signup page in your browser.",
           "summary": "Sign up for a Paperspace account.",
-          "usage": "  signup [flags]",
+          "usage": "  pspace signup [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -15154,7 +15154,7 @@
           "name": "snapshot",
           "description": "Manage your snapshots. Snapshots are copies of your machine's disk at a point in time.\nThey can be used to restore the machine to its previous state. Using snapshots is recommended\nbefore taking any action that could affect the usability of the machine or its network connection.\n\nFor more information, see https://docs.paperspace.com/storage/snapshots.",
           "summary": "Manage your snapshots",
-          "usage": "  snapshot [command]\n  snapshot [flags]",
+          "usage": "  pspace snapshot [command]\n  pspace snapshot [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -15232,7 +15232,7 @@
               "name": "create",
               "description": "Create a snapshot from a machine.",
               "summary": "Create a snapshot",
-              "usage": "  snapshot create [flags]",
+              "usage": "  pspace snapshot create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -15359,7 +15359,7 @@
               "name": "delete",
               "description": "Delete a snapshot from a team.",
               "summary": "Delete a snapshot",
-              "usage": "  snapshot delete [arguments] [flags]",
+              "usage": "  pspace snapshot delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -15471,7 +15471,7 @@
               "name": "help",
               "description": "Show help for a snapshot command",
               "summary": "Show help for a snapshot command",
-              "usage": "  snapshot help [command]\n  snapshot help [arguments] [flags]",
+              "usage": "  pspace snapshot help [command]\n  pspace snapshot help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -15571,9 +15571,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List snapshot commands\n\nExample:\n```\n$ snapshot help commands commands\n```",
+                  "description": "List snapshot commands\n\nExample:\n```\n$ pspace snapshot help commands commands\n```",
                   "summary": "List snapshot commands",
-                  "usage": "  snapshot help commands [flags]",
+                  "usage": "  pspace snapshot help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -15671,7 +15671,7 @@
               "name": "list",
               "description": "List snapshots in your team.\n\nPick a subset of fields to display:\n```\npspace snapshot list -F name -F dtModified\n```",
               "summary": "List snapshots.",
-              "usage": "  snapshot list [flags]",
+              "usage": "  pspace snapshot list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -15855,7 +15855,7 @@
               "name": "restore",
               "description": "Restore a machine to a snapshot.",
               "summary": "Restore a snapshot",
-              "usage": "  snapshot restore [arguments] [flags]",
+              "usage": "  pspace snapshot restore [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -15983,7 +15983,7 @@
           "name": "startup-script",
           "description": "Manage your startup scripts. Startup scripts allow you to configure a machine\non first boot or on every boot.",
           "summary": "Manage your startup scripts",
-          "usage": "  startup-script [command]\n  startup-script [flags]",
+          "usage": "  pspace startup-script [command]\n  pspace startup-script [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -16061,7 +16061,7 @@
               "name": "assign",
               "description": "Assign a startup script to a machine.",
               "summary": "Assign a startup script",
-              "usage": "  startup-script assign [arguments] [flags]",
+              "usage": "  pspace startup-script assign [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -16187,7 +16187,7 @@
               "name": "create",
               "description": "Create a startup script.",
               "summary": "Create a startup script",
-              "usage": "  startup-script create [flags]",
+              "usage": "  pspace startup-script create [flags]",
               "flags": [
                 {
                   "name": "fields",
@@ -16326,7 +16326,7 @@
               "name": "delete",
               "description": "Delete a startup script from a team.",
               "summary": "Delete a startup script",
-              "usage": "  startup-script delete [arguments] [flags]",
+              "usage": "  pspace startup-script delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -16438,7 +16438,7 @@
               "name": "get",
               "description": "Get a startup script from a team.",
               "summary": "Get a startup script",
-              "usage": "  startup-script get [arguments] [flags]",
+              "usage": "  pspace startup-script get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -16550,7 +16550,7 @@
               "name": "help",
               "description": "Show help for a startup-script command",
               "summary": "Show help for a startup-script command",
-              "usage": "  startup-script help [command]\n  startup-script help [arguments] [flags]",
+              "usage": "  pspace startup-script help [command]\n  pspace startup-script help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -16653,9 +16653,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List startup-script commands\n\nExample:\n```\n$ startup-script help commands commands\n```",
+                  "description": "List startup-script commands\n\nExample:\n```\n$ pspace startup-script help commands commands\n```",
                   "summary": "List startup-script commands",
-                  "usage": "  startup-script help commands [flags]",
+                  "usage": "  pspace startup-script help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -16753,7 +16753,7 @@
               "name": "list",
               "description": "List startup scripts in your team.\n\nPick a subset of fields to display:\n```\npspace startup-script list -F name -F dtCreated\n```",
               "summary": "List startup scripts.",
-              "usage": "  startup-script list [flags]",
+              "usage": "  pspace startup-script list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -16937,7 +16937,7 @@
               "name": "unassign",
               "description": "Unassign a startup script from a machine.",
               "summary": "Unassign a startup script",
-              "usage": "  startup-script unassign [arguments] [flags]",
+              "usage": "  pspace startup-script unassign [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -17063,7 +17063,7 @@
               "name": "update",
               "description": "Update a startup script.",
               "summary": "Update a startup script",
-              "usage": "  startup-script update [arguments] [flags]",
+              "usage": "  pspace startup-script update [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -17235,7 +17235,7 @@
           "name": "storage-provider",
           "description": "Manage your storage providers.\n\nFor more information, see https://docs.paperspace.com/storage/storageProviders.",
           "summary": "Manage your storage providers",
-          "usage": "  storage-provider [command]\n  storage-provider [flags]",
+          "usage": "  pspace storage-provider [command]\n  pspace storage-provider [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -17313,7 +17313,7 @@
               "name": "create",
               "description": "Create a storage provider.",
               "summary": "Create a storage provider",
-              "usage": "  storage-provider create [command]\n  storage-provider create [flags]",
+              "usage": "  pspace storage-provider create [command]\n  pspace storage-provider create [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -17391,7 +17391,7 @@
                   "name": "help",
                   "description": "Show help for a create command",
                   "summary": "Show help for a create command",
-                  "usage": "  storage-provider create help [command]\n  storage-provider create help [arguments] [flags]",
+                  "usage": "  pspace storage-provider create help [command]\n  pspace storage-provider create help [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -17488,9 +17488,9 @@
                   "commands": [
                     {
                       "name": "commands",
-                      "description": "List create commands\n\nExample:\n```\n$ storage-provider create help commands commands\n```",
+                      "description": "List create commands\n\nExample:\n```\n$ pspace storage-provider create help commands commands\n```",
                       "summary": "List create commands",
-                      "usage": "  storage-provider create help commands [flags]",
+                      "usage": "  pspace storage-provider create help commands [flags]",
                       "flags": [
                         {
                           "name": "log-level",
@@ -17588,7 +17588,7 @@
                   "name": "s3",
                   "description": "Create an S3 storage provider.",
                   "summary": "Create an S3 storage provider",
-                  "usage": "  storage-provider create s3 [flags]",
+                  "usage": "  pspace storage-provider create s3 [flags]",
                   "flags": [
                     {
                       "name": "fields",
@@ -17813,7 +17813,7 @@
               "name": "delete",
               "description": "Delete a storage provider from a team.",
               "summary": "Delete a storage provider",
-              "usage": "  storage-provider delete [arguments] [flags]",
+              "usage": "  pspace storage-provider delete [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -17925,7 +17925,7 @@
               "name": "get",
               "description": "Get a storage provider from a team.",
               "summary": "Get a storage provider",
-              "usage": "  storage-provider get [arguments] [flags]",
+              "usage": "  pspace storage-provider get [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -18037,7 +18037,7 @@
               "name": "help",
               "description": "Show help for a storage-provider command",
               "summary": "Show help for a storage-provider command",
-              "usage": "  storage-provider help [command]\n  storage-provider help [arguments] [flags]",
+              "usage": "  pspace storage-provider help [command]\n  pspace storage-provider help [arguments] [flags]",
               "arguments": {
                 "description": "",
                 "summary": "",
@@ -18138,9 +18138,9 @@
               "commands": [
                 {
                   "name": "commands",
-                  "description": "List storage-provider commands\n\nExample:\n```\n$ storage-provider help commands commands\n```",
+                  "description": "List storage-provider commands\n\nExample:\n```\n$ pspace storage-provider help commands commands\n```",
                   "summary": "List storage-provider commands",
-                  "usage": "  storage-provider help commands [flags]",
+                  "usage": "  pspace storage-provider help commands [flags]",
                   "flags": [
                     {
                       "name": "log-level",
@@ -18238,7 +18238,7 @@
               "name": "list",
               "description": "List storage providers in your team or project.\n\nPick a subset of fields to display:\n```\npspace storage provider list -F name -F dtModified\n```",
               "summary": "List storage providers.",
-              "usage": "  storage-provider list [flags]",
+              "usage": "  pspace storage-provider list [flags]",
               "flags": [
                 {
                   "name": "limit",
@@ -18406,7 +18406,7 @@
               "name": "update",
               "description": "Update a storage provider.",
               "summary": "Update a storage provider",
-              "usage": "  storage-provider update [command]\n  storage-provider update [flags]",
+              "usage": "  pspace storage-provider update [command]\n  pspace storage-provider update [flags]",
               "flags": [
                 {
                   "name": "log-level",
@@ -18484,7 +18484,7 @@
                   "name": "help",
                   "description": "Show help for a update command",
                   "summary": "Show help for a update command",
-                  "usage": "  storage-provider update help [command]\n  storage-provider update help [arguments] [flags]",
+                  "usage": "  pspace storage-provider update help [command]\n  pspace storage-provider update help [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -18581,9 +18581,9 @@
                   "commands": [
                     {
                       "name": "commands",
-                      "description": "List update commands\n\nExample:\n```\n$ storage-provider update help commands commands\n```",
+                      "description": "List update commands\n\nExample:\n```\n$ pspace storage-provider update help commands commands\n```",
                       "summary": "List update commands",
-                      "usage": "  storage-provider update help commands [flags]",
+                      "usage": "  pspace storage-provider update help commands [flags]",
                       "flags": [
                         {
                           "name": "log-level",
@@ -18681,7 +18681,7 @@
                   "name": "s3",
                   "description": "Update an S3 storage provider in a project or team.",
                   "summary": "Update an S3 storage provider",
-                  "usage": "  storage-provider update s3 [arguments] [flags]",
+                  "usage": "  pspace storage-provider update s3 [arguments] [flags]",
                   "arguments": {
                     "description": "",
                     "summary": "",
@@ -18925,7 +18925,7 @@
           "name": "up",
           "description": "This will upsert an app config and deploy your app to Paperspace. You can optionally \nspecify a path to a config file. If no config file is specified, the default\nconfig file paths will be tried.\n\nDeploy the app in the current directory.\n```\n$ pspace up\n```\n\nDeploy the app using a config file.\n```\n$ pspace up -c paperspace.json\n```\n\nDeploy an app in a different directory.\n```\n$ pspace up --cwd ../my-app\n```",
           "summary": "Deploy your app to Paperspace",
-          "usage": "  up [flags]",
+          "usage": "  pspace up [flags]",
           "flags": [
             {
               "name": "config",
@@ -19050,7 +19050,7 @@
           "name": "upgrade",
           "description": "This command upgrades \u001b[1mpspace\u001b[22m to the latest version.\n\nIf you used a package manager like `brew` to install `pspace`, \nyou should use that to upgrade in order to avoid potential permissions \nissues. For example, for `brew` you can upgrade by running:\n```\nbrew upgrade pspace\n```\n\nIf you installed `pspace` using the install script, you can upgrade by\nrunning:\n```\npspace upgrade\n```",
           "summary": "Upgrade \u001b[1mpspace\u001b[22m to the latest version.",
-          "usage": "  upgrade [flags]",
+          "usage": "  pspace upgrade [flags]",
           "flags": [
             {
               "name": "log-level",
@@ -19129,7 +19129,7 @@
           "name": "version",
           "description": "Shows version information command, including version number and build date.",
           "summary": "Show version information",
-          "usage": "  version [flags]",
+          "usage": "  pspace version [flags]",
           "flags": [
             {
               "name": "log-level",

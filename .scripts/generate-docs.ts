@@ -14,7 +14,11 @@ await Deno.writeTextFile(
 let markdown = "";
 
 // Also generate markdown for the CLI
-async function renderCommand(path: string[], command: ZcliJsonCommand) {
+async function renderCommand(
+  path: string[],
+  command: ZcliJsonCommand,
+  recursive = false,
+) {
   markdown += `## ${path.join(" ")}\n\n`;
   markdown += command.description + "\n\n";
   markdown += "### Usage\n\n";
@@ -36,8 +40,10 @@ async function renderCommand(path: string[], command: ZcliJsonCommand) {
     markdown += `- [${subcommand.name}](#${subcommand.name})\n`;
   }
 
-  for (const subcommand of command.commands) {
-    await renderCommand([...path, subcommand.name], subcommand);
+  if (recursive) {
+    for (const subcommand of command.commands) {
+      await renderCommand([...path, subcommand.name], subcommand);
+    }
   }
 }
 
@@ -47,7 +53,7 @@ for (const command of json.commands) {
   });
   for (const subcommand of command.commands) {
     markdown = "";
-    await renderCommand([command.name, subcommand.name], subcommand);
+    await renderCommand([command.name, subcommand.name], subcommand, true);
     await Deno.writeTextFile(
       `.assets/${command.name}/${subcommand.name}.md`,
       markdown,

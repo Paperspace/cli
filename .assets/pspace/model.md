@@ -7,8 +7,8 @@ For more information, see https://docs.paperspace.com/deploying/models.
 ### Usage
 
 ```
-model [command]
-model [flags]
+pspace model [command]
+pspace model [flags]
 ```
 
 ### Flags
@@ -36,7 +36,7 @@ one.
 ### Usage
 
 ```
-model create [flags]
+pspace model create [flags]
 ```
 
 ### Flags
@@ -63,7 +63,7 @@ Delete a model from a team.
 ### Usage
 
 ```
-model delete [arguments] [flags]
+pspace model delete [arguments] [flags]
 ```
 
 ### Flags
@@ -85,7 +85,7 @@ Get a model from a team.
 ### Usage
 
 ```
-model get [arguments] [flags]
+pspace model get [arguments] [flags]
 ```
 
 ### Flags
@@ -107,8 +107,8 @@ Show help for a model command
 ### Usage
 
 ```
-model help [command]
-model help [arguments] [flags]
+pspace model help [command]
+pspace model help [arguments] [flags]
 ```
 
 ### Flags
@@ -124,34 +124,6 @@ model help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace model help commands
-
-List model commands
-
-Example:
-
-```
-$ model help commands commands
-```
-
-### Usage
-
-```
-model help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace model list
 
 List models in your team.
@@ -165,7 +137,7 @@ pspace model list -F name -F dtModified
 ### Usage
 
 ```
-model list [flags]
+pspace model list [flags]
 ```
 
 ### Flags

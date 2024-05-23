@@ -15,8 +15,8 @@ For more information, see https://docs.paperspace.com/secrets.
 ### Usage
 
 ```
-secret [command]
-secret [flags]
+pspace secret [command]
+pspace secret [flags]
 ```
 
 ### Flags
@@ -44,7 +44,7 @@ Create a secret in a project or team.
 ### Usage
 
 ```
-secret create [arguments] [arguments] [flags]
+pspace secret create [arguments] [arguments] [flags]
 ```
 
 ### Flags
@@ -73,7 +73,7 @@ Delete a secret from a project or team.
 ### Usage
 
 ```
-secret delete [arguments] [flags]
+pspace secret delete [arguments] [flags]
 ```
 
 ### Flags
@@ -102,7 +102,7 @@ Get a secret from a project or team.
 ### Usage
 
 ```
-secret get [arguments] [flags]
+pspace secret get [arguments] [flags]
 ```
 
 ### Flags
@@ -132,8 +132,8 @@ Show help for a secret command
 ### Usage
 
 ```
-secret help [command]
-secret help [arguments] [flags]
+pspace secret help [command]
+pspace secret help [arguments] [flags]
 ```
 
 ### Flags
@@ -149,34 +149,6 @@ secret help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace secret help commands
-
-List secret commands
-
-Example:
-
-```
-$ secret help commands commands
-```
-
-### Usage
-
-```
-secret help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace secret list
 
 List secrets in your team or project.
@@ -190,7 +162,7 @@ pspace secret list -F name -F dtModified
 ### Usage
 
 ```
-secret list [flags]
+pspace secret list [flags]
 ```
 
 ### Flags
@@ -225,7 +197,7 @@ Update a secret in a project or team.
 ### Usage
 
 ```
-secret update [arguments] [arguments] [flags]
+pspace secret update [arguments] [arguments] [flags]
 ```
 
 ### Flags

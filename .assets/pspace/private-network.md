@@ -10,8 +10,8 @@ https://docs.paperspace.com/networking/private-networks.
 ### Usage
 
 ```
-private-network [command]
-private-network [flags]
+pspace private-network [command]
+pspace private-network [flags]
 ```
 
 ### Flags
@@ -38,7 +38,7 @@ Create a private network.
 ### Usage
 
 ```
-private-network create [flags]
+pspace private-network create [flags]
 ```
 
 ### Flags
@@ -62,7 +62,7 @@ Delete a private network from a team.
 ### Usage
 
 ```
-private-network delete [arguments] [flags]
+pspace private-network delete [arguments] [flags]
 ```
 
 ### Flags
@@ -84,7 +84,7 @@ Get a private network from a team.
 ### Usage
 
 ```
-private-network get [arguments] [flags]
+pspace private-network get [arguments] [flags]
 ```
 
 ### Flags
@@ -106,8 +106,8 @@ Show help for a private-network command
 ### Usage
 
 ```
-private-network help [command]
-private-network help [arguments] [flags]
+pspace private-network help [command]
+pspace private-network help [arguments] [flags]
 ```
 
 ### Flags
@@ -123,34 +123,6 @@ private-network help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace private-network help commands
-
-List private-network commands
-
-Example:
-
-```
-$ private-network help commands commands
-```
-
-### Usage
-
-```
-private-network help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace private-network list
 
 List private networks in your team.
@@ -164,7 +136,7 @@ pspace private-network list -F name -F dtModified
 ### Usage
 
 ```
-private-network list [flags]
+pspace private-network list [flags]
 ```
 
 ### Flags

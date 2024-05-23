@@ -8,8 +8,8 @@ For more information, see https://docs.paperspace.com/networking/public-ips.
 ### Usage
 
 ```
-public-ip [command]
-public-ip [flags]
+pspace public-ip [command]
+pspace public-ip [flags]
 ```
 
 ### Flags
@@ -36,7 +36,7 @@ Assign a public IP to a machine.
 ### Usage
 
 ```
-public-ip assign [arguments] [flags]
+pspace public-ip assign [arguments] [flags]
 ```
 
 ### Flags
@@ -59,7 +59,7 @@ Claim a public IP for a team.
 ### Usage
 
 ```
-public-ip claim [flags]
+pspace public-ip claim [flags]
 ```
 
 ### Flags
@@ -82,8 +82,8 @@ Show help for a public-ip command
 ### Usage
 
 ```
-public-ip help [command]
-public-ip help [arguments] [flags]
+pspace public-ip help [command]
+pspace public-ip help [arguments] [flags]
 ```
 
 ### Flags
@@ -99,34 +99,6 @@ public-ip help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace public-ip help commands
-
-List public-ip commands
-
-Example:
-
-```
-$ public-ip help commands commands
-```
-
-### Usage
-
-```
-public-ip help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace public-ip list
 
 List public IPs in your team or project.
@@ -140,7 +112,7 @@ pspace public-ip list -F name -F dtModified
 ### Usage
 
 ```
-public-ip list [flags]
+pspace public-ip list [flags]
 ```
 
 ### Flags
@@ -169,7 +141,7 @@ machine, if any.
 ### Usage
 
 ```
-public-ip release [arguments] [flags]
+pspace public-ip release [arguments] [flags]
 ```
 
 ### Flags

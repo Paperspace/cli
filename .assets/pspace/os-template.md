@@ -8,8 +8,8 @@ For more information, see https://docs.paperspace.com/compute/os-templates.
 ### Usage
 
 ```
-os-template [command]
-os-template [flags]
+pspace os-template [command]
+pspace os-template [flags]
 ```
 
 ### Flags
@@ -33,8 +33,8 @@ Show help for a os-template command
 ### Usage
 
 ```
-os-template help [command]
-os-template help [arguments] [flags]
+pspace os-template help [command]
+pspace os-template help [arguments] [flags]
 ```
 
 ### Flags
@@ -50,34 +50,6 @@ os-template help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace os-template help commands
-
-List os-template commands
-
-Example:
-
-```
-$ os-template help commands commands
-```
-
-### Usage
-
-```
-os-template help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace os-template list
 
 List OS templates.
@@ -91,7 +63,7 @@ pspace os-template list -F name
 ### Usage
 
 ```
-os-template list [flags]
+pspace os-template list [flags]
 ```
 
 ### Flags

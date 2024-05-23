@@ -9,8 +9,8 @@ For more information, see https://docs.paperspace.com/storage/shared-drives.
 ### Usage
 
 ```
-shared-drive [command]
-shared-drive [flags]
+pspace shared-drive [command]
+pspace shared-drive [flags]
 ```
 
 ### Flags
@@ -37,7 +37,7 @@ Create a shared drive.
 ### Usage
 
 ```
-shared-drive create [flags]
+pspace shared-drive create [flags]
 ```
 
 ### Flags
@@ -63,7 +63,7 @@ Delete a shared drive from a team.
 ### Usage
 
 ```
-shared-drive delete [arguments] [flags]
+pspace shared-drive delete [arguments] [flags]
 ```
 
 ### Flags
@@ -85,7 +85,7 @@ Get a shared drive from a team.
 ### Usage
 
 ```
-shared-drive get [arguments] [flags]
+pspace shared-drive get [arguments] [flags]
 ```
 
 ### Flags
@@ -107,8 +107,8 @@ Show help for a shared-drive command
 ### Usage
 
 ```
-shared-drive help [command]
-shared-drive help [arguments] [flags]
+pspace shared-drive help [command]
+pspace shared-drive help [arguments] [flags]
 ```
 
 ### Flags
@@ -124,34 +124,6 @@ shared-drive help [arguments] [flags]
 
 - [commands](#commands)
 
-## pspace shared-drive help commands
-
-List shared-drive commands
-
-Example:
-
-```
-$ shared-drive help commands commands
-```
-
-### Usage
-
-```
-shared-drive help commands [flags]
-```
-
-### Flags
-
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-| all       | a       | Show all commands, including hidden ones                     | false    |
-
-#### Subcommands
-
 ## pspace shared-drive list
 
 List shared drives in your team or project.
@@ -165,7 +137,7 @@ pspace shared-drive list -F name -F dtModified
 ### Usage
 
 ```
-shared-drive list [flags]
+pspace shared-drive list [flags]
 ```
 
 ### Flags
