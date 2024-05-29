@@ -11,15 +11,12 @@ await Deno.writeTextFile(
   JSON.stringify(json, null, 2),
 );
 
-let markdown = "";
-
 // Also generate markdown for the CLI
 async function renderCommand(
   path: string[],
   command: ZcliJsonCommand,
-  recursive = false,
 ) {
-  markdown += `## ${path.join(" ")}\n\n`;
+  let markdown = "";
   markdown += command.description + "\n\n";
   markdown += "### Usage\n\n";
   markdown += `\`\`\`\n`;
@@ -29,47 +26,43 @@ async function renderCommand(
   markdown += "| Name | Aliases | Description | Required |\n";
   markdown += "| --- | --- | --- | --- |\n";
   for (const flag of command.flags) {
-    markdown += `| ${flag.name} | ${
+    markdown += `| \`${flag.name}\` | ${
       flag.aliases.join(", ")
     } | ${flag.description} | ${flag.required} |\n`;
   }
   markdown += "\n";
 
-  markdown += "#### Subcommands\n\n";
-  for (const subcommand of command.commands) {
-    markdown += `- [${subcommand.name}](#${subcommand.name})\n`;
-  }
+  const hasSubcommands = command.commands.length > 0;
 
-  if (recursive) {
+  if (hasSubcommands) {
+    markdown += "#### Subcommands\n\n";
+    markdown += "| Subcommand | Description |\n";
+    markdown += "| --- | --- |\n";
     for (const subcommand of command.commands) {
-      await renderCommand([...path, subcommand.name], subcommand);
+      markdown += `| \`${subcommand.name}\` | ${subcommand.description} |\n`;
     }
+    markdown += "\n";
   }
-}
 
-for (const command of json.commands) {
-  await Deno.mkdir(`.assets/${command.name}`, {
-    recursive: true,
-  });
-  for (const subcommand of command.commands) {
-    markdown = "";
-    await renderCommand([command.name, subcommand.name], subcommand, true);
-    await Deno.writeTextFile(
-      `.assets/${command.name}/${subcommand.name}.md`,
-      markdown,
-      {
-        create: true,
-      },
-    );
-  }
-  markdown = "";
-  await renderCommand([command.name], command);
+  const dir = path.slice(0, path.length - (hasSubcommands ? 0 : 1));
+  const writePath = [
+    ...dir,
+    command.name + ".md",
+  ].join("/");
+  await Deno.mkdir(`.assets/${dir.join("/")}`, { recursive: true });
   await Deno.writeTextFile(
     // edge case, put pspace in pspace/pspace.md
-    `.assets/${command.name}/${command.name}.md`,
+    `.assets/${writePath}`,
     markdown,
     {
       create: true,
     },
   );
+  for (const subcommand of command.commands) {
+    await renderCommand([...path, subcommand.name], subcommand);
+  }
+}
+
+for (const command of json.commands) {
+  await renderCommand([command.name], command);
 }

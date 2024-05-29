@@ -1,5 +1,3 @@
-## pspace upgrade
-
 This command upgrades [1mpspace[22m to the latest version.
 
 If you used a package manager like `brew` to install `pspace`, you should use
@@ -24,11 +22,9 @@ pspace upgrade [flags]
 
 ### Flags
 
-| Name      | Aliases | Description                                                  | Required |
-| --------- | ------- | ------------------------------------------------------------ | -------- |
-| log-level | l       | Enable debug logging.                                        | false    |
-| json      | j       | Output JSON                                                  | false    |
-| api-key   |         | A Paperspace public API Key used for authenticating requests | false    |
-| help      | h       | Show help for a command                                      | false    |
-
-#### Subcommands
+| Name        | Aliases | Description                                                  | Required |
+| ----------- | ------- | ------------------------------------------------------------ | -------- |
+| `log-level` | l       | Enable debug logging.                                        | false    |
+| `json`      | j       | Output JSON                                                  | false    |
+| `api-key`   |         | A Paperspace public API Key used for authenticating requests | false    |
+| `help`      | h       | Show help for a command                                      | false    |
