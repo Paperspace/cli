@@ -16,6 +16,9 @@ async function renderCommand(
   path: string[],
   command: ZcliJsonCommand,
 ) {
+  if (command.name === "help") {
+    return;
+  }
   let markdown = "";
   markdown += command.description + "\n\n";
   markdown += "### Usage\n\n";
