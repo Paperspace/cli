@@ -13,11 +13,12 @@
     /**
      * Compile the CLI for all supported platforms.
      */
-    "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows",
-    "compile:macos": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output $PWD/bin/macos/pspace mod.ts",
-    "compile:macos-arm": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output $PWD/bin/macos-arm/pspace mod.ts",
-    "compile:linux": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output $PWD/bin/linux/pspace mod.ts",
-    "compile:windows": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output $PWD/bin/windows/pspace mod.ts",
+    "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows && deno task organize",
+    "compile:macos": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output bin/pspace-macos mod.ts",
+    "compile:macos-arm": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output bin/pspace-macos-arm mod.ts",
+    "compile:linux": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output bin/pspace-linux mod.ts",
+    "compile:windows": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output bin/pspace-windows mod.ts",
+    "organize": "mkdir -p bin/macos bin/macos-arm bin/linux bin/windows && mv bin/pspace-macos bin/macos/pspace && mv bin/pspace-macos-arm bin/macos-arm/pspace && mv bin/pspace-linux bin/linux/pspace && mv bin/pspace-windows.exe bin/windows/pspace.exe",
     /**
      * Generate the CLI documentation.
      */

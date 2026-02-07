@@ -41,9 +41,9 @@ jobs:
       
       - name: Create bin directories
         run: |
-          mkdir -pv bin/macos bin/macos-arm bin/linux bin/windows
-          ls -la bin/
-          chmod -R 777 bin/
+          mkdir -pv bin
+          chmod 777 bin
+          ls -la
       
       - name: Build
         run: deno task compile
