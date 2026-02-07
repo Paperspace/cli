@@ -33,8 +33,5 @@ jobs:
       - name: Test
         run: deno task test
 
-      - name: Create bin directories
-        run: mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
-
       - name: Build
         run: deno task compile
