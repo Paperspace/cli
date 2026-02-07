@@ -39,12 +39,13 @@ jobs:
       
       - name: Setup Deno cache directory
         run: |
-          mkdir -p .deno_cache
-          mkdir -p .tmp
+          mkdir -p .deno_cache .tmp
           echo "DENO_DIR=$PWD/.deno_cache" >> $GITHUB_ENV
           echo "TMPDIR=$PWD/.tmp" >> $GITHUB_ENV
       
       - name: Release
-        run: npx semantic-release
+        run: |
+          mkdir -p .deno_cache .tmp
+          npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
