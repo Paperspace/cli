@@ -34,4 +34,6 @@ jobs:
         run: deno task test
 
       - name: Build
-        run: deno task compile
+        run: |
+          mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
+          deno task compile

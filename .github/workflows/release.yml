@@ -34,6 +34,8 @@ jobs:
           npm i semantic-release @google/semantic-release-replace-plugin @semantic-release/exec
       
       - name: Release
-        run: npx semantic-release
+        run: |
+          mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
+          npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
