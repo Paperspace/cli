@@ -28,6 +28,10 @@ jobs:
         with:
           deno-version: 1.x.x
 
+      - name: Ensure output directories exist
+        run: |
+          mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
+
       - name: Install semantic release
         run: |
           npm init -y 

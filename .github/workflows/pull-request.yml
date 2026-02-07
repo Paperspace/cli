@@ -35,7 +35,7 @@ jobs:
       
       - name: Ensure output directories exist
         run: |
-          mkdir -p bin/macos bin/linux bin/windows
+          mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
 
       - name: Build
         run: deno task compile
