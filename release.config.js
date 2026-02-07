@@ -63,7 +63,7 @@ module.exports = {
       },
     ],
     /**
-     * Compile the binaries for the release
+     * Compile the binaries for the release.
      */
     [
       "@semantic-release/exec",
