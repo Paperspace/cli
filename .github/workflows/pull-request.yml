@@ -33,11 +33,12 @@ jobs:
       - name: Test
         run: deno task test
 
-      - name: Prepare temp directory
-        if: runner.os != 'Windows'
-        run: mkdir -p /tmp
-
       - name: Build
-        run: deno task compile
+        run: |
+          mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output bin/macos/pspace mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output bin/macos-arm/pspace mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output bin/linux/pspace mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output bin/windows/pspace mod.ts
         env:
           TMPDIR: ${{ runner.temp }}
