@@ -14,10 +14,10 @@
      * Compile the CLI for all supported platforms.
      */
     "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows",
-    "compile:macos": "sh -c 'mkdir -p ./bin/macos && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output ./bin/macos/pspace mod.ts'",
-    "compile:macos-arm": "sh -c 'mkdir -p ./bin/macos-arm && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output ./bin/macos-arm/pspace mod.ts'",
-    "compile:linux": "sh -c 'mkdir -p ./bin/linux && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output ./bin/linux/pspace mod.ts'",
-    "compile:windows": "sh -c 'mkdir -p ./bin/windows && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output ./bin/windows/pspace mod.ts'",
+    "compile:macos": "sh -c 'mkdir -p $PWD/bin/macos && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output $PWD/bin/macos/pspace mod.ts'",
+    "compile:macos-arm": "sh -c 'mkdir -p $PWD/bin/macos-arm && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output $PWD/bin/macos-arm/pspace mod.ts'",
+    "compile:linux": "sh -c 'mkdir -p $PWD/bin/linux && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output $PWD/bin/linux/pspace mod.ts'",
+    "compile:windows": "sh -c 'mkdir -p $PWD/bin/windows && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output $PWD/bin/windows/pspace mod.ts'",
     /**
      * Generate the CLI documentation.
      */
