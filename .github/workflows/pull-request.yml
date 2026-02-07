@@ -38,6 +38,15 @@ jobs:
           mkdir -p .deno_cache
           echo "DENO_DIR=$PWD/.deno_cache" >> $GITHUB_ENV
       
+      - name: Pre-download denort runtimes
+        run: |
+          mkdir -p $HOME/.cache/deno/dl
+          cd $HOME/.cache/deno/dl
+          curl -L https://dl.deno.land/release/v1.46.3/denort-x86_64-apple-darwin.zip -o denort-x86_64-apple-darwin.zip
+          curl -L https://dl.deno.land/release/v1.46.3/denort-aarch64-apple-darwin.zip -o denort-aarch64-apple-darwin.zip
+          curl -L https://dl.deno.land/release/v1.46.3/denort-x86_64-unknown-linux-gnu.zip -o denort-x86_64-unknown-linux-gnu.zip
+          curl -L https://dl.deno.land/release/v1.46.3/denort-x86_64-pc-windows-msvc.zip -o denort-x86_64-pc-windows-msvc.zip
+      
       - name: Build
         run: |
           unset TMPDIR
