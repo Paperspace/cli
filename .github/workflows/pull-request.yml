@@ -36,7 +36,13 @@ jobs:
       - name: Setup Deno cache directory
         run: |
           mkdir -p .deno_cache
+          mkdir -p .tmp
           echo "DENO_DIR=$PWD/.deno_cache" >> $GITHUB_ENV
+          echo "TMPDIR=$PWD/.tmp" >> $GITHUB_ENV
+          echo "Testing write permissions..."
+          touch /tmp/test-file && rm /tmp/test-file && echo "/tmp is writable" || echo "/tmp is NOT writable"
+          touch $PWD/.tmp/test-file && rm $PWD/.tmp/test-file && echo "$PWD/.tmp is writable" || echo "$PWD/.tmp is NOT writable"
+          touch $PWD/test-file && rm $PWD/test-file && echo "$PWD is writable" || echo "$PWD is NOT writable"
       
       - name: Build
         run: deno task compile
