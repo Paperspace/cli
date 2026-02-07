@@ -70,6 +70,7 @@ module.exports = {
       {
         execCwd: ".",
         prepareCmd: [
+          `mkdir -p bin/macos bin/macos-arm bin/linux bin/windows`,
           `deno task compile`,
           `cd bin/linux`,
           `zip -9 pspace-linux.zip pspace`,
