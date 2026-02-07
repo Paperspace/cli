@@ -39,5 +39,11 @@ jobs:
           echo "DENO_DIR=$PWD/.deno_cache" >> $GITHUB_ENV
           echo "TMPDIR=$PWD/.tmp" >> $GITHUB_ENV
       
+      - name: Create bin directories
+        run: |
+          mkdir -pv bin/macos bin/macos-arm bin/linux bin/windows
+          ls -la bin/
+          chmod -R 777 bin/
+      
       - name: Build
         run: deno task compile
