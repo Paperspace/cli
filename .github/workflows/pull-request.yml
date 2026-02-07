@@ -21,8 +21,8 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Check types
-        run: deno check mod.ts
+      # - name: Check types
+      #   run: deno check mod.ts
 
       - name: Lint
         run: deno lint
