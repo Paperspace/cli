@@ -63,16 +63,13 @@ module.exports = {
       },
     ],
     /**
-     * Compile the binaries for the release
+     * Compile the binaries for the release.
      */
     [
       "@semantic-release/exec",
       {
         execCwd: ".",
         prepareCmd: [
-    /**
-     * For creating the release assets, we need to create the output directories first.
-     */
           `mkdir -p bin/macos bin/macos-arm bin/linux bin/windows`,
           `deno task compile`,
           `cd bin/linux`,
