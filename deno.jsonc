@@ -14,11 +14,11 @@
      * Compile the CLI for all supported platforms.
      */
     "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows && deno task organize",
-    "compile:macos": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output bin/pspace-macos mod.ts",
-    "compile:macos-arm": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output bin/pspace-macos-arm mod.ts",
-    "compile:linux": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output bin/pspace-linux mod.ts",
-    "compile:windows": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output bin/pspace-windows mod.ts",
-    "organize": "mkdir -p bin/macos bin/macos-arm bin/linux bin/windows && mv bin/pspace-macos bin/macos/pspace && mv bin/pspace-macos-arm bin/macos-arm/pspace && mv bin/pspace-linux bin/linux/pspace && mv bin/pspace-windows.exe bin/windows/pspace.exe",
+    "compile:macos": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output .tmp/pspace-macos mod.ts",
+    "compile:macos-arm": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output .tmp/pspace-macos-arm mod.ts",
+    "compile:linux": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output .tmp/pspace-linux mod.ts",
+    "compile:windows": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output .tmp/pspace-windows mod.ts",
+    "organize": "mkdir -p bin/macos bin/macos-arm bin/linux bin/windows && mv .tmp/pspace-macos bin/macos/pspace && mv .tmp/pspace-macos-arm bin/macos-arm/pspace && mv .tmp/pspace-linux bin/linux/pspace && mv .tmp/pspace-windows.exe bin/windows/pspace.exe",
     /**
      * Generate the CLI documentation.
      */
