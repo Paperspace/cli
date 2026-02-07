@@ -33,13 +33,5 @@ jobs:
       - name: Test
         run: deno task test
       
-      - name: Ensure output directories exist
-        run: |
-          mkdir -pv bin/macos bin/macos-arm bin/linux bin/windows
-          pwd
-          ls -laR bin/
-
       - name: Build
-        run: |
-          mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
-          deno task compile
+        run: deno task compile
