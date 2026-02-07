@@ -41,10 +41,10 @@ jobs:
       - name: Build
         run: |
           unset TMPDIR
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output /tmp/pspace-macos mod.ts
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output /tmp/pspace-macos-arm mod.ts
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output /tmp/pspace-linux mod.ts
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output /tmp/pspace-windows mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output /tmp/pspace-macos mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output /tmp/pspace-macos-arm mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output /tmp/pspace-linux mod.ts
+          deno compile --no-check --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output /tmp/pspace-windows mod.ts
           mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
           mv /tmp/pspace-macos bin/macos/pspace
           mv /tmp/pspace-macos-arm bin/macos-arm/pspace
