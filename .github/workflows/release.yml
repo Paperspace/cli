@@ -26,19 +26,14 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: 1.x.x
+          deno-version: 1.38.5
 
       - name: Install semantic release
         run: |
           npm init -y 
           npm i semantic-release @google/semantic-release-replace-plugin @semantic-release/exec
-
-      - name: Prepare temp directory
-        if: runner.os != 'Windows'
-        run: mkdir -p /tmp
       
       - name: Release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TMPDIR: ${{ runner.temp }}
