@@ -13,11 +13,11 @@
     /**
      * Compile the CLI for all supported platforms.
      */
-    "compile": "deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows",
-    "compile:macos": "mkdir -p bin/macos && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output bin/macos/pspace mod.ts",
-    "compile:macos-arm": "mkdir -p bin/macos-arm && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output bin/macos-arm/pspace mod.ts",
-    "compile:linux": "mkdir -p bin/linux && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output bin/linux/pspace mod.ts",
-    "compile:windows": "mkdir -p bin/windows && deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output bin/windows/pspace mod.ts",
+    "compile": "mkdir -p bin/macos bin/macos-arm bin/linux bin/windows && deno task compile:macos && deno task compile:macos-arm && deno task compile:linux && deno task compile:windows",
+    "compile:macos": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output bin/macos/pspace mod.ts",
+    "compile:macos-arm": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output bin/macos-arm/pspace mod.ts",
+    "compile:linux": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output bin/linux/pspace mod.ts",
+    "compile:windows": "deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output bin/windows/pspace mod.ts",
     /**
      * Generate the CLI documentation.
      */
