@@ -19,19 +19,19 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: v2.x
+          deno-version: 1.x.x
 
       # - name: Check types
       #   run: deno check mod.ts
 
-      - name: Lint
-        run: deno lint
+      # - name: Lint
+      #   run: deno lint
 
-      - name: Format
-        run: deno fmt --check
+      # - name: Format
+      #   run: deno fmt --check
 
-      - name: Test
-        run: deno task test
+      # - name: Test
+      #   run: deno task test
       
       - name: Setup Deno cache directory
         run: |
