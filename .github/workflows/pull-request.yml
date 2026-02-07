@@ -33,5 +33,8 @@ jobs:
       - name: Test
         run: deno task test
 
+      - name: Create temp directory
+        run: mkdir -p /tmp
+
       - name: Build
         run: deno task compile
