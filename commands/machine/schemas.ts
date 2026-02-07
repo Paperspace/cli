@@ -5,8 +5,8 @@ export const MachineAutoSnapshotFrequencySchema = z.enum([
   "daily",
   "weekly",
   "monthly",
-]);
+]).optional();
 
-export const MachineRestorePointFrequencySchema = z.enum(["shutdown"]);
+export const MachineRestorePointFrequencySchema = z.enum(["shutdown"]).optional();
 
-export const MachinePublicIpTypeSchema = z.enum(["static", "dynamic", "none"]);
+export const MachinePublicIpTypeSchema = z.enum(["static", "dynamic", "none"]).optional();
