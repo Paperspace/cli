@@ -33,5 +33,12 @@ jobs:
       - name: Test
         run: deno task test
       
+      - name: Debug filesystem
+        run: |
+          pwd
+          ls -la
+          df -h .
+          touch test-file && rm test-file && echo "Current directory is writable" || echo "Current directory is NOT writable"
+      
       - name: Build
         run: deno task compile
