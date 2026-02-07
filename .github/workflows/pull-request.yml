@@ -35,18 +35,18 @@ jobs:
       
       - name: Setup Deno cache directory
         run: |
-          mkdir -p .deno_cache .tmp
+          mkdir -p .deno_cache
           echo "DENO_DIR=$PWD/.deno_cache" >> $GITHUB_ENV
-          echo "TMPDIR=$PWD/.tmp" >> $GITHUB_ENV
       
       - name: Build
         run: |
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output pspace-macos mod.ts
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output pspace-macos-arm mod.ts
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output pspace-linux mod.ts
-          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output pspace-windows mod.ts
+          unset TMPDIR
+          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-apple-darwin --output /tmp/pspace-macos mod.ts
+          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target aarch64-apple-darwin --output /tmp/pspace-macos-arm mod.ts
+          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-unknown-linux-gnu --output /tmp/pspace-linux mod.ts
+          deno compile --allow-env --allow-run --allow-read --allow-write --allow-net --target x86_64-pc-windows-msvc --output /tmp/pspace-windows mod.ts
           mkdir -p bin/macos bin/macos-arm bin/linux bin/windows
-          mv pspace-macos bin/macos/pspace
-          mv pspace-macos-arm bin/macos-arm/pspace
-          mv pspace-linux bin/linux/pspace
-          mv pspace-windows.exe bin/windows/pspace.exe
+          mv /tmp/pspace-macos bin/macos/pspace
+          mv /tmp/pspace-macos-arm bin/macos-arm/pspace
+          mv /tmp/pspace-linux bin/linux/pspace
+          mv /tmp/pspace-windows.exe bin/windows/pspace.exe
