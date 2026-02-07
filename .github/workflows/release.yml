@@ -37,6 +37,11 @@ jobs:
           npm init -y 
           npm i semantic-release @google/semantic-release-replace-plugin @semantic-release/exec
       
+      - name: Setup Deno cache directory
+        run: |
+          mkdir -p .deno_cache
+          echo "DENO_DIR=$PWD/.deno_cache" >> $GITHUB_ENV
+      
       - name: Release
         run: npx semantic-release
         env:
