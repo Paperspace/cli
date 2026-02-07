@@ -34,6 +34,7 @@ jobs:
           npm i semantic-release @google/semantic-release-replace-plugin @semantic-release/exec
 
       - name: Prepare temp directory
+        if: runner.os != 'Windows'
         run: mkdir -p /tmp
       
       - name: Release

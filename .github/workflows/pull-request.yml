@@ -34,6 +34,7 @@ jobs:
         run: deno task test
 
       - name: Prepare temp directory
+        if: runner.os != 'Windows'
         run: mkdir -p /tmp
 
       - name: Build
